@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D Modeled Tape Dispenser</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      padding: 40px 5%;
+    }
+
+    .project-title {
+      font-size: 2.8rem;
+      color: #ff004f;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .project-subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-inline: auto;
+    }
+
+    .main-image img {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto 40px;
+      box-shadow: 0 6px 12px rgba(255, 0, 79, 0.3);
+    }
+
+    .grid-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .grid-images img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(255, 0, 79, 0.2);
+    }
+
+    .project-description {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .project-description h2 {
+      color: #ff004f;
+      margin-bottom: 15px;
+    }
+
+    .project-description p {
+      line-height: 1.7;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .project-description ul {
+      margin-bottom: 30px;
+      padding-left: 20px;
+    }
+
+    .project-description li {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .back-link a {
+      text-decoration: none;
+      color: #fff;
+      background: #ff004f;
+      padding: 12px 30px;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .back-link a:hover {
+      background: #e10045;
+    }
+
+    @media(max-width: 768px) {
+      .project-title {
+        font-size: 2rem;
+      }
+    }
+    .custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid red;
+  border-radius: 50%;
+  background-color: transparent;
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+}
+
+  </style>
+</head>
+<body>
+
+  <h1 class="project-title">3D Modeled Tape Dispenser</h1>
+  <p class="project-subtitle">A playful sea otter-inspired design rendered in Blender and optimized for 3D printing.</p>
+
+  <div class="main-image">
+    <img src="images/sea otter final 3 .png" alt="Main Render - Otter Tape Dispenser" />
+  </div>
+
+  <div class="grid-images">
+    <img src="images/sea otter final 1  .png" alt="Render View 2">
+    <img src="images/sea otter final 2  .png" alt="Render View 3">
+    <img src="images/sea otter 3 png.png" alt="Top View">
+    <img src="images/sea otter1 .png" alt="Perspective View">
+  </div>
+
+  <div class="project-description">
+    <h2>Project Overview</h2>
+    <p>This 3D modeled tape dispenser takes inspiration from the way sea otters hold objects while floating on their backs. I modeled it in Blender with an emphasis on a functional, ergonomic, and joyful design that looks great on a modern desk.</p>
+
+    <h2>Design Highlights</h2>
+    <ul>
+      <li>Ergonomic shape mimicking sea otter posture</li>
+      <li>Blender-modeled with smooth organic sculpting</li>
+      <li>3D printable with supports considered</li>
+      <li>Non-bottom blade for top-access cutting</li>
+    </ul>
+
+    <h2>Tools Used</h2>
+    <ul>
+      <li>Blender 3.6 (Modeling & Rendering)</li>
+      <li>Cycles Renderer</li>
+      <li>Adobe Photoshop (for final image touch-ups)</li>
+    </ul>
+  </div>
+
+  <div class="back-link">
+    <a href="index.html#portfolio"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+  </div>
+  <div class="custom-cursor"></div>
+  <script>
+    const cursor = document.querySelector(".custom-cursor");
+    
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
+    });
+    </script>
+    
+</body>
+</html>

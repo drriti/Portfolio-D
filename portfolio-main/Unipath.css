@@ -1,0 +1,128 @@
+:root {
+  --black: #0b0b0b;
+  --white: #f2f2f2;
+  --gray: #9a9a9a;
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.case-dark {
+  font-family: "Poppins", sans-serif;
+  background: var(--black);
+  color: var(--white);
+}
+
+/* ===============================
+   CASE LAYOUT
+================================ */
+
+.case-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 64px;
+  padding: 120px 80px;
+  min-height: 200vh;
+}
+
+/* LEFT + RIGHT PINNED */
+.case-left,
+.case-right {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+}
+
+/* LEFT */
+.case-tag {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+
+.case-title {
+  font-size: 44px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.case-intro {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #d6d6d6;
+  max-width: 320px;
+}
+
+/* RIGHT */
+.case-right p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--gray);
+  margin-bottom: 28px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ===============================
+   CENTER SCROLL (BEHANCE STYLE)
+================================ */
+
+.case-center {
+  display: flex;
+  flex-direction: column;
+}
+
+.case-center img {
+  width: 100%;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===============================
+   BACK LINK
+================================ */
+
+.case-back {
+  padding: 120px 80px;
+}
+
+.case-back a {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--gray);
+  transition: color 0.3s ease;
+}
+
+.case-back a:hover {
+  color: var(--white);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1024px) {
+  .case-wrapper {
+    grid-template-columns: 1fr;
+    padding: 80px 24px;
+  }
+
+  .case-left,
+  .case-right {
+    position: relative;
+    top: auto;
+  }
+
+  .case-right {
+    margin-top: 80px;
+  }
+}
