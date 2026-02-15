@@ -241,10 +241,10 @@
 
           <div class="pin-item" data-type="video" data-src="vidoes/final animation with sound.mp4">
             <span class="pin"></span>
-            <img src="images/Screenshot 2025-03-22 145445.png">
+            <img src="images/Screenshot 2026-02-15 221423.png">
           </div>
 
-          <div class="pin-item" data-type="image" data-src="images/extra/comic.jpg">
+          <div class="pin-item" data-type="flipbook" data-src="YOUR_FLIPBOOK_LINK_HERE">
             <span class="pin"></span>
             <img src="images/standing softcover book mockup.png">
           </div>
@@ -593,6 +593,16 @@
               video.controls = true;
               video.autoplay = true;
               content.appendChild(video);
+            } else if (type === "flipbook") {
+              const iframe = document.createElement("iframe");
+              iframe.src = src;
+              iframe.setAttribute("allowfullscreen", "");
+              iframe.setAttribute("scrolling", "no");
+              iframe.style.width = "80vw";
+              iframe.style.height = "80vh";
+              iframe.style.border = "none";
+              iframe.style.borderRadius = "12px";
+              content.appendChild(iframe);
             } else {
               const img = document.createElement("img");
               img.src = src;
