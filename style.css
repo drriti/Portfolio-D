@@ -366,41 +366,74 @@ h2 {
 
 .work-media img {
   width: 100%;
-  max-width: 420px;
-  height: 260px;
-  /* 🔑 FIXED HEIGHT */
-  object-fit: contain;
-  /* prevents cropping */
-  border-radius: 20px;
+  max-width: 480px;
+  /* Slightly wider */
+  height: 320px;
+  /* Taller height */
+  object-fit: cover;
+  /* 🔑 Improved from contain for better look */
+  border-radius: 24px;
+  /* More rounded */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-
-
 .work-card {
+  position: relative;
+  /* 🔑 Added for glass effect alignment */
   display: grid;
   grid-template-columns: 1fr 1.1fr;
-  gap: 36px;
+  gap: 48px;
   align-items: center;
+  overflow: hidden;
+  /* Keep glass contained */
 
-  padding: 40px;
+  padding: 60px;
   min-height: 60vh;
-  /* ⬅️ reduced */
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.05);
+  /* Slightly more subtle */
+  backdrop-filter: blur(24px);
+  /* Stronger blur */
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 32px;
 
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.35),
-    inset 0 1px 1px rgba(255, 255, 255, 0.18);
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
 
   transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease,
-    background 0.35s ease;
+    transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.45s ease,
+    background 0.45s ease;
+}
 
+/* Metadata Styles */
+.work-meta {
+  display: flex;
+  gap: 32px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.work-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.meta-value {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
 }
 
 .work-card:hover {
@@ -415,14 +448,16 @@ h2 {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 28px;
+  border-radius: 32px;
+  /* Matched to parent */
   pointer-events: none;
 
   background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.18),
-      rgba(255, 255, 255, 0.02));
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.05));
 
-  opacity: 0.35;
+  opacity: 0.5;
+  /* Slightly more visible */
 }
 
 .work-container {

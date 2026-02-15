@@ -127,8 +127,12 @@
     <!-- PORTFOLIO (YOUR WORK KEPT) -->
     <section id="work" class="work-section">
       <div class="work-wrapper">
-        <div class="work-card" onclick="window.location.href='unipath.html'">
 
+        <!-- Project 1: UniPath -->
+        <div class="work-card" onclick="window.location.href='unipath.html'">
+          <div class="work-media">
+            <img src="images/unipath.jpg.png" alt="UniPath project">
+          </div>
           <div class="work-text">
             <span class="work-category">UI / UX</span>
             <h3 class="work-title">UniPath</h3>
@@ -136,36 +140,76 @@
               A university navigation system designed to simplify campus movement
               through clarity and structure.
             </p>
-          </div>
-          <div class="work-media">
-            <img src="images/unipath.jpg.png" alt="UniPath project">
+            <div class="work-meta">
+              <div class="work-meta-item">
+                <span class="meta-label">Role</span>
+                <span class="meta-value">UI/UX Designer</span>
+              </div>
+              <div class="work-meta-item">
+                <span class="meta-label">Duration</span>
+                <span class="meta-value">4 Weeks</span>
+              </div>
+              <div class="work-meta-item">
+                <span class="meta-label">Tools</span>
+                <span class="meta-value">Figma · Illustrator</span>
+              </div>
+            </div>
           </div>
         </div>
+
+        <!-- Project 2: Oton -->
         <div class="work-card reverse" onclick="window.location.href='oton.html'">
+          <div class="work-media">
+            <img src="images/oton/REPLACE THIS.png" alt="Oton branding project">
+          </div>
           <div class="work-text">
             <span class="work-category">Branding</span>
             <h3 class="work-title">Oton</h3>
             <p class="work-desc">
               A calm, editorial brand identity rooted in thoughtful storytelling.
             </p>
-          </div>
-          <div class="work-media">
-            <img src="images/oton/REPLACE THIS.png" alt="">
+            <div class="work-meta">
+              <div class="work-meta-item">
+                <span class="meta-label">Role</span>
+                <span class="meta-value">Brand Designer</span>
+              </div>
+              <div class="work-meta-item">
+                <span class="meta-label">Duration</span>
+                <span class="meta-value">3 Weeks</span>
+              </div>
+              <div class="work-meta-item">
+                <span class="meta-label">Tools</span>
+                <span class="meta-value">Illustrator · Photoshop</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Project 3 (MITTRIKA) -->
-        <div class="work-card reverse" onclick="window.location.href='mittrika.html'">
+        <!-- Project 3: MRITTIKA -->
+        <div class="work-card" onclick="window.location.href='mittrika.html'">
+          <div class="work-media">
+            <img src="images/mittrika/MRITTIKA BEHANCE-17.jpg" alt="MRITTIKA branding">
+          </div>
           <div class="work-text">
             <span class="work-category">Branding</span>
             <h3 class="work-title">MRITTIKA</h3>
             <p class="work-desc">
               Desk accessories designed for calm, intentional workspaces.
             </p>
-          </div>
-
-          <div class="work-media">
-            <img src="images/mittrika/MRITTIKA BEHANCE-17.jpg" alt="MITTRIKA branding">
+            <div class="work-meta">
+              <div class="work-meta-item">
+                <span class="meta-label">Role</span>
+                <span class="meta-value">Brand Designer</span>
+              </div>
+              <div class="work-meta-item">
+                <span class="meta-label">Duration</span>
+                <span class="meta-value">3 Weeks</span>
+              </div>
+              <div class="work-meta-item">
+                <span class="meta-label">Tools</span>
+                <span class="meta-value">Illustrator · InDesign</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -377,7 +421,35 @@
       });
     </script>
     <script>
+      /* Custom Project Cursor Logic */
+      const projectCursor = document.querySelector(".project-cursor");
+
+      document.addEventListener("mousemove", (e) => {
+        gsap.to(projectCursor, {
+          x: e.clientX,
+          y: e.clientY,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+      });
+
       document.querySelectorAll(".work-card").forEach(card => {
+        card.addEventListener("mouseenter", () => {
+          gsap.to(projectCursor, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.3
+          });
+        });
+        card.addEventListener("mouseleave", () => {
+          gsap.to(projectCursor, {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.3
+          });
+        });
+
+        /* 3D Tilt Effect */
         card.addEventListener("mousemove", (e) => {
           const rect = card.getBoundingClientRect();
           const x = e.clientX - rect.left;
@@ -386,11 +458,11 @@
           const rotateY = ((x / rect.width) - 0.5) * 8;
 
           card.style.transform = `
-      perspective(900px)
-      rotateX(${rotateX}deg)
-      rotateY(${rotateY}deg)
-      translateY(-6px)
-    `;
+            perspective(1200px)
+            rotateX(${rotateX}deg)
+            rotateY(${rotateY}deg)
+            translateY(-8px)
+          `;
         });
         card.addEventListener("mouseleave", () => {
           card.style.transform = "none";
