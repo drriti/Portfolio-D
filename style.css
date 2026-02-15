@@ -18,7 +18,9 @@ body {
   transition: background-color 0.4s linear, color 0.4s linear;
 }
 
-a { color: inherit; }
+a {
+  color: inherit;
+}
 
 /* NAV */
 .nav {
@@ -36,6 +38,7 @@ a { color: inherit; }
   justify-content: space-between;
   align-items: center;
 }
+
 /* NAV ICONS */
 .nav-icons {
   display: flex;
@@ -52,7 +55,9 @@ a { color: inherit; }
   color: var(--muted-red);
 }
 
-.logo { height: 40px; }
+.logo {
+  height: 40px;
+}
 
 .nav-links {
   display: flex;
@@ -69,6 +74,7 @@ a { color: inherit; }
 .nav-links a:hover {
   color: var(--muted-red);
 }
+
 .nav-left {
   font-size: 11px;
   letter-spacing: 0.3em;
@@ -76,6 +82,7 @@ a { color: inherit; }
   color: rgba(0, 0, 0, 0.944);
   font-weight: 400;
 }
+
 .nav-left:hover {
   color: rgba(0, 0, 0, 0.55);
 }
@@ -98,6 +105,7 @@ html {
   justify-content: center;
   overflow: hidden;
 }
+
 .scroll-indicator {
   position: absolute;
   bottom: 48px;
@@ -105,7 +113,7 @@ html {
   transform: translateX(-50%);
   height: 120px;
   width: 1px;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
@@ -113,7 +121,8 @@ html {
   display: block;
   width: 100%;
   height: 0%;
-  background: #8b2f2f; /* muted red */
+  background: #8b2f2f;
+  /* muted red */
 }
 
 /* soft abstract background shape */
@@ -121,12 +130,10 @@ html {
   position: absolute;
   width: 520px;
   height: 520px;
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(139, 47, 47, 0.18),
-    rgba(139, 47, 47, 0.06),
-    transparent 70%
-  );
+  background: radial-gradient(circle at 30% 30%,
+      rgba(139, 47, 47, 0.18),
+      rgba(139, 47, 47, 0.06),
+      transparent 70%);
   filter: blur(60px);
   top: 50%;
   left: 50%;
@@ -185,6 +192,7 @@ html {
     height: 380px;
   }
 }
+
 /* =========================
    FILM GRAIN TEXTURE
 ========================= */
@@ -221,7 +229,8 @@ h2 {
 /* ABOUT */
 .about-image img {
   width: 100%;
-  max-width: 380px;        /* ⬅️ keeps it elegant, not dominant */
+  max-width: 380px;
+  /* ⬅️ keeps it elegant, not dominant */
   border-radius: 12px;
   object-fit: cover;
   filter: contrast(1.02) saturate(0.95);
@@ -257,6 +266,7 @@ h2 {
   color: #777;
   margin-bottom: 10px;
 }
+
 .about-image,
 .about-content {
   opacity: 0;
@@ -284,7 +294,7 @@ h2 {
 
 .service-item {
   padding-top: 24px;
-  border-top: 1px solid rgba(0,0,0,0.15);
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .service-item h3 {
@@ -299,6 +309,7 @@ h2 {
   line-height: 1.7;
   color: #555;
 }
+
 .service-number {
   display: block;
   font-size: 12px;
@@ -318,12 +329,16 @@ h2 {
 /* WORK */
 /* WORK SECTION */
 .work-section {
-  background: transparent; /* IMPORTANT */
+  background: transparent;
+  /* IMPORTANT */
   padding: 120px 0;
 }
+
 .work-card {
-  min-height: 520px;      /* lock visual height */
-  align-items: stretch;  /* force both sides equal */
+  min-height: 520px;
+  /* lock visual height */
+  align-items: stretch;
+  /* force both sides equal */
 }
 
 
@@ -340,8 +355,9 @@ h2 {
   transform-style: preserve-3d;
   transition: transform 0.25s ease;
   will-change: transform;
-  
+
 }
+
 .work-media {
   display: flex;
   align-items: center;
@@ -351,8 +367,10 @@ h2 {
 .work-media img {
   width: 100%;
   max-width: 420px;
-  height: 260px;                 /* 🔑 FIXED HEIGHT */
-  object-fit: contain;           /* prevents cropping */
+  height: 260px;
+  /* 🔑 FIXED HEIGHT */
+  object-fit: contain;
+  /* prevents cropping */
   border-radius: 20px;
 }
 
@@ -365,8 +383,9 @@ h2 {
   align-items: center;
 
   padding: 40px;
-  min-height: 60vh; /* ⬅️ reduced */
-   background: rgba(255, 255, 255, 0.08);
+  min-height: 60vh;
+  /* ⬅️ reduced */
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-radius: 28px;
@@ -381,7 +400,7 @@ h2 {
     transform 0.35s ease,
     box-shadow 0.35s ease,
     background 0.35s ease;
-  
+
 }
 
 .work-card:hover {
@@ -391,6 +410,7 @@ h2 {
     0 30px 70px rgba(0, 0, 0, 0.45),
     inset 0 1px 1px rgba(255, 255, 255, 0.25);
 }
+
 .work-card::after {
   content: "";
   position: absolute;
@@ -398,17 +418,16 @@ h2 {
   border-radius: 28px;
   pointer-events: none;
 
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.18),
-    rgba(255,255,255,0.02)
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.02));
 
   opacity: 0.35;
 }
 
 .work-container {
-  max-width: 1100px; /* ⬅️ key change */
+  max-width: 1100px;
+  /* ⬅️ key change */
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -427,7 +446,7 @@ h2 {
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 16px;
 }
 
@@ -440,7 +459,7 @@ h2 {
 .work-desc {
   font-size: 16px;
   line-height: 1.7;
-  color: rgba(255,255,255,0.75);
+  color: rgba(255, 255, 255, 0.75);
   max-width: 420px;
 }
 
@@ -455,13 +474,16 @@ h2 {
 .work-link:hover {
   opacity: 1;
 }
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
+
   .about-grid,
   .services-grid {
     grid-template-columns: 1fr;
   }
 }
+
 .name-wrap {
   position: relative;
   display: inline-block;
@@ -472,9 +494,11 @@ h2 {
   position: relative;
   z-index: 2;
 }
+
 .rr-text {
   white-space: nowrap;
 }
+
 .rr-note {
   white-space: nowrap;
 }
@@ -484,8 +508,10 @@ h2 {
   position: absolute;
 
   /* move it relative to the RR, not the headline */
-  left: 70px;      /* stays aligned with "rr" */
-  top: -30px;      /* 👈 LOWERED so it doesn't hit eyebrow */
+  left: 70px;
+  /* stays aligned with "rr" */
+  top: -30px;
+  /* 👈 LOWERED so it doesn't hit eyebrow */
 
   display: flex;
   align-items: center;
@@ -501,15 +527,18 @@ h2 {
 
   pointer-events: none;
 }
+
 /* arrow svg */
 .name-note svg {
   flex-shrink: 0;
 }
+
 /* hover reveal */
 .name-wrap:hover .name-note {
   opacity: 0.85;
   transform: translateY(0);
 }
+
 .hero-cursor {
   position: fixed;
   width: 42px;
@@ -524,6 +553,7 @@ h2 {
     transform 0.25s ease;
   z-index: 9999;
 }
+
 .scroll-indicator {
   position: absolute;
   bottom: 48px;
@@ -533,15 +563,25 @@ h2 {
   height: 60px;
   background-color: rgba(0, 0, 0, 0.25);
 }
+
 @keyframes breathe {
-  0% { opacity: 0.2; }
-  50% { opacity: 0.5; }
-  100% { opacity: 0.2; }
+  0% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.2;
+  }
 }
 
 .scroll-indicator {
   animation: breathe 2.5s ease-in-out infinite;
 }
+
 #page-bg {
   position: fixed;
   inset: 0;
@@ -557,7 +597,8 @@ h2 {
   left: 0;
   width: 160px;
   height: 56px;
-  border-radius: 14px; /* ← rectangle with soft corners */
+  border-radius: 14px;
+  /* ← rectangle with soft corners */
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -629,11 +670,14 @@ h2 {
 .wall {
   position: relative;
   width: 100%;
-  height: 420px;                 /* CONTROLLED HEIGHT */
+  height: 520px;
+  /* enough room for dragging */
   background: #eae6df;
   border-radius: 28px;
-  padding: 72px 70px;            /* tighter */
+  padding: 72px 70px;
   overflow: hidden;
+  user-select: none;
+  /* prevent text selection during drag */
 }
 
 
@@ -642,33 +686,37 @@ h2 {
   position: absolute;
   inset: 0;
   border-radius: 32px;
-  background: radial-gradient(
-    circle at top left,
-    rgba(255,255,255,0.35),
-    transparent 60%
-  );
+  background: radial-gradient(circle at top left,
+      rgba(255, 255, 255, 0.35),
+      transparent 60%);
   pointer-events: none;
 }
 
 /* PIN ITEM */
 .pin-item {
   position: absolute;
-  width: 150px;                 /* slightly bigger */
-  cursor: pointer;
+  width: 150px;
+  cursor: grab;
 
   transform: rotate(var(--r));
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.pin-item:hover {
-  transform: scale(1.06) rotate(var(--r));
-  z-index: 10;
+.pin-item.dragging {
+  cursor: grabbing;
+  z-index: 1000 !important;
+  transition: none !important;
+  /* kill transitions during drag */
+  transform: scale(1.06) rotate(var(--r)) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35) !important;
 }
 
 .pin-item img {
   width: 100%;
   border-radius: 6px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  /* prevent image from capturing drag events */
 }
 
 /* Pin */
@@ -682,34 +730,70 @@ h2 {
   height: 14px;
   border-radius: 50%;
 
-  background: radial-gradient(
-    circle at 30% 30%,
-    #ff6b6b,
-    #8b2f2f 70%
-  );
+  background: radial-gradient(circle at 30% 30%,
+      #ff6b6b,
+      #8b2f2f 70%);
 
   box-shadow:
-    0 3px 6px rgba(0,0,0,0.45),
-    inset 0 1px 1px rgba(255,255,255,0.35);
+    0 3px 6px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
 
   z-index: 3;
 }
 
 
 /* Positions (controlled chaos) */
-.pin-item:nth-child(1) { top: 20px;  left: 40px;  --r: -3deg; }
-.pin-item:nth-child(2) { top: 80px;  left: 220px; --r: 2deg; }
-.pin-item:nth-child(3) { top: 30px;  left: 380px; --r: -2deg; }
-.pin-item:nth-child(4) { top: 90px;  left: 540px; --r: 3deg; }
+.pin-item:nth-child(1) {
+  top: 20px;
+  left: 40px;
+  --r: -3deg;
+}
 
-.pin-item:nth-child(5) { top: 200px; left: 100px; --r: 2deg; }
-.pin-item:nth-child(6) { top: 240px; left: 260px; --r: -3deg; }
-.pin-item:nth-child(7) { top: 210px; left: 420px; --r: 1deg; }
-.pin-item:nth-child(8) { top: 260px; left: 580px; --r: -2deg; }
+.pin-item:nth-child(2) {
+  top: 80px;
+  left: 220px;
+  --r: 2deg;
+}
+
+.pin-item:nth-child(3) {
+  top: 30px;
+  left: 380px;
+  --r: -2deg;
+}
+
+.pin-item:nth-child(4) {
+  top: 90px;
+  left: 540px;
+  --r: 3deg;
+}
+
+.pin-item:nth-child(5) {
+  top: 200px;
+  left: 100px;
+  --r: 2deg;
+}
+
+.pin-item:nth-child(6) {
+  top: 240px;
+  left: 260px;
+  --r: -3deg;
+}
+
+.pin-item:nth-child(7) {
+  top: 210px;
+  left: 420px;
+  --r: 1deg;
+}
+
+.pin-item:nth-child(8) {
+  top: 260px;
+  left: 580px;
+  --r: -2deg;
+}
 
 
-/* Hover */
-.pin-item:hover {
+/* Hover — only when NOT dragging */
+.pin-item:not(.dragging):hover {
   transform: translateY(-6px) scale(1.04) rotate(var(--r));
   z-index: 10;
 }
@@ -722,7 +806,7 @@ h2 {
 .wall-viewer {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -743,5 +827,3 @@ h2 {
   max-height: 80vh;
   border-radius: 12px;
 }
-
-
