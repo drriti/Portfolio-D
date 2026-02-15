@@ -1,0 +1,260 @@
+<%- include('partials/head') %>
+
+    <div id="page-content">
+        <div id="page-bg"></div>
+
+        <%- include('partials/nav') %>
+
+            <!--hero-->
+            <section class="hero">
+                <!-- background blob -->
+                <div class="hero-blob"></div>
+                <div class="hero-grain"></div>
+                <div class="hero-inner">
+                    <p class="hero-eyebrow">VISUAL COMMUNICATION DESIGNER</p>
+                    <h1 class="hero-title">
+                        Hi, I'm
+                        <span class="name-wrap hero-name">
+                            D<span class="rr">rr</span>iti
+                            <!-- Handwritten Name Note -->
+                            <span class="name-note">
+                                <svg width="42" height="26" viewBox="0 0 42 26" fill="none">
+                                    <path d="M2 24 C14 10, 26 8, 40 2" stroke="#8b2f2f" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                                <span class="note-text">Yes, double r</span>
+                            </span>
+                        </span>
+                    </h1>
+                    <p class="hero-description">
+                        I create thoughtful visual identities and digital experience.
+                    </p>
+                </div>
+                <div class="scroll-indicator">
+                    <span></span>
+                </div>
+            </section>
+
+            <!-- ABOUT -->
+            <section id="about" class="section about">
+                <div class="container about-grid">
+                    <div class="about-image">
+                        <img src="/images/drriti.jpeg" alt="Drriti Pasrija">
+                    </div>
+                    <div class="about-content">
+                        <h2>About</h2>
+                        <p class="about-text">
+                            I'm a Visual Communication Designer with a strong inclination towards
+                            branding, UI/UX, and visual storytelling. I enjoy working at the
+                            intersection of structure and emotion — creating designs that feel
+                            considered, calm, and purposeful.
+                        </p>
+                        <ul class="about-values">
+                            <li>Thoughtful over loud</li>
+                            <li>Detail-driven design</li>
+                            <li>Soft visuals with a sharp idea</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SERVICES -->
+            <section id="services" class="section services">
+                <div class="container">
+                    <h2 class="services-title">Areas of focus</h2>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-number">01</span>
+                            <h3>Visual Identity</h3>
+                            <p>Branding systems built with clarity, restraint, and emotional intent.</p>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-number">02</span>
+                            <h3>UI / UX Design</h3>
+                            <p>Thoughtful digital interfaces focused on usability, structure, and flow.</p>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-number">03</span>
+                            <h3>Editorial & Graphic Design</h3>
+                            <p>Print and digital layouts that communicate quietly yet effectively.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PORTFOLIO (WORK) -->
+            <section id="work" class="work-section">
+                <div class="work-wrapper">
+
+                    <!-- Project 1: UniPath -->
+                    <div class="work-card" onclick="window.location.href='/unipath'">
+                        <div class="work-media">
+                            <img src="/images/unipath.jpg.png" alt="UniPath project">
+                        </div>
+                        <div class="work-text">
+                            <span class="work-category">UI / UX</span>
+                            <h3 class="work-title">UniPath</h3>
+                            <p class="work-desc">
+                                A university navigation system designed to simplify campus movement
+                                through clarity and structure.
+                            </p>
+                            <div class="work-meta">
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Role</span>
+                                    <span class="meta-value">UI/UX Designer</span>
+                                </div>
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Duration</span>
+                                    <span class="meta-value">4 Weeks</span>
+                                </div>
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Tools</span>
+                                    <span class="meta-value">Figma · Illustrator</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Oton -->
+                    <div class="work-card reverse" onclick="window.location.href='/oton'">
+                        <div class="work-media">
+                            <img src="/images/oton/REPLACE THIS.png" alt="Oton branding project">
+                        </div>
+                        <div class="work-text">
+                            <span class="work-category">Branding</span>
+                            <h3 class="work-title">Oton</h3>
+                            <p class="work-desc">
+                                A calm, editorial brand identity rooted in thoughtful storytelling.
+                            </p>
+                            <div class="work-meta">
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Role</span>
+                                    <span class="meta-value">Brand Designer</span>
+                                </div>
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Duration</span>
+                                    <span class="meta-value">3 Weeks</span>
+                                </div>
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Tools</span>
+                                    <span class="meta-value">Illustrator · Photoshop</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: MRITTIKA -->
+                    <div class="work-card" onclick="window.location.href='/mittrika'">
+                        <div class="work-media">
+                            <img src="/images/mittrika/MRITTIKA BEHANCE-17.jpg" alt="MRITTIKA branding">
+                        </div>
+                        <div class="work-text">
+                            <span class="work-category">Branding</span>
+                            <h3 class="work-title">MRITTIKA</h3>
+                            <p class="work-desc">
+                                Desk accessories designed for calm, intentional workspaces.
+                            </p>
+                            <div class="work-meta">
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Role</span>
+                                    <span class="meta-value">Brand Designer</span>
+                                </div>
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Duration</span>
+                                    <span class="meta-value">3 Weeks</span>
+                                </div>
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Tools</span>
+                                    <span class="meta-value">Illustrator · InDesign</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- STUDIO WALL -->
+            <section class="studio-wall">
+                <div class="studio-inner">
+                    <div class="studio-header">
+                        <h2>Studio wall</h2>
+                        <p>Experiments, motion, illustrations & things in progress.</p>
+                    </div>
+
+                    <div class="wall">
+
+                        <!-- PIN 1 -->
+                        <div class="pin-item" data-type="video" data-src="/videos/food app.mp4">
+                            <span class="pin"></span>
+                            <img src="/images/Screenshot 2024-09-20 002730.png">
+                        </div>
+
+                        <div class="pin-item" data-type="video" data-src="/videos/final animation with sound.mp4">
+                            <span class="pin"></span>
+                            <img src="/images/Screenshot 2026-02-15 221423.png">
+                        </div>
+
+                        <div class="pin-item" data-type="flipbook"
+                            data-src="https://heyzine.com/flip-book/fc33b854ba.html">
+                            <span class="pin"></span>
+                            <img src="/images/standing softcover book mockup.png">
+                        </div>
+
+                        <div class="pin-item" data-type="image" data-src="/images/book cover finalll ka final.jpg">
+                            <span class="pin"></span>
+                            <img src="/images/book cover finalll ka final - Copy.jpg">
+                        </div>
+
+                        <div class="pin-item" data-type="image" data-src="/images/Screenshot 2026-02-15 224122.png">
+                            <span class="pin"></span>
+                            <img src="/images/Screenshot 2026-02-15 224122.png">
+                        </div>
+
+                        <div class="pin-item" data-type="image" data-src="/images/sea otter final 3 .png">
+                            <span class="pin"></span>
+                            <img src="/images/sea otter final 3 .png">
+                        </div>
+
+                        <div class="pin-item" data-type="image" data-src="/images/jrissylogo.png">
+                            <span class="pin"></span>
+                            <img src="/images/jrissylogo.png">
+                        </div>
+
+                        <div class="pin-item" data-type="video" data-src="/videos/cheri cheri lady.mp4">
+                            <span class="pin"></span>
+                            <img src="/images/Screenshot 2026-02-15 225704.png">
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- SINGLE VIEWER ONLY -->
+            <div class="wall-viewer">
+                <div class="viewer-content"></div>
+            </div>
+
+            <!-- CONTACT SECTION -->
+            <section id="contact" class="contact-section">
+                <div class="container">
+                    <div class="contact-inner">
+                        <p class="contact-eyebrow">Let's work together</p>
+                        <h2 class="contact-title">Have a project in mind?<br>Let's build something intentional.</h2>
+                        <a href="mailto:drritipasrija11@gmail.com" class="contact-email">
+                            drritipasrija11@gmail.com <i class="fa-solid fa-arrow-right-long"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <%- include('partials/footer') %>
+
+                <div class="project-cursor">
+                    <span>View project →</span>
+                </div>
+
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="/js/main.js"></script>
