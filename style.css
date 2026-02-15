@@ -564,26 +564,20 @@ h2 {
 /* handwritten annotation */
 .name-note {
   position: absolute;
-
-  /* move it relative to the RR, not the headline */
-  left: 70px;
-  /* stays aligned with "rr" */
-  top: -30px;
-  /* 👈 LOWERED so it doesn't hit eyebrow */
-
+  left: 75px;
+  top: -45px;
   display: flex;
   align-items: center;
-  gap: 4px;
-
+  gap: 10px;
   font-family: 'Caveat', cursive;
-  font-size: 16px;
+  font-size: 24px;
   color: var(--muted-red);
-
+  font-weight: 500;
   opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-
+  transform: translateY(8px) rotate(-3deg);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   pointer-events: none;
+  white-space: nowrap;
 }
 
 /* arrow svg */
@@ -593,8 +587,8 @@ h2 {
 
 /* hover reveal */
 .name-wrap:hover .name-note {
-  opacity: 0.85;
-  transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0) rotate(-3deg);
 }
 
 .hero-cursor {
@@ -885,6 +879,7 @@ h2 {
   max-height: 80vh;
   border-radius: 12px;
 }
+
 /* CONTACT SECTION */
 .contact-section {
   padding: 160px 0;
