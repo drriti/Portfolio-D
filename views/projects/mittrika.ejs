@@ -1,67 +1,373 @@
-<%- include('../partials/head') %>
-    <link rel="stylesheet" href="/css/project-style.css" />
+<!DOCTYPE html>
+<html lang="en">
 
-    <section class="case-wrapper">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= title %>
+    </title>
+    <meta name="description"
+        content="MRITTIKA — A desk accessories brand built around material honesty, quiet utility, and intentional workspaces. Case study by Drriti Pasrija.">
 
-        <!-- LEFT PINNED -->
-        <div class="case-left">
-            <span class="case-tag">Branding • Product</span>
-            <h1 class="case-title">MITTRIKA</h1>
-            <p class="case-intro">
-                MITTRIKA is a desk accessories brand built around material honesty,
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Mrittika Styles -->
+    <link rel="stylesheet" href="/css/mittrika-style.css" />
+</head>
+
+<body>
+
+    <!-- Progress Bar -->
+    <div class="mk-progress"></div>
+
+    <!-- Back Button -->
+    <a href="/#work" class="mk-back">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Back to Work</span>
+    </a>
+
+    <!-- ════════════════════════════════
+         HERO — Asymmetric Split Entry
+    ════════════════════════════════ -->
+    <section class="mk-hero" id="mk-hero">
+        <div class="mk-hero-grain"></div>
+
+        <div class="mk-hero-left">
+            <div class="mk-hero-chapter">Case Study</div>
+            <h1 class="mk-hero-title">
+                <span class="mk-title-script">made with earth</span>
+                MRITTIKA
+            </h1>
+            <p class="mk-hero-subtitle">
+                A desk accessories brand built around material honesty,
                 quiet utility, and intentional workspaces.
             </p>
-        </div>
-
-        <!-- CENTER SCROLL -->
-        <main class="case-center">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-01.jpg" alt="MITTRIKA Branding 1">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-02.jpg" alt="MITTRIKA Branding 2">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-03.jpg" alt="MITTRIKA Branding 3">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-04.jpg" alt="MITTRIKA Branding 4">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-05.jpg" alt="MITTRIKA Branding 5">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-06.jpg" alt="MITTRIKA Branding 6">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-08.jpg" alt="MITTRIKA Branding 8">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-09.jpg" alt="MITTRIKA Branding 9">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-10.jpg" alt="MITTRIKA Branding 10">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-11.jpg" alt="MITTRIKA Branding 11">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-12.jpg" alt="MITTRIKA Branding 12">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-13.jpg" alt="MITTRIKA Branding 13">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-14.jpg" alt="MITTRIKA Branding 14">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-15.jpg" alt="MITTRIKA Branding 15">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-16.jpg" alt="MITTRIKA Branding 16">
-            <img src="/images/mittrika/MRITTIKA BEHANCE-17.jpg" alt="MITTRIKA Branding 17">
-        </main>
-
-        <!-- RIGHT PINNED -->
-        <div class="case-right">
-            <div class="case-meta-item">
-                <span>Role</span>
-                <p>Brand Designer</p>
-            </div>
-            <div class="case-meta-item">
-                <span>Focus</span>
-                <p>Identity, Product Language</p>
-            </div>
-            <div class="case-meta-item">
-                <span>Deliverables</span>
-                <p>Logo, System, Visuals</p>
+            <div class="mk-hero-meta-row">
+                <div class="mk-meta-tag"><span class="lbl">Role</span> Brand Designer</div>
+                <div class="mk-meta-tag"><span class="lbl">Focus</span> Identity & Product</div>
+                <div class="mk-meta-tag"><span class="lbl">Tools</span> Illustrator · InDesign</div>
             </div>
         </div>
 
+        <div class="mk-hero-right">
+            <div class="mk-hero-image-wrap">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-01.jpg" alt="MRITTIKA brand overview">
+            </div>
+        </div>
+
+        <div class="mk-scroll-cue">
+            <span>Scroll</span>
+            <div class="mk-scroll-line"></div>
+        </div>
     </section>
 
-    <nav class="project-nav">
-        <a href="/#work" class="nav-btn back">
-            <span>Portfolio</span>
-            <h3><i class="fa-solid fa-arrow-left"></i> Back to work</h3>
-        </a>
-        <a href="/unipath" class="nav-btn next">
-            <span>Next Project</span>
-            <h3>UniPath <i class="fa-solid fa-arrow-right"></i></h3>
-        </a>
-    </nav>
+    <!-- ════════════════════════════════
+         MANIFESTO — Big Quote
+    ════════════════════════════════ -->
+    <div class="mk-manifesto" id="mk-manifesto">
+        <div class="mk-manifesto-inner">
+            <div class="mk-manifesto-mark">"</div>
+            <p class="mk-manifesto-quote">
+                Objects that carry the <span>warmth of earth</span> and the
+                <span>calm of intention</span> — designed to serve without
+                demanding attention.
+            </p>
+            <p class="mk-manifesto-attr">— Brand Manifesto</p>
+        </div>
+    </div>
 
-    </body>
+    <!-- ════════════════════════════════
+         CHAPTER 01 — Core Values
+    ════════════════════════════════ -->
+    <section class="mk-chapter" id="mk-values">
+        <div class="mk-chapter-header">
+            <div class="mk-chapter-num">01</div>
+            <div class="mk-chapter-info">
+                <div class="mk-chapter-label">Core Values</div>
+                <h2 class="mk-chapter-title">Rooted in earth,<br>shaped by intention.</h2>
+            </div>
+        </div>
 
-    </html>
+        <p class="mk-chapter-desc">
+            MRITTIKA translates the raw beauty of natural materials into
+            functional objects that bring calm and order to creative workspaces.
+        </p>
+
+        <div class="mk-values-row">
+            <div class="mk-value-item">
+                <div class="mk-value-num">01</div>
+                <h3>Material Honesty</h3>
+                <p>
+                    Every material speaks for itself. Nothing is disguised,
+                    coated, or made to look like something it isn't.
+                </p>
+            </div>
+            <div class="mk-value-item">
+                <div class="mk-value-num">02</div>
+                <h3>Quiet Utility</h3>
+                <p>
+                    Objects that serve without demanding attention. Each piece
+                    enhances focus rather than competing for it.
+                </p>
+            </div>
+            <div class="mk-value-item">
+                <div class="mk-value-num">03</div>
+                <h3>Intentional Design</h3>
+                <p>
+                    Every curve, weight, and proportion is deliberate.
+                    Nothing is added for ornament.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         FULL BLEED IMAGE
+    ════════════════════════════════ -->
+    <div class="mk-fullbleed">
+        <img src="/images/mittrika/MRITTIKA BEHANCE-02.jpg" alt="MRITTIKA brand identity">
+    </div>
+
+    <!-- ════════════════════════════════
+         CHAPTER 02 — Process
+    ════════════════════════════════ -->
+    <section class="mk-chapter" id="mk-process">
+        <div class="mk-chapter-header">
+            <div class="mk-chapter-num">02</div>
+            <div class="mk-chapter-info">
+                <div class="mk-chapter-label">Process</div>
+                <h2 class="mk-chapter-title">From earth<br>to workspace.</h2>
+            </div>
+        </div>
+
+        <p class="mk-chapter-desc">
+            The design process mirrored the brand's philosophy — starting
+            from raw materials and shaping each decision with intention.
+        </p>
+
+        <div class="mk-process-rail">
+            <div class="mk-process-card">
+                <div class="mk-pcard-num">01</div>
+                <h3>Material Exploration</h3>
+                <p>Researched natural materials — clay, stone, wood — and their unique textures, studying how they
+                    behave and age.</p>
+            </div>
+            <div class="mk-process-card">
+                <div class="mk-pcard-num">02</div>
+                <h3>Identity Formation</h3>
+                <p>Developed a brand identity reflecting organic nature — earthy tones, warm typography, and marks
+                    inspired by natural forms.</p>
+            </div>
+            <div class="mk-process-card">
+                <div class="mk-pcard-num">03</div>
+                <h3>Product Language</h3>
+                <p>Created cohesive packaging, labeling, and presentation that honors the materials and the brand's
+                    quiet confidence.</p>
+            </div>
+            <div class="mk-process-card">
+                <div class="mk-pcard-num">04</div>
+                <h3>Visual System</h3>
+                <p>Assembled the complete system — business cards to packaging, each touchpoint carries the same warmth
+                    and honesty.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         HORIZONTAL SCROLL — Material Gallery
+    ════════════════════════════════ -->
+    <div class="mk-hscroll-wrap" id="mk-hscroll">
+        <div class="mk-hscroll-header">
+            <h2 class="mk-hscroll-title">Visual System</h2>
+            <span class="mk-hscroll-hint">Hover to pause</span>
+        </div>
+        <div class="mk-hscroll-track" id="mk-hscroll-track">
+            <!-- First set -->
+            <div class="mk-hscroll-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-03.jpg" alt="MRITTIKA typography">
+            </div>
+            <div class="mk-hscroll-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-04.jpg" alt="MRITTIKA color palette">
+            </div>
+            <div class="mk-hscroll-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-05.jpg" alt="MRITTIKA brand elements">
+            </div>
+            <div class="mk-hscroll-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-06.jpg" alt="MRITTIKA patterns">
+            </div>
+            <div class="mk-hscroll-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-08.jpg" alt="MRITTIKA applications">
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="mk-hscroll-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-03.jpg" alt="MRITTIKA typography">
+            </div>
+            <div class="mk-hscroll-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-04.jpg" alt="MRITTIKA color palette">
+            </div>
+            <div class="mk-hscroll-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-05.jpg" alt="MRITTIKA brand elements">
+            </div>
+            <div class="mk-hscroll-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-06.jpg" alt="MRITTIKA patterns">
+            </div>
+            <div class="mk-hscroll-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-08.jpg" alt="MRITTIKA applications">
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         CHAPTER 03 — Packaging Deep Dive (Split)
+    ════════════════════════════════ -->
+    <div class="mk-split" id="mk-split-1">
+        <div class="mk-split-text">
+            <div class="mk-split-label">Visual Style</div>
+            <h2 class="mk-split-heading">Brand Imagery</h2>
+            <p class="mk-split-body">
+                Brand imagery reflects sustainable design, organic elegance, and material integrity.
+                Emotional warmth comes through natural textures and earthy tones instead of sterile minimalism.
+            </p>
+            <p class="mk-split-body">
+                Every piece carries the soul of craftsmanship—shaped by hand, guided by sustainability, and designed for
+                timeless harmony.
+            </p>
+        </div>
+        <div class="mk-split-visual">
+            <img src="/images/mittrika/MRITTIKA BEHANCE-09.jpg" alt="MRITTIKA packaging">
+        </div>
+    </div>
+
+    <div class="mk-split reverse" id="mk-split-2">
+        <div class="mk-split-text">
+            <div class="mk-split-label">Product Details</div>
+            <h2 class="mk-split-heading">Where form<br>meets function.</h2>
+            <p class="mk-split-body">
+                Every product in the MRITTIKA line is designed to serve a
+                specific purpose in a creative workspace. Pen holders, trays,
+                and organizers — each shaped by how people actually work.
+            </p>
+            <p class="mk-split-body">
+                The earthy palette and organic textures bring warmth to
+                modern workspaces without visual noise.
+            </p>
+        </div>
+        <div class="mk-split-visual">
+            <img src="/images/mittrika/MRITTIKA BEHANCE-10.jpg" alt="MRITTIKA product details">
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         MASONRY GALLERY — Big Visual Grid
+    ════════════════════════════════ -->
+    <section class="mk-chapter" id="mk-gallery">
+        <div class="mk-chapter-header">
+            <div class="mk-chapter-num">03</div>
+            <div class="mk-chapter-info">
+                <div class="mk-chapter-label">Applications</div>
+                <h2 class="mk-chapter-title">A language that feels<br>grounded and warm.</h2>
+            </div>
+        </div>
+
+        <div class="mk-masonry">
+            <div class="mk-masonry-item tall">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-11.jpg" alt="MRITTIKA stationery">
+            </div>
+            <div class="mk-masonry-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-12.jpg" alt="MRITTIKA mockup">
+            </div>
+            <div class="mk-masonry-item wide">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-13.jpg" alt="MRITTIKA full spread">
+            </div>
+            <div class="mk-masonry-item">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-14.jpg" alt="MRITTIKA detail">
+            </div>
+            <div class="mk-masonry-item tall">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-15.jpg" alt="MRITTIKA environment">
+            </div>
+            <div class="mk-masonry-item wide">
+                <img src="/images/mittrika/MRITTIKA BEHANCE-16.jpg" alt="MRITTIKA presentation">
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         FULL BLEED CLOSING
+    ════════════════════════════════ -->
+    <div class="mk-fullbleed closing">
+        <img src="/images/mittrika/MRITTIKA BEHANCE-17.jpg" alt="MRITTIKA final showcase">
+    </div>
+
+    <!-- ════════════════════════════════
+         MARQUEE DIVIDER
+    ════════════════════════════════ -->
+    <div class="mk-marquee">
+        <div class="mk-marquee-track">
+            <span class="mk-marquee-item">Material</span>
+            <span class="mk-marquee-item">Honesty</span>
+            <span class="mk-marquee-item">Quiet</span>
+            <span class="mk-marquee-item">Utility</span>
+            <span class="mk-marquee-item">Intentional</span>
+            <span class="mk-marquee-item">Design</span>
+            <span class="mk-marquee-item">Clay</span>
+            <span class="mk-marquee-item">Earth</span>
+            <!-- Duplicate for loop -->
+            <span class="mk-marquee-item">Material</span>
+            <span class="mk-marquee-item">Honesty</span>
+            <span class="mk-marquee-item">Quiet</span>
+            <span class="mk-marquee-item">Utility</span>
+            <span class="mk-marquee-item">Intentional</span>
+            <span class="mk-marquee-item">Design</span>
+            <span class="mk-marquee-item">Clay</span>
+            <span class="mk-marquee-item">Earth</span>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         NEXT PROJECT
+    ════════════════════════════════ -->
+    <section class="mk-next" id="mk-next">
+        <p class="mk-next-label mk-reveal">Next Project</p>
+        <h2 class="mk-next-title mk-reveal">
+            <a href="/riyasat">Riyasat →</a>
+        </h2>
+        <a href="/riyasat" class="mk-next-arrow mk-reveal">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </section>
+
+    <!-- ════════════════════════════════
+         FOOTER
+    ════════════════════════════════ -->
+    <footer class="mk-footer">
+        <p>&copy; 2026 Drriti Pasrija</p>
+        <div class="mk-footer-links">
+            <a href="https://www.linkedin.com/in/drriti-pasrija" target="_blank">LinkedIn</a>
+            <a href="https://www.behance.net/drritipasrija" target="_blank">Behance</a>
+        </div>
+    </footer>
+
+    <!-- ════════════════════════════════
+         IMAGE LIGHTBOX
+    ════════════════════════════════ -->
+    <div class="mk-lightbox">
+        <button class="mk-lightbox-close"><i class="fa-solid fa-xmark"></i></button>
+        <img src="" alt="Enlarged view">
+    </div>
+
+    <!-- Mrittika Interactions Script -->
+    <script src="/js/mittrika.js"></script>
+
+</body>
+
+</html>

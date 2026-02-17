@@ -7,6 +7,8 @@
 
             <!--hero-->
             <section class="hero">
+                <!-- Interactive dot grid canvas -->
+                <canvas id="hero-canvas"></canvas>
                 <!-- background blob -->
                 <div class="hero-blob"></div>
                 <div class="hero-grain"></div>
@@ -95,8 +97,8 @@
                             <span class="work-category">UI / UX</span>
                             <h3 class="work-title">UniPath</h3>
                             <p class="work-desc">
-                                A university navigation system designed to simplify campus movement
-                                through clarity and structure.
+                                A comprehensive platform that simplifies the chaotic study abroad journey—from
+                                university discovery to departure.
                             </p>
                             <div class="work-meta">
                                 <div class="work-meta-item">
@@ -166,6 +168,35 @@
                                 <div class="work-meta-item">
                                     <span class="meta-label">Tools</span>
                                     <span class="meta-value">Illustrator · InDesign</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Riyasat -->
+                    <div class="work-card reverse" onclick="window.location.href='/riyasat'">
+                        <div class="work-media">
+                            <img src="/images/riyasat/riyasat brand guidelines 1_Page_01.jpg"
+                                alt="Riyasat branding project">
+                        </div>
+                        <div class="work-text">
+                            <span class="work-category">Branding</span>
+                            <h3 class="work-title">Riyasat</h3>
+                            <p class="work-desc">
+                                A rich, heritage-inspired brand identity rooted in tradition and elegance.
+                            </p>
+                            <div class="work-meta">
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Role</span>
+                                    <span class="meta-value">Brand Designer</span>
+                                </div>
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Duration</span>
+                                    <span class="meta-value">3 Weeks</span>
+                                </div>
+                                <div class="work-meta-item">
+                                    <span class="meta-label">Tools</span>
+                                    <span class="meta-value">Illustrator · Photoshop</span>
                                 </div>
                             </div>
                         </div>
@@ -257,4 +288,5 @@
     </div>
 
     <!-- SCRIPTS -->
+    <script src="/js/hero-interact.js"></script>
     <script src="/js/main.js"></script>

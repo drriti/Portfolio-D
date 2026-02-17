@@ -1,0 +1,1308 @@
+/* ═══════════════════════════════════════════
+   OTON — EDITORIAL MAGAZINE LAYOUT
+   Cinematic, High-Contrast Menswear Identity
+   Layout: Vertical narrative with horizontal showcase,
+   dramatic split-screens, and editorial typography
+═══════════════════════════════════════════ */
+
+/* ── Reset & Base ────────────────────────── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --ot-bg: #050505;
+    --ot-surface: #0a0a0a;
+    --ot-card: #0f0f0f;
+    --ot-white: #ffffff;
+    --ot-cream: #e8e4de;
+    --ot-warm: #c8b89a;
+    --ot-muted: #5a5a5a;
+    --ot-muted-light: #888888;
+    --ot-border: rgba(255, 255, 255, 0.05);
+    --ot-border-hover: rgba(255, 255, 255, 0.12);
+    --ot-text: #f5f5f5;
+    --ot-serif: 'Caveat', cursive;
+    --ot-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    --ot-ease: cubic-bezier(0.23, 1, 0.32, 1);
+    --ot-ease-dramatic: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--ot-sans);
+    background: var(--ot-bg);
+    color: var(--ot-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR FOLLOWER
+═══════════════════════════════════════════ */
+.ot-cursor {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transition: width 0.3s var(--ot-ease), height 0.3s var(--ot-ease),
+        border-color 0.3s ease, background 0.3s ease;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+}
+
+.ot-cursor.hovering {
+    width: 48px;
+    height: 48px;
+    border-color: var(--ot-white);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* ═══════════════════════════════════════════
+   PROGRESS BAR — Thin line
+═══════════════════════════════════════════ */
+.ot-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 0%;
+    background: var(--ot-white);
+    z-index: 9999;
+    transition: none;
+}
+
+/* ═══════════════════════════════════════════
+   BACK BUTTON — Consistent with other projects
+═══════════════════════════════════════════ */
+.ot-back {
+    position: fixed;
+    top: 32px;
+    left: 32px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ot-muted-light);
+    padding: 10px 20px;
+    border: 1px solid var(--ot-border);
+    border-radius: 100px;
+    backdrop-filter: blur(12px);
+    background: rgba(5, 5, 5, 0.75);
+    transition: all 0.3s ease;
+}
+
+.ot-back:hover {
+    color: var(--ot-white);
+    border-color: var(--ot-border-hover);
+}
+
+.ot-back i {
+    font-size: 11px;
+}
+
+/* ═══════════════════════════════════════════
+   HERO — Full-Screen Cinematic Title
+═══════════════════════════════════════════ */
+.ot-hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.ot-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 255, 255, 0.015), transparent),
+        radial-gradient(ellipse 50% 50% at 80% 70%, rgba(200, 184, 154, 0.02), transparent);
+}
+
+.ot-hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 120px 120px;
+    opacity: 0.3;
+}
+
+.ot-hero-grain {
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+}
+
+/* Side labels */
+.ot-hero-side-label {
+    position: absolute;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ot-muted);
+    writing-mode: vertical-rl;
+    opacity: 0;
+}
+
+.ot-hero-side-label.left {
+    left: 36px;
+    bottom: 100px;
+}
+
+.ot-hero-side-label.right {
+    right: 36px;
+    top: 100px;
+}
+
+.ot-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 1100px;
+    padding: 0 40px;
+}
+
+/* Category tag */
+.ot-hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--ot-sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ot-muted);
+    margin-bottom: 48px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.ot-hero-tag::before,
+.ot-hero-tag::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--ot-muted);
+}
+
+/* Title — Bold statement */
+.ot-hero-title {
+    font-family: var(--ot-sans);
+    font-size: clamp(72px, 14vw, 200px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(60px);
+    color: var(--ot-white);
+}
+
+.ot-hero-title span {
+    display: block;
+    font-family: var(--ot-sans);
+    font-size: 0.1em;
+    letter-spacing: 0.6em;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: var(--ot-muted);
+    margin-bottom: 24px;
+}
+
+/* Subtitle */
+.ot-hero-subtitle {
+    font-family: var(--ot-sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ot-muted-light);
+    max-width: 460px;
+    margin: 0 auto 56px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Meta row — inline tags */
+.ot-hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.ot-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border: 1px solid var(--ot-border);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+}
+
+.ot-meta-item .label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ot-muted);
+}
+
+.ot-meta-item .value {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ot-cream);
+}
+
+/* Scroll CTA */
+.ot-scroll-cue {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+}
+
+.ot-scroll-cue span {
+    font-family: var(--ot-sans);
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ot-muted);
+}
+
+.ot-scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--ot-muted), transparent);
+    animation: ot-scroll-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ot-scroll-pulse {
+
+    0%,
+    100% {
+        opacity: 0.15;
+        transform: scaleY(0.4);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scaleY(1);
+    }
+}
+
+/* ═══════════════════════════════════════════
+   CINEMATIC IMAGE — Full bleed with overlay text
+═══════════════════════════════════════════ */
+.ot-cinematic {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+}
+
+.ot-cinematic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ot-ease);
+}
+
+.ot-cinematic:hover img {
+    transform: scale(1.02);
+}
+
+.ot-cinematic-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 80px 60px 48px;
+    background: linear-gradient(to top, var(--ot-bg), transparent);
+}
+
+.ot-cinematic-overlay p {
+    font-family: var(--ot-serif);
+    font-style: normal;
+    font-size: clamp(18px, 2.5vw, 28px);
+    color: var(--ot-cream);
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════
+   SPLIT SECTION — text left, number right
+═══════════════════════════════════════════ */
+.ot-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+    border-bottom: 1px solid var(--ot-border);
+}
+
+.ot-split-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    opacity: 0;
+    transform: translateX(-60px);
+}
+
+.ot-split-label {
+    font-family: var(--ot-sans);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ot-muted);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.ot-split-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--ot-muted);
+}
+
+.ot-split-heading {
+    font-family: var(--ot-sans);
+    font-size: clamp(30px, 3.5vw, 48px);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 28px;
+    color: var(--ot-white);
+}
+
+.ot-split-body {
+    font-family: var(--ot-sans);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 2;
+    color: var(--ot-muted-light);
+    max-width: 440px;
+}
+
+.ot-split-visual {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ot-surface);
+    opacity: 0;
+    transform: translateX(60px);
+}
+
+.ot-split-visual img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 1s var(--ot-ease);
+}
+
+.ot-split-visual:hover img {
+    transform: scale(1.03);
+}
+
+.ot-split-number {
+    position: absolute;
+    bottom: 24px;
+    right: 32px;
+    font-family: var(--ot-sans);
+    font-size: clamp(100px, 12vw, 200px);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.03);
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* Reverse split */
+.ot-split.reverse {
+    direction: rtl;
+}
+
+.ot-split.reverse>* {
+    direction: ltr;
+}
+
+/* ═══════════════════════════════════════════
+   PHILOSOPHY — Large statement cards
+═══════════════════════════════════════════ */
+.ot-section {
+    padding: 140px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.ot-section-compact {
+    padding: 100px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.ot-editorial-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 48px;
+    align-items: end;
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.ot-editorial-number {
+    font-family: var(--ot-sans);
+    font-size: clamp(60px, 8vw, 120px);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.04);
+    line-height: 1;
+}
+
+.ot-editorial-text {
+    padding-bottom: 8px;
+}
+
+.ot-editorial-label {
+    font-family: var(--ot-sans);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ot-muted);
+    margin-bottom: 16px;
+}
+
+.ot-editorial-title {
+    font-family: var(--ot-sans);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--ot-white);
+}
+
+/* Philosophy twin cards */
+.ot-philosophy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+}
+
+.ot-philosophy-card {
+    padding: 64px 48px;
+    background: var(--ot-surface);
+    border: 1px solid var(--ot-border);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: border-color 0.5s ease;
+}
+
+.ot-philosophy-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background: var(--ot-white);
+    transition: width 0.8s var(--ot-ease);
+}
+
+.ot-philosophy-card:hover {
+    border-color: var(--ot-border-hover);
+}
+
+.ot-philosophy-card:hover::after {
+    width: 100%;
+}
+
+.ot-philosophy-card .card-number {
+    font-family: var(--ot-sans);
+    font-size: 48px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.05);
+    margin-bottom: 32px;
+    line-height: 1;
+}
+
+.ot-philosophy-card h3 {
+    font-family: var(--ot-sans);
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: var(--ot-cream);
+}
+
+.ot-philosophy-card p {
+    font-family: var(--ot-sans);
+    font-size: 13px;
+    line-height: 2;
+    color: var(--ot-muted-light);
+    font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════
+   HORIZONTAL SCROLL GALLERY
+═══════════════════════════════════════════ */
+.ot-hscroll-wrap {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--ot-border);
+    border-bottom: 1px solid var(--ot-border);
+}
+
+.ot-hscroll-header {
+    padding: 60px 80px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.ot-hscroll-title {
+    font-family: var(--ot-sans);
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 500;
+    color: var(--ot-white);
+}
+
+.ot-hscroll-hint {
+    font-family: var(--ot-sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ot-muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ot-hscroll-hint i {
+    font-size: 12px;
+    animation: ot-arrow-slide 1.5s ease-in-out infinite;
+}
+
+@keyframes ot-arrow-slide {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(6px);
+    }
+}
+
+.ot-hscroll-track {
+    display: flex;
+    gap: 4px;
+    padding: 48px 80px 60px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+}
+
+.ot-hscroll-track::-webkit-scrollbar {
+    display: none;
+}
+
+.ot-hscroll-track:active {
+    cursor: grabbing;
+}
+
+.ot-hscroll-item {
+    flex: 0 0 auto;
+    width: 45vw;
+    height: 55vh;
+    overflow: hidden;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+.ot-hscroll-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ot-ease);
+}
+
+.ot-hscroll-item:hover img {
+    transform: scale(1.04);
+}
+
+/* ═══════════════════════════════════════════
+   PROCESS — Editorial Steps (Stacked blocks)
+═══════════════════════════════════════════ */
+.ot-process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--ot-border);
+}
+
+.ot-process-block {
+    padding: 48px 36px;
+    border-right: 1px solid var(--ot-border);
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: background 0.4s ease;
+}
+
+.ot-process-block:last-child {
+    border-right: none;
+}
+
+.ot-process-block:hover {
+    background: var(--ot-surface);
+}
+
+.ot-process-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--ot-white);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s var(--ot-ease);
+}
+
+.ot-process-block:hover::before {
+    transform: scaleX(1);
+}
+
+.ot-process-num {
+    font-family: var(--ot-sans);
+    font-size: 40px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.06);
+    margin-bottom: 28px;
+    line-height: 1;
+}
+
+.ot-process-block h3 {
+    font-family: var(--ot-sans);
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--ot-cream);
+}
+
+.ot-process-block p {
+    font-family: var(--ot-sans);
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--ot-muted-light);
+    font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════
+   DEEP DIVE — Magazine Spread
+═══════════════════════════════════════════ */
+.ot-spread {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+}
+
+.ot-spread-image {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.ot-spread-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ot-ease);
+}
+
+.ot-spread-image:hover img {
+    transform: scale(1.03);
+}
+
+.ot-spread-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px;
+    background: var(--ot-surface);
+    border-left: 1px solid var(--ot-border);
+    opacity: 0;
+    transform: translateX(40px);
+}
+
+.ot-spread-tag {
+    font-family: var(--ot-sans);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ot-muted);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.ot-spread-tag::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--ot-muted);
+}
+
+.ot-spread-content h3 {
+    font-family: var(--ot-sans);
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 500;
+    margin-bottom: 24px;
+    line-height: 1.25;
+    color: var(--ot-white);
+}
+
+.ot-spread-content p {
+    font-family: var(--ot-sans);
+    font-size: 14px;
+    line-height: 2;
+    color: var(--ot-muted-light);
+    font-weight: 300;
+    margin-bottom: 20px;
+    max-width: 400px;
+}
+
+/* Reverse spread */
+.ot-spread.reverse .ot-spread-content {
+    border-left: none;
+    border-right: 1px solid var(--ot-border);
+    order: -1;
+}
+
+.ot-spread.reverse .ot-spread-content {
+    transform: translateX(-40px);
+}
+
+/* ═══════════════════════════════════════════
+   FULL BLEED SHOWCASE
+═══════════════════════════════════════════ */
+.ot-showcase-full {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.ot-showcase-full img {
+    width: 100%;
+    display: block;
+    opacity: 0;
+    transform: scale(0.97);
+    transition: transform 1s var(--ot-ease);
+}
+
+/* ═══════════════════════════════════════════
+   STATS — Minimal grid with rules
+═══════════════════════════════════════════ */
+.ot-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--ot-border);
+    border-bottom: 1px solid var(--ot-border);
+}
+
+.ot-metric {
+    text-align: center;
+    padding: 72px 24px;
+    border-right: 1px solid var(--ot-border);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.ot-metric:last-child {
+    border-right: none;
+}
+
+.ot-metric-number {
+    font-family: var(--ot-sans);
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 600;
+    color: var(--ot-white);
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+.ot-metric-label {
+    font-family: var(--ot-sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ot-muted);
+}
+
+/* ═══════════════════════════════════════════
+   NEXT PROJECT — Consistent with other projects
+═══════════════════════════════════════════ */
+.ot-next {
+    position: relative;
+    padding: 160px 40px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.ot-next::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 60%, rgba(255, 255, 255, 0.015), transparent);
+}
+
+.ot-next-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ot-muted);
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.ot-next-title {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 500;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.ot-next-title a {
+    text-decoration: none;
+    color: var(--ot-text);
+    transition: color 0.3s ease;
+}
+
+.ot-next-title a:hover {
+    color: var(--ot-muted-light);
+}
+
+.ot-next-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--ot-text);
+    font-size: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.ot-next-arrow:hover {
+    border-color: var(--ot-border-hover);
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateX(8px);
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.ot-footer {
+    padding: 40px;
+    border-top: 1px solid var(--ot-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 12px;
+    color: var(--ot-muted);
+    letter-spacing: 0.05em;
+}
+
+.ot-footer a {
+    color: var(--ot-muted);
+    transition: color 0.3s ease;
+}
+
+.ot-footer a:hover {
+    color: var(--ot-white);
+}
+
+.ot-footer-links {
+    display: flex;
+    gap: 28px;
+}
+
+/* ═══════════════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════════════ */
+.ot-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    cursor: zoom-out;
+}
+
+.ot-lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.ot-lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    box-shadow: 0 60px 120px rgba(0, 0, 0, 0.8);
+    transform: scale(0.92);
+    transition: transform 0.5s var(--ot-ease);
+}
+
+.ot-lightbox.active img {
+    transform: scale(1);
+}
+
+.ot-lightbox-close {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s ease;
+}
+
+.ot-lightbox-close:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ═══════════════════════════════════════════
+   REVEAL ANIMATIONS
+═══════════════════════════════════════════ */
+.ot-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.ot-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1s var(--ot-ease),
+        transform 1s var(--ot-ease);
+}
+
+/* ═══════════════════════════════════════════
+   MARQUEE DIVIDER
+═══════════════════════════════════════════ */
+.ot-marquee {
+    overflow: hidden;
+    padding: 28px 0;
+    border-top: 1px solid var(--ot-border);
+    border-bottom: 1px solid var(--ot-border);
+    white-space: nowrap;
+}
+
+.ot-marquee-track {
+    display: flex;
+    animation: ot-marquee 25s linear infinite;
+}
+
+.ot-marquee-item {
+    font-family: var(--ot-sans);
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.08);
+    padding: 0 48px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.ot-marquee-item::after {
+    content: '•';
+    margin-left: 48px;
+    color: rgba(255, 255, 255, 0.04);
+}
+
+@keyframes ot-marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+    .ot-split {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .ot-split-text {
+        padding: 60px 40px;
+    }
+
+    .ot-split-visual {
+        height: 50vh;
+    }
+
+    .ot-split.reverse {
+        direction: ltr;
+    }
+
+    .ot-split.reverse>* {
+        order: unset;
+    }
+
+    .ot-philosophy {
+        grid-template-columns: 1fr;
+    }
+
+    .ot-process-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .ot-process-block:nth-child(2) {
+        border-right: none;
+    }
+
+    .ot-process-block:nth-child(3),
+    .ot-process-block:nth-child(4) {
+        border-top: 1px solid var(--ot-border);
+    }
+
+    .ot-spread {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .ot-spread-image {
+        height: 50vh;
+    }
+
+    .ot-spread.reverse .ot-spread-content {
+        order: unset;
+        border-right: none;
+        border-left: none;
+    }
+
+    .ot-spread-content {
+        border-left: none;
+    }
+
+    .ot-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .ot-metric {
+        border-right: none;
+        border-bottom: 1px solid var(--ot-border);
+    }
+
+    .ot-metric:last-child {
+        border-bottom: none;
+    }
+
+    .ot-section {
+        padding: 100px 40px;
+    }
+
+    .ot-section-compact {
+        padding: 80px 40px;
+    }
+
+    .ot-editorial-header {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .ot-hscroll-item {
+        width: 70vw;
+        height: 45vh;
+    }
+
+    .ot-hscroll-header {
+        padding: 48px 40px 0;
+    }
+
+    .ot-hscroll-track {
+        padding: 36px 40px 48px;
+    }
+
+    .ot-hero-side-label {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .ot-hero {
+        height: 100vh;
+    }
+
+    .ot-hero-content {
+        padding: 0 24px;
+    }
+
+    .ot-section {
+        padding: 80px 24px;
+    }
+
+    .ot-section-compact {
+        padding: 60px 24px;
+    }
+
+    .ot-next {
+        padding: 120px 24px;
+    }
+
+    .ot-back {
+        top: 20px;
+        left: 20px;
+        padding: 8px 16px;
+        font-size: 10px;
+    }
+
+    .ot-hero-meta {
+        gap: 8px;
+    }
+
+    .ot-meta-item {
+        padding: 6px 14px;
+    }
+
+    .ot-process-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ot-process-block {
+        border-right: none;
+        border-bottom: 1px solid var(--ot-border);
+    }
+
+    .ot-process-block:last-child {
+        border-bottom: none;
+    }
+
+    .ot-process-block:nth-child(3),
+    .ot-process-block:nth-child(4) {
+        border-top: none;
+    }
+
+    .ot-spread-content {
+        padding: 48px 24px;
+    }
+
+    .ot-cinematic {
+        height: 50vh;
+    }
+
+    .ot-cinematic-overlay {
+        padding: 60px 24px 32px;
+    }
+
+    .ot-hscroll-item {
+        width: 85vw;
+        height: 40vh;
+    }
+
+    .ot-hscroll-header,
+    .ot-hscroll-track {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .ot-footer {
+        padding: 40px 24px;
+    }
+
+    .ot-ot-cursor {
+        display: none;
+    }
+
+    .ot-marquee-item {
+        padding: 0 24px;
+    }
+
+    .ot-marquee-item::after {
+        margin-left: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ot-footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .ot-hscroll-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+}

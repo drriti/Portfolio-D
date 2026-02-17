@@ -1,65 +1,382 @@
-<%- include('../partials/head') %>
-    <link rel="stylesheet" href="/css/project-style.css" />
+<!DOCTYPE html>
+<html lang="en">
 
-    <section class="case-wrapper">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= title %>
+    </title>
+    <meta name="description"
+        content="UniPath — A mobile app designed to simplify the overwhelming study abroad journey for students, from university search to visa guidance. Case study by Drriti Pasrija.">
 
-        <!-- LEFT PINNED -->
-        <div class="case-left">
-            <span class="case-tag">UI / UX · Wayfinding</span>
-            <h1 class="case-title">UniPath</h1>
-            <p class="case-intro">
-                A university navigation system designed to simplify campus movement
-                through clarity, hierarchy, and intuitive flow.
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- UniPath Styles (project-specific) -->
+    <link rel="stylesheet" href="/css/unipath-style.css" />
+</head>
+
+<body>
+
+    <!-- Progress Bar -->
+    <div class="up-progress"></div>
+
+    <!-- Back Button -->
+    <a href="/#work" class="up-back">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Back to Work</span>
+    </a>
+
+    <!-- ════════════════════════════════
+         HERO SECTION
+    ════════════════════════════════ -->
+    <section class="up-hero">
+        <div class="up-hero-bg"></div>
+        <div class="up-hero-grid"></div>
+        <div class="up-hero-grain"></div>
+
+        <div class="up-hero-content">
+            <div class="up-hero-tag">
+                <i class="fa-solid fa-paper-plane"></i>
+                UI / UX · Mobile App · EdTech
+            </div>
+
+            <h1 class="up-hero-title">
+                <span>Uni</span>Path
+            </h1>
+
+            <p class="up-hero-subtitle">
+                A comprehensive platform designed to de-mystify the overwhelming process of moving abroad—simplifying
+                every step from university discovery to departure.
+            </p>
+
+            <div class="up-hero-meta">
+                <div class="up-meta-pill">
+                    <span class="label">Role</span>
+                    <span class="value">UI/UX Designer</span>
+                </div>
+                <div class="up-meta-pill">
+                    <span class="label">Duration</span>
+                    <span class="value">4 Weeks</span>
+                </div>
+                <div class="up-meta-pill">
+                    <span class="label">Tools</span>
+                    <span class="value">Figma · Illustrator</span>
+                </div>
+                <div class="up-meta-pill">
+                    <span class="label">Type</span>
+                    <span class="value">Academic Project</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="up-scroll-cue">
+            <span>Scroll</span>
+            <div class="up-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         FEATURED IMAGE — Full Bleed
+    ════════════════════════════════ -->
+    <div class="up-featured">
+        <img src="/images/Unipath/behance unipath-01.png" alt="UniPath app overview - Simplifying Study Abroad">
+    </div>
+
+    <!-- ════════════════════════════════
+         OVERVIEW — Problem & Solution
+    ════════════════════════════════ -->
+    <section class="up-section" id="overview">
+        <div class="up-section-header up-reveal">
+            <div class="up-section-label">Overview</div>
+            <h2 class="up-section-title">Moving abroad is overwhelming.<br>UniPath makes it simple.</h2>
+            <p class="up-section-desc">
+                For students dreaming of global education, the path is often blocked by chaos—fragmented information,
+                confusing visa rules, and endless paperwork. UniPath exists to clear that path.
             </p>
         </div>
 
-        <!-- CENTER SCROLL -->
-        <main class="case-center">
-            <img src="/images/Unipath/behance unipath-01.png" alt="UniPath Overview 1">
-            <img src="/images/Unipath/behance unipath-02.png" alt="UniPath Overview 2">
-            <img src="/images/Unipath/behance unipath-03.png" alt="UniPath Overview 3">
-            <img src="/images/Unipath/behance unipath-04.png" alt="UniPath Overview 4">
-            <img src="/images/Unipath/behance unipath-05.png" alt="UniPath Overview 5">
-            <img src="/images/Unipath/behance unipath-06.png" alt="UniPath Overview 6">
-            <img src="/images/Unipath/behance unipath-07.png" alt="UniPath Overview 7">
-            <img src="/images/Unipath/behance unipath-08.png" alt="UniPath Overview 8">
-            <img src="/images/Unipath/behance unipath-09.png" alt="UniPath Overview 9">
-            <img src="/images/Unipath/behance unipath-10.png" alt="UniPath Overview 10">
-            <img src="/images/Unipath/behance unipath-11.png" alt="UniPath Overview 11">
-            <img src="/images/Unipath/behance unipath-12.png" alt="UniPath Overview 12">
-            <img src="/images/Unipath/behance unipath-13.png" alt="UniPath Overview 13">
-            <img src="/images/Unipath/behance unipath-14.png" alt="UniPath Overview 14">
-        </main>
+        <div class="up-overview-grid">
+            <div class="up-overview-card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3>The Challenge</h3>
+                <p>
+                    The process of moving abroad is riddled with anxiety. Students struggle to find reliable
+                    information, manage conflicting deadlines, and navigate complex visa requirements without guidance.
+                </p>
+                <ul>
+                    <li><i class="fa-solid fa-circle"></i> Information overload & fragmentation</li>
+                    <li><i class="fa-solid fa-circle"></i> Anxiety around missed deadlines</li>
+                    <li><i class="fa-solid fa-circle"></i> Complex, unclear visa procedures</li>
+                    <li><i class="fa-solid fa-circle"></i> Lack of personalized guidance</li>
+                </ul>
+            </div>
 
-        <!-- RIGHT PINNED -->
-        <div class="case-right">
-            <div class="case-meta-item">
-                <span>Role</span>
-                <p>UI / UX Designer</p>
+            <div class="up-overview-card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h3>The Solution</h3>
+                <p>
+                    UniPath is the all-in-one companion that simplifies the entire journey. It breaks down the massive
+                    undertaking of moving abroad into clear, actionable steps, providing peace of mind.
+                </p>
+                <ul>
+                    <li><i class="fa-solid fa-circle"></i> Personalized, step-by-step roadmap</li>
+                    <li><i class="fa-solid fa-circle"></i> Centralized application management</li>
+                    <li><i class="fa-solid fa-circle"></i> Simplified visa & document checklists</li>
+                    <li><i class="fa-solid fa-circle"></i> Real-time status tracking & alerts</li>
+                </ul>
             </div>
-            <div class="case-meta-item">
-                <span>Focus</span>
-                <p>Navigation · Accessibility</p>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         FEATURED IMAGE 2
+    ════════════════════════════════ -->
+    <div class="up-section-full">
+        <div class="up-featured">
+            <img src="/images/Unipath/behance unipath-02.png" alt="User research on study abroad pain points">
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         DESIGN PROCESS
+    ════════════════════════════════ -->
+    <section class="up-section" id="process">
+        <div class="up-section-header up-reveal">
+            <div class="up-section-label">Process</div>
+            <h2 class="up-section-title">Designing for clarity<br>in a chaotic process.</h2>
+            <p class="up-section-desc">
+                Our approach focused on reducing cognitive load. By understanding the student's emotional journey, we
+                designed a system that turns anxiety into confidence.
+            </p>
+        </div>
+
+        <div class="up-process">
+            <div class="up-process-step">
+                <div class="up-process-dot">01</div>
+                <div class="up-process-content">
+                    <h3>Empathize & Define</h3>
+                    <p>
+                        Conducted extensive interviews with aspiring students to identify the exact moments where
+                        excitement turns into overwhelm. Mapped the emotional highs and lows of the process.
+                    </p>
+                </div>
             </div>
-            <div class="case-meta-item">
-                <span>Tools</span>
-                <p>Figma · Research</p>
+
+            <div class="up-process-step">
+                <div class="up-process-dot">02</div>
+                <div class="up-process-content">
+                    <h3>Structure & Simplify</h3>
+                    <p>
+                        Reorganized the entire study abroad timeline into linear, manageable milestones. Created an
+                        information architecture that prioritizes clarity and prevents decision fatigue.
+                    </p>
+                </div>
+            </div>
+
+            <div class="up-process-step">
+                <div class="up-process-dot">03</div>
+                <div class="up-process-content">
+                    <h3>Visual Calm</h3>
+                    <p>
+                        Crafted a UI system using soft colors and ample whitespace to create a sense of calm. The visual
+                        design explicitly counters the stress usually associated with applications.
+                    </p>
+                </div>
+            </div>
+
+            <div class="up-process-step">
+                <div class="up-process-dot">04</div>
+                <div class="up-process-content">
+                    <h3>Test & Refine</h3>
+                    <p>
+                        Validated the simplified flows with real users, ensuring that complex tasks like visa
+                        documentation felt approachable and straightforward.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         GALLERY — Design Explorations
+    ════════════════════════════════ -->
+    <section class="up-section" id="gallery">
+        <div class="up-section-header up-reveal">
+            <div class="up-section-label">Design System</div>
+            <h2 class="up-section-title">A visual language<br>that reduces anxiety.</h2>
+        </div>
+
+        <div class="up-gallery">
+            <div class="up-gallery-item full">
+                <img src="/images/Unipath/behance unipath-03.png" alt="UniPath design system overview">
+            </div>
+            <div class="up-gallery-item">
+                <img src="/images/Unipath/behance unipath-04.png" alt="Calming color palette">
+            </div>
+            <div class="up-gallery-item">
+                <img src="/images/Unipath/behance unipath-05.png" alt="Readable typography">
+            </div>
+            <div class="up-gallery-item full">
+                <img src="/images/Unipath/behance unipath-06.png" alt="App screens showing simplified flows">
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         DEEP DIVE — Signage Design
+    ════════════════════════════════ -->
+    <section class="up-section">
+        <div class="up-deep">
+            <div class="up-deep-text">
+                <div class="up-section-label">Discovery</div>
+                <h3>Finding the right path,<br>without the noise.</h3>
+                <p>
+                    UniPath cuts through the clutter of thousands of universities. It uses smart matching to present
+                    students with options that truly align with their goals, budget, and preferences.
+                </p>
+                <p>
+                    Instead of endless spreadsheets, students get a curated, comparative view that makes decision-making
+                    intuitive and stress-free.
+                </p>
+            </div>
+            <div class="up-deep-visual">
+                <img src="/images/Unipath/behance unipath-07.png" alt="Simplified university discovery interface">
             </div>
         </div>
 
+        <div class="up-deep reverse" style="margin-top: 120px;">
+            <div class="up-deep-text">
+                <div class="up-section-label">Management</div>
+                <h3>Your entire journey,<br>organized in one place.</h3>
+                <p>
+                    The core of UniPath is the centralized tracker. It aggregates every deadline, document, and task
+                    into a single, easy-to-read dashboard.
+                </p>
+                <p>
+                    From the first application draft to the final visa stamp, students always know exactly what to do
+                    next, eliminating the fear of missing out.
+                </p>
+            </div>
+            <div class="up-deep-visual">
+                <img src="/images/Unipath/behance unipath-08.png" alt="Centralized application tracker">
+            </div>
+        </div>
     </section>
 
-    <nav class="project-nav">
-        <a href="/#work" class="nav-btn back">
-            <span>Portfolio</span>
-            <h3><i class="fa-solid fa-arrow-left"></i> Back to work</h3>
-        </a>
-        <a href="/oton" class="nav-btn next">
-            <span>Next Project</span>
-            <h3>Oton <i class="fa-solid fa-arrow-right"></i></h3>
-        </a>
-    </nav>
+    <!-- ════════════════════════════════
+         FULL BLEED SHOWCASE
+    ════════════════════════════════ -->
+    <div class="up-section-full">
+        <div class="up-showcase">
+            <img class="up-showcase-img" src="/images/Unipath/behance unipath-09.png" alt="UniPath mobile experience">
+        </div>
+    </div>
 
-    </body>
+    <!-- ════════════════════════════════
+         RESULTS / IMPACT
+    ════════════════════════════════ -->
+    <section class="up-section" id="results">
+        <div class="up-section-header up-reveal">
+            <div class="up-section-label">Impact</div>
+            <h2 class="up-section-title">From overwhelmed<br>to organized.</h2>
+            <p class="up-section-desc">
+                UniPath transforms the study abroad experience. By simplifying the process, we empower students to focus
+                on their dreams rather than the paperwork.
+            </p>
+        </div>
 
-    </html>
+        <div class="up-stats">
+            <div class="up-stat">
+                <div class="up-stat-number" data-value="85" data-suffix="%">0%</div>
+                <div class="up-stat-label">Less Anxiety</div>
+            </div>
+            <div class="up-stat">
+                <div class="up-stat-number" data-value="5" data-suffix="">0</div>
+                <div class="up-stat-label">Simplified Stages</div>
+            </div>
+            <div class="up-stat">
+                <div class="up-stat-number" data-value="92" data-suffix="%">0%</div>
+                <div class="up-stat-label">Clarity Score</div>
+            </div>
+            <div class="up-stat">
+                <div class="up-stat-number" data-value="30" data-suffix="+">0</div>
+                <div class="up-stat-label">Flows Optimized</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         MORE DESIGN DETAILS
+    ════════════════════════════════ -->
+    <section class="up-section">
+        <div class="up-gallery">
+            <div class="up-gallery-item">
+                <img src="/images/Unipath/behance unipath-10.png" alt="UniPath onboarding screens">
+            </div>
+            <div class="up-gallery-item">
+                <img src="/images/Unipath/behance unipath-11.png" alt="UniPath dashboard screens">
+            </div>
+            <div class="up-gallery-item full">
+                <img src="/images/Unipath/behance unipath-12.png" alt="UniPath user flow overview">
+            </div>
+            <div class="up-gallery-item">
+                <img src="/images/Unipath/behance unipath-13.png" alt="UniPath UI components">
+            </div>
+            <div class="up-gallery-item">
+                <img src="/images/Unipath/behance unipath-14.png" alt="UniPath final prototype">
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         NEXT PROJECT
+    ════════════════════════════════ -->
+    <section class="up-next">
+        <p class="up-next-label up-reveal">Next Project</p>
+        <h2 class="up-next-title up-reveal">
+            <a href="/oton">Oton →</a>
+        </h2>
+        <a href="/oton" class="up-next-arrow up-reveal">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </section>
+
+    <!-- ════════════════════════════════
+         FOOTER
+    ════════════════════════════════ -->
+    <footer class="up-footer">
+        <p>&copy; 2026 Drriti Pasrija</p>
+        <div class="up-footer-links">
+            <a href="https://www.linkedin.com/in/drriti-pasrija" target="_blank">LinkedIn</a>
+            <a href="https://www.behance.net/drritipasrija" target="_blank">Behance</a>
+        </div>
+    </footer>
+
+    <!-- ════════════════════════════════
+         IMAGE LIGHTBOX
+    ════════════════════════════════ -->
+    <div class="up-lightbox">
+        <button class="up-lightbox-close"><i class="fa-solid fa-xmark"></i></button>
+        <img src="" alt="Enlarged view">
+    </div>
+
+    <!-- UniPath Interactions Script -->
+    <script src="/js/unipath.js"></script>
+
+</body>
+
+</html>

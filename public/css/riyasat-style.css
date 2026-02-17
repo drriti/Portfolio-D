@@ -1,0 +1,494 @@
+/* ═══════════════════════════════════════════
+   RIYASAT — FULL-BLEED LOOKBOOK
+   Immersive vertical scroll, image-dominant
+   Like flipping through a luxury brand book
+═══════════════════════════════════════════ */
+
+/* ── Reset ───────────────────────────────── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --ry-bg: #0a0908;
+    --ry-surface: #111110;
+    --ry-accent: #b8944a;
+    --ry-accent-dim: rgba(184, 148, 74, 0.10);
+    --ry-accent-glow: rgba(184, 148, 74, 0.20);
+    --ry-cream: #f0ebe3;
+    --ry-text: #d8d2c8;
+    --ry-muted: #7a7468;
+    --ry-border: rgba(184, 148, 74, 0.06);
+    --ry-gradient: linear-gradient(135deg, #b8944a, #d4b06a);
+    --ry-ease: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--ry-bg);
+    color: var(--ry-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ═══════════════════════════════════════════
+   PROGRESS BAR
+═══════════════════════════════════════════ */
+.ry-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--ry-gradient);
+    z-index: 9999;
+    box-shadow: 0 0 16px var(--ry-accent-glow);
+}
+
+/* ═══════════════════════════════════════════
+   BACK BUTTON
+═══════════════════════════════════════════ */
+.ry-back {
+    position: fixed;
+    top: 32px;
+    left: 32px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ry-muted);
+    padding: 10px 20px;
+    border: 1px solid var(--ry-border);
+    border-radius: 100px;
+    backdrop-filter: blur(14px);
+    background: rgba(10, 9, 8, 0.75);
+    transition: all 0.3s ease;
+}
+
+.ry-back:hover {
+    color: var(--ry-accent);
+    border-color: rgba(184, 148, 74, 0.2);
+}
+
+.ry-back i {
+    font-size: 11px;
+}
+
+/* ═══════════════════════════════════════════
+   HERO — Typographic Curtain
+   Tall, centered, dramatic entrance
+═══════════════════════════════════════════ */
+.ry-hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.ry-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 50% at 50% 50%, rgba(184, 148, 74, 0.04), transparent),
+        radial-gradient(ellipse 40% 40% at 80% 20%, rgba(184, 148, 74, 0.02), transparent);
+}
+
+.ry-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 40px;
+}
+
+.ry-hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ry-accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.ry-hero-title {
+    font-size: clamp(72px, 14vw, 180px);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    line-height: 0.9;
+    color: var(--ry-cream);
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.ry-hero-tagline {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(20px, 3vw, 30px);
+    color: var(--ry-accent);
+    line-height: 1.4;
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.ry-hero-details {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.ry-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ry-detail-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ry-muted);
+}
+
+.ry-detail-value {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ry-text);
+}
+
+/* Scroll Line */
+.ry-hero-scroll {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+}
+
+.ry-hero-scroll-line {
+    width: 1px;
+    height: 48px;
+    background: var(--ry-accent);
+    animation: ry-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ry-pulse {
+
+    0%,
+    100% {
+        opacity: 0.15;
+        transform: scaleY(0.4);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scaleY(1);
+    }
+}
+
+/* ═══════════════════════════════════════════
+   BOOK PAGES — Full-Bleed Images
+   The core of the lookbook experience.
+   Each image fills the full viewport width.
+═══════════════════════════════════════════ */
+.ry-page {
+    width: 100%;
+    line-height: 0;
+    overflow: hidden;
+}
+
+.ry-page img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s var(--ry-ease), transform 0.8s var(--ry-ease);
+}
+
+.ry-page img.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Last page — subtle bottom margin */
+.ry-page.last {
+    margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════════
+   TEXT INTERLUDES — Breathing Room
+   Centered text cards between image groups.
+   Minimal, elegant, Caveat accents.
+═══════════════════════════════════════════ */
+.ry-interlude {
+    padding: 120px 40px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.ry-interlude::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, transparent, var(--ry-accent), transparent);
+    opacity: 0.3;
+}
+
+.ry-interlude-inner {
+    max-width: 560px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.ry-interlude-script {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: var(--ry-accent);
+    margin-bottom: 16px;
+    letter-spacing: 0.03em;
+}
+
+.ry-interlude-heading {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--ry-cream);
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+}
+
+.ry-interlude-body {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--ry-muted);
+    font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════
+   NEXT PROJECT CTA
+═══════════════════════════════════════════ */
+.ry-next {
+    position: relative;
+    padding: 160px 40px;
+    text-align: center;
+    overflow: hidden;
+    border-top: 1px solid var(--ry-border);
+}
+
+.ry-next::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 40% at 50% 60%, rgba(184, 148, 74, 0.04), transparent);
+}
+
+.ry-next-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ry-muted);
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.ry-next-title {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.ry-next-title a {
+    color: var(--ry-text);
+    transition: color 0.3s ease;
+}
+
+.ry-next-title a:hover {
+    color: var(--ry-accent);
+}
+
+.ry-next-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1px solid rgba(184, 148, 74, 0.12);
+    color: var(--ry-text);
+    font-size: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.ry-next-arrow:hover {
+    border-color: var(--ry-accent);
+    background: var(--ry-accent-dim);
+    transform: translateX(8px);
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.ry-footer {
+    padding: 40px 80px;
+    border-top: 1px solid var(--ry-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-size: 13px;
+    color: var(--ry-muted);
+}
+
+.ry-footer a {
+    color: var(--ry-muted);
+    transition: color 0.3s ease;
+}
+
+.ry-footer a:hover {
+    color: var(--ry-accent);
+}
+
+.ry-footer-links {
+    display: flex;
+    gap: 28px;
+}
+
+/* ═══════════════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════════════ */
+.ry-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.94);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    cursor: zoom-out;
+}
+
+.ry-lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.ry-lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 6px;
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+    transform: scale(0.92);
+    transition: transform 0.4s var(--ry-ease);
+}
+
+.ry-lightbox.active img {
+    transform: scale(1);
+}
+
+.ry-lightbox-close {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.ry-lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* ═══════════════════════════════════════════
+   REVEAL CLASS
+═══════════════════════════════════════════ */
+.ry-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.ry-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s var(--ry-ease),
+        transform 0.8s var(--ry-ease);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .ry-hero-details {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .ry-interlude {
+        padding: 80px 24px;
+    }
+
+    .ry-next {
+        padding: 100px 24px;
+    }
+
+    .ry-back {
+        top: 20px;
+        left: 20px;
+    }
+
+    .ry-footer {
+        padding: 40px 24px;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}

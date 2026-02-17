@@ -1,60 +1,371 @@
-<%- include('../partials/head') %>
-    <link rel="stylesheet" href="/css/project-style.css" />
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- CASE STUDY -->
-    <section class="case-wrapper">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= title %>
+    </title>
+    <meta name="description"
+        content="OTON — A minimal, performance-driven brand identity designed for a modern menswear label. Case study by Drriti Pasrija.">
 
-        <!-- LEFT (Pinned) -->
-        <div class="case-left">
-            <span class="case-tag">Brand Identity</span>
-            <h1 class="case-title">OTON</h1>
-            <p class="case-intro">
-                A minimal, performance-driven brand identity designed for a modern
-                mobility brand focused on clarity, control, and precision.
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Oton Styles -->
+    <link rel="stylesheet" href="/css/oton-style.css" />
+</head>
+
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="ot-cursor"></div>
+
+    <!-- Progress Bar -->
+    <div class="ot-progress"></div>
+
+    <!-- Back Button -->
+    <a href="/#work" class="ot-back" id="oton-back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Back to Work</span>
+    </a>
+
+    <!-- ════════════════════════════════
+         HERO — Cinematic Full-Screen
+    ════════════════════════════════ -->
+    <section class="ot-hero" id="oton-hero">
+        <div class="ot-hero-bg"></div>
+        <div class="ot-hero-grid"></div>
+        <div class="ot-hero-grain"></div>
+
+        <!-- Side labels -->
+        <div class="ot-hero-side-label left">Brand Identity — 2025</div>
+        <div class="ot-hero-side-label right">Menswear — Minimal</div>
+
+        <div class="ot-hero-content">
+            <div class="ot-hero-tag">
+                Brand Identity · Menswear
+            </div>
+
+            <h1 class="ot-hero-title">
+                <span>Modern Menswear</span>
+                OTON
+            </h1>
+
+            <p class="ot-hero-subtitle">
+                A minimal, performance-driven brand identity built on
+                clarity, control, and precision.
             </p>
-        </div>
 
-        <!-- CENTER (Scroll like Behance) -->
-        <main class="case-center">
-            <img src="/images/oton/OTON  Brand Guidelines_Page_03.jpg" alt="OTON branding">
-            <img src="/images/oton/OTON  Brand Guidelines_Page_05.jpg" alt="OTON typography">
-            <img src="/images/oton/OTON  Brand Guidelines_Page_07.jpg" alt="OTON applications">
-            <img src="/images/oton/OTON  Brand Guidelines_Page_10.jpg" alt="OTON brand system">
-            <img src="/images/oton/OTON  Brand Guidelines_Page_11.jpg" alt="OTON brand system">
-            <img src="/images/oton/Free Two Shopping Bag PSD Mockups.png" alt="OTON bag mockup">
-            <img src="/images/oton/REPLACE THIS.png" alt="OTON visuals">
-            <img src="/images/oton/Clothing Label Mockup.png" alt="OTON label mockup">
-        </main>
-
-        <!-- RIGHT (Pinned meta) -->
-        <div class="case-right">
-            <div class="case-meta-item">
-                <span>Role</span>
-                <p>Brand Designer</p>
-            </div>
-            <div class="case-meta-item">
-                <span>Focus</span>
-                <p>Visual Identity, Brand System</p>
-            </div>
-            <div class="case-meta-item">
-                <span>Deliverables</span>
-                <p>Logo, Brand Guidelines, Mockups</p>
+            <div class="ot-hero-meta">
+                <div class="ot-meta-item">
+                    <span class="label">Role</span>
+                    <span class="value">Brand Designer</span>
+                </div>
+                <div class="ot-meta-item">
+                    <span class="label">Focus</span>
+                    <span class="value">Visual Identity</span>
+                </div>
+                <div class="ot-meta-item">
+                    <span class="label">Tools</span>
+                    <span class="value">Illustrator · InDesign</span>
+                </div>
+                <div class="ot-meta-item">
+                    <span class="label">Deliverables</span>
+                    <span class="value">Logo, Guidelines, Mockups</span>
+                </div>
             </div>
         </div>
 
+        <div class="ot-scroll-cue">
+            <span>Scroll</span>
+            <div class="ot-scroll-line"></div>
+        </div>
     </section>
 
-    <nav class="project-nav">
-        <a href="/#work" class="nav-btn back">
-            <span>Portfolio</span>
-            <h3><i class="fa-solid fa-arrow-left"></i> Back to work</h3>
-        </a>
-        <a href="/mittrika" class="nav-btn next">
-            <span>Next Project</span>
-            <h3>MRITTIKA <i class="fa-solid fa-arrow-right"></i></h3>
-        </a>
-    </nav>
+    <!-- ════════════════════════════════
+         CINEMATIC IMAGE — Full Bleed with Overlay
+    ════════════════════════════════ -->
+    <div class="ot-cinematic" id="oton-cinematic">
+        <img src="/images/oton/OTON  Brand Guidelines_Page_03.jpg" alt="OTON brand identity overview">
+        <div class="ot-cinematic-overlay">
+            <p>"Where restraint becomes the strongest visual statement."</p>
+        </div>
+    </div>
 
-    </body>
+    <!-- ════════════════════════════════
+         MARQUEE DIVIDER
+    ════════════════════════════════ -->
+    <div class="ot-marquee">
+        <div class="ot-marquee-track">
+            <span class="ot-marquee-item">Precision</span>
+            <span class="ot-marquee-item">Performance</span>
+            <span class="ot-marquee-item">Clarity</span>
+            <span class="ot-marquee-item">Control</span>
+            <span class="ot-marquee-item">Menswear</span>
+            <span class="ot-marquee-item">Modern</span>
+            <span class="ot-marquee-item">Minimal</span>
+            <span class="ot-marquee-item">Identity</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="ot-marquee-item">Precision</span>
+            <span class="ot-marquee-item">Performance</span>
+            <span class="ot-marquee-item">Clarity</span>
+            <span class="ot-marquee-item">Control</span>
+            <span class="ot-marquee-item">Menswear</span>
+            <span class="ot-marquee-item">Modern</span>
+            <span class="ot-marquee-item">Minimal</span>
+            <span class="ot-marquee-item">Identity</span>
+        </div>
+    </div>
 
-    </html>
+    <!-- ════════════════════════════════
+         PHILOSOPHY — Editorial Section
+    ════════════════════════════════ -->
+    <section class="ot-section" id="oton-philosophy">
+        <div class="ot-editorial-header">
+            <div class="ot-editorial-number">01</div>
+            <div class="ot-editorial-text">
+                <div class="ot-editorial-label">Philosophy</div>
+                <h2 class="ot-editorial-title">Clarity through<br>restraint.</h2>
+            </div>
+        </div>
+
+        <div class="ot-philosophy">
+            <div class="ot-philosophy-card">
+                <div class="card-number">01</div>
+                <h3>Precision</h3>
+                <p>
+                    Every element is placed with intention. The brand system uses strict
+                    geometric proportions, creating a visual language that communicates
+                    control and confidence without excess.
+                </p>
+            </div>
+
+            <div class="ot-philosophy-card">
+                <div class="card-number">02</div>
+                <h3>Performance</h3>
+                <p>
+                    Designed for a modern menswear label that values function as much
+                    as form. The identity reflects movement, efficiency, and the
+                    pursuit of refinement in everyday wear.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         SPLIT SECTION — Logo Deep Dive
+    ════════════════════════════════ -->
+    <div class="ot-split" id="oton-split-1">
+        <div class="ot-split-text">
+            <div class="ot-split-label">Visual Identity</div>
+            <h2 class="ot-split-heading">Geometric<br>construction.</h2>
+            <p class="ot-split-body">
+                The OTON logomark is rooted in geometric construction — clean curves
+                and structured forms. The monochromatic palette with high-contrast
+                applications creates a distinct, recognizable mark.
+            </p>
+        </div>
+        <div class="ot-split-visual">
+            <img src="/images/oton/OTON  Brand Guidelines_Page_05.jpg" alt="OTON logo anatomy and breakdown">
+            <div class="ot-split-number">O</div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         PROCESS — Four Blocks
+    ════════════════════════════════ -->
+    <section class="ot-section-compact" id="oton-process">
+        <div class="ot-editorial-header">
+            <div class="ot-editorial-number">02</div>
+            <div class="ot-editorial-text">
+                <div class="ot-editorial-label">Process</div>
+                <h2 class="ot-editorial-title">From concept to<br>complete system.</h2>
+            </div>
+        </div>
+
+        <div class="ot-process-grid">
+            <div class="ot-process-block">
+                <div class="ot-process-num">01</div>
+                <h3>Research & Positioning</h3>
+                <p>
+                    Studied the modern menswear landscape, identifying gaps in brands
+                    that balance minimalism with performance.
+                </p>
+            </div>
+
+            <div class="ot-process-block">
+                <div class="ot-process-num">02</div>
+                <h3>Visual Identity</h3>
+                <p>
+                    Created a logomark rooted in geometric construction — clean curves
+                    and structured forms with high-contrast applications.
+                </p>
+            </div>
+
+            <div class="ot-process-block">
+                <div class="ot-process-num">03</div>
+                <h3>System & Guidelines</h3>
+                <p>
+                    Built comprehensive brand guidelines covering logo usage, typography
+                    hierarchy, spacing rules, and application standards.
+                </p>
+            </div>
+
+            <div class="ot-process-block">
+                <div class="ot-process-num">04</div>
+                <h3>Mockups & Applications</h3>
+                <p>
+                    Brought the brand to life through realistic mockups — packaging,
+                    labels, shopping bags, and environmental applications.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         HORIZONTAL SCROLL GALLERY
+    ════════════════════════════════ -->
+    <div class="ot-hscroll-wrap" id="oton-gallery">
+        <div class="ot-hscroll-header">
+            <h2 class="ot-hscroll-title">Brand System</h2>
+            <span class="ot-hscroll-hint">Drag to explore <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <div class="ot-hscroll-track" id="oton-hscroll">
+            <div class="ot-hscroll-item">
+                <img src="/images/oton/OTON  Brand Guidelines_Page_07.jpg" alt="OTON visual system">
+            </div>
+            <div class="ot-hscroll-item">
+                <img src="/images/oton/OTON  Brand Guidelines_Page_10.jpg" alt="OTON brand applications">
+            </div>
+            <div class="ot-hscroll-item">
+                <img src="/images/oton/OTON  Brand Guidelines_Page_11.jpg" alt="OTON brand elements">
+            </div>
+            <div class="ot-hscroll-item">
+                <img src="/images/oton/OTON  Brand Guidelines_Page_03.jpg" alt="OTON brand overview">
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         MAGAZINE SPREAD — Applications
+    ════════════════════════════════ -->
+    <div class="ot-spread" id="oton-spread-1">
+        <div class="ot-spread-image">
+            <img src="/images/oton/Free Two Shopping Bag PSD Mockups.png" alt="OTON shopping bag mockup">
+        </div>
+        <div class="ot-spread-content">
+            <div class="ot-spread-tag">Applications</div>
+            <h3>From screen<br>to shelf.</h3>
+            <p>
+                The OTON identity extends seamlessly across physical and digital
+                touchpoints. Packaging, labels, and bags all carry the same
+                stark visual clarity.
+            </p>
+            <p>
+                Every application reinforces the brand's core commitment to
+                restraint — letting materials and construction speak louder
+                than decoration.
+            </p>
+        </div>
+    </div>
+
+    <div class="ot-spread reverse" id="oton-spread-2">
+        <div class="ot-spread-image">
+            <img src="/images/oton/Clothing Label Mockup.png" alt="OTON clothing label mockup">
+        </div>
+        <div class="ot-spread-content">
+            <div class="ot-spread-tag">Details</div>
+            <h3>Precision in<br>every detail.</h3>
+            <p>
+                Labels, tags, and brand marks are designed with the same grid-based
+                discipline as the primary logo. Even the smallest touchpoints
+                maintain the system's integrity.
+            </p>
+            <p>
+                The monochromatic approach ensures the brand remains recognizable
+                at any scale and across any medium.
+            </p>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+         FULL BLEED SHOWCASE
+    ════════════════════════════════ -->
+    <div class="ot-showcase-full" id="oton-showcase">
+        <img src="/images/oton/REPLACE THIS.png" alt="OTON full brand showcase">
+    </div>
+
+    <!-- ════════════════════════════════
+         MARQUEE DIVIDER 2
+    ════════════════════════════════ -->
+    <div class="ot-marquee">
+        <div class="ot-marquee-track">
+            <span class="ot-marquee-item">Logo</span>
+            <span class="ot-marquee-item">Guidelines</span>
+            <span class="ot-marquee-item">Packaging</span>
+            <span class="ot-marquee-item">Labels</span>
+            <span class="ot-marquee-item">Mockups</span>
+            <span class="ot-marquee-item">Print</span>
+            <span class="ot-marquee-item">Digital</span>
+            <span class="ot-marquee-item">System</span>
+            <!-- Duplicate -->
+            <span class="ot-marquee-item">Logo</span>
+            <span class="ot-marquee-item">Guidelines</span>
+            <span class="ot-marquee-item">Packaging</span>
+            <span class="ot-marquee-item">Labels</span>
+            <span class="ot-marquee-item">Mockups</span>
+            <span class="ot-marquee-item">Print</span>
+            <span class="ot-marquee-item">Digital</span>
+            <span class="ot-marquee-item">System</span>
+        </div>
+    </div>
+
+
+    <!-- ════════════════════════════════
+         NEXT PROJECT
+    ════════════════════════════════ -->
+    <section class="ot-next" id="oton-next">
+        <p class="ot-next-label ot-reveal">Next Project</p>
+        <h2 class="ot-next-title ot-reveal">
+            <a href="/mittrika">Mrittika →</a>
+        </h2>
+        <a href="/mittrika" class="ot-next-arrow ot-reveal">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </section>
+
+    <!-- ════════════════════════════════
+         FOOTER
+    ════════════════════════════════ -->
+    <footer class="ot-footer">
+        <p>&copy; 2026 Drriti Pasrija</p>
+        <div class="ot-footer-links">
+            <a href="https://www.linkedin.com/in/drriti-pasrija" target="_blank">LinkedIn</a>
+            <a href="https://www.behance.net/drritipasrija" target="_blank">Behance</a>
+        </div>
+    </footer>
+
+    <!-- ════════════════════════════════
+         IMAGE LIGHTBOX
+    ════════════════════════════════ -->
+    <div class="ot-lightbox" id="oton-lightbox">
+        <button class="ot-lightbox-close"><i class="fa-solid fa-xmark"></i></button>
+        <img src="" alt="Enlarged view">
+    </div>
+
+    <!-- Oton Interactions Script -->
+    <script src="/js/oton.js"></script>
+
+</body>
+
+</html>

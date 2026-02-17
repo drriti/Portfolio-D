@@ -56,6 +56,14 @@ app.get('/mittrika', (req, res) => {
     });
 });
 
+// Project: Riyasat
+app.get('/riyasat', (req, res) => {
+    res.render('projects/riyasat', {
+        title: 'Riyasat — Brand Identity',
+        page: 'riyasat'
+    });
+});
+
 // Project: 3D Model
 app.get('/3d-model', (req, res) => {
     res.render('projects/3d-model', {
