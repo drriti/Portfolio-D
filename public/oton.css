@@ -1,0 +1,123 @@
+:root {
+  --black: #0b0b0b;
+  --white: #f4f4f4;
+  --gray: #9a9a9a;
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* =========================
+   DARK BASE
+========================= */
+.case-dark {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.case-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 64px;
+  padding: 120px 80px;
+  min-height: 200vh;
+}
+
+/* LEFT */
+.case-left {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+}
+
+.case-tag {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.case-title {
+  font-size: 42px;
+  font-weight: 400;
+  margin: 16px 0 24px;
+}
+
+.case-intro {
+  max-width: 320px;
+  line-height: 1.8;
+  color: #cfcfcf;
+}
+
+/* CENTER */
+.case-center {
+  display: flex;
+  flex-direction: column;
+}
+
+.case-center img {
+  width: 100%;
+  display: block;
+}
+
+/* RIGHT */
+.case-right {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+}
+
+.case-right p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #bdbdbd;
+  margin-bottom: 24px;
+}
+
+/* BACK */
+.case-back {
+  padding: 80px;
+}
+
+.case-back a {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bdbdbd;
+}
+
+.case-back a:hover {
+  color: #ffffff;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1024px) {
+  .case-wrapper {
+    grid-template-columns: 1fr;
+    padding: 80px 24px;
+  }
+
+  .case-left,
+  .case-right {
+    position: relative;
+    top: auto;
+  }
+
+  .case-right {
+    margin-top: 64px;
+  }
+}

@@ -1,12 +1,12 @@
 {
     "name": "drriti-portfolio",
     "version": "1.0.0",
-    "description": "Drriti Pasrija — Visual Communication Designer Portfolio",
+    "description": "Drriti Pasrija — Product Designer Portfolio",
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
         "dev": "node server.js",
-        "vercel-build": "echo 'Build complete'"
+        "vercel-build": "mkdir -p public/images public/brand-assets public/echo-assets public/unipath-assets && cp -rn images/* public/images/ 2>/dev/null || true && cp -rn brand-assets/* public/brand-assets/ 2>/dev/null || true && cp -rn echo-assets/* public/echo-assets/ 2>/dev/null || true && cp -rn unipath-assets/* public/unipath-assets/ 2>/dev/null || true && cp -n *.html public/ 2>/dev/null || true && cp -n *.css public/ 2>/dev/null || true"
     },
     "engines": {
         "node": ">=18.x"

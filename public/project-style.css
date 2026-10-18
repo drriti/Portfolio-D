@@ -1,0 +1,198 @@
+:root {
+    --black: #0b0b0b;
+    --white: #f4f4f4;
+    --gray: #9a9a9a;
+    --accent: #8b2f2f;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+}
+
+/* =========================
+   CASE LAYOUT
+========================= */
+.case-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 64px;
+    padding: 120px 80px;
+    min-height: 100vh;
+}
+
+/* LEFT + RIGHT PINNED */
+.case-left,
+.case-right {
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+}
+
+/* LEFT */
+.case-tag {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.case-title {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 500;
+    margin-bottom: 24px;
+    line-height: 1.1;
+}
+
+.case-intro {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #c0c0c0;
+    max-width: 320px;
+}
+
+/* RIGHT (META) */
+.case-right {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.case-meta-item span {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+    margin-bottom: 8px;
+}
+
+.case-meta-item p {
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.5;
+}
+
+/* CENTER SCROLL (BEHANCE STYLE) */
+.case-center {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    /* Tight stack */
+}
+
+.case-center img {
+    width: 100%;
+    display: block;
+    height: auto;
+    border-radius: 0;
+    /* Typical Behance style is full-width edges */
+}
+
+/* =========================
+   PROJECT NAVIGATION
+========================= */
+.project-nav {
+    padding: 120px 80px 80px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.nav-btn {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: opacity 0.3s ease;
+}
+
+.nav-btn span {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+}
+
+.nav-btn h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-btn:hover {
+    opacity: 0.7;
+}
+
+.nav-btn.next {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.nav-btn.back {
+    text-align: left;
+    align-items: flex-start;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1100px) {
+    .case-wrapper {
+        grid-template-columns: 1fr;
+        padding: 80px 40px;
+        gap: 48px;
+    }
+
+    .case-left,
+    .case-right {
+        position: relative;
+        top: auto;
+    }
+
+    .case-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+
+    .project-nav {
+        padding: 80px 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .case-wrapper {
+        padding: 60px 20px;
+    }
+
+    .project-nav {
+        padding: 60px 20px;
+        flex-direction: column;
+        gap: 40px;
+        align-items: flex-start;
+    }
+
+    .nav-btn.next {
+        text-align: left;
+        align-items: flex-start;
+    }
+}

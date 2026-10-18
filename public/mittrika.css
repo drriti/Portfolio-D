@@ -1,0 +1,116 @@
+:root {
+  --black: #0b0b0b;
+  --white: #f2f2f2;
+  --gray: #9a9a9a;
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* DARK BASE */
+.case-dark {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* LAYOUT */
+.case-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 72px;
+  padding: 120px 80px;
+  min-height: 200vh;
+}
+
+/* PINNED SIDES */
+.case-left,
+.case-right {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+}
+
+/* LEFT */
+.case-tag {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.case-title {
+  font-size: 42px;
+  font-weight: 400;
+  margin: 16px 0 24px;
+}
+
+.case-intro {
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 320px;
+  color: #d6d6d6;
+}
+
+/* RIGHT */
+.case-right p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--gray);
+  margin-bottom: 28px;
+}
+
+/* CENTER SCROLL */
+.case-center {
+  display: flex;
+  flex-direction: column;
+}
+
+.case-center img {
+  width: 100%;
+  display: block;
+  margin: 0;
+}
+
+/* BACK LINK */
+.case-back {
+  padding: 120px 80px;
+}
+
+.case-back a {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--gray);
+  transition: color 0.3s ease;
+}
+
+.case-back a:hover {
+  color: var(--white);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .case-wrapper {
+    grid-template-columns: 1fr;
+    padding: 80px 24px;
+  }
+
+  .case-left,
+  .case-right {
+    position: relative;
+    top: auto;
+  }
+
+  .case-right {
+    margin-top: 64px;
+  }
+}

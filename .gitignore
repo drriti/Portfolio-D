@@ -7,3 +7,6 @@ desktop.ini
 _build/
 _versions/
 deploy/
+public/images/Unipath/behance*
+public/images/oton/
+preview-*.html
