@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Echo — Case study · Drriti</title>
+<meta name="description" content="Echo: a music app that closes the gap between listening to a song and learning it. 1st prize, NSUT Oblivion Hackathon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@200;300;400;500&family=Martian+Mono:wght@300;400;500&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html{background:#121226;scroll-behavior:smooth}
+body{margin:0;background:#121226}
+/* =========================================================================
+   CASE STUDY — BHARTIYA KHEL SUTRA  (scoped under .kx)
+   Type: Space Grotesk (display) + Martian Mono (text, labels), same as the hero.
+   Default (no JS / reduced motion): every chapter stacks normally.
+   .kx--live adds the pinned / scrubbed behaviour, one idea per chapter:
+     A intro  — laptop rises, top panel drops (the only top panel)
+     B brief  — doc + challenge share one pinned scroll
+     C IA     — circle opens onto the diagram (the only circle)
+     D access — sticky text, two browser frames drift past
+     E world  — horizontal gallery
+     F print  — overlapping spreads
+     G change — list with a sticky screen
+     H launch — closing
+   ========================================================================= */
+.kx{
+  --ink:#121226; --cream:#F4EFDF; --paper:#EDE5CE; --moss:#3B2FA8; --mossd:#1B1B3A; --clay:#6A55F0; --gold:#A99BFF; --sky:#7777A0;
+  --serif:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --text:"Martian Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  position:relative;background:var(--ink);color:var(--cream);font-family:var(--text);-webkit-font-smoothing:antialiased;overflow-x:clip;
+}
+.kx *,.kx *::before,.kx *::after{box-sizing:border-box}
+.kx img,.kx video{display:block;max-width:100%}
+.kx :where(h2,h3,p,dl,dd,ul,figure){margin:0;padding:0}
+.kx ul{list-style:none}
+.kx em{font-style:italic}
+.kx-lab{font:300 12px/1.4 var(--text);letter-spacing:.2em;text-transform:uppercase;opacity:.7;margin-bottom:clamp(12px,1.4vw,22px)}
+.kx-t{font:200 clamp(26px,3.6vw,60px)/.94 var(--serif);letter-spacing:-.015em;margin-bottom:clamp(16px,1.8vw,28px)}
+.kx-p{font:300 clamp(13px,1.01vw,17px)/1.5 var(--text);max-width:34ch}
+.kx-pad{padding:clamp(72px,10vw,150px) 5vw}
+
+/* browser frame (full web-screen screenshots) */
+.kx-win{border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 30px 70px rgba(0,0,0,.34),0 0 0 1px rgba(0,0,0,.12)}
+.kx-win__bar{display:flex;align-items:center;gap:6px;height:28px;padding:0 12px;background:#E9E3D2}
+.kx-win__bar i{width:9px;height:9px;border-radius:50%;background:rgba(18,18,38,.28)}
+.kx-win__bar span{margin-left:10px;font:300 12px/1 var(--text);color:rgba(18,18,38,.62);letter-spacing:.04em}
+.kx-win img{width:100%;height:auto}
+.kx-cap{margin-top:14px;font:300 clamp(12px,0.83vw,14px)/1.4 var(--text);opacity:.85}
+
+/* ---------------- A · intro ---------------- */
+.kx-a{background:radial-gradient(120% 90% at 50% 0%,#2A2468 0%,#121226 62%);}
+.kx-a__pin{position:relative;padding:0 5vw 6vh;display:flex;flex-direction:column;align-items:center}
+.kx-a__bar{width:calc(100% + 10vw);margin:0 -5vw;background:var(--cream);color:var(--ink);padding:clamp(14px,2vh,22px) 5vw;display:flex;gap:2vw;justify-content:space-between;align-items:center;flex-wrap:wrap;position:relative;z-index:5}
+.kx-a__name{font:200 clamp(16px,1.56vw,26px)/1 var(--serif)}
+.kx-a__meta{display:flex;gap:clamp(18px,2.6vw,48px);flex-wrap:wrap}
+.kx-a__meta div{min-width:0}
+.kx-a__meta dt{font:300 11px/1 var(--text);letter-spacing:.18em;text-transform:uppercase;opacity:.58;margin-bottom:6px}
+.kx-a__meta dd{font:300 clamp(12px,0.83vw,14px)/1.2 var(--text)}
+.kx-a__head{text-align:center;padding:clamp(48px,9vh,110px) 0 clamp(28px,5vh,60px);position:relative;z-index:2}
+.kx-a__head .kx-t{font-size:clamp(34px,7.4vw,130px);margin:0 0 .2em;line-height:.98}
+.kx-a__head .kx-p{margin:0 auto;max-width:44ch;opacity:.92}
+.kx-lap{--ar:1.755;width:min(86vw,calc(70vh * var(--ar) / .94));position:relative;z-index:3}
+.kx-lap__lid{background:#0B0F0A;border-radius:14px 14px 4px 4px;padding:1.6% 1.6% 1.9%;box-shadow:0 0 0 2px #2A2E29,0 40px 90px rgba(0,0,0,.55);position:relative}
+.kx-lap__lid::before{content:"";position:absolute;left:50%;top:.55%;width:.6%;aspect-ratio:1;border-radius:50%;background:#262B25;transform:translateX(-50%)}
+.kx-lap__screen{aspect-ratio:var(--ar);background:#111;border-radius:3px;overflow:hidden;position:relative}
+.kx-lap__screen video{width:100%;height:100%;object-fit:cover}
+.kx-lap__base{height:clamp(8px,1.5vw,20px);margin:0 -4.5%;background:linear-gradient(#D5D0C2,#A9A598);border-radius:0 0 18px 18px;position:relative;box-shadow:0 24px 40px rgba(0,0,0,.45)}
+.kx-lap__base::before{content:"";position:absolute;left:50%;top:0;width:16%;height:38%;background:rgba(0,0,0,.18);border-radius:0 0 10px 10px;transform:translateX(-50%)}
+.kx-lap__note{margin-top:18px;text-align:center;font:300 clamp(12px,0.79vw,14px)/1.4 var(--text);opacity:.75}
+.kx--live .kx-a__pin{height:100vh;height:100svh;padding-bottom:3vh;justify-content:flex-start;overflow:hidden}
+.kx--live .kx-a__bar{position:absolute;top:0;left:0;margin:0;width:100%}
+.kx--live .kx-a__head{position:absolute;left:0;right:0;top:50%;transform:translateY(-54%);padding:0 5vw}
+.kx--live .kx-lap{position:absolute;left:50%;bottom:3vh;transform:translateX(-50%)}
+.kx--live .kx-lap__note{display:none}
+
+/* ---------------- B · brief + research doc, one scroll ---------------- */
+.kx-b{background:var(--paper);color:var(--ink)}
+.kx-b__in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,90px);align-items:center;max-width:1500px;margin:0 auto}
+.kx-b .kx-lab{color:var(--clay);opacity:1}
+.kx-b__issues{margin-top:clamp(22px,3vw,40px);counter-reset:i}
+.kx-b__issues li{counter-increment:i;display:grid;grid-template-columns:2.2em 1fr;gap:.4em;padding:clamp(12px,1.4vw,20px) 0;border-top:1px solid rgba(18,18,38,.25);font:300 clamp(12px,0.94vw,15px)/1.42 var(--text)}
+.kx-b__issues li::before{content:"0" counter(i);font:200 clamp(13px,1.08vw,18px)/1 var(--serif);color:var(--clay)}
+.kx-b__issues b{font-weight:500}
+.kx-b__doc{position:relative;transform:rotate(1.4deg)}
+.kx-b__doc .kx-win{box-shadow:0 36px 70px rgba(18,18,38,.28),0 0 0 1px rgba(18,18,38,.16)}
+.kx-b__doc .kx-cap{color:var(--ink)}
+.kx-b__stamp{position:absolute;right:-1.4vw;top:-3.2vw;width:clamp(78px,8vw,124px);aspect-ratio:1;border-radius:50%;background:var(--clay);color:var(--cream);display:grid;place-items:center;text-align:center;font:200 clamp(10px,0.9vw,14px)/1.05 var(--serif);transform:rotate(-10deg);box-shadow:0 10px 24px rgba(0,0,0,.22)}
+.kx--live .kx-b{padding:0}
+.kx--live .kx-b__pin{height:100vh;height:100svh;padding:0 5vw;display:flex;align-items:center;overflow:hidden}
+.kx--live .kx-b__in{width:100%}
+
+/* ---------------- C · information architecture (circle) ---------------- */
+.kx-c{background:var(--ink)}
+
+/* ---------------- D · two ways in ---------------- */
+.kx-d{background:var(--cream);color:var(--ink)}
+.kx-d__in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);gap:clamp(28px,5vw,90px);max-width:1500px;margin:0 auto;align-items:start}
+.kx-d__txt{position:sticky;top:18vh}
+.kx-d .kx-lab{color:var(--clay);opacity:1}
+.kx-d__list{margin-top:clamp(20px,2.4vw,34px)}
+.kx-d__list li{padding:.8em 0;border-top:1px solid rgba(18,18,38,.25);font:300 clamp(12px,0.86vw,14px)/1.42 var(--text)}
+.kx-d__shots{display:grid;gap:clamp(40px,8vw,120px)}
+.kx-d__shots figure:nth-child(2){margin-left:clamp(0px,6vw,100px)}
+.kx-d__shots figure:nth-child(1){margin-right:clamp(0px,4vw,60px)}
+.kx-d__shots .kx-cap{color:var(--ink)}
+
+/* ---------------- E · the world (horizontal) ---------------- */
+.kx-e{background:var(--mossd)}
+.kx-e__track{display:flex;gap:clamp(22px,3vw,52px);align-items:center;padding:0 5vw}
+.kx-e__intro{flex:none;width:min(520px,86vw)}
+.kx-e__sw{display:flex;gap:8px;margin-top:clamp(18px,2vw,28px)}
+.kx-e__sw i{width:clamp(30px,2.6vw,42px);aspect-ratio:1;border-radius:50%;border:1px solid rgba(244,239,223,.4)}
+.kx-e__note{margin-top:14px;font:300 clamp(12px,0.79vw,14px)/1.4 var(--text);opacity:.8;max-width:34ch}
+.kx-e__item{flex:none;width:min(66vw,calc(62vh * 1.78));margin:0}
+.kx-e__item .kx-win{box-shadow:0 26px 60px rgba(0,0,0,.45)}
+.kx-e__end{flex:none;width:2vw}
+.kx-e__hint{display:none}
+.kx--live .kx-e__pin{height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden}
+.kx--live .kx-e__track{width:max-content}
+.kx:not(.kx--live) .kx-e{padding:clamp(72px,10vw,150px) 0}
+.kx:not(.kx--live) .kx-e__track{flex-wrap:wrap;justify-content:center}
+.kx:not(.kx--live) .kx-e__item{width:min(92vw,900px)}
+
+/* ---------------- F · print ---------------- */
+.kx-f{background:#E4D9BC;color:var(--ink);overflow:hidden}
+.kx-f__in{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr);gap:clamp(24px,5vw,80px);max-width:1500px;margin:0 auto;align-items:center}
+.kx-f .kx-lab{color:var(--clay);opacity:1}
+.kx-f__art{position:relative;min-height:clamp(420px,52vw,760px)}
+.kx-f__art figure{position:absolute;margin:0;background:#fff;padding:clamp(6px,.8vw,12px);box-shadow:0 26px 50px rgba(18,18,38,.28)}
+.kx-f__art img{width:100%;height:auto}
+.kx-f__a{left:0;top:0;width:58%;transform:rotate(-2.4deg)}
+.kx-f__b{right:0;top:12%;width:50%;transform:rotate(2deg)}
+.kx-f__c{left:14%;bottom:0;width:44%;transform:rotate(-.8deg)}
+.kx-f__art figcaption{font:300 clamp(12px,0.72vw,14px)/1.3 var(--text);padding-top:8px;color:rgba(18,18,38,.75)}
+.kx-f__list{margin-top:clamp(18px,2vw,30px)}
+.kx-f__list li{padding:.8em 0;border-top:1px solid rgba(18,18,38,.28);font:300 clamp(12px,0.86vw,14px)/1.42 var(--text)}
+
+/* ---------------- G · iterations ---------------- */
+.kx-g{background:var(--ink)}
+.kx-g__in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,90px);max-width:1500px;margin:0 auto;align-items:start}
+.kx-g__stick{position:sticky;top:8vh}
+.kx-g__stick .kx-t{font-size:clamp(40px,4.3vw,72px)}
+.kx-g__rows li{display:grid;grid-template-columns:clamp(60px,7vw,110px) 1fr;gap:clamp(12px,2vw,28px);padding:clamp(28px,6vh,64px) 0;border-top:1px solid rgba(244,239,223,.25);opacity:.45;transition:opacity .5s}
+.kx-g__rows li.on,.kx:not(.kx--live) .kx-g__rows li{opacity:1}
+.kx-g__rows li:last-child{border-bottom:1px solid rgba(244,239,223,.25)}
+.kx-g__rows span{font:200 clamp(28px,3.6vw,60px)/.9 var(--serif);color:var(--gold)}
+.kx-g__rows h3{font:200 clamp(16px,1.44vw,24px)/1.05 var(--serif);margin-bottom:.35em}
+.kx-g__rows p{font:300 clamp(12px,0.86vw,14px)/1.5 var(--text);opacity:.9;max-width:40ch}
+.kx-g__rows li{min-height:clamp(180px,34vh,320px);align-items:start}
+
+/* ---------------- H · launch ---------------- */
+.kx-h{background:var(--moss);text-align:center}
+.kx-h__in{max-width:1300px;margin:0 auto}
+.kx-h .kx-t{font-size:clamp(60px,12vw,210px);margin-bottom:.1em}
+.kx-h__lead{font:300 clamp(14px,1.15vw,19px)/1.45 var(--text);max-width:40ch;margin:0 auto clamp(36px,5vw,70px)}
+.kx-h__checks{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,36px);text-align:left;border-top:1px solid rgba(244,239,223,.35);padding-top:clamp(22px,3vw,40px)}
+.kx-h__checks h3{font:200 clamp(13px,1.14vw,19px)/1.05 var(--serif);margin-bottom:.5em;color:var(--gold)}
+.kx-h__checks p{font:300 clamp(12px,0.79vw,14px)/1.5 var(--text);opacity:.92}
+.kx-h__go{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:clamp(36px,5vw,64px)}
+.kx-btn{display:inline-flex;gap:.6em;align-items:center;padding:1em 1.8em;border-radius:999px;border:1px solid var(--cream);color:var(--cream);text-decoration:none;font:300 13px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;transition:background .25s,color .25s}
+.kx-btn:hover,.kx-btn:focus-visible{background:var(--cream);color:var(--ink);outline:none}
+
+/* ---------------- small screens ---------------- */
+@media (max-width:860px){
+  .kx-b__in,.kx-d__in,.kx-f__in,.kx-g__in{grid-template-columns:1fr}
+  .kx-d__txt,.kx-g__stick{position:static}
+  .kx-h__checks{grid-template-columns:1fr 1fr}
+  .kx-a__meta{gap:14px 22px}
+  .kx-a__bar{gap:10px}
+  .kx-f__art{min-height:140vw;margin-bottom:8vw}
+  .kx--live .kx-b__pin{height:auto;display:block;overflow:visible;padding:clamp(72px,10vw,150px) 5vw}
+  .kx-e__item{width:84vw}
+  .kx--live .kx-b__in{gap:20px}
+  .kx-b__doc{transform:none}
+  .kx-b__stamp{display:none}
+  .kx-g__rows li{min-height:0}
+}
+@media (max-width:520px){
+  .kx-a__meta div:nth-child(n+4){display:none}
+  .kx-h__checks{grid-template-columns:1fr}
+}
+
+/* ---- Lexend Zetta / Martian Mono treatment (matches the hero and tunnel) ---- */
+.kx em{font-style:normal;color:var(--gold)}
+.kx-b em,.kx-d em,.kx-f em{color:var(--clay)}
+.kx-t,.kx-a__name,.kx-g__rows h3{text-transform:uppercase;letter-spacing:-.04em}
+.kx-t{line-height:1.02}
+.kx-a__head .kx-t{line-height:.98}
+.kx-lab{font-weight:400;letter-spacing:.18em}
+.kx-p{line-height:1.75;max-width:46ch;letter-spacing:.01em}
+.kx-g__rows span,.kx-b__issues li::before{letter-spacing:-.04em}
+.kx-cap{font-style:normal;letter-spacing:.02em}
+.kx-e__note,.kx-lap__note,.kx-f__art figcaption{font-style:normal}
+.kx-b__stamp{letter-spacing:-.02em;font-size:clamp(13px,1.1vw,18px)}
+.kx-win__bar span{letter-spacing:.04em}
+/* C: no circle — head above, diagram frame below, panned on scroll */
+.kx-c{background:var(--ink)}
+.kx-c__head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,70px);align-items:end;max-width:1500px;margin:0 auto 4vh}
+.kx-c__head .kx-t{margin-bottom:0}
+.kx-c__fig{max-width:1500px;margin:0 auto}
+.kx-c__view{background:var(--cream);border-radius:10px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.kx-c__view img{width:100%;height:auto;max-width:none}
+.kx-c .kx-pad{padding:0}
+.kx-c__pin{padding:clamp(72px,10vw,150px) 5vw}
+.kx--live .kx-c__pin{height:100vh;height:100svh;padding:7vh 5vw 4vh;display:flex;flex-direction:column;overflow:hidden}
+.kx--live .kx-c__fig{flex:1;min-height:0;display:flex;flex-direction:column;width:100%}
+.kx--live .kx-c__view{flex:1;min-height:0}
+.kx--live .kx-c__view img{height:100%;width:auto}
+.kx--live .kx-c__head{width:100%}
+@media (max-width:860px){.kx-c__head{grid-template-columns:1fr}}
+
+/* ---- header face: Space Grotesk (tight, even spacing) ---- */
+.kx-t,.kx-a__name,.kx-g__rows h3,.kx-g__rows span,.kx-b__issues li::before,.kx-b__stamp{font-weight:500}
+.kx-t,.kx-a__name,.kx-g__rows h3{letter-spacing:-.02em;text-transform:uppercase}
+.kx-t{font-size:clamp(36px,5vw,84px);line-height:.98}
+.kx-a__head .kx-t{font-size:clamp(46px,9vw,160px);line-height:.92}
+.kx-a__name{font-size:clamp(20px,1.9vw,32px)}
+.kx-g__stick .kx-t{font-size:clamp(34px,3.9vw,64px)}
+.kx-c__head .kx-t{font-size:clamp(32px,4.2vw,70px)}
+.kx-g__rows h3{font-size:clamp(20px,1.8vw,30px)}
+.kx-g__rows span{font-size:clamp(36px,4.6vw,76px);letter-spacing:-.03em}
+.kx-b__issues li::before{font-size:clamp(18px,1.4vw,24px);letter-spacing:0}
+.kx-b__stamp{font-size:clamp(15px,1.3vw,22px);letter-spacing:-.01em}
+
+/* tunnel headings: Space Grotesk (the hero About section keeps Lexend Zetta) */
+.tun__h{font-weight:500;font-size:clamp(34px,7vw,116px);letter-spacing:-.03em}
+.tun__title{font-weight:500;font-size:clamp(30px,3.9vw,60px);letter-spacing:-.025em}
+.tun__toolshead .tun__t{font-weight:500;font-size:clamp(20px,2.8vw,42px);letter-spacing:-.02em}
+.tun__tool b{font-weight:500;font-size:clamp(17px,1.8vw,26px);letter-spacing:-.01em}
+.tun__outro p{font-weight:500;font-size:clamp(30px,5.6vw,92px);letter-spacing:-.03em}
+
+/* intro heading returns to Lexend Zetta */
+.tun__h{font-family:"Lexend Zetta",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-weight:200;font-size:clamp(30px,6.4vw,104px);letter-spacing:-.045em;text-transform:uppercase}
+/* tools with logos */
+.tun__tool{flex-direction:row!important;align-items:center;gap:14px!important;padding:12px 26px 12px 14px!important;text-align:left}
+.tun__tt{display:flex;flex-direction:column;gap:5px}
+.tun__logo{flex:none;width:38px;height:38px;border-radius:9px;display:grid;place-items:center;background:var(--bg,#1e1e1e);color:var(--fg,#fff);font:700 15px/1 "Martian Mono",monospace;font-style:normal;letter-spacing:-.02em;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18)}
+.tun__logo--fig{background:#1E1E1E}
+/* resume buttons */
+.drh__resume,.tun__resume{display:inline-flex;gap:.7em;align-items:center;padding:.95em 1.6em;border-radius:999px;border:1px solid currentColor;color:inherit;text-decoration:none;font:400 11px/1 "Martian Mono",monospace;letter-spacing:.14em;text-transform:uppercase;transition:background .25s,color .25s;pointer-events:auto}
+.drh__resume:hover,.drh__resume:focus-visible{background:var(--drh-ink);color:var(--drh-peach);outline:none}
+.tun__resume{margin-left:10px;background:var(--tun-ink);color:var(--tun-cream)}
+.tun__resume:hover,.tun__resume:focus-visible{background:transparent;color:var(--tun-ink);outline:none}
+.drh__note{opacity:1}
+/* performance: cheap tiles, no blur shadows, drift only while the hero is untouched */
+.drh__tile{box-shadow:0 0 0 1px rgba(0,0,0,.28)!important}
+.drh__tile::after{display:none}
+.drh--still .drh__tile img{animation-play-state:paused}
+@media (max-width:768px){.drh__tile img{animation:none}}
+@media (max-width:640px){.tun__tool small{display:none}.tun__tool b{font-size:14px!important;white-space:nowrap}.tun__logo{width:32px;height:32px;font-size:13px}.tun__tool{padding:9px 16px 9px 10px!important;gap:10px!important}}
+
+/* =========================================================================
+   ECHO — extra pieces, built from the same parts as the Khel Sutra chapter
+   ========================================================================= */
+.ex-light{color:var(--ink)}
+.ex-light .kx-lab{color:var(--clay);opacity:1}
+.ex-light em{color:var(--clay)}
+.ex-ink{background:var(--ink)} .ex-paper{background:var(--paper)} .ex-cream{background:var(--cream)}
+.ex-moss{background:var(--mossd)} .ex-sand{background:#E4D9BC}
+.ex-in{max-width:1500px;margin:0 auto}
+.ex-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,90px);align-items:center;max-width:1500px;margin:0 auto}
+.ex-two--r{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.ex-hero{width:min(60vw,560px)}
+.ex-hero img{width:100%;height:auto}
+.ex-cut img{filter:drop-shadow(0 30px 60px rgba(124,105,255,.32))}
+.ex-light .ex-cut img{filter:drop-shadow(0 30px 36px rgba(18,18,38,.34))}
+.ex-shot{border-radius:14px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.34)}
+.ex-light .ex-shot{box-shadow:0 30px 60px rgba(18,18,38,.26)}
+.ex-shot img{width:100%;height:auto}
+.ex-stats{display:flex;gap:clamp(20px,3.4vw,56px);margin-top:clamp(24px,3vw,44px);flex-wrap:wrap}
+.ex-stats div{border-top:1px solid rgba(18,18,38,.3);padding-top:12px;min-width:7em}
+.ex-stats b{display:block;font:500 clamp(28px,3.4vw,56px)/1 var(--serif);color:var(--clay);letter-spacing:-.02em;text-transform:uppercase}
+.ex-stats span{display:block;margin-top:8px;font:300 12px/1.4 var(--text);letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.ex-head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,70px);align-items:end;max-width:1500px;margin:0 auto clamp(28px,4vw,56px)}
+.ex-head .kx-t{margin-bottom:0;font-size:clamp(32px,4.2vw,70px)}
+.ex-3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,36px);border-top:1px solid rgba(244,239,223,.3);padding-top:clamp(22px,3vw,40px);margin-top:clamp(40px,5vw,72px)}
+.ex-3 h3{font:500 clamp(18px,1.6vw,26px)/1.05 var(--serif);text-transform:uppercase;letter-spacing:-.02em;color:var(--gold);margin-bottom:.5em}
+.ex-3 p{font:300 clamp(12px,0.86vw,14px)/1.55 var(--text);opacity:.92;max-width:34ch}
+.ex-note{margin-top:clamp(14px,1.4vw,22px);font:300 clamp(12px,0.79vw,14px)/1.5 var(--text);opacity:.85;max-width:60ch}
+.ex-sw{display:flex;flex-wrap:wrap;gap:clamp(14px,1.6vw,24px);margin:clamp(20px,2.4vw,34px) 0}
+.ex-sw div{display:grid;gap:8px;justify-items:center;font:300 11px/1 var(--text);letter-spacing:.1em}
+.ex-sw i{width:clamp(44px,4.2vw,68px);aspect-ratio:1;border-radius:50%;border:1px solid rgba(244,239,223,.4)}
+.ex-type{border-top:1px solid rgba(244,239,223,.25)}
+.ex-type div{display:flex;justify-content:space-between;gap:16px;padding:.9em 0;border-bottom:1px solid rgba(244,239,223,.25);font:300 clamp(12px,0.9vw,15px)/1.2 var(--text);letter-spacing:.14em;text-transform:uppercase}
+.ex-type b{font-weight:300;opacity:.65}
+.ex-big{font:500 clamp(26px,3.8vw,64px)/1.08 var(--serif);text-transform:uppercase;letter-spacing:-.02em;max-width:22ch}
+.ex-emp{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.8vw,26px);max-width:1500px;margin:0 auto}
+.ex-emp>div{border:1px solid rgba(18,18,38,.28);border-radius:14px;padding:clamp(18px,2.2vw,32px)}
+.ex-emp h3{font:500 clamp(18px,1.6vw,26px)/1 var(--serif);text-transform:uppercase;letter-spacing:-.02em;color:var(--clay);margin-bottom:.7em}
+.ex-emp li{padding:.55em 0;border-top:1px solid rgba(18,18,38,.18);font:300 clamp(12px,0.9vw,14.5px)/1.45 var(--text)}
+.ex-table{max-width:1500px;margin:0 auto;background:var(--cream);color:var(--ink);border-radius:14px;overflow-x:auto;box-shadow:0 30px 70px rgba(0,0,0,.4);-webkit-overflow-scrolling:touch}
+.ex-table table{border-collapse:collapse;width:100%;min-width:980px;font:300 12.5px/1.45 var(--text)}
+.ex-table th,.ex-table td{padding:14px 16px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(18,18,38,.16)}
+.ex-table thead th{font:400 11px/1.2 var(--text);letter-spacing:.14em;text-transform:uppercase;background:#E9E3D2;white-space:nowrap}
+.ex-table tbody th{font-weight:500;width:13%;color:var(--moss)}
+.ex-table .e{background:rgba(106,85,240,.1)}
+.ex-table thead .e{background:var(--clay);color:var(--cream)}
+.ex-table b{font-weight:500}
+.ex-table .n{opacity:.55}
+.ex-decs{counter-reset:d}
+.ex-decs li{counter-increment:d;display:grid;grid-template-columns:2.4em 1fr;gap:.4em;padding:clamp(12px,1.4vw,20px) 0;border-top:1px solid rgba(18,18,38,.25);font:300 clamp(12px,0.94vw,15px)/1.45 var(--text)}
+.ex-decs li::before{content:"0" counter(d);font:500 clamp(14px,1.2vw,20px)/1 var(--serif);color:var(--clay)}
+.ex-chain{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.ex-chain span{padding:.85em 1.3em;border-radius:999px;border:1px solid var(--ink);font:300 12px/1 var(--text);letter-spacing:.12em;text-transform:uppercase}
+.ex-chain span.last{background:var(--clay);border-color:var(--clay);color:var(--cream)}
+.ex-chain i{font-style:normal;opacity:.5}
+.ex-rej{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,32px);max-width:1500px;margin:0 auto}
+.ex-rej article{background:var(--cream);border-radius:14px;overflow:hidden;box-shadow:0 22px 50px rgba(18,18,38,.22);display:flex;flex-direction:column}
+.ex-rej .im{background:#fff;aspect-ratio:4/3;display:grid;place-items:center;padding:10px}
+.ex-rej .im img{max-height:100%;width:100%;height:100%;object-fit:contain}
+.ex-rej .tx{padding:clamp(16px,1.8vw,26px);display:grid;gap:12px;font:300 clamp(12px,0.88vw,14px)/1.5 var(--text)}
+.ex-rej b{display:inline-block;margin-right:.8em;font:400 11px/1 var(--text);letter-spacing:.16em;color:var(--clay)}
+.ex-rej .s b{color:var(--moss)}
+.ex-rej p{margin:0}
+.ex-flow{max-width:1500px;margin:0 auto;overflow-x:auto}
+.ex-flow .kx-win img{min-width:900px}
+.ex-four{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,30px);margin:0}
+.ex-four img{width:100%;height:auto;aspect-ratio:710/1540;object-fit:cover;filter:drop-shadow(0 24px 40px rgba(124,105,255,.28))}
+@media (max-width:860px){.ex-four{grid-template-columns:1fr 1fr}}
+.ex-prize{border-radius:18px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.ex-prize img{width:100%;height:auto}
+.ex-refl{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,90px);max-width:1500px;margin:0 auto}
+.ex-refl p{font:300 clamp(14px,1.15vw,19px)/1.6 var(--text);max-width:40ch}
+.ex-phonewrap{display:grid;justify-items:center}
+.ex-phone{position:relative;width:min(300px,72vw);background:#0B0B12;border-radius:46px;padding:10px;box-shadow:0 0 0 2px #2B2B3A,0 40px 80px rgba(18,18,38,.4)}
+.ex-phone__isl{position:absolute;z-index:2;left:50%;top:19px;width:28%;height:22px;border-radius:20px;background:#000;transform:translateX(-50%)}
+.ex-phone__screen{aspect-ratio:9/17;border-radius:37px;overflow:hidden;background:#111;position:relative}
+.ex-phone__yt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#F4EFDF;text-decoration:none;text-align:center;background:radial-gradient(120% 90% at 50% 20%,#3B2FA8 0%,#121226 70%);font:300 12px/1.3 var(--text);letter-spacing:.12em;text-transform:uppercase}
+.ex-phone__yt b{font-weight:400}.ex-phone__yt small{opacity:.7;font-size:10px}
+.ex-phone__play{width:64px;height:64px;border-radius:50%;background:#7C69FF;position:relative;box-shadow:0 10px 30px rgba(124,105,255,.5)}
+.ex-phone__play::after{content:"";position:absolute;left:26px;top:20px;border-left:19px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent}
+.ex-phone__screen video,.ex-phone__screen iframe{width:100%;height:100%;object-fit:cover;border:0;display:block}
+.ex-ph{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,28px);margin-top:clamp(18px,2vw,30px)}
+.ex-ph img{width:100%;height:auto;border-radius:14px;box-shadow:0 24px 50px rgba(0,0,0,.35)}
+.kx-btn--dark{border-color:var(--ink);color:var(--ink)}
+.kx-btn--dark:hover{background:var(--ink);color:var(--cream)}
+.kx-btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+
+/* reveal on scroll (only when JS runs) */
+.ex-js .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.ex-js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.ex-js .rv{opacity:1;transform:none;transition:none}}
+
+@media (max-width:860px){
+  .ex-two,.ex-two--r,.ex-head,.ex-refl{grid-template-columns:1fr}
+  .ex-3{grid-template-columns:1fr}
+  .ex-emp{grid-template-columns:1fr}
+  .ex-rej{grid-template-columns:1fr}
+}
+
+
+/* story pieces */
+.ex-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,28px);max-width:1500px;margin:0 auto}
+.ex-trio article{border:1px solid rgba(18,18,38,.25);border-radius:14px;padding:clamp(20px,2.4vw,36px);background:rgba(255,255,255,.35)}
+.ex-trio span{display:block;font:500 clamp(18px,1.7vw,28px)/1 var(--serif);text-transform:uppercase;letter-spacing:-.02em;color:var(--clay);margin-bottom:.8em}
+.ex-trio p{font:300 clamp(13px,1vw,16px)/1.6 var(--text);max-width:36ch;margin:0}
+.ex-chips{display:flex;flex-wrap:wrap;gap:10px;max-width:1500px;margin:0 auto clamp(20px,2.4vw,32px);padding:0;list-style:none}
+.ex-chips li{padding:.8em 1.3em;border-radius:999px;background:var(--clay);color:var(--cream);font:300 12px/1 var(--text);letter-spacing:.12em;text-transform:uppercase}
+.ex-steps{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(12px,1.6vw,24px);max-width:1500px}
+.ex-steps li{border-top:1px solid rgba(244,239,223,.35);padding-top:16px}
+.ex-steps b{display:block;font:500 clamp(28px,3vw,48px)/1 var(--serif);color:var(--gold);letter-spacing:-.03em;margin-bottom:.4em}
+.ex-steps h3{font:500 clamp(15px,1.3vw,21px)/1.1 var(--serif);text-transform:uppercase;letter-spacing:-.02em;margin:0 0 .5em}
+.ex-steps p{font:300 clamp(12px,0.84vw,14px)/1.55 var(--text);opacity:.9;margin:0}
+.ex-strip{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:0;max-width:1500px;border-top:2px solid var(--ink)}
+.ex-strip li{position:relative;padding:22px 14px 0 0}
+.ex-strip li::before{content:"";position:absolute;left:0;top:-7px;width:12px;height:12px;border-radius:50%;background:var(--clay)}
+.ex-strip b{display:block;font:500 12px/1 var(--text);letter-spacing:.16em;color:var(--clay);margin-bottom:.8em}
+.ex-strip span{display:block;font:500 clamp(14px,1.2vw,19px)/1.1 var(--serif);text-transform:uppercase;letter-spacing:-.02em;margin-bottom:.4em}
+.ex-strip em{font:300 12.5px/1.4 var(--text);font-style:normal;opacity:.8}
+@media (max-width:860px){.ex-trio,.ex-steps,.ex-strip{grid-template-columns:1fr}.ex-strip li{padding-bottom:14px}}
+
+/* bottom bar (same part as on the Khel Sutra page) */
+.kbar{position:fixed;left:50%;bottom:clamp(12px,2.4vh,26px);z-index:60;transform:translate(-50%,24px);width:min(calc(100vw - 24px),640px);display:flex;align-items:center;justify-content:space-between;gap:14px;padding:8px 8px 8px 22px;border-radius:999px;background:rgba(244,239,223,.95);color:#121226;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 14px 40px rgba(0,0,0,.4),0 0 0 1px rgba(18,18,38,.14);font:300 11px/1.2 "Martian Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .45s,transform .45s,visibility 0s .45s}
+.kbar.on{opacity:1;visibility:visible;transform:translate(-50%,0);pointer-events:auto;transition-delay:0s}
+.kbar__msg{display:flex;align-items:center;gap:.8em;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:inherit;text-decoration:none}
+.kbar__msg i{font-style:normal;display:inline-block;animation:kbarBob 1.6s ease-in-out infinite}
+.kbar__go{flex:none;display:inline-flex;gap:.6em;align-items:center;padding:1em 1.4em;border-radius:999px;background:#5B47E0;color:#F4EFDF;text-decoration:none;white-space:nowrap;transition:background .25s}
+a.kbar__go:hover,a.kbar__go:focus-visible{background:#7C69FF;outline:none}
+.kbar__go[aria-disabled="true"]{opacity:.55;cursor:default}
+@keyframes kbarBob{0%,100%{transform:translateY(-1px)}50%{transform:translateY(3px)}}
+@media (max-width:560px){.kbar{font-size:9.5px;letter-spacing:.08em;padding-left:16px}.kbar__go{padding:.95em 1.1em}}
+@media (prefers-reduced-motion:reduce){.kbar__msg i{animation:none}.kbar{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="kx" id="echo">
+
+  <!-- A · Introduction -->
+  <section class="kx-a" aria-label="Echo: introduction">
+    <div class="kx-a__pin">
+      <header class="kx-a__bar">
+        <p class="kx-a__name">E<em>cho</em></p>
+        <dl class="kx-a__meta">
+          <div><dt>Role</dt><dd>UX research</dd></div>
+          <div><dt>Nature</dt><dd>UI/UX, Product design</dd></div>
+          <div><dt>Team</dt><dd>2 interns</dd></div>
+          <div><dt>Time</dt><dd>Hackathon, a few hours</dd></div>
+          <div><dt>Outcome</dt><dd>1st prize</dd></div>
+        </dl>
+      </header>
+      <div class="kx-a__head">
+        <p class="kx-lab">Case study · Hackathon project</p>
+        <h1 class="kx-t">E<em>cho</em></h1>
+        <p class="kx-p">A music app that closes the gap between listening to a song and learning it. The idea: put the learning layer inside the player, tied to the exact version you are hearing.</p>
+      </div>
+      <figure class="ex-hero ex-cut rv"><img src="echo-assets/hero-phones-cut.webp" alt="Echo app: Music Jam and home screens" decoding="async"></figure>
+    </div>
+  </section>
+
+  <section class="ex-cream ex-light kx-pad" aria-label="The idea in 30 seconds" id="idea30">
+    <div class="ex-head rv">
+      <div>
+        <p class="kx-lab">01 — The idea in 30 seconds</p>
+        <h2 class="kx-t">Learning a song should not mean <em>leaving the song</em></h2>
+      </div>
+      <p class="kx-p">Echo was built in a few hours, by two interns, for the NSUT Oblivion Hackathon. It won first prize among 150+ teams.</p>
+    </div>
+    <div class="ex-trio rv">
+      <article><span>The problem</span><p>Musicians learn one song across a player, chord charts, tutorials, lyrics and practice tools, and lose sync with the exact version they are trying to learn.</p></article>
+      <article><span>The insight</span><p>The one thing that stays constant is the song. Everything a learner needs should hang off the exact track and version.</p></article>
+      <article><span>The idea</span><p>Stream the full catalogue, tap Learn, and get synced chords, tabs, lyrics, tempo, loops and a Jam in one place.</p></article>
+    </div>
+  </section>
+
+  <section class="ex-cream ex-light kx-pad" aria-label="The user: Aditi" id="aditi">
+    <div class="ex-head rv">
+      <div>
+        <p class="kx-lab">02 — The user</p>
+        <h2 class="kx-t">Meet Aditi: a beginner guitarist, <em>four tabs, one song, still lost</em></h2>
+      </div>
+      <p class="kx-p">Aditi is prepping a song for a sangeet. What she says and does shows the problem more clearly than any feature list.</p>
+    </div>
+    <div class="ex-emp rv">
+      <div><h3>Says</h3><ul><li>"Wait, which video was I on?"</li><li>"Is this the right version?"</li><li>"I lost my place again."</li></ul></div>
+      <div><h3>Thinks</h3><ul><li>Am I even playing this right?</li><li>This is taking forever.</li><li>There must be an easier way.</li></ul></div>
+      <div><h3>Does</h3><ul><li>Switches between 3 to 4 tabs</li><li>Pauses and rewinds the tutorial</li><li>Screenshots chords mid-video</li><li>Restarts the song from scratch</li></ul></div>
+      <div><h3>Feels</h3><ul><li>Frustrated, loses momentum</li><li>Unsure if practice is correct</li><li>Overwhelmed by scattered tools</li><li>Tempted to give up early</li></ul></div>
+    </div>
+  </section>
+
+  <section class="ex-ink kx-pad" aria-label="The gap" id="gap">
+    <div class="ex-head rv">
+      <div>
+        <p class="kx-lab">03 — The gap</p>
+        <h2 class="kx-t">Everyone solves a slice. <em>Nobody keeps it in one place.</em></h2>
+      </div>
+      <p class="kx-p">We compared four tools learners use today. Each is best at one thing. Echo puts the four things that matter in one place, and we name its own gap honestly: streaming master audio needs licensing.</p>
+    </div>
+    <ul class="ex-chips rv"><li>Full licensed catalogue</li><li>Live AI stems on the stream</li><li>Version-synced chords</li><li>Native practice controls</li></ul>
+    <div class="ex-table rv" tabindex="0" aria-label="Competitive analysis table">
+      <table>
+        <thead><tr><th>Feature</th><th>Yousician</th><th>Ultimate Guitar</th><th>Moises.ai</th><th>Simply Piano</th><th class="e">Echo</th></tr></thead>
+        <tbody>
+          <tr><th>Core value</th><td>Gamified practice and interactive lessons</td><td>Interactive tab/chord directory</td><td>AI audio isolation and track manipulation</td><td>Interactive beginner piano learning</td><td class="e"><b>All-in-one practice-integrated music streaming</b></td></tr>
+          <tr><th>Audio source / catalogue</th><td>Synthesized MIDI, limited licensed backing tracks</td><td>Synthetic MIDI, community uploads</td><td>User file upload (MP3/WAV/YouTube links)</td><td>Fixed curriculum library, limited pop songs</td><td class="e"><b>Full licensed streaming catalogue (master audio)</b></td></tr>
+          <tr><th>Live stem separation</th><td class="n">Pre-rendered tracks only</td><td class="n">No</td><td><b>Market leader</b> (AI vocal, drum, bass, guitar)</td><td class="n">No</td><td class="e"><b>Integrated AI stems</b> (mute/isolate on live stream)</td></tr>
+          <tr><th>Interactive chords &amp; tabs</th><td>Gamified falling-notes view</td><td><b>Market leader</b> (800k+ tabs, auto-scroll)</td><td>Basic AI chord detection</td><td>Sheet-music style</td><td class="e"><b>Version-synced chords</b> (matched to the exact audio)</td></tr>
+          <tr><th>Pitch shift / transpose</th><td class="n">Strictly tuned to standard</td><td>Transposes chord text only</td><td>Real-time audio pitch shifter</td><td class="n">No</td><td class="e"><b>Audio transpose and key match</b> for singers and players</td></tr>
+          <tr><th>Practice tools (BPM / loop)</th><td>Tempo control in lessons</td><td>Metronome and static autoscroll</td><td><b>Best in class</b> (smart metronome, A-B looper)</td><td>Lesson-bounded looping</td><td class="e"><b>Native player controls</b> (A-B loop, speed without pitch drift)</td></tr>
+          <tr><th>Primary friction / gap</th><td>Feels like a rigid classroom app, not a daily player</td><td>Tabs often mismatch specific live/acoustic versions</td><td>High upload friction; not a discovery app</td><td>Locked to piano; no singer/jam utility</td><td class="e">High licensing requirement for master streaming</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ex-sand ex-light kx-pad" aria-label="The solution" id="solution">
+    <div class="ex-two">
+      <div class="rv">
+        <p class="kx-lab">04 — The solution</p>
+        <h2 class="kx-t">Echo: learn it <em>where you hear it</em></h2>
+        <p class="kx-p">Five product decisions, all with one rule: learning content stays tied to the exact song.</p>
+        <ol class="ex-decs">
+          <li><span>Playback, lyrics, chords/tabs and tutorials around the same song.</span></li>
+          <li><span>Keep learning content tied to the exact track and version.</span></li>
+          <li><span>Slow down, loop, count in and control tempo without leaving the song.</span></li>
+          <li><span>Role- and instrument-aware views, key and difficulty adjustments.</span></li>
+          <li><span>Save progress, context and the next section to resume.</span></li>
+        </ol>
+        <p style="margin-top:clamp(22px,2.4vw,36px)"><a class="kx-btn kx-btn--dark" href="https://youtube.com/shorts/MMMDPnlxyn8" target="_blank" rel="noopener">Watch on YouTube ↗</a></p>
+      </div>
+      <figure class="rv ex-phonewrap">
+        <div class="ex-phone" id="exPhone">
+          <i class="ex-phone__isl" aria-hidden="true"></i>
+          <div class="ex-phone__screen">
+            <video id="exVid" muted loop playsinline preload="metadata" aria-label="Echo prototype walkthrough">
+              <source src="videos/echo-prototype.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <figcaption class="kx-cap">The clickable prototype, a short walkthrough.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="ex-ink kx-pad" aria-label="How it works" id="how">
+    <div class="ex-head rv">
+      <div>
+        <p class="kx-lab">05 — How it works</p>
+        <h2 class="kx-t">From a shared song to a practice session, <em>in five steps</em></h2>
+      </div>
+      <p class="kx-p">The demo is a clean two-screen story: the player, then the learning view.</p>
+    </div>
+    <ol class="ex-steps rv">
+      <li><b>01</b><h3>Share to Echo</h3><p>Share the song from any platform. No copy-pasting a link.</p></li>
+      <li><b>02</b><h3>Full player</h3><p>The full media player opens on that exact song.</p></li>
+      <li><b>03</b><h3>Click Learn</h3><p>One tap opens a view tied to the version: studio cut, 118 BPM, key of Am.</p></li>
+      <li><b>04</b><h3>Practice</h3><p>Pick an instrument or role. Chords, tabs and lyrics follow the song. Slow down, loop, count in, transpose.</p></li>
+      <li><b>05</b><h3>Jam</h3><p>Take it to friends, and save your progress to resume.</p></li>
+    </ol>
+    <div class="ex-two ex-two--r" style="margin-top:clamp(48px,6vw,90px);align-items:center">
+      <figure class="rv"><div class="kx-win"><div class="kx-win__bar"><i></i><i></i><i></i><span>Final user flow</span></div>
+        <img src="echo-assets/user-flow-enlarged.jpg" alt="Final user flow: full player, learning button, practice screen with chords, lyrics, tabs, tools; jam; save progress" decoding="async"></div></figure>
+      <figure class="ex-cut rv" style="max-width:520px;justify-self:center"><img src="echo-assets/r2-final-screens-cut.webp" alt="Echo Now Playing and Learning screens" decoding="async" style="width:100%;height:auto"></figure>
+    </div>
+  </section>
+
+  <section class="ex-paper ex-light kx-pad" aria-label="The process" id="process">
+    <div class="ex-head rv">
+      <div>
+        <p class="kx-lab">06 — The process</p>
+        <h2 class="kx-t">How we got here: <em>two rounds, one pivot</em></h2>
+      </div>
+      <p class="kx-p">A few hours, two rounds, and one working flow that we threw away. Here is the path, then each step.</p>
+    </div>
+    <ol class="ex-strip rv">
+      <li><b>01</b><span>Round 1 brief</span><em>Fix streaming apps</em></li>
+      <li><b>02</b><span>Wireframes and system</span><em>Structure, then violet</em></li>
+      <li><b>03</b><span>The brief changes</span><em>Learning a song</em></li>
+      <li><b>04</b><span>Research</span><em>Aditi and competitors, see 02 and 03</em></li>
+      <li><b>05</b><span>Three rejected flows</span><em>Each with a reason</em></li>
+      <li><b>06</b><span>Final flow</span><em>Prototype, see 04 and 05</em></li>
+    </ol>
+  </section>
+
+  <section class="ex-ink kx-pad" aria-label="Round 1: the challenge" id="r1">
+    <div class="ex-two ex-two--r">
+      <div class="rv">
+        <p class="kx-lab">07 — Step 1 · Round 1: the brief</p>
+        <h2 class="kx-t">Streaming apps bury the music you <em>already love</em></h2>
+        <p class="kx-p">Round 1 asked how a streaming app could work better for the people who use it every day. Four problems kept showing up.</p>
+      </div>
+      <ul class="kx-b__issues rv" style="margin-top:0">
+        <li><span><b>Cluttered home screens.</b> Apps prioritise recommendations, podcasts and new content, making your own music harder to reach.</span></li>
+        <li><span><b>Hidden personal library.</b> Saved songs and playlists get buried, though users keep returning to music they already know.</span></li>
+        <li><span><b>Friction in listening.</b> Simple actions like adding a song to the queue take unnecessary steps and interrupt the flow.</span></li>
+        <li><span><b>Disconnected social listening.</b> Sharing and listening together with friends isn't seamless, so music feels less personal.</span></li>
+      </ul>
+    </div>
+    <div class="ex-in">
+      <div class="ex-3 rv">
+        <div><h3>Listen</h3><p>Start with music you already know: Recently Played, Saved Songs, Playlists.</p></div>
+        <div><h3>Discover</h3><p>Contextual recommendations when you want something new, without an overwhelming feed.</p></div>
+        <div><h3>Connect</h3><p>Share, Jam or Blend directly from the music you're listening to.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ex-cream ex-light kx-pad" aria-label="Round 1: wireframes">
+    <div class="ex-head rv">
+      <div>
+        <p class="kx-lab">08 — Step 2 · Wireframes</p>
+        <h2 class="kx-t">Six screens, <em>structure first</em></h2>
+      </div>
+      <p class="kx-p">Before any colour, the question was where things live: your music on top, discovery second, people third.</p>
+    </div>
+    <figure class="ex-in rv">
+      <div class="kx-win"><div class="kx-win__bar"><i></i><i></i><i></i><span>Round 1 · Low-fidelity wireframes</span></div>
+        <img src="echo-assets/r1-wireframes.jpg" alt="Round 1 low-fidelity wireframes" decoding="async"></div>
+    </figure>
+  </section>
+
+  <section class="ex-moss kx-pad" aria-label="Round 1: design system and screens" id="system">
+    <div class="ex-two">
+      <div class="rv">
+        <p class="kx-lab">09 — Step 2 · Design system</p>
+        <h2 class="kx-t">Violet on <em>near-black</em></h2>
+        <div class="ex-sw">
+          <div><i style="background:#7C69FF"></i><span>#7C69FF</span></div>
+          <div><i style="background:#121226"></i><span>#121226</span></div>
+          <div><i style="background:#7777A0"></i><span>#7777A0</span></div>
+          <div><i style="background:#FFFDFF"></i><span>#FFFDFF</span></div>
+        </div>
+        <div class="ex-type">
+          <div><b>Display</b><span style="font-weight:500">Cal Sans</span></div>
+          <div><b>Text</b><span>Outfit</span></div>
+        </div>
+      </div>
+      <figure class="rv" style="max-width:640px;justify-self:center"><div class="ex-shot"><img src="echo-assets/design-components.jpg" alt="Echo components: mini player, search, tab bar, logo, buttons" decoding="async"></div></figure>
+    </div>
+    <div class="ex-in" style="margin-top:clamp(56px,8vw,120px)">
+      <div class="ex-head rv">
+        <div>
+          <p class="kx-lab">10 — Step 2 · Final screens</p>
+          <h2 class="kx-t">Home, player, <em>Jam</em>, search</h2>
+        </div>
+        <p class="kx-p">Your library first. Jam and Blend sit one tap away from whatever is playing.</p>
+      </div>
+      <figure class="rv ex-four">
+        <img src="echo-assets/r1-screen-home.webp" alt="Round 1 home screen" decoding="async">
+        <img src="echo-assets/r1-screen-player.webp" alt="Round 1 now playing screen" decoding="async">
+        <img src="echo-assets/r1-screen-jam.webp" alt="Round 1 music jam screen" decoding="async">
+        <img src="echo-assets/r1-screen-search.webp" alt="Round 1 search screen" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+  <section class="ex-paper ex-light kx-pad" aria-label="Round 2: the pivot" id="r2">
+    <div class="ex-in rv">
+      <p class="kx-lab">11 — Step 3 · The pivot</p>
+      <h2 class="ex-big">Halfway through, the brief changed. We threw away a <em>working flow.</em></h2>
+      <p class="kx-p" style="margin-top:1.6em;max-width:56ch">Round 1 asked us to fix streaming apps. Round 2 asked a different question: why is learning a song so hard? That meant a new problem statement, a new user and a new flow, with the clock still running.</p>
+    </div>
+  </section>
+
+  <section class="ex-paper ex-light kx-pad" aria-label="Rejected flows" id="rejected">
+    <div class="ex-head rv">
+      <div>
+        <p class="kx-lab">12 — Step 5 · Rejected flows</p>
+        <h2 class="kx-t">Three flows we <em>threw away</em></h2>
+      </div>
+      <p class="kx-p">Each rejected flow taught us something the final flow keeps. We could only throw them away because we could say why.</p>
+    </div>
+    <div class="ex-rej rv">
+      <article>
+        <div class="im"><img src="echo-assets/rejected-1-modes.jpg" alt="Sketch: instrumentalist vs vocalist mode"></div>
+        <div class="tx"><p><b>Then</b>The user chooses between instrumentalist and vocalist mode.</p><p><b>Issue</b>Only one feature at a time. Blending the two doesn't work.</p></div>
+      </article>
+      <article>
+        <div class="im"><img src="echo-assets/rejected-2-flow.jpg" alt="Flow diagram without sharing, jam or saved progress"></div>
+        <div class="tx"><p><b>Then</b>No sharing, no Jam, no saved progress.</p><p><b>Issue</b>Users can't collaborate or pick up their previous practice.</p></div>
+      </article>
+      <article>
+        <div class="im"><img src="echo-assets/rejected-3-sketch.jpg" alt="Notebook sketch: paste a YouTube link into the app"></div>
+        <div class="tx"><p><b>Then</b>Users copy and paste a link into the app.</p><p><b>Issue</b>Friction.</p><p class="s"><b>Fix</b>Share the song from any platform to Echo. The full media player opens.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="ex-moss kx-pad" aria-label="Outcome" id="outcome">
+    <div class="ex-two ex-two--r">
+      <figure class="rv"><div class="ex-prize"><img src="echo-assets/first-prize.jpg" alt="Receiving first prize at NSUT Oblivion hackathon" decoding="async"></div></figure>
+      <div class="rv">
+        <p class="kx-lab">13 — The result</p>
+        <h2 class="kx-t">First <em>prize</em></h2>
+        <p class="kx-p">Between 150+ teams, our research and idea made it to the top place, with a chance to publish the app.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ex-paper ex-light kx-pad" aria-label="Reflection">
+    <div class="ex-in rv" style="margin-bottom:clamp(24px,3vw,48px)">
+      <p class="kx-lab">14 — Reflection</p>
+      <h2 class="kx-t">Defend the decision, <em>not the first idea</em></h2>
+    </div>
+    <div class="ex-refl rv">
+      <p>The mid-hackathon pivot meant discarding a working flow and restarting persona research under time pressure. I trusted my fellow intern and we pushed each other.</p>
+      <p>Having to state why a flow was rejected made me a more deliberate designer than shipping the first version I liked.</p>
+    </div>
+  </section>
+
+  <section class="kx-h kx-pad" aria-label="Next" id="end">
+    <div class="kx-h__in">
+      <p class="kx-lab">That was Echo</p>
+      <h2 class="kx-t">Up <em>next</em></h2>
+      <p class="kx-h__lead">More case studies are on their way: MyDayss, then the branding work and a playzone for everything else.</p>
+      <div class="kx-h__go">
+        <a class="kx-btn" href="final-v2.html#work">← Bhartiya Khel Sutra</a>
+        <a class="kx-btn" href="final-v2.html">Home</a>
+        <a class="kx-btn" href="final-v2.html#contact">Work with me</a>
+        <a class="kx-btn" href="unipath-case-study.html">UniPath →</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- bottom bar -->
+<nav class="kbar" id="kbar" aria-label="Project navigation">
+  <a class="kbar__msg" href="final-v2.html#work"><i>←</i><span>Bhartiya Khel Sutra</span></a>
+  <a class="kbar__go" href="unipath-case-study.html">Next project · UniPath →</a>
+</nav>
+
+<script>
+(function(){
+  var d=document.documentElement;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rv=[].slice.call(document.querySelectorAll('.rv'));
+  if(!reduce&&'IntersectionObserver' in window){
+    d.classList.add('ex-js');
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    rv.forEach(function(el){io.observe(el);});
+    setTimeout(function(){rv.forEach(function(el){el.classList.add('in');});},9000); // safety
+  }
+  var bar=document.getElementById('kbar'),end=document.getElementById('end');
+  function upd(){
+    var vh=window.innerHeight;
+    var on=window.pageYOffset>vh*.7&&end.getBoundingClientRect().top>vh*.6;
+    bar.classList.toggle('on',on);
+  }
+  window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
+
+  /* phone video: play while on screen; if the mp4 is missing, fall back to the YouTube embed */
+  (function(){
+    var vid=document.getElementById('exVid'),box=document.querySelector('.ex-phone__screen');
+    if(!vid||!box)return;
+    var embedded=false;
+    function embed(){
+      if(embedded)return;embedded=true;
+      var a=document.createElement('a');
+      a.className='ex-phone__yt';a.href='https://youtube.com/shorts/MMMDPnlxyn8';a.target='_blank';a.rel='noopener';
+      a.innerHTML='<span class="ex-phone__play" aria-hidden="true"></span><b>Watch the prototype</b><small>Opens on YouTube</small>';
+      box.replaceChild(a,vid);
+    }
+    var src=vid.querySelector('source');
+    if(src)src.addEventListener('error',embed);
+    vid.addEventListener('error',embed);
+    window.addEventListener('load',function(){setTimeout(function(){if(!embedded&&vid.networkState===3)embed();},800);});
+    if(reduce){vid.setAttribute('controls','');return;}
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){es.forEach(function(e){
+        if(embedded)return;
+        if(e.isIntersecting){var p=vid.play();if(p&&p.catch)p.catch(function(){});}else vid.pause();
+      });},{threshold:.35}).observe(box);
+    }
+  })();
+
+  var lz=[].slice.call(document.querySelectorAll('img[loading="lazy"]'));
+  window.addEventListener('load',function(){lz.forEach(function(i){i.loading='eager';});});
+})();
+</script>
+</body>
+</html>

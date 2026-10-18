@@ -26,10 +26,7 @@ app.use(express.json());
 
 // Home
 app.get('/', (req, res) => {
-    res.render('index', {
-        title: 'Drriti Pasrija — Portfolio',
-        page: 'home'
-    });
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Project: Bhartiya Khel Sutra (Flagship Industry UI/UX Project)

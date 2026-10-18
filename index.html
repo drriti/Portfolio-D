@@ -1,470 +1,2046 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Drriti Pasrija — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Drriti — Product Designer</title>
+<meta name="description" content="Drriti — Product Designer. Portfolio &amp; selected work.">
 
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Google Fonts: Lexend Zetta & Martian Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@200;300;400;500&family=Martian+Mono:wght@300;400;500&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script>
+(function(d){
+  d.classList.add('js');
+  setTimeout(function(){
+    if(document.getElementById('drp')) d.classList.add('drp-failsafe');
+  }, 10000);
+})(document.documentElement);
+</script>
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+/* =========================================================================
+   PRELOADER CSS (scoped under .drp)
+   ========================================================================= */
+.drp { display: none; }
+.js .drp {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #10130d;
+  color: #F2E4C8;
+  overflow: hidden;
+  font-family: "Martian Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  -webkit-font-smoothing: antialiased;
+  will-change: transform;
+}
+.drp * { box-sizing: border-box; }
+html.drp-active { overflow: hidden; }
 
+.drp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(60% 55% at 72% 62%, rgba(217, 138, 58, 0.12), rgba(217, 138, 58, 0) 70%);
+}
+
+.drp__inner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 56%;
+  padding: 0 clamp(24px, 3.1vw, 62px);
+}
+
+.drp__mark {
+  display: block;
+  margin: 0 0 clamp(14px, 1.5vw, 26px);
+  text-align: right;
+  font: 200 clamp(30px, 4.6vw, 88px)/1 "Lexend Zetta", sans-serif;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: #F2E4C8;
+  animation: drp-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.drp__rule {
+  position: relative;
+  height: 1px;
+  background: rgba(242, 228, 200, 0.14);
+  --p: 0;
+}
+.drp__rule i {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 1px;
+  width: calc(var(--p) * 1%);
+  background: #F2E4C8;
+}
+.drp__rule i::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 36% 30%, #ffd27a 0%, #f2a83f 32%, #d98a3a 68%, #9c5319 100%);
+  box-shadow: 0 0 0 1px rgba(16, 19, 13, 0.6);
+  opacity: calc(var(--p) / 6);
+}
+
+.drp__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: clamp(12px, 1.25vw, 20px);
+  font: 400 clamp(10px, 0.92vw, 15px)/1 "Martian Mono", monospace;
+  letter-spacing: 0.62em;
+  text-transform: uppercase;
+}
+.drp__num {
+  color: #F3B477;
+  font-variant-numeric: tabular-nums;
+  min-width: 5.4em;
+}
+.drp__label {
+  opacity: 0.85;
+  margin-right: -0.62em;
+  color: #F2E4C8;
+}
+
+.drp__mark, .drp__row {
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.6, 0, 0.2, 1);
+}
+.drp--done .drp__mark, .drp--done .drp__row {
+  opacity: 0;
+  transform: translateY(-16px);
+}
+.drp--leave {
+  transform: translateY(-100%);
+  transition: transform 1.05s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@keyframes drp-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (max-width: 768px) {
+  .drp__inner { top: 60%; }
+  .drp__mark { font-size: clamp(34px, 11vw, 64px); }
+  .drp__row { letter-spacing: 0.42em; font-size: 10px; }
+  .drp__label { margin-right: -0.42em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drp__mark { animation: none; }
+  .drp--leave { transform: none; opacity: 0; transition: opacity 0.45s ease; }
+}
+
+.drp-failsafe .drp { display: none !important; }
+html.drp-failsafe { overflow: auto !important; }
+
+/* =========================================================================
+   HERO & SCROLL TRANSITION (ROCK-SOLID, BUTTERY SMOOTH, NO FLICKER)
+   ========================================================================= */
+
+:root {
+  --drh-dark: #10130d;
+  --drh-peach: #F3B477;
+  --drh-cream: #F2E4C8;
+  --drh-ivory: #EFE5D2;
+  --drh-sage: #92977A;
+  --drh-olive: #73795B;
+  --drh-forest: #424C3A;
+  --drh-pumpkin: #D98A3A;
+  --drh-ink: #171717;
+  --drh-display: "Lexend Zetta", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --drh-mono: "Martian Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background: var(--drh-dark);
+  color: var(--drh-ink);
+  font-family: var(--drh-mono);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--drh-dark);
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------- pin & scene -- */
+.drh {
+  position: relative;
+  width: 100%;
+  background: var(--drh-dark);
+}
+
+.drh__pin {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--drh-dark);
+  transform: translateZ(0);
+}
+
+.drh__scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #171e11;
+  transform-origin: 50% 50%;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.drh__layers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.drh__layer {
+  position: absolute;
+  left: -2%;
+  top: -2%;
+  width: 104%;
+  height: 104%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+  display: block;
+}
+
+.drh__grade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 50%, rgba(0,0,0,0) 45%, rgba(16,19,13,.55) 100%),
+    linear-gradient(to top, rgba(16,19,13,.4) 0%, rgba(16,19,13,0) 40%);
+}
+
+.drh__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.25;
+}
+
+/* -------------------------------------------------------------- mosaic --- */
+.drh__mosaic {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2400px;
+  height: 1500px;
+  margin: -750px 0 0 -1200px;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  --shade: 0;
+  z-index: 2;
+  transform: translateZ(0);
+}
+
+.drh__tile {
+  position: absolute;
+  overflow: hidden;
+  background: #2b3022;
+  border-radius: 4px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+}
+
+.drh__tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--drh-dark);
+  opacity: var(--shade, 0);
+  pointer-events: none;
+}
+
+.drh__tile img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(var(--z, 1.15)) translate3d(var(--dx, 0), var(--dy, 0), 0);
+  transform-origin: var(--ox, 50%) var(--oy, 50%);
+  animation: drh-drift var(--dur, 16s) ease-in-out infinite alternate;
+}
+
+@keyframes drh-drift {
+  from { transform: scale(var(--z, 1.15)) translate3d(calc(var(--dx, 0px) * -1), calc(var(--dy, 0px) * -1), 0); }
+  to   { transform: scale(var(--z, 1.15)) translate3d(var(--dx, 0px), var(--dy, 0px), 0); }
+}
+
+
+.drh__tile--phone{border-radius:26px}
+
+/* ------------------------------------------------------------------ CTA -- */
+.drh__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  cursor: pointer;
+  font: 400 11px/1 var(--drh-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--drh-ink);
+  padding: 0.95em 1.6em;
+  border-radius: 999px;
+  border: 1px solid rgba(23, 23, 23, 0.35);
+  background: rgba(242, 228, 200, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.25s, transform 0.25s;
+}
+
+.drh__cta:hover {
+  background: #F2E4C8;
+  transform: translate(-50%, -52%);
+}
+
+/* --------------------------------------------------------------- panel --- */
+.drh__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: 3;
+  overflow: hidden;
+  background: linear-gradient(90deg, #E2C4A3 0%, #EDB27A 19%, #F0A24F 40%, #EC9A42 50%, #EFAE72 72%, #E6C7A5 100%);
+  transform: translateZ(0);
+}
+
+.drh__content {
+  position: relative;
+  padding: 0 4vw;
+}
+
+.drh__meta {
+  display: grid;
+  grid-template-columns: 28% 22% 1fr auto;
+  align-items: start;
+  padding-top: 3.5vh;
+  font: 400 clamp(9px, 0.68vw, 12px)/1.4 var(--drh-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(23, 23, 23, 0.7);
+}
+
+.drh__meta a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.drh__title {
+  margin: clamp(24px, 4.5vh, 60px) 0 0;
+  font: 200 12vw/1 var(--drh-display);
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--drh-ink);
+  font-kerning: normal;
+}
+
+.drh__line {
+  display: block;
+  overflow: hidden;
+  padding: 0.05em 0 0.04em;
+  margin: -0.05em 0 -0.04em;
+}
+
+.drh__line > span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.drh__line--1 {
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.drh__line--2 {
+  font-size: 4.8vw;
+  line-height: 1.05;
+  margin-top: 0.12em;
+  letter-spacing: -0.02em;
+}
+
+.drh__lede, .drh__note {
+  margin: 0;
+  width: 42%;
+  margin-left: 50%;
+  font: 300 clamp(10px, 0.72vw, 13px)/1.75 var(--drh-mono);
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: rgba(23, 23, 23, 0.85);
+}
+
+.drh__lede {
+  margin-top: 6vh;
+}
+
+.drh__statement {
+  margin: 9vh 0 0 35%;
+  width: 60%;
+  font: 300 clamp(18px, 2.2vw, 42px)/1.22 var(--drh-display);
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: var(--drh-ink);
+}
+
+.drh__statement .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.06em 0 0.04em;
+  margin: -0.06em 0 -0.04em;
+}
+
+.drh__statement .w > span {
+  display: inline-block;
+}
+
+.drh__note {
+  margin-top: 6vh;
+  padding-bottom: 12vh;
+  color: rgba(23, 23, 23, 0.6);
+}
+
+/* ----------------------------------------------------------- mobile ------ */
+@media (max-width: 768px) {
+  .drh__content { padding: 0 5vw; }
+  .drh__meta { grid-template-columns: 1fr auto; row-gap: 0.5em; font-size: 9.5px; padding-top: 2.5vh; }
+  .drh__meta span:nth-child(2), .drh__meta span:nth-child(3) { display: none; }
+  .drh__title { font-size: 15vw; margin-top: 4vh; }
+  .drh__line--2 { font-size: 6vw; }
+  .drh__lede, .drh__note { width: 100%; margin-left: 0; font-size: 10.5px; line-height: 1.7; }
+  .drh__lede { margin-top: 4vh; }
+  .drh__statement { margin: 5vh 0 0; width: 100%; font-size: 5vw; line-height: 1.25; }
+  .drh__note { margin-top: 4vh; padding-bottom: 8vh; }
+  .drh__cta { font-size: 10px; padding: 0.9em 1.3em; }
+}
+
+.preview-next {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 12vh 6vw;
+  background: #10130d;
+  color: #e9e1cc;
+  font: 300 13px/1.7 "Martian Mono", ui-monospace, monospace;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.preview-next p { max-width: 48ch; margin: 0; opacity: .75; }
+
+/* =========================================================================
+   SERVICES TUNNEL  (scoped under .tun — nothing here touches the hero)
+   Default (no JS / reduced motion): static stacked layout.
+   .tun--live : pinned, scroll-scrubbed tunnel.
+   ========================================================================= */
+.tun{
+  --tun-forest:#424C3A; --tun-cream:#F2E4C8; --tun-peach:#F3B477; --tun-pumpkin:#D98A3A; --tun-ink:#171717;
+  --tun-display:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --tun-mono:"Martian Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  position:relative;background:var(--tun-forest);color:var(--tun-ink);
+  font-family:var(--tun-mono);-webkit-font-smoothing:antialiased;
+}
+.tun *,.tun *::before,.tun *::after{box-sizing:border-box}
+.tun__pin{position:relative;overflow:hidden;padding:14vh 5vw 16vh;display:flex;flex-direction:column;align-items:center;gap:26px}
+.tun__canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+.tun__grain{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.22;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
+.tun__vig{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(110% 90% at 50% 50%,rgba(16,19,13,0) 55%,rgba(16,19,13,.38) 100%)}
+
+/* text blocks */
+.tun__intro,.tun__outro,.tun__card,.tun__toolshead,.tun__tool{position:relative;z-index:4}
+.tun__intro{text-align:center;z-index:6;background:var(--tun-cream);padding:28px 34px;border-radius:10px}
+.tun__kicker{margin:0 0 14px;font:400 11px/1 var(--tun-mono);letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+.tun__h{margin:0;font:200 clamp(30px,6.4vw,104px)/.98 var(--tun-display);letter-spacing:-.045em;text-transform:uppercase}
+
+.tun__card{width:min(560px,100%);padding:clamp(22px,2.6vw,38px);background:var(--tun-cream);color:var(--tun-ink);
+  border:1px solid rgba(23,23,23,.22);border-radius:10px;box-shadow:0 30px 80px rgba(16,19,13,.35)}
+.tun__card--lead{width:min(700px,100%)}
+.tun__num{display:flex;gap:10px;align-items:center;margin:0 0 clamp(14px,1.6vw,22px);font:400 11px/1 var(--tun-mono);letter-spacing:.18em;text-transform:uppercase}
+.tun__badge{padding:.55em .9em;border-radius:999px;background:var(--tun-pumpkin);color:var(--tun-ink);letter-spacing:.14em}
+.tun__title{margin:0 0 clamp(12px,1.4vw,20px);font:200 clamp(26px,3.4vw,52px)/1.02 var(--tun-display);letter-spacing:-.04em;text-transform:uppercase}
+.tun__card--lead .tun__title{font-size:clamp(32px,4.9vw,76px)}
+.tun__desc{margin:0 0 clamp(16px,1.8vw,24px);font:300 clamp(11px,.86vw,14px)/1.75 var(--tun-mono);letter-spacing:.04em;text-transform:uppercase;opacity:.86}
+.tun__tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.tun__tags li{padding:.7em 1.05em;border:1px solid rgba(23,23,23,.35);border-radius:999px;font:400 10px/1 var(--tun-mono);letter-spacing:.12em;text-transform:uppercase}
+.tun__work{margin:clamp(14px,1.6vw,20px) 0 0;font:300 10.5px/1.6 var(--tun-mono);letter-spacing:.08em;text-transform:uppercase;opacity:.62}
+
+.tun__toolshead{width:min(500px,92vw);padding:22px 26px;background:var(--tun-cream);border:1px solid rgba(23,23,23,.22);border-radius:10px;text-align:center;box-shadow:0 30px 80px rgba(16,19,13,.35)}
+.tun__toolshead p{margin:0}
+.tun__toolshead .tun__kicker{margin-bottom:12px}
+.tun__toolshead .tun__t{white-space:nowrap;font:200 clamp(18px,2.4vw,36px)/1.05 var(--tun-display);letter-spacing:-.04em;text-transform:uppercase}
+.tun__tools{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.tun__tool{display:flex;flex-direction:column;gap:6px;padding:16px 26px;border-radius:999px;background:var(--tun-forest);color:var(--tun-cream);
+  border:1px solid rgba(242,228,200,.5);box-shadow:0 18px 50px rgba(16,19,13,.4);text-align:center;white-space:nowrap}
+.tun__tool:nth-child(even){background:var(--tun-peach);color:var(--tun-ink);border-color:rgba(23,23,23,.3)}
+.tun__tool b{font:400 clamp(15px,1.5vw,22px)/1 var(--tun-display);letter-spacing:-.02em;text-transform:uppercase}
+.tun__tool small{font:300 10px/1.2 var(--tun-mono);letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+
+.tun__outro{text-align:center;z-index:6;background:var(--tun-cream);padding:28px 34px;border-radius:10px}
+.tun__outro p{margin:0 0 12px;font:200 clamp(26px,5vw,80px)/1 var(--tun-display);letter-spacing:-.045em;text-transform:uppercase}
+.tun__outro a{display:inline-flex;gap:.7em;align-items:center;padding:.95em 1.6em;border-radius:999px;border:1px solid rgba(23,23,23,.4);
+  color:var(--tun-ink);text-decoration:none;font:400 11px/1 var(--tun-mono);letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.35);transition:background .25s}
+.tun__outro a:hover{background:#fff}
+.tun__outro a:focus-visible{outline:2px solid var(--tun-ink);outline-offset:3px}
+
+.tun__iris{display:none}
+.tun__hud{display:none}
+
+/* ------------------------------------------------------------ live (pinned) */
+.tun--live .tun__pin{height:100vh;height:100svh;padding:0;display:block}
+.tun--live .tun__intro,.tun--live .tun__outro{position:absolute;left:50%;top:50%;background:transparent;padding:0;border-radius:0;width:min(92vw,1200px)}
+.tun--live .tun__outro p{font-size:clamp(34px,7vw,120px)}
+.tun--live .tun__card,.tun--live .tun__toolshead,.tun--live .tun__tool{position:absolute;left:50%;top:50%;margin:0;pointer-events:none}
+.tun--live .tun__tools{display:block}
+.tun--live .tun__outro a{pointer-events:auto}
+.tun--live .tun__card,.tun--live .tun__tool,.tun--live .tun__toolshead,.tun--live .tun__intro,.tun--live .tun__outro{will-change:transform,opacity}
+.tun--live .tun__iris{
+  display:block;position:absolute;inset:0;z-index:5;pointer-events:none;--iris:-8;
+  background:linear-gradient(90deg,#E2C4A3 0%,#EDB27A 19%,#F0A24F 40%,#EC9A42 50%,#EFAE72 72%,#E6C7A5 100%);
+  -webkit-mask-image:radial-gradient(circle at 50% 50%,transparent calc(var(--iris) * 1%),#000 calc(var(--iris) * 1% + 10%));
+          mask-image:radial-gradient(circle at 50% 50%,transparent calc(var(--iris) * 1%),#000 calc(var(--iris) * 1% + 10%));
+}
+.tun--live .tun__hud{
+  display:flex;align-items:center;gap:14px;position:absolute;left:clamp(16px,2.4vw,40px);bottom:clamp(16px,3vh,34px);z-index:7;
+  padding:.85em 1.2em;border-radius:999px;background:rgba(242,228,200,.92);border:1px solid rgba(23,23,23,.25);
+  font:400 10px/1 var(--tun-mono);letter-spacing:.16em;text-transform:uppercase;
+}
+.tun__dots{display:flex;gap:7px;align-items:center}
+.tun__dots i{display:block;width:6px;height:6px;border-radius:50%;background:rgba(23,23,23,.25);transition:background .3s,transform .3s}
+.tun__dots i.on{background:var(--tun-pumpkin);transform:scale(1.5)}
+
+@media (max-width:768px){
+  .tun__pin{padding:12vh 5vw 14vh}
+  .tun__tool{padding:12px 20px}
+  .tun--live .tun__hud{font-size:9px;padding:.75em 1em}
+  .tun__card,.tun__card--lead{padding:22px;width:90vw}
+  .tun__title{font-size:clamp(19px,5.4vw,30px)}
+  .tun__card--lead .tun__title{font-size:clamp(24px,7.4vw,40px)}
+  .tun__intro,.tun__outro{width:90vw}
+  .tun__tags li{font-size:9px;padding:.65em .9em}
+}
+@media (prefers-reduced-motion:reduce){
+  .tun__dots i{transition:none}
+}
+
+/* =========================================================================
+   CASE STUDY — BHARTIYA KHEL SUTRA  (scoped under .kx)
+   Type: Space Grotesk (display) + Martian Mono (text, labels), same as the hero.
+   Default (no JS / reduced motion): every chapter stacks normally.
+   .kx--live adds the pinned / scrubbed behaviour, one idea per chapter:
+     A intro  — laptop rises, top panel drops (the only top panel)
+     B brief  — doc + challenge share one pinned scroll
+     C IA     — circle opens onto the diagram (the only circle)
+     D access — sticky text, two browser frames drift past
+     E world  — horizontal gallery
+     F print  — overlapping spreads
+     G change — list with a sticky screen
+     H launch — closing
+   ========================================================================= */
+.kx{
+  --ink:#1E2B1C; --cream:#F4EFDF; --paper:#EDE5CE; --moss:#33502F; --mossd:#223A20; --clay:#B5502F; --gold:#CF9A3D; --sky:#6C8F8C;
+  --serif:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --text:"Martian Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  position:relative;background:var(--ink);color:var(--cream);font-family:var(--text);-webkit-font-smoothing:antialiased;overflow-x:clip;
+}
+.kx *,.kx *::before,.kx *::after{box-sizing:border-box}
+.kx img,.kx video{display:block;max-width:100%}
+.kx :where(h2,h3,p,dl,dd,ul,figure){margin:0;padding:0}
+.kx ul{list-style:none}
+.kx em{font-style:italic}
+.kx-lab{font:300 12px/1.4 var(--text);letter-spacing:.2em;text-transform:uppercase;opacity:.7;margin-bottom:clamp(12px,1.4vw,22px)}
+.kx-t{font:200 clamp(26px,3.6vw,60px)/.94 var(--serif);letter-spacing:-.015em;margin-bottom:clamp(16px,1.8vw,28px)}
+.kx-p{font:300 clamp(13px,1.01vw,17px)/1.5 var(--text);max-width:34ch}
+.kx-pad{padding:clamp(72px,10vw,150px) 5vw}
+
+/* browser frame (full web-screen screenshots) */
+.kx-win{border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 30px 70px rgba(0,0,0,.34),0 0 0 1px rgba(0,0,0,.12)}
+.kx-win__bar{display:flex;align-items:center;gap:6px;height:28px;padding:0 12px;background:#E9E3D2}
+.kx-win__bar i{width:9px;height:9px;border-radius:50%;background:rgba(30,43,28,.28)}
+.kx-win__bar span{margin-left:10px;font:300 12px/1 var(--text);color:rgba(30,43,28,.62);letter-spacing:.04em}
+.kx-win img{width:100%;height:auto}
+.kx-cap{margin-top:14px;font:300 clamp(12px,0.83vw,14px)/1.4 var(--text);opacity:.85}
+
+/* ---------------- A · intro ---------------- */
+.kx-a{background:radial-gradient(120% 90% at 50% 0%,#2C4228 0%,#1E2B1C 62%);}
+.kx-a__pin{position:relative;padding:0 5vw 6vh;display:flex;flex-direction:column;align-items:center}
+.kx-a__bar{width:calc(100% + 10vw);margin:0 -5vw;background:var(--cream);color:var(--ink);padding:clamp(14px,2vh,22px) 5vw;display:flex;gap:2vw;justify-content:space-between;align-items:center;flex-wrap:wrap;position:relative;z-index:5}
+.kx-a__name{font:200 clamp(16px,1.56vw,26px)/1 var(--serif)}
+.kx-a__meta{display:flex;gap:clamp(18px,2.6vw,48px);flex-wrap:wrap}
+.kx-a__meta div{min-width:0}
+.kx-a__meta dt{font:300 11px/1 var(--text);letter-spacing:.18em;text-transform:uppercase;opacity:.58;margin-bottom:6px}
+.kx-a__meta dd{font:300 clamp(12px,0.83vw,14px)/1.2 var(--text)}
+.kx-a__head{text-align:center;padding:clamp(48px,9vh,110px) 0 clamp(28px,5vh,60px);position:relative;z-index:2}
+.kx-a__head .kx-t{font-size:clamp(34px,7.4vw,130px);margin:0 0 .2em;line-height:.98}
+.kx-a__head .kx-p{margin:0 auto;max-width:44ch;opacity:.92}
+.kx-lap{--ar:1.755;width:min(86vw,calc(70vh * var(--ar) / .94));position:relative;z-index:3}
+.kx-lap__lid{background:#0B0F0A;border-radius:14px 14px 4px 4px;padding:1.6% 1.6% 1.9%;box-shadow:0 0 0 2px #2A2E29,0 40px 90px rgba(0,0,0,.55);position:relative}
+.kx-lap__lid::before{content:"";position:absolute;left:50%;top:.55%;width:.6%;aspect-ratio:1;border-radius:50%;background:#262B25;transform:translateX(-50%)}
+.kx-lap__screen{aspect-ratio:var(--ar);background:#111;border-radius:3px;overflow:hidden;position:relative}
+.kx-lap__screen video{width:100%;height:100%;object-fit:cover}
+.kx-lap__base{height:clamp(8px,1.5vw,20px);margin:0 -4.5%;background:linear-gradient(#D5D0C2,#A9A598);border-radius:0 0 18px 18px;position:relative;box-shadow:0 24px 40px rgba(0,0,0,.45)}
+.kx-lap__base::before{content:"";position:absolute;left:50%;top:0;width:16%;height:38%;background:rgba(0,0,0,.18);border-radius:0 0 10px 10px;transform:translateX(-50%)}
+.kx-lap__note{margin-top:18px;text-align:center;font:300 clamp(12px,0.79vw,14px)/1.4 var(--text);opacity:.75}
+.kx--live .kx-a__pin{height:100vh;height:100svh;padding-bottom:3vh;justify-content:flex-start;overflow:hidden}
+.kx--live .kx-a__bar{position:absolute;top:0;left:0;margin:0;width:100%}
+.kx--live .kx-a__head{position:absolute;left:0;right:0;top:50%;transform:translateY(-54%);padding:0 5vw}
+.kx--live .kx-lap{position:absolute;left:50%;bottom:3vh;transform:translateX(-50%)}
+.kx--live .kx-lap__note{display:none}
+
+/* ---------------- B · brief + research doc, one scroll ---------------- */
+.kx-b{background:var(--paper);color:var(--ink)}
+.kx-b__in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,90px);align-items:center;max-width:1500px;margin:0 auto}
+.kx-b .kx-lab{color:var(--clay);opacity:1}
+.kx-b__issues{margin-top:clamp(22px,3vw,40px);counter-reset:i}
+.kx-b__issues li{counter-increment:i;display:grid;grid-template-columns:2.2em 1fr;gap:.4em;padding:clamp(12px,1.4vw,20px) 0;border-top:1px solid rgba(30,43,28,.25);font:300 clamp(12px,0.94vw,15px)/1.42 var(--text)}
+.kx-b__issues li::before{content:"0" counter(i);font:200 clamp(13px,1.08vw,18px)/1 var(--serif);color:var(--clay)}
+.kx-b__issues b{font-weight:500}
+.kx-b__doc{position:relative;transform:rotate(1.4deg)}
+.kx-b__doc .kx-win{box-shadow:0 36px 70px rgba(30,43,28,.28),0 0 0 1px rgba(30,43,28,.16)}
+.kx-b__doc .kx-cap{color:var(--ink)}
+.kx-b__stamp{position:absolute;right:-1.4vw;top:-3.2vw;width:clamp(78px,8vw,124px);aspect-ratio:1;border-radius:50%;background:var(--clay);color:var(--cream);display:grid;place-items:center;text-align:center;font:200 clamp(10px,0.9vw,14px)/1.05 var(--serif);transform:rotate(-10deg);box-shadow:0 10px 24px rgba(0,0,0,.22)}
+.kx--live .kx-b{padding:0}
+.kx--live .kx-b__pin{height:100vh;height:100svh;padding:0 5vw;display:flex;align-items:center;overflow:hidden}
+.kx--live .kx-b__in{width:100%}
+
+/* ---------------- C · information architecture (circle) ---------------- */
+.kx-c{background:var(--ink)}
+
+/* ---------------- D · two ways in ---------------- */
+.kx-d{background:var(--cream);color:var(--ink)}
+.kx-d__in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);gap:clamp(28px,5vw,90px);max-width:1500px;margin:0 auto;align-items:start}
+.kx-d__txt{position:sticky;top:18vh}
+.kx-d .kx-lab{color:var(--clay);opacity:1}
+.kx-d__list{margin-top:clamp(20px,2.4vw,34px)}
+.kx-d__list li{padding:.8em 0;border-top:1px solid rgba(30,43,28,.25);font:300 clamp(12px,0.86vw,14px)/1.42 var(--text)}
+.kx-d__shots{display:grid;gap:clamp(40px,8vw,120px)}
+.kx-d__shots figure:nth-child(2){margin-left:clamp(0px,6vw,100px)}
+.kx-d__shots figure:nth-child(1){margin-right:clamp(0px,4vw,60px)}
+.kx-d__shots .kx-cap{color:var(--ink)}
+
+/* ---------------- E · the world (horizontal) ---------------- */
+.kx-e{background:var(--mossd)}
+.kx-e__track{display:flex;gap:clamp(22px,3vw,52px);align-items:center;padding:0 5vw}
+.kx-e__intro{flex:none;width:min(520px,86vw)}
+.kx-e__sw{display:flex;gap:8px;margin-top:clamp(18px,2vw,28px)}
+.kx-e__sw i{width:clamp(30px,2.6vw,42px);aspect-ratio:1;border-radius:50%;border:1px solid rgba(244,239,223,.4)}
+.kx-e__note{margin-top:14px;font:300 clamp(12px,0.79vw,14px)/1.4 var(--text);opacity:.8;max-width:34ch}
+.kx-e__item{flex:none;width:min(66vw,calc(62vh * 1.78));margin:0}
+.kx-e__item .kx-win{box-shadow:0 26px 60px rgba(0,0,0,.45)}
+.kx-e__end{flex:none;width:2vw}
+.kx-e__hint{display:none}
+.kx--live .kx-e__pin{height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden}
+.kx--live .kx-e__track{width:max-content}
+.kx:not(.kx--live) .kx-e{padding:clamp(72px,10vw,150px) 0}
+.kx:not(.kx--live) .kx-e__track{flex-wrap:wrap;justify-content:center}
+.kx:not(.kx--live) .kx-e__item{width:min(92vw,900px)}
+
+/* ---------------- F · print ---------------- */
+.kx-f{background:#E4D9BC;color:var(--ink);overflow:hidden}
+.kx-f__in{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr);gap:clamp(24px,5vw,80px);max-width:1500px;margin:0 auto;align-items:center}
+.kx-f .kx-lab{color:var(--clay);opacity:1}
+.kx-f__art{position:relative;min-height:clamp(420px,52vw,760px)}
+.kx-f__art figure{position:absolute;margin:0;background:#fff;padding:clamp(6px,.8vw,12px);box-shadow:0 26px 50px rgba(30,43,28,.28)}
+.kx-f__art img{width:100%;height:auto}
+.kx-f__a{left:0;top:0;width:58%;transform:rotate(-2.4deg)}
+.kx-f__b{right:0;top:12%;width:50%;transform:rotate(2deg)}
+.kx-f__c{left:14%;bottom:0;width:44%;transform:rotate(-.8deg)}
+.kx-f__art figcaption{font:300 clamp(12px,0.72vw,14px)/1.3 var(--text);padding-top:8px;color:rgba(30,43,28,.75)}
+.kx-f__list{margin-top:clamp(18px,2vw,30px)}
+.kx-f__list li{padding:.8em 0;border-top:1px solid rgba(30,43,28,.28);font:300 clamp(12px,0.86vw,14px)/1.42 var(--text)}
+
+/* ---------------- G · iterations ---------------- */
+.kx-g{background:var(--ink)}
+.kx-g__in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,90px);max-width:1500px;margin:0 auto;align-items:start}
+.kx-g__stick{position:sticky;top:8vh}
+.kx-g__stick .kx-t{font-size:clamp(40px,4.3vw,72px)}
+.kx-g__rows li{display:grid;grid-template-columns:clamp(60px,7vw,110px) 1fr;gap:clamp(12px,2vw,28px);padding:clamp(28px,6vh,64px) 0;border-top:1px solid rgba(244,239,223,.25);opacity:.45;transition:opacity .5s}
+.kx-g__rows li.on,.kx:not(.kx--live) .kx-g__rows li{opacity:1}
+.kx-g__rows li:last-child{border-bottom:1px solid rgba(244,239,223,.25)}
+.kx-g__rows span{font:200 clamp(28px,3.6vw,60px)/.9 var(--serif);color:var(--gold)}
+.kx-g__rows h3{font:200 clamp(16px,1.44vw,24px)/1.05 var(--serif);margin-bottom:.35em}
+.kx-g__rows p{font:300 clamp(12px,0.86vw,14px)/1.5 var(--text);opacity:.9;max-width:40ch}
+.kx-g__rows li{min-height:clamp(180px,34vh,320px);align-items:start}
+
+/* ---------------- H · launch ---------------- */
+.kx-h{background:var(--moss);text-align:center}
+.kx-h__in{max-width:1300px;margin:0 auto}
+.kx-h .kx-t{font-size:clamp(60px,12vw,210px);margin-bottom:.1em}
+.kx-h__lead{font:300 clamp(14px,1.15vw,19px)/1.45 var(--text);max-width:40ch;margin:0 auto clamp(36px,5vw,70px)}
+.kx-h__checks{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,36px);text-align:left;border-top:1px solid rgba(244,239,223,.35);padding-top:clamp(22px,3vw,40px)}
+.kx-h__checks h3{font:200 clamp(13px,1.14vw,19px)/1.05 var(--serif);margin-bottom:.5em;color:var(--gold)}
+.kx-h__checks p{font:300 clamp(12px,0.79vw,14px)/1.5 var(--text);opacity:.92}
+.kx-h__go{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:clamp(36px,5vw,64px)}
+.kx-btn{display:inline-flex;gap:.6em;align-items:center;padding:1em 1.8em;border-radius:999px;border:1px solid var(--cream);color:var(--cream);text-decoration:none;font:300 13px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;transition:background .25s,color .25s}
+.kx-btn:hover,.kx-btn:focus-visible{background:var(--cream);color:var(--ink);outline:none}
+
+/* ---------------- small screens ---------------- */
+@media (max-width:860px){
+  .kx-b__in,.kx-d__in,.kx-f__in,.kx-g__in{grid-template-columns:1fr}
+  .kx-d__txt,.kx-g__stick{position:static}
+  .kx-h__checks{grid-template-columns:1fr 1fr}
+  .kx-a__meta{gap:14px 22px}
+  .kx-a__bar{gap:10px}
+  .kx-f__art{min-height:140vw;margin-bottom:8vw}
+  .kx--live .kx-b__pin{height:auto;display:block;overflow:visible;padding:clamp(72px,10vw,150px) 5vw}
+  .kx-e__item{width:84vw}
+  .kx--live .kx-b__in{gap:20px}
+  .kx-b__doc{transform:none}
+  .kx-b__stamp{display:none}
+  .kx-g__rows li{min-height:0}
+}
+@media (max-width:520px){
+  .kx-a__meta div:nth-child(n+4){display:none}
+  .kx-h__checks{grid-template-columns:1fr}
+}
+
+/* ---- Lexend Zetta / Martian Mono treatment (matches the hero and tunnel) ---- */
+.kx em{font-style:normal;color:var(--gold)}
+.kx-b em,.kx-d em,.kx-f em{color:var(--clay)}
+.kx-t,.kx-a__name,.kx-g__rows h3{text-transform:uppercase;letter-spacing:-.04em}
+.kx-t{line-height:1.02}
+.kx-a__head .kx-t{line-height:.98}
+.kx-lab{font-weight:400;letter-spacing:.18em}
+.kx-p{line-height:1.75;max-width:46ch;letter-spacing:.01em}
+.kx-g__rows span,.kx-b__issues li::before{letter-spacing:-.04em}
+.kx-cap{font-style:normal;letter-spacing:.02em}
+.kx-e__note,.kx-lap__note,.kx-f__art figcaption{font-style:normal}
+.kx-b__stamp{letter-spacing:-.02em;font-size:clamp(13px,1.1vw,18px)}
+.kx-win__bar span{letter-spacing:.04em}
+/* C: no circle — head above, diagram frame below, panned on scroll */
+.kx-c{background:var(--ink)}
+.kx-c__head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,70px);align-items:end;max-width:1500px;margin:0 auto 4vh}
+.kx-c__head .kx-t{margin-bottom:0}
+.kx-c__fig{max-width:1500px;margin:0 auto}
+.kx-c__view{background:var(--cream);border-radius:10px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.kx-c__view img{width:100%;height:auto;max-width:none}
+.kx-c .kx-pad{padding:0}
+.kx-c__pin{padding:clamp(72px,10vw,150px) 5vw}
+.kx--live .kx-c__pin{height:100vh;height:100svh;padding:7vh 5vw 4vh;display:flex;flex-direction:column;overflow:hidden}
+.kx--live .kx-c__fig{flex:1;min-height:0;display:flex;flex-direction:column;width:100%}
+.kx--live .kx-c__view{flex:1;min-height:0}
+.kx--live .kx-c__view img{height:100%;width:auto}
+.kx--live .kx-c__head{width:100%}
+@media (max-width:860px){.kx-c__head{grid-template-columns:1fr}}
+
+/* ---- header face: Space Grotesk (tight, even spacing) ---- */
+.kx-t,.kx-a__name,.kx-g__rows h3,.kx-g__rows span,.kx-b__issues li::before,.kx-b__stamp{font-weight:500}
+.kx-t,.kx-a__name,.kx-g__rows h3{letter-spacing:-.02em;text-transform:uppercase}
+.kx-t{font-size:clamp(36px,5vw,84px);line-height:.98}
+.kx-a__head .kx-t{font-size:clamp(46px,9vw,160px);line-height:.92}
+.kx-a__name{font-size:clamp(20px,1.9vw,32px)}
+.kx-g__stick .kx-t{font-size:clamp(34px,3.9vw,64px)}
+.kx-c__head .kx-t{font-size:clamp(32px,4.2vw,70px)}
+.kx-g__rows h3{font-size:clamp(20px,1.8vw,30px)}
+.kx-g__rows span{font-size:clamp(36px,4.6vw,76px);letter-spacing:-.03em}
+.kx-b__issues li::before{font-size:clamp(18px,1.4vw,24px);letter-spacing:0}
+.kx-b__stamp{font-size:clamp(15px,1.3vw,22px);letter-spacing:-.01em}
+
+/* tunnel headings: Space Grotesk (the hero About section keeps Lexend Zetta) */
+.tun__h{font-weight:500;font-size:clamp(34px,7vw,116px);letter-spacing:-.03em}
+.tun__title{font-weight:500;font-size:clamp(30px,3.9vw,60px);letter-spacing:-.025em}
+.tun__toolshead .tun__t{font-weight:500;font-size:clamp(20px,2.8vw,42px);letter-spacing:-.02em}
+.tun__tool b{font-weight:500;font-size:clamp(17px,1.8vw,26px);letter-spacing:-.01em}
+.tun__outro p{font-weight:500;font-size:clamp(30px,5.6vw,92px);letter-spacing:-.03em}
+
+/* intro heading returns to Lexend Zetta */
+.tun__h{font-family:"Lexend Zetta",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-weight:200;font-size:clamp(30px,6.4vw,104px);letter-spacing:-.045em;text-transform:uppercase}
+/* tools with logos */
+.tun__tool{flex-direction:row!important;align-items:center;gap:14px!important;padding:12px 26px 12px 14px!important;text-align:left}
+.tun__tt{display:flex;flex-direction:column;gap:5px}
+.tun__logo{flex:none;width:38px;height:38px;border-radius:9px;display:grid;place-items:center;background:var(--bg,#1e1e1e);color:var(--fg,#fff);font:700 15px/1 "Martian Mono",monospace;font-style:normal;letter-spacing:-.02em;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18)}
+.tun__logo--fig{background:#1E1E1E}
+/* resume buttons */
+.drh__resume,.tun__resume{display:inline-flex;gap:.7em;align-items:center;padding:.95em 1.6em;border-radius:999px;border:1px solid currentColor;color:inherit;text-decoration:none;font:400 11px/1 "Martian Mono",monospace;letter-spacing:.14em;text-transform:uppercase;transition:background .25s,color .25s;pointer-events:auto}
+.drh__resume:hover,.drh__resume:focus-visible{background:var(--drh-ink);color:var(--drh-peach);outline:none}
+.tun__resume{margin-left:10px;background:var(--tun-ink);color:var(--tun-cream)}
+.tun__resume:hover,.tun__resume:focus-visible{background:transparent;color:var(--tun-ink);outline:none}
+.drh__note{opacity:1}
+/* performance: cheap tiles, no blur shadows, drift only while the hero is untouched */
+.drh__tile{box-shadow:0 0 0 1px rgba(0,0,0,.28)!important}
+.drh__tile::after{display:none}
+.drh--still .drh__tile img{animation-play-state:paused}
+@media (max-width:768px){.drh__tile img{animation:none}}
+@media (max-width:640px){.tun__tool small{display:none}.tun__tool b{font-size:14px!important;white-space:nowrap}.tun__logo{width:32px;height:32px;font-size:13px}.tun__tool{padding:9px 16px 9px 10px!important;gap:10px!important}}
+
+/* =========================================================================
+   CONTACT / WORK WITH ME  (scoped under .ct)
+   ========================================================================= */
+.ct{background:#10130d;color:#F2E4C8;padding:clamp(88px,14vh,170px) 6vw clamp(28px,4vh,48px);font-family:"Martian Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;-webkit-font-smoothing:antialiased;position:relative;overflow:hidden}
+.ct *,.ct *::before,.ct *::after{box-sizing:border-box}
+.ct a{color:inherit}
+.ct__lab{font:300 12px/1.4 "Martian Mono",monospace;letter-spacing:.2em;text-transform:uppercase;opacity:.65;margin:0 0 clamp(18px,2vw,30px)}
+.ct__title{font:300 clamp(40px,7vw,124px)/.98 "Lexend Zetta",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;letter-spacing:-.04em;text-transform:uppercase;margin:0;max-width:14ch}
+.ct__title em{font-style:normal;color:#F3B477}
+.ct__grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(36px,6vw,110px);margin-top:clamp(44px,7vw,100px);align-items:start}
+.ct__lead{font:300 clamp(13px,1.1vw,18px)/1.7 "Martian Mono",monospace;max-width:44ch;margin:0 0 clamp(24px,3vw,40px);opacity:.92}
+.ct__open{list-style:none;margin:0;padding:0;border-top:1px solid rgba(242,228,200,.28)}
+.ct__open li{padding:.95em 0;border-bottom:1px solid rgba(242,228,200,.28);font:300 clamp(12px,.9vw,14px)/1.4 "Martian Mono",monospace;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;gap:16px}
+.ct__open span{opacity:.6}
+.ct__mail{display:block;font:300 clamp(15px,1.55vw,26px)/1.2 "Lexend Zetta",-apple-system,sans-serif;letter-spacing:-.03em;text-decoration:none;overflow-wrap:anywhere;margin:0 0 clamp(20px,2.4vw,32px);transition:color .25s}
+.ct__mail:hover,.ct__mail:focus-visible{color:#F3B477;outline:none}
+.ct__btns{display:flex;flex-wrap:wrap;gap:12px}
+.ct__btn{display:inline-flex;gap:.7em;align-items:center;padding:1.05em 1.7em;border-radius:999px;border:1px solid #F2E4C8;background:transparent;color:#F2E4C8;text-decoration:none;font:400 11px/1 "Martian Mono",monospace;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.ct__btn:hover,.ct__btn:focus-visible{background:#F2E4C8;color:#10130d;outline:none}
+.ct__btn--fill{background:#F3B477;border-color:#F3B477;color:#171717}
+.ct__btn--fill:hover,.ct__btn--fill:focus-visible{background:#F2E4C8;border-color:#F2E4C8}
+.ct__links{display:flex;flex-wrap:wrap;gap:clamp(18px,2.4vw,40px);margin-top:clamp(28px,3.4vw,48px);font:300 12px/1 "Martian Mono",monospace;letter-spacing:.16em;text-transform:uppercase}
+.ct__links a{text-decoration:none;padding-bottom:6px;border-bottom:1px solid rgba(242,228,200,.4);transition:color .25s,border-color .25s}
+.ct__links a:hover,.ct__links a:focus-visible{color:#F3B477;border-color:#F3B477;outline:none}
+.ct__foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:clamp(64px,10vw,150px);padding-top:20px;border-top:1px solid rgba(242,228,200,.2);font:300 11px/1.4 "Martian Mono",monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.6}
+.ct__foot a{text-decoration:none}
+@media (max-width:860px){.ct__grid{grid-template-columns:1fr}}
+
+/* lift the laptop so the bar never covers the screen */
+.kx--live .kx-lap{bottom:calc(3vh + 58px)}
+/* bottom bar (same part as on the Khel Sutra page) */
+.kbar{position:fixed;left:50%;bottom:clamp(12px,2.4vh,26px);z-index:60;transform:translate(-50%,24px);width:min(calc(100vw - 24px),640px);display:flex;align-items:center;justify-content:space-between;gap:14px;padding:8px 8px 8px 22px;border-radius:999px;background:rgba(244,239,223,.95);color:#1E2B1C;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 14px 40px rgba(0,0,0,.4),0 0 0 1px rgba(30,43,28,.14);font:300 11px/1.2 "Martian Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .45s,transform .45s,visibility 0s .45s}
+.kbar.on{opacity:1;visibility:visible;transform:translate(-50%,0);pointer-events:auto;transition-delay:0s}
+.kbar__msg{display:flex;align-items:center;gap:.8em;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:inherit;text-decoration:none}
+.kbar__msg i{font-style:normal;display:inline-block;animation:kbarBob 1.6s ease-in-out infinite}
+.kbar__go{flex:none;display:inline-flex;gap:.6em;align-items:center;padding:1em 1.4em;border-radius:999px;background:#33502F;color:#F4EFDF;text-decoration:none;white-space:nowrap;transition:background .25s}
+a.kbar__go:hover,a.kbar__go:focus-visible{background:#B5502F;outline:none}
+.kbar__go[aria-disabled="true"]{opacity:.55;cursor:default}
+@keyframes kbarBob{0%,100%{transform:translateY(-1px)}50%{transform:translateY(3px)}}
+@media (max-width:560px){.kbar{font-size:9.5px;letter-spacing:.08em;padding-left:16px}.kbar__go{padding:.95em 1.1em}}
+@media (prefers-reduced-motion:reduce){.kbar__msg i{animation:none}.kbar{transition:none}}
+</style>
 </head>
-
 <body>
 
-  <!-- ═══════════════════════════════════════════
-       INTRO OVERLAY — remove this entire block to disable
-  ═══════════════════════════════════════════ -->
-  <div id="intro-overlay">
-    <div class="intro-inner">
-      <div class="intro-counter-line">
-        <span class="intro-counter">000</span>
-      </div>
-      <div class="intro-name-row">
-        <div class="intro-letter-wrap"><span>D</span></div>
-        <div class="intro-letter-wrap"><span class="intro-rr">rr</span></div>
-        <div class="intro-letter-wrap"><span>iti</span></div>
-      </div>
-      <div class="intro-note">
-        <svg width="36" height="22" viewBox="0 0 36 22" fill="none">
-          <path d="M2 20 C12 8, 22 6, 34 2" stroke="#8b2f2f" stroke-width="1.5" stroke-linecap="round" />
-        </svg>
-        <span>Yes, double r</span>
-      </div>
+<!-- ============================ PRELOADER ============================ -->
+<div class="drp" id="drp" role="status" aria-live="polite" aria-label="Loading">
+  <div class="drp__inner">
+    <span class="drp__mark">Drriti</span>
+    <div class="drp__rule"><i></i></div>
+    <div class="drp__row">
+      <span class="drp__num">0%</span>
+      <span class="drp__label">Product Designer</span>
     </div>
   </div>
-  <!-- ═══════════════════════════════════════════ -->
+</div>
 
-  <div id="page-content">
-    <div id="page-bg"></div>
-    <nav class="nav">
-      <div class="nav-inner">
-        <div class="nav-left">Drriti</div>
-        <!-- Center: navigation links -->
-        <div class="nav-links">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#portfolio">Work</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <!-- Right: social icons (unchanged) -->
-        <div class="nav-icons">
-          <a href="images/Drriti Resume.pdf" class="resume-btn" download>
-            Resume <i class="fa-solid fa-download"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/drriti-pasrija" target="_blank">
-            <i class="fa-brands fa-linkedin-in"></i>
-          </a>
-          <a href="https://www.behance.net/drritipasrija" target="_blank">
-            <i class="fa-brands fa-behance"></i>
-          </a>
-        </div>
+<!-- ============================ HERO ============================ -->
+<section class="drh" id="drh" aria-label="Introduction">
+  <div class="drh__pin">
+
+    <!-- Collage tiles are generated by JS exclusively from home page pictures -->
+    <div class="drh__mosaic" aria-hidden="true"></div>
+
+    <!-- The scene: centerpiece image from home page pictures -->
+    <div class="drh__scene">
+      <div class="drh__layers">
+        <img class="drh__layer" data-depth="center" src="assets/home/ui-hero-classroom.jpg" alt="Drriti Portfolio Hero Artwork" decoding="async">
       </div>
-    </nav>
-    </header>
-    <!--hero-->
-    <section class="hero">
-      <!-- Interactive cursor glow canvas -->
-      <canvas id="hero-canvas"></canvas>
-      <!-- background blob -->
-      <div class="hero-blob"></div>
-      <div class="hero-grain"></div>
-      <div class="hero-inner">
-        <p class="hero-eyebrow">VISUAL COMMUNICATION DESIGNER</p>
-        <h1 class="hero-title">
-          Hi, I'm
-          <span class="name-wrap hero-name">
-            D<span class="rr">rr</span>iti
-            <!-- Handwritten Name Note -->
-            <span class="name-note">
-              <svg width="42" height="26" viewBox="0 0 42 26" fill="none">
-                <path d="M2 24 C14 10, 26 8, 40 2" stroke="#8b2f2f" stroke-width="1.5" stroke-linecap="round" />
-              </svg>
-              <span class="note-text">Yes, double r</span>
-            </span>
-          </span>
+      <div class="drh__grade"></div>
+      <div class="drh__grain"></div>
+    </div>
+
+    <button class="drh__cta" type="button" aria-label="Scroll to introduction">Scroll <span aria-hidden="true">↓</span></button>
+
+    <div class="drh__panel">
+      <div class="drh__content">
+        <div class="drh__meta">
+          <span>About</span>
+          <span>2026</span>
+          <span>Open to product design roles</span>
+          <span><a href="#work">Selected work ↓</a></span>
+          <span><a href="#contact">Contact ↓</a></span>
+        </div>
+
+        <h1 class="drh__title" aria-label="Drriti, Product Designer">
+          <span class="drh__line drh__line--1"><span>Drriti</span></span>
+          <span class="drh__line drh__line--2"><span>Product Designer</span></span>
         </h1>
-        <p class="hero-description">
-          I create thoughtful visual identities and digital experience.
-        </p>
+
+        <p class="drh__lede">Curiosity first. Then form, colour, rhythm and detail, until an idea becomes something you can feel.</p>
+
+        <p class="drh__statement">I believe design can turn curiosity into experiences that people feel, understand, and remember.</p>
+
+        <p class="drh__note"><a class="drh__resume" href="Resume.pdf" download="Drriti_Pasrija_Resume.pdf" data-resume>Download resume <span aria-hidden="true">↓</span></a></p>
       </div>
-      <div class="scroll-indicator">
-        <span></span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ SERVICES TUNNEL ============================ -->
+<section class="tun" id="services" aria-labelledby="tun-h">
+  <div class="tun__pin">
+    <canvas class="tun__canvas" aria-hidden="true"></canvas>
+    <div class="tun__grain" aria-hidden="true"></div>
+    <div class="tun__vig" aria-hidden="true"></div>
+
+    <div class="tun__intro">
+      <p class="tun__kicker">Capabilities &amp; tools</p>
+      <h2 class="tun__h" id="tun-h">Design<br>services</h2>
+    </div>
+
+    <article class="tun__card tun__card--lead">
+      <p class="tun__num"><span>01 / Service</span></p>
+      <h3 class="tun__title">Product Design</h3>
+      <p class="tun__desc">End-to-end product work: research, flows, interfaces and prototypes, from the first question to developer handoff.</p>
+      <ul class="tun__tags">
+        <li>UX research</li><li>User flows</li><li>Wireframes</li><li>UI systems</li><li>Prototypes</li>
+      </ul>
+    </article>
+
+    <article class="tun__card">
+      <p class="tun__num"><span>02 / Service</span></p>
+      <h3 class="tun__title">Visual Identity</h3>
+      <p class="tun__desc">Branding systems built with clarity, restraint and emotional intent.</p>
+      <ul class="tun__tags">
+        <li>Logo</li><li>Colour &amp; type</li><li>Brand guidelines</li>
+      </ul>
+    </article>
+
+    <article class="tun__card">
+      <p class="tun__num"><span>03 / Service</span></p>
+      <h3 class="tun__title">Editorial &amp; Graphic Design</h3>
+      <p class="tun__desc">Print and digital layouts that communicate quietly yet effectively: books, covers, posters and collateral, built on a clear grid and prepared for press.</p>
+      <ul class="tun__tags">
+        <li>Layouts</li><li>Typography</li><li>Book covers</li><li>Posters</li><li>Social graphics</li><li>Print-ready files</li>
+      </ul>
+    </article>
+
+    <div class="tun__toolshead">
+      <p class="tun__kicker">04 / Tools</p>
+      <p class="tun__t">Tools I work in</p>
+    </div>
+    <ul class="tun__tools" aria-label="Tools">
+      <li class="tun__tool"><i class="tun__logo tun__logo--fig" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="#F24E1E" d="M8 2h4v6H8a3 3 0 0 1 0-6z"/><path fill="#FF7262" d="M12 2h4a3 3 0 0 1 0 6h-4z"/><path fill="#A259FF" d="M8 8h4v6H8a3 3 0 0 1 0-6z"/><circle fill="#1ABCFE" cx="15" cy="11" r="3"/><path fill="#0ACF83" d="M8 14h4v3a3 3 0 1 1-4-2.8z"/></svg></i><span class="tun__tt"><b>Figma</b><small>UI, systems, prototypes</small></span></li>
+      <li class="tun__tool"><i class="tun__logo" style="--bg:#330000;--fg:#FF9A00" aria-hidden="true">Ai</i><span class="tun__tt"><b>Illustrator</b><small>Identity, illustration</small></span></li>
+      <li class="tun__tool"><i class="tun__logo" style="--bg:#001E36;--fg:#31A8FF" aria-hidden="true">Ps</i><span class="tun__tt"><b>Photoshop</b><small>Image work, mockups</small></span></li>
+      <li class="tun__tool"><i class="tun__logo" style="--bg:#49021F;--fg:#FF3366" aria-hidden="true">Id</i><span class="tun__tt"><b>InDesign</b><small>Editorial, print layouts</small></span></li>
+      <li class="tun__tool"><i class="tun__logo" style="--bg:#00005B;--fg:#9999FF" aria-hidden="true">Pr</i><span class="tun__tt"><b>Premiere Pro</b><small>Video editing</small></span></li>
+      <li class="tun__tool"><i class="tun__logo" style="--bg:#00005B;--fg:#9999FF" aria-hidden="true">Ae</i><span class="tun__tt"><b>After Effects</b><small>Motion graphics</small></span></li>
+    </ul>
+
+    <div class="tun__outro">
+      <p>Now, the work.</p>
+      <a href="#work">Selected work <span aria-hidden="true">↓</span></a>
+      <a class="tun__resume" href="Resume.pdf" download="Drriti_Pasrija_Resume.pdf" data-resume>Resume <span aria-hidden="true">↓</span></a>
+    </div>
+
+    <div class="tun__iris" aria-hidden="true"></div>
+    <div class="tun__hud" aria-hidden="true"><span>Services</span><span class="tun__dots"><i></i><i></i><i></i><i></i></span></div>
+  </div>
+</section>
+<!-- ============================ /SERVICES TUNNEL ============================ -->
+
+<!-- ============================ CASE STUDY: BHARTIYA KHEL SUTRA ============================ -->
+<div class="kx" id="work">
+
+  <!-- A · Introduction: laptop mockup + the single top panel -->
+  <section class="kx-a" aria-label="Bhartiya Khel Sutra: introduction">
+    <div class="kx-a__pin">
+      <header class="kx-a__bar">
+        <p class="kx-a__name">Bhartiya <em>Khel Sutra</em></p>
+        <dl class="kx-a__meta">
+          <div><dt>Role</dt><dd>UI/UX designer</dd></div>
+          <div><dt>Client</dt><dd>Khol Khel Pvt. Ltd.</dd></div>
+          <div><dt>Duration</dt><dd>8 weeks</dd></div>
+          <div><dt>Tools</dt><dd>Figma, Illustrator</dd></div>
+          <div><dt>Status</dt><dd>Launching soon</dd></div>
+        </dl>
+      </header>
+      <div class="kx-a__head">
+        <p class="kx-lab">Case study · Client project</p>
+        <h2 class="kx-t">Bhartiya<br><em>Khel Sutra</em></h2>
+        <p class="kx-p">Play traditions of India. A digital archive of 75+ traditional games, designed as a place you walk through, not a list you search.</p>
       </div>
-    </section>
-    <!-- ABOUT -->
-    <section id="about" class="section about">
-      <div class="container about-grid">
-        <div class="about-image">
-          <img src="images/drriti.jpeg" alt="Drriti Pasrija">
-        </div>
-        <div class="about-content">
-          <h2>About</h2>
-          <p class="about-text">
-            I’m a Visual Communication Designer with a strong inclination towards
-            branding, UI/UX, and visual storytelling. I enjoy working at the
-            intersection of structure and emotion — creating designs that feel
-            considered, calm, and purposeful.
-          </p>
-          <ul class="about-values">
-            <li>Thoughtful over loud</li>
-            <li>Detail-driven design</li>
-            <li>Soft visuals with a sharp idea</li>
+      <div class="kx-lap">
+        <div class="kx-lap__lid"><div class="kx-lap__screen">
+          <video muted loop playsinline preload="metadata" poster="videos/khel-sutra-prototype-poster.jpg" aria-label="Prototype walkthrough of the Bhartiya Khel Sutra website">
+            <source src="videos/khel-sutra-prototype.mp4" type="video/mp4">
+          </video>
+        </div></div>
+        <div class="kx-lap__base"></div>
+        <p class="kx-lap__note">The clickable prototype, a 40-second walkthrough.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- B · The challenge and the research doc, one scroll -->
+  <section class="kx-b" aria-label="The challenge">
+    <div class="kx-b__pin kx-pad">
+      <div class="kx-b__in">
+        <div>
+          <p class="kx-lab">01 — The challenge</p>
+          <h3 class="kx-t">From archive<br>to <em>playground</em></h3>
+          <p class="kx-p">Khol Khel had documented games from across India: rules, lineages, regional variants. Some entries are two lines, others carry centuries of evidence. A list or a product grid would flatten all of it.</p>
+          <ul class="kx-b__issues">
+            <li><span><b>Uneven density.</b> Two-line rules next to pages of history.</span></li>
+            <li><span><b>Lost place.</b> Games belong to courtyards, lanes and fields. A list erases that.</span></li>
+            <li><span><b>Two audiences.</b> Browsers want to stumble on things. Teachers and parents want to search.</span></li>
           </ul>
         </div>
+        <figure class="kx-b__doc">
+          <div class="kx-win"><div class="kx-win__bar"><i></i><i></i><i></i><span>Research document</span></div>
+            <img width="833" height="606" loading="lazy" src="images/khel-sutra/illustration-style-exploration.jpg" alt="The client's written research for one game section: overview, archaeology and cultural context" decoding="async"></div>
+          <figcaption class="kx-cap">Where it started: written research for every game, section by section.</figcaption>
+          <div class="kx-b__stamp" aria-hidden="true">75+<br>games</div>
+        </figure>
       </div>
-    </section>
-    <!-- SERVICES -->
-    <section id="services" class="section services">
-      <div class="container">
-
-        <h2 class="services-title">Areas of focus</h2>
-
-        <div class="services-list">
-
-          <div class="service-item">
-            <span class="service-number">01</span>
-            <h3>Visual Identity</h3>
-            <p>Branding systems built with clarity, restraint, and emotional intent.</p>
-          </div>
-          <div class="service-item">
-            <span class="service-number">02</span>
-            <h3>UI / UX Design</h3>
-            <p>
-              Thoughtful digital interfaces focused on usability, structure, and flow.
-            </p>
-          </div>
-          <div class="service-item">
-            <span class="service-number">03</span>
-            <h3>Editorial & Graphic Design</h3>
-            <p>
-              Print and digital layouts that communicate quietly yet effectively.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- PORTFOLIO (YOUR WORK KEPT) -->
-    <section id="work" class="work-section">
-      <div class="work-wrapper">
-
-        <!-- Project 1: UniPath -->
-        <div class="work-card" onclick="window.location.href='unipath.html'">
-          <div class="work-media">
-            <img src="images/unipath.jpg.png" alt="UniPath project">
-          </div>
-          <div class="work-text">
-            <span class="work-category">UI / UX</span>
-            <h3 class="work-title">UniPath</h3>
-            <p class="work-desc">
-              A mobile app designed to simplify the overwhelming study abroad
-              journey — from university search to visa guidance.
-            </p>
-            <div class="work-meta">
-              <div class="work-meta-item">
-                <span class="meta-label">Role</span>
-                <span class="meta-value">UI/UX Designer</span>
-              </div>
-              <div class="work-meta-item">
-                <span class="meta-label">Duration</span>
-                <span class="meta-value">4 Weeks</span>
-              </div>
-              <div class="work-meta-item">
-                <span class="meta-label">Tools</span>
-                <span class="meta-value">Figma · Illustrator</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 2: Oton -->
-        <div class="work-card reverse" onclick="window.location.href='oton.html'">
-          <div class="work-media">
-            <img src="images/oton/REPLACE THIS.png" alt="Oton branding project">
-          </div>
-          <div class="work-text">
-            <span class="work-category">Branding</span>
-            <h3 class="work-title">Oton</h3>
-            <p class="work-desc">
-              A calm, editorial brand identity rooted in thoughtful storytelling.
-            </p>
-            <div class="work-meta">
-              <div class="work-meta-item">
-                <span class="meta-label">Role</span>
-                <span class="meta-value">Brand Designer</span>
-              </div>
-              <div class="work-meta-item">
-                <span class="meta-label">Duration</span>
-                <span class="meta-value">3 Weeks</span>
-              </div>
-              <div class="work-meta-item">
-                <span class="meta-label">Tools</span>
-                <span class="meta-value">Illustrator · Photoshop</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 3: Mydayss UX -->
-        <div class="work-card" onclick="window.location.href='mydayss-ux.html'">
-          <div class="work-media">
-            <img src="images/mydayss/hero.png" alt="Mydayss Emotional Search Experience">
-          </div>
-          <div class="work-text">
-            <span class="work-category">UI / UX</span>
-            <h3 class="work-title">Mydayss</h3>
-            <p class="work-desc">
-              An emotion-first digital platform that guides users through self-reflection —
-              from feeling to journaling to healing, one gentle prompt at a time.
-            </p>
-            <div class="work-meta">
-              <div class="work-meta-item">
-                <span class="meta-label">Role</span>
-                <span class="meta-value">UX/UI Designer</span>
-              </div>
-              <div class="work-meta-item">
-                <span class="meta-label">Duration</span>
-                <span class="meta-value">2–3 Weeks</span>
-              </div>
-              <div class="work-meta-item">
-                <span class="meta-label">Tools</span>
-                <span class="meta-value">Figma · Illustrator</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 4: MRITTIKA -->
-        <div class="work-card" onclick="window.location.href='mittrika.html'">
-          <div class="work-media">
-            <img src="images/mittrika/MRITTIKA BEHANCE-17.jpg" alt="MRITTIKA branding">
-          </div>
-          <div class="work-text">
-            <span class="work-category">Branding</span>
-            <h3 class="work-title">MRITTIKA</h3>
-            <p class="work-desc">
-              Desk accessories designed for calm, intentional workspaces.
-            </p>
-            <div class="work-meta">
-              <div class="work-meta-item">
-                <span class="meta-label">Role</span>
-                <span class="meta-value">Brand Designer</span>
-              </div>
-              <div class="work-meta-item">
-                <span class="meta-label">Duration</span>
-                <span class="meta-value">3 Weeks</span>
-              </div>
-              <div class="work-meta-item">
-                <span class="meta-label">Tools</span>
-                <span class="meta-value">Illustrator · InDesign</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-          <!-- Project 4: Riyasat -->
-          <div class="work-card reverse" onclick="window.location.href='riyasat.html'">
-            <div class="work-media">
-              <img src="images/riyasat/riyasat brand guidelines 1_Page_01.jpg" alt="Riyasat branding project">
-            </div>
-            <div class="work-text">
-              <span class="work-category">Branding</span>
-              <h3 class="work-title">Riyasat</h3>
-              <p class="work-desc">
-                A rich, heritage-inspired brand identity rooted in tradition and elegance.
-              </p>
-              <div class="work-meta">
-                <div class="work-meta-item">
-                  <span class="meta-label">Role</span>
-                  <span class="meta-value">Brand Designer</span>
-                </div>
-                <div class="work-meta-item">
-                  <span class="meta-label">Duration</span>
-                  <span class="meta-value">3 Weeks</span>
-                </div>
-                <div class="work-meta-item">
-                  <span class="meta-label">Tools</span>
-                  <span class="meta-value">Illustrator · Photoshop</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-      </div>
-    </section>
-    <!-- STUDIO WALL -->
-
-    <!-- STUDIO WALL -->
-    <!-- STUDIO WALL -->
-    <section class="studio-wall">
-
-      <div class="studio-inner">
-
-        <div class="studio-header">
-          <h2>Studio wall</h2>
-          <p>Experiments, motion, illustrations & things in progress.</p>
-        </div>
-
-        <div class="wall">
-
-          <!-- PIN 1 -->
-          <div class="pin-item" data-type="video" data-src="vidoes/food app.mp4">
-            <span class="pin"></span>
-            <img src="images/Screenshot 2024-09-20 002730.png">
-          </div>
-
-          <div class="pin-item" data-type="video" data-src="vidoes/final animation with sound.mp4">
-            <span class="pin"></span>
-            <img src="images/Screenshot 2026-02-15 221423.png">
-          </div>
-
-          <div class="pin-item" data-type="flipbook" data-src="https://heyzine.com/flip-book/fc33b854ba.html">
-            <span class="pin"></span>
-            <img src="images/standing softcover book mockup.png">
-          </div>
-
-          <div class="pin-item" data-type="image" data-src="images/book cover finalll ka final.jpg">
-            <span class="pin"></span>
-            <img src="images/book cover finalll ka final - Copy.jpg">
-          </div>
-
-          <div class="pin-item" data-type="image" data-src="images/Screenshot 2026-02-15 224122.png">
-            <span class="pin"></span>
-            <img src="images/Screenshot 2026-02-15 224122.png">
-          </div>
-
-          <div class="pin-item" data-type="image" data-src="images/sea otter final 3 .png">
-            <span class="pin"></span>
-            <img src="images/sea otter final 3 .png">
-          </div>
-
-          <div class="pin-item" data-type="image" data-src="images/jrissylogo.png">
-            <span class="pin"></span>
-            <img src="images/jrissylogo.png">
-          </div>
-
-          <div class="pin-item" data-type="video" data-src="vidoes/cheri cheri lady.mp4">
-            <span class="pin"></span>
-            <img src="images/Screenshot 2026-02-15 225704.png">
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- SINGLE VIEWER ONLY -->
-    <div class="wall-viewer">
-      <div class="viewer-content"></div>
     </div>
-    </section>
+  </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="contact-section">
-      <div class="container">
-        <div class="contact-inner">
-          <p class="contact-eyebrow">Let’s work together</p>
-          <h2 class="contact-title">Have a project in mind?<br>Let’s build something intentional.</h2>
-          <a href="mailto:drritipasrija11@gmail.com" class="contact-email">
-            drritipasrija11@gmail.com <i class="fa-solid fa-arrow-right-long"></i>
-          </a>
+  <!-- C · Information architecture -->
+  <section class="kx-c" aria-label="Information architecture">
+    <div class="kx-c__pin">
+      <div class="kx-c__head">
+        <div>
+          <p class="kx-lab">02 — Structure</p>
+          <h3 class="kx-t">Nine places<br>for <em>every</em> game</h3>
         </div>
+        <p class="kx-p">I turned a research spreadsheet into a taxonomy. Each game gets two coordinates: an intellectual genre and a physical place. The place becomes the navigation.</p>
       </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="footer-inner">
-        <p>© 2026 Drriti Pasrija</p>
-        <div class="footer-links">
-          <a href="https://www.linkedin.com/in/drriti-pasrija" target="_blank">LinkedIn</a>
-          <a href="https://www.behance.net/drritipasrija" target="_blank">Behance</a>
-        </div>
-      </div>
-    </footer>
-    <div class="project-cursor">
-      <span>View project →</span>
+      <figure class="kx-c__fig">
+        <div class="kx-c__view"><img width="1920" height="812" loading="lazy" src="images/khel-sutra/information-architecture.jpg" alt="Information architecture: home, sections, environments and game entries" decoding="async"></div>
+        <figcaption class="kx-cap">Information architecture: home → sections → environments → game entries.</figcaption>
+      </figure>
     </div>
+  </section>
+
+  <!-- D · Two ways in -->
+  <section class="kx-d kx-pad" aria-label="Interaction">
+    <div class="kx-d__in">
+      <div class="kx-d__txt">
+        <p class="kx-lab">03 — Interaction</p>
+        <h3 class="kx-t">Wander,<br>or <em>search</em></h3>
+        <p class="kx-p">Two ways in, one structure. Drag across the playground and a pin opens a game; a zone opens as its own room. Or go straight to Find a game, for the teacher who needs a title now.</p>
+        <ul class="kx-d__list">
+          <li>A result opens the game inside its own room, not a separate page.</li>
+          <li>Each result shows that game's own illustration, not a zone icon.</li>
+          <li>Only filters with real data: section and setting.</li>
+        </ul>
+      </div>
+      <div class="kx-d__shots">
+        <figure data-par="-40">
+          <div class="kx-win"><div class="kx-win__bar"><i></i><i></i><i></i><span>Home</span></div>
+            <img width="2000" height="1123" loading="lazy" src="assets/khel-sutra/web-home.jpg" alt="Home screen: an illustrated playground with pins for nine game zones" decoding="async"></div>
+          <figcaption class="kx-cap">Wander: the home screen is a playground with a pin for every zone.</figcaption>
+        </figure>
+        <figure data-par="-70">
+          <div class="kx-win"><div class="kx-win__bar"><i></i><i></i><i></i><span>Find a game</span></div>
+            <img width="2000" height="1135" loading="lazy" src="assets/khel-sutra/web-4.jpg" alt="Find a game: search by name, filter by section and setting, results with a thumbnail per game" decoding="async"></div>
+          <figcaption class="kx-cap">Search: by name, filtered by section and setting.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- E · The world: horizontal gallery -->
+  <section class="kx-e" aria-label="The world">
+    <div class="kx-e__pin">
+      <div class="kx-e__track">
+        <div class="kx-e__intro">
+          <p class="kx-lab">04 — The world</p>
+          <h3 class="kx-t">A world<br>with <em>rooms</em></h3>
+          <p class="kx-p">Every zone is an illustrated environment, and games stand where they would be played. One tab bar sits along the bottom, so moving between genres never reloads the scene.</p>
+          <div class="kx-e__sw" role="img" aria-label="Palette: ink, cream, moss, clay, gold, sky"><i style="background:#1E2B1C"></i><i style="background:#F4EFDF"></i><i style="background:#33502F"></i><i style="background:#B5502F"></i><i style="background:#CF9A3D"></i><i style="background:#6C8F8C"></i></div>
+        </div>
+        <figure class="kx-e__item">
+          <div class="kx-win"><div class="kx-win__bar"><i></i><i></i><i></i><span>Buddhiyoga · classroom</span></div>
+            <img width="2000" height="1086" loading="lazy" src="assets/khel-sutra/web-3.jpg" alt="Buddhiyoga classroom: children playing board games on mats, with a tab bar for game genres" decoding="async"></div>
+          <figcaption class="kx-cap">The classroom. Changing genre is a tab, not a page.</figcaption>
+        </figure>
+        <figure class="kx-e__item">
+          <div class="kx-win"><div class="kx-win__bar"><i></i><i></i><i></i><span>Buddhibala · pavilion</span></div>
+            <img width="2000" height="1135" loading="lazy" src="assets/khel-sutra/web-5.jpg" alt="Buddhibala pavilion: an illustrated environment with game pins" decoding="async"></div>
+          <figcaption class="kx-cap">The pavilion. Same top bar, same way back.</figcaption>
+        </figure>
+        <figure class="kx-e__item">
+          <div class="kx-win"><div class="kx-win__bar"><i></i><i></i><i></i><span>Game card</span></div>
+            <img width="2000" height="1129" loading="lazy" src="assets/khel-sutra/web-7.jpg" alt="Game card for Shatranj over its environment: synopsis, equipment and a link to the full game" decoding="async"></div>
+          <figcaption class="kx-cap">The game card: what it is, what you need, a way into the full rules.</figcaption>
+        </figure>
+        <figure class="kx-e__item">
+          <div class="kx-win"><div class="kx-win__bar"><i></i><i></i><i></i><span>Sports ground</span></div>
+            <img width="1474" height="837" loading="lazy" src="images/khel-sutra/classroom-race-dice.jpg" alt="Sports ground: open grass with archery and wrestling figures and a back link" decoding="async"></div>
+          <figcaption class="kx-cap">The sports ground. Open grass, the same bar and the same way back.</figcaption>
+        </figure>
+        <div class="kx-e__end"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- F · Print -->
+  <section class="kx-f kx-pad" aria-label="Editorial">
+    <div class="kx-f__in">
+      <div class="kx-f__art">
+        <figure class="kx-f__a" data-par="-30"><img width="2000" height="1499" loading="lazy" src="assets/khel-sutra/web-1.jpg" alt="Typeset yoga spread from the rulebook" decoding="async"><figcaption>Yoga &amp; Martial spread</figcaption></figure>
+        <figure class="kx-f__b" data-par="-80"><img width="1034" height="771" loading="lazy" src="images/khel-sutra/wireframes-1.jpg" alt="Typeset rulebook spread: Part One, Buddhiyoga, with a margin column of labels" decoding="async"><figcaption>Part One: Buddhiyoga</figcaption></figure>
+        <figure class="kx-f__c" data-par="-50"><img width="923" height="751" loading="lazy" src="images/khel-sutra/building-visuals.jpg" alt="Mockup of the printed rulebook lying open on a concrete surface" decoding="async"><figcaption>The rulebook, printed</figcaption></figure>
+      </div>
+      <div>
+        <p class="kx-lab">05 — Editorial</p>
+        <h3 class="kx-t">The same research,<br><em>in print</em></h3>
+        <p class="kx-p">The research behind each game was also typeset as a rulebook in InDesign: part openers, a narrow margin for labels, one grid under every game page.</p>
+        <ul class="kx-f__list">
+          <li>Margin labels carry the structure: overview, archaeology, cultural context.</li>
+          <li>The text column stays quiet. One grid, then each game dropped in.</li>
+          <li>Same sections as the on-screen game card.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- G · Iterations -->
+  <section class="kx-g kx-pad" aria-label="Iterations">
+    <div class="kx-g__in">
+      <div class="kx-g__stick">
+        <p class="kx-lab">06 — Iterations</p>
+        <h3 class="kx-t">What I changed,<br><em>and why</em></h3>
+        <p class="kx-p" style="margin-bottom:clamp(20px,2.4vw,34px)">Feedback came in rounds. Most changes removed something instead of adding it.</p>
+        <div class="kx-win"><div class="kx-win__bar"><i></i><i></i><i></i><span>Buddhiyoga · after the changes</span></div>
+          <img width="2000" height="1086" loading="lazy" src="assets/home/ui-hero-classroom.jpg" alt="Buddhiyoga classrooms page with game tabs, after the changes" decoding="async"></div>
+      </div>
+      <ul class="kx-g__rows">
+        <li><span>01</span><div><h3>Navigation</h3><p>Tried a right-edge hover drawer. Feedback: worse. Went back to the bottom dock.</p></div></li>
+        <li><span>02</span><div><h3>Room headings</h3><p>Removed. The tab bar already says where you are, and it fixed unreadable text on two zones.</p></div></li>
+        <li><span>03</span><div><h3>Back link</h3><p>Moved left on every zone page, matching the homepage.</p></div></li>
+        <li><span>04</span><div><h3>Crowded zone</h3><p>Measured every illustration's bounds and re-plotted until nothing touched.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+<!-- ============================ /CASE STUDY ============================ -->
+
+<!-- ============================ CONTACT / WORK WITH ME ============================ -->
+<section class="ct" id="contact" aria-label="Contact and work with me">
+  <p class="ct__lab">Contact · Work with me</p>
+  <h2 class="ct__title">Let&rsquo;s make something <em>worth using</em></h2>
+  <div class="ct__grid">
+    <div>
+      <p class="ct__lead">I design products people can follow without a manual, and brands that hold together. If you have a role, a project or a problem that needs a designer, write to me.</p>
+      <ul class="ct__open">
+        <li>Product design roles <span>Open</span></li>
+        <li>UI / UX projects <span>Open</span></li>
+        <li>Brand identity <span>Open</span></li>
+      </ul>
+    </div>
+    <div>
+      <a class="ct__mail" id="ctMail" href="mailto:drritipasrija11@gmail.com?subject=Hello%20Drriti">drritipasrija11@gmail.com</a>
+      <div class="ct__btns">
+        <a class="ct__btn ct__btn--fill" href="mailto:drritipasrija11@gmail.com?subject=Hello%20Drriti">Write to me <span aria-hidden="true">&rarr;</span></a>
+        <button class="ct__btn" type="button" id="ctCopy">Copy email</button>
+        <a class="ct__btn" href="Resume.pdf" download="Drriti_Pasrija_Resume.pdf" data-resume>Download resume <span aria-hidden="true">&darr;</span></a>
+      </div>
+      <nav class="ct__links" aria-label="Elsewhere">
+        <a href="https://www.linkedin.com/in/drriti-pasrija" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.behance.net/drritipasrija" target="_blank" rel="noopener">Behance</a>
+      </nav>
+    </div>
+  </div>
+  <div class="ct__foot"><span>&copy; 2026 Drriti Pasrija</span><a href="#drh">Back to top &uarr;</a></div>
+</section>
+<script>
+(function(){
+  var b=document.getElementById('ctCopy'),m='drritipasrija11@gmail.com';
+  if(!b)return;
+  b.addEventListener('click',function(){
+    function done(){var t=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent='Copy email';},1800);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(m).then(done,function(){window.prompt('Copy this email',m);});}
+    else{window.prompt('Copy this email',m);}
+  });
+})();
+</script>
 
 
+<!-- PRELOADER SCRIPT -->
+<script>
+(function () {
+  'use strict';
 
-    <!-- SCRIPTS -->
-    <script src="public/js/hero-interact.js"></script>
-    <script src="public/js/main.js"></script>
+  var html = document.documentElement;
+  var el = document.getElementById('drp');
+  if (!el) return;
+  if (!html.classList.contains('js')) {
+    if (el.parentNode) el.parentNode.removeChild(el);
+    return;
+  }
 
-    <!-- ═══════════════════════════════════════════
-         INTRO ANIMATION — remove this script block to disable
-    ═══════════════════════════════════════════ -->
-    <script>
-      (function () {
-        const overlay = document.getElementById('intro-overlay');
-        if (!overlay) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MIN = reduce ? 500 : 2000;
+  var GIVE_UP = 8000;
 
-        // Lock scroll during intro
-        document.documentElement.style.overflow = 'hidden';
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+  window.scrollTo(0, 0);
+  html.classList.add('drp-active');
 
-        const counterEl = overlay.querySelector('.intro-counter');
-        const letters   = overlay.querySelectorAll('.intro-letter-wrap span');
-        const note      = overlay.querySelector('.intro-note');
+  var num = el.querySelector('.drp__num');
+  var rule = el.querySelector('.drp__rule');
 
-        const tl = gsap.timeline({
-          defaults: { ease: 'power3.out' },
-          onComplete: () => {
-            document.documentElement.style.overflow = '';
-            overlay.style.pointerEvents = 'none';
-            overlay.style.display = 'none';
-          }
+  var total = 0, done = 0;
+  function track(start) {
+    total++;
+    var fired = false;
+    start(function () { if (!fired) { fired = true; done++; } });
+  }
+
+  Array.prototype.filter.call(document.images, function (im) { return !im.closest('.kx'); }).forEach(function (im) {
+    track(function (fin) {
+      if (im.complete) fin();
+      else {
+        im.addEventListener('load', fin);
+        im.addEventListener('error', fin);
+      }
+    });
+  });
+
+  if (document.fonts && document.fonts.load) {
+    ['200 100px "Lexend Zetta"', '300 20px "Lexend Zetta"', '300 12px "Martian Mono"'].forEach(function (f) {
+      track(function (fin) { document.fonts.load(f).then(fin, fin); });
+    });
+  }
+
+  var t0 = performance.now(), shown = 0, finishing = false;
+
+  function paint() {
+    if (num) num.textContent = Math.round(shown) + '%';
+    if (rule) rule.style.setProperty('--p', shown.toFixed(2));
+  }
+
+  function frame(now) {
+    var timeP = Math.min(1, (now - t0) / MIN);
+    var loadP = (now - t0 > GIVE_UP || !total) ? 1 : done / total;
+    var target = Math.min(timeP, loadP) * 100;
+    shown += (target - shown) * 0.12;
+    if (target >= 100 && shown > 99.4) shown = 100;
+    paint();
+    if (shown >= 100) return finish();
+    requestAnimationFrame(frame);
+  }
+
+  function finish() {
+    if (finishing) return;
+    finishing = true;
+
+    setTimeout(function () {
+      el.classList.add('drp--done');
+      setTimeout(function () {
+        el.classList.add('drp--leave');
+        setTimeout(function () {
+          window.dispatchEvent(new Event('drp:reveal'));
+        }, reduce ? 0 : 300);
+
+        var gone = false;
+        function remove() {
+          if (gone) return;
+          gone = true;
+          if (el.parentNode) el.parentNode.removeChild(el);
+          html.classList.remove('drp-active');
+          window.scrollTo(0, 0);
+          window.dispatchEvent(new Event('drp:end'));
+        }
+
+        el.addEventListener('transitionend', function (e) {
+          if (e.target === el) remove();
         });
+        setTimeout(remove, reduce ? 600 : 1300);
+      }, reduce ? 0 : 550);
+    }, reduce ? 0 : 250);
+  }
 
-        // ── 1. Counter: 000 → 100 ──────────────────────
-        const count = { val: 0 };
-        tl.to(count, {
-          val: 100,
-          duration: 1.6,
-          ease: 'power2.inOut',
-          onUpdate() {
-            counterEl.textContent = String(Math.round(count.val)).padStart(3, '0');
-          }
+  paint();
+  requestAnimationFrame(frame);
+})();
+</script>
+
+<!-- GSAP 3 + ScrollTrigger (CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<!-- HERO ENGINE (100% EXCLUSIVELY FROM HOME PAGE PICTURES) -->
+<script>
+(function () {
+  'use strict';
+
+  var root = document.getElementById('drh');
+  if (!root) return;
+
+  var $  = function (s, c) { return (c || root).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || root).querySelectorAll(s)); };
+
+  function fitTitle() {
+    var l1 = $('.drh__line--1 > span');
+    var l2 = $('.drh__line--2 > span');
+    var line1 = $('.drh__line--1');
+    var line2 = $('.drh__line--2');
+    if (!l1 || !l2 || !line1 || !line2) return;
+
+    line2.style.fontSize = '';
+    line2.style.marginLeft = '';
+
+    var w1 = l1.offsetWidth;
+    var w2 = l2.offsetWidth;
+    if (!w1 || !w2) return;
+
+    var currentFs2 = parseFloat(window.getComputedStyle(line2).fontSize);
+    var targetFs2 = currentFs2 * (w1 / w2);
+    line2.style.fontSize = targetFs2.toFixed(2) + 'px';
+  }
+
+  function splitWords(el) {
+    if (!el || el.getAttribute('data-split')) return [];
+    var text = el.textContent.replace(/\s+/g, ' ').trim();
+    el.setAttribute('data-split', '1');
+    el.innerHTML = '';
+
+    var sr = document.createElement('span');
+    sr.textContent = text;
+    sr.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap';
+    el.appendChild(sr);
+
+    var wrap = document.createElement('span');
+    wrap.setAttribute('aria-hidden', 'true');
+    text.split(' ').forEach(function (word, i, all) {
+      var w = document.createElement('span');
+      w.className = 'w';
+      var s = document.createElement('span');
+      s.textContent = word;
+      w.appendChild(s);
+      wrap.appendChild(w);
+      if (i < all.length - 1) wrap.appendChild(document.createTextNode(' '));
+    });
+    el.appendChild(wrap);
+    return $$('.w > span', el);
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
+
+  var pinEl   = $('.drh__pin');
+  var scene   = $('.drh__scene');
+  var mosaic  = $('.drh__mosaic');
+  var panel   = $('.drh__panel');
+  var content = $('.drh__content');
+  var cta     = $('.drh__cta');
+  var sceneImg = $('.drh__layer');
+
+  var words = splitWords($('.drh__statement'));
+  fitTitle();
+
+  window.addEventListener('load', function () {
+    fitTitle();
+    ScrollTrigger.refresh();
+  });
+  window.addEventListener('resize', function () {
+    fitTitle();
+  });
+
+  function rng(seed) {
+    return function () {
+      seed |= 0;
+      seed = (seed + 0x6D2B79F5) | 0;
+      var t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  // IMAGES: ONLY FROM THE "HOME PAGE PICTURES" FOLDER. Each tile keeps its own screen proportion
+  // (phones stay tall, web screens stay wide) so the UI is readable, not cropped to confetti.
+  var IMG = {
+    s1:  { src: 'assets/home/t/ui-screen-1.jpg',     ar: 900 / 674,  kind: 'Editorial',  name: 'Book layout' },
+    s2:  { src: 'assets/home/t/ui-screen-2.jpg',     ar: 1100 / 715, kind: 'Web',        name: 'Khol Khel · product page' },
+    s3:  { src: 'assets/home/t/ui-screen-3.jpg',     ar: 1300 / 705, kind: 'Web',        name: 'Khel Sutra · classrooms' },
+    s4:  { src: 'assets/home/t/ui-screen-4.jpg',     ar: 1300 / 737, kind: 'Web',        name: 'Khel Sutra · find a game' },
+    s5:  { src: 'assets/home/t/ui-screen-5.jpg',     ar: 1300 / 729, kind: 'Brand',      name: 'Colour palette' },
+    s6:  { src: 'assets/home/t/ui-screen-6.jpg',     ar: 1300 / 734, kind: 'Web',        name: 'Khel Sutra · game detail' },
+    p1:  { src: 'assets/home/t/ui-home-mobile.jpg',  ar: 230 / 500,  kind: 'Mobile',     name: 'Echo · home' },
+    p2:  { src: 'assets/home/t/ui-music-player.jpg', ar: 230 / 500,  kind: 'Mobile',     name: 'Echo · player' }
+  };
+
+  // Row pool: a row is one wide screen, or a pair of phones side by side.
+  // Columns read it at different offsets, so neighbours never repeat the same screen.
+  var POOL = [['s2'], ['p1', 'p2'], ['s4'], ['s1'], ['s6'], ['s5']];
+
+  var COLS = [
+    [-170, 362], [200, 352], [560, 332], [900, 600],
+    [1508, 392], [1908, 352], [2268, 362]
+  ];
+  var GAP = 10;
+  var CT = { x: 900, y: 515, w: 600, h: 470 };
+
+  function buildMosaic(mobile) {
+    var r = rng(11);
+    var cols = mobile ? COLS.slice(1, 6) : COLS;
+    var tiles = [];
+    var frag = document.createDocumentFragment();
+    
+    function mk(x, y, w, h, key) {
+      var item = IMG[key];
+      var phone = item.ar < 1;
+      var d = document.createElement('div');
+      d.className = 'drh__tile' + (phone ? ' drh__tile--phone' : '');
+      d.style.cssText = 'left:' + x + 'px;top:' + y + 'px;width:' + w + 'px;height:' + h + 'px';
+
+      var im = new Image();
+      im.alt = '';
+      im.decoding = 'async';
+      im.draggable = false;
+      im.src = item.src;
+      im.style.setProperty('--z', phone ? 1.02 : 1.05);
+      im.style.setProperty('--ox', '50%');
+      im.style.setProperty('--oy', '50%');
+      im.style.setProperty('--dx', ((r() < 0.5 ? -1 : 1) * (2 + r() * 3)).toFixed(1) + 'px');
+      im.style.setProperty('--dy', ((r() < 0.5 ? -1 : 1) * (2 + r() * 3)).toFixed(1) + 'px');
+      im.style.setProperty('--dur', (14 + r() * 10).toFixed(1) + 's');
+      im.style.animationDelay = (-r() * 15).toFixed(1) + 's';
+      d.appendChild(im);
+
+      var vk = mobile ? (0.60 * window.innerWidth) / CT.w : Math.max(window.innerWidth / 1920, window.innerHeight / 1080);
+      var vr = Math.hypot(window.innerWidth, window.innerHeight) / 2 / vk + 150;
+      var tcx = x + w / 2 - 1200, tcy = y + h / 2 - 750, kk = r();
+      if (Math.hypot(tcx, tcy) - Math.hypot(w, h) / 2 > vr) return;       // never on screen: do not build it
+      frag.appendChild(d);
+      tiles.push({ el: d, cx: tcx, cy: tcy, k: kk });
+    }
+
+    // lay one pool row at y (growing downward) and return its height
+    function rowAt(ci, ri, x, w, y) {
+      var row = POOL[(ci * 3 + ri + 80) % POOL.length], h;
+      if (row.length === 2) {
+        var pw = (w - GAP) / 2;
+        h = pw / IMG[row[0]].ar;
+        mk(x, y, pw, h, row[0]);
+        mk(x + pw + GAP, y, pw, h, row[1]);
+      } else {
+        h = w / IMG[row[0]].ar;
+        mk(x, y, w, h, row[0]);
+      }
+      return h;
+    }
+    function rowH(ci, ri, w) {
+      var row = POOL[(ci * 3 + ri + 80) % POOL.length];
+      return row.length === 2 ? ((w - GAP) / 2) / IMG[row[0]].ar : w / IMG[row[0]].ar;
+    }
+
+    cols.forEach(function (c, ci) {
+      var x = c[0], w = c[1], y, ri;
+      if (x === CT.x) {
+        y = CT.y - GAP; ri = -1;
+        while (y > -900) { var h1 = rowH(ci, ri, w); rowAt(ci, ri, x, w, y - h1); y -= h1 + GAP; ri--; }
+        y = CT.y + CT.h + GAP; ri = 0;
+        while (y < 2400) { y += rowAt(ci, ri, x, w, y) + GAP; ri++; }
+      } else {
+        y = -900 - r() * 260; ri = 0;
+        while (y < 2400) { y += rowAt(ci, ri, x, w, y) + GAP; ri++; }
+      }
+    });
+
+    mosaic.appendChild(frag);
+    return tiles;
+  }
+
+  function initHero() {
+    var mobile = window.innerWidth <= 768;
+    var ROT = mobile ? 7 : 10;
+    var tiles = buildMosaic(mobile);
+
+    function geom() {
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      var k = mobile ? (0.60 * w) / CT.w : Math.max(w / 1920, h / 1080);
+      var s = Math.max(0.48, (CT.w * k) / w, (CT.h * k) / h);
+      return { k: k, s: s };
+    }
+
+    var g = geom();
+
+    gsap.set(scene, { rotation: -ROT, scale: g.s, borderRadius: 12 });
+    gsap.set(mosaic, { scale: g.k, rotation: -ROT });
+    gsap.set(panel, { yPercent: 100 });
+
+    var scrollDistance = Math.round(window.innerHeight * (mobile ? 3.2 : 4.0));
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pinEl,
+        start: 'top top',
+        end: '+=' + scrollDistance,
+        pin: true,
+        scrub: 0.5,
+        anticipatePin: 1
+      }
+    });
+
+    /* Phase 1: Mosaic converges & focal tile expands */
+    tl.to(scene, {
+      rotation: 0,
+      scale: 1,
+      borderRadius: 0,
+      ease: 'power2.inOut',
+      duration: 3.2
+    }, 0);
+
+    tl.to(mosaic, {
+      scale: g.k * 1.45,
+      rotation: -ROT * 0.3,
+      ease: 'power2.in',
+      duration: 3.2
+    }, 0);
+
+    tl.to(mosaic, { opacity: 0.3, ease: 'power1.in', duration: 2.9 }, 0);
+    tl.to(mosaic, { autoAlpha: 0, duration: 0.35 }, 2.9);
+
+    tiles.forEach(function (t) {
+      var a = Math.atan2(t.cy, t.cx);
+      var d = (110 + t.k * 220) * (mobile ? 0.7 : 1);
+      tl.to(t.el, { x: Math.cos(a) * d, y: Math.sin(a) * d, ease: 'power2.in', duration: 3.2 }, 0);
+    });
+
+    if (cta) {
+      tl.to(cta, { autoAlpha: 0, y: -16, duration: 0.4 }, 0);
+    }
+
+    /* Phase 2: Peach panel rises, scene lifts */
+    tl.to(panel, { yPercent: 0, ease: 'power2.inOut', duration: 3.0 }, 3.8);
+    tl.to(scene, { yPercent: -32, scale: 1.12, ease: 'power2.inOut', duration: 3.0 }, 3.8);
+
+    if (sceneImg) {
+      tl.to(sceneImg, { yPercent: -8, ease: 'power2.inOut', duration: 3.0 }, 3.8);
+    }
+
+    var line1Span = $('.drh__line--1 > span');
+    var line2Span = $('.drh__line--2 > span');
+    if (line1Span) {
+      tl.fromTo(line1Span, { yPercent: 115 }, { yPercent: 0, ease: 'power3.out', duration: 1.6 }, 4.3);
+    }
+    if (line2Span) {
+      tl.fromTo(line2Span, { yPercent: 115 }, { yPercent: 0, ease: 'power3.out', duration: 1.4 }, 4.7);
+    }
+
+    var metaEl = $('.drh__meta');
+    if (metaEl) {
+      tl.fromTo(metaEl, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8 }, 4.1);
+    }
+
+    /* Phase 3: Lede & statement reveal */
+    var ledeEl = $('.drh__lede');
+    if (ledeEl) {
+      tl.fromTo(ledeEl, { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, ease: 'power2.out', duration: 1.1 }, 6.3);
+    }
+    if (words && words.length) {
+      tl.fromTo(words, { yPercent: 115 }, { yPercent: 0, ease: 'power3.out', duration: 0.9, stagger: 0.05 }, 6.5);
+    }
+    var noteEl = $('.drh__note');
+    if (noteEl) {
+      tl.fromTo(noteEl, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, ease: 'power2.out', duration: 0.9 }, 7.6);
+    }
+
+    if (content && panel) {
+      tl.to(content, {
+        y: function () {
+          return -Math.max(0, content.offsetHeight - panel.offsetHeight + 40);
+        },
+        ease: 'power1.inOut',
+        duration: 2.4
+      }, 6.8);
+    }
+
+    tl.to({}, { duration: 0.001 }, 10);
+
+    /* Entrance on loader completion */
+    function triggerEntrance() {
+      var ordered = tiles.slice().sort(function (a, b) {
+        return (a.cx * a.cx + a.cy * a.cy) - (b.cx * b.cx + b.cy * b.cy);
+      });
+      gsap.from(ordered.map(function (t) { return t.el; }), {
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power2.out',
+        stagger: 0.016
+      });
+      gsap.from(scene, {
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
+    }
+
+    var still = false;
+    window.addEventListener('scroll', function () {
+      var st = window.pageYOffset > 40;
+      if (st !== still) { still = st; root.classList.toggle('drh--still', st); }
+    }, { passive: true });
+    window.addEventListener('drp:reveal', triggerEntrance);
+    // Fallback if loader already finished
+    if (!document.getElementById('drp')) {
+      triggerEntrance();
+    }
+
+    if (cta) {
+      cta.addEventListener('click', function () {
+        var st = tl.scrollTrigger;
+        if (st) {
+          window.scrollTo({
+            top: st.start + (st.end - st.start) * 0.35,
+            behavior: 'smooth'
+          });
+        }
+      });
+    }
+  }
+
+  initHero();
+
+})();
+</script>
+<script>
+/* SERVICES TUNNEL — canvas tunnel + scroll-scrubbed chapters (needs gsap + ScrollTrigger) */
+(function () {
+  'use strict';
+  var root = document.querySelector('.tun');
+  if (!root || !window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var $  = function (s, c) { return (c || root).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || root).querySelectorAll(s)); };
+
+  var pin     = $('.tun__pin');
+  var canvas  = $('.tun__canvas');
+  var iris    = $('.tun__iris');
+  var intro   = $('.tun__intro');
+  var cards   = $$('.tun__card');
+  var head    = $('.tun__toolshead');
+  var tools   = $$('.tun__tool');
+  var outro   = $('.tun__outro');
+  var dots    = $$('.tun__dots i');
+  var reduce  = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+      var t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  /* ------------------------------------------------------------ tunnel -- */
+  var FOREST = [66, 76, 58], CREAM = [242, 228, 200], PEACH = [243, 180, 119], GLOW = [246, 205, 150];
+  var ctx = canvas.getContext('2d');
+  var W = 0, H = 0, dpr = 1, halfDiag = 1, Q = ((navigator.hardwareConcurrency || 8) <= 4 || window.innerWidth <= 768) ? 0.8 : 1, ema = 0, slowN = 0, lastTick = 0;
+  var M = 64, K = 22, NEAR = 0.5, STEP = 0.3;
+  var J = [], S = [], base;
+  var mobile = false;
+
+  function buildNoise() {
+    var r = rng(7);
+    base = []; J = []; S = [];
+    var k, j;
+    for (k = 0; k < K; k++) base[k] = (r() - 0.5) * 2;
+    for (j = 0; j <= M; j++) {
+      J[j] = []; S[j] = [];
+      for (k = 0; k < K; k++) {
+        J[j][k] = 0.55 * base[k] + 0.45 * (r() - 0.5) * 2;
+        S[j][k] = r();
+      }
+    }
+  }
+
+  function size() {
+    mobile = window.innerWidth <= 768;
+    var nM = mobile ? 44 : 60, nK = mobile ? 12 : 18;
+    if (nM !== M || nK !== K || !J.length) { M = nM; K = nK; buildNoise(); }
+    var r = canvas.getBoundingClientRect();
+    W = Math.max(2, Math.round(r.width)); H = Math.max(2, Math.round(r.height));
+    dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1 : 1.25);
+    canvas.width = Math.round(W * dpr * Q); canvas.height = Math.round(H * dpr * Q);
+    halfDiag = Math.sqrt(W * W + H * H) / 2;
+  }
+
+  function mix(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
+  function bandColor(j) {
+    if (j % 2 === 0) return FOREST;
+    return (j % 10 === 5) ? PEACH : CREAM;
+  }
+
+  var D = [];
+  function draw(c, rot, ox, oy) {
+    ctx.setTransform(dpr * Q, 0, 0, dpr * Q, 0, 0);
+    ctx.fillStyle = 'rgb(' + GLOW[0] + ',' + GLOW[1] + ',' + GLOW[2] + ')';
+    ctx.fillRect(0, 0, W, H);
+
+    var cx = W / 2, cy = H / 2, K0 = halfDiag * 0.62, total = M * STEP, j, k;
+    for (j = 0; j <= M; j++) {
+      var d = (((j * STEP - c) % total) + total) % total;
+      D[j] = d + NEAR;
+    }
+    var TAU = Math.PI * 2;
+    for (j = 0; j < M; j++) {
+      var d0 = D[j], d1 = D[j + 1];
+      if (d1 - d0 < STEP * 0.5 || d1 - d0 > STEP * 1.5) continue;           // wrapped band
+      var fog = Math.min(1, Math.max(0, (d0 - 2.6) / 13));
+      fog = fog * fog * (3 - 2 * fog);
+      if (fog > 0.992) continue;                                            // melts into the glow: skip
+      var col = mix(bandColor(j), GLOW, fog);
+      var sh = 0.24 * (1 - fog * 0.75);
+      var f0 = Math.min(1, d0 / 10), f1 = Math.min(1, d1 / 10);
+      var R0 = K0 / d0, R1 = K0 / d1;
+      var tw0 = rot + 0.035 * d0, tw1 = rot + 0.035 * d1;
+      var ax0 = cx + ox * f0, ay0 = cy + oy * f0, ax1 = cx + ox * f1, ay1 = cy + oy * f1;
+      var amp = 0.13;
+      for (k = 0; k < K; k++) {
+        var k2 = (k + 1) % K;
+        var a0 = TAU * k / K, a1 = TAU * (k + 1) / K;
+        var ra = R0 * (1 + amp * J[j][k]),     rb = R0 * (1 + amp * J[j][k2]);
+        var rc = R1 * (1 + amp * J[j + 1][k2]), rd = R1 * (1 + amp * J[j + 1][k]);
+        var s = 1 + (S[j][k] - 0.5) * sh;
+        var rr = Math.min(255, col[0] * s) | 0, gg = Math.min(255, col[1] * s) | 0, bb = Math.min(255, col[2] * s) | 0;
+        var style = 'rgb(' + rr + ',' + gg + ',' + bb + ')';
+        ctx.beginPath();
+        ctx.moveTo(ax0 + ra * Math.cos(a0 + tw0), ay0 + ra * Math.sin(a0 + tw0));
+        ctx.lineTo(ax0 + rb * Math.cos(a1 + tw0), ay0 + rb * Math.sin(a1 + tw0));
+        ctx.lineTo(ax1 + rc * Math.cos(a1 + tw1), ay1 + rc * Math.sin(a1 + tw1));
+        ctx.lineTo(ax1 + rd * Math.cos(a0 + tw1), ay1 + rd * Math.sin(a0 + tw1));
+        ctx.closePath();
+        ctx.fillStyle = style; ctx.strokeStyle = style; ctx.lineWidth = 1;
+        ctx.fill(); if (d0 < 9) ctx.stroke();
+      }
+    }
+    var g = ctx.createRadialGradient(cx + ox * 0.6, cy + oy * 0.6, 0, cx + ox * 0.6, cy + oy * 0.6, halfDiag * 0.2);
+    g.addColorStop(0, 'rgba(250,224,180,0.95)'); g.addColorStop(1, 'rgba(250,224,180,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  }
+
+  size();
+
+  /* ------------------------------------------------------ static fallback -- */
+  if (reduce) {
+    root.classList.add('tun--static');
+    draw(5.3, 0.2, 0, 0);
+    var rs; window.addEventListener('resize', function () { clearTimeout(rs); rs = setTimeout(function () { size(); draw(5.3, 0.2, 0, 0); }, 150); });
+    return;
+  }
+
+  /* ----------------------------------------------------------- live mode -- */
+  var cam = { c: 0 }, active = false, mx = 0, my = 0, tx = 0, ty = 0, t0 = performance.now();
+
+  var lastDraw = 0, lastC = -1;
+  function render() {
+    if (!active) return;
+    var now = performance.now();
+    var moving = Math.abs(cam.c - lastC) > 0.0005;
+    var gap = mobile ? 33 : (moving ? 15 : 42);                       // idle drift needs no 60 fps
+    if (now - lastDraw < gap) return;
+    if (moving && lastTick) {
+      ema = ema ? ema * 0.9 + (now - lastTick) * 0.1 : (now - lastTick);
+      if (ema > (mobile ? 42 : 28) && Q > 0.5 && ++slowN > 18) { Q = Math.max(0.5, Q - 0.15); slowN = 0; ema = 0; size(); }
+    }
+    lastTick = moving ? now : 0;
+    lastDraw = now; lastC = cam.c;
+    var t = (now - t0) / 1000;
+    mx += (tx - mx) * 0.06; my += (ty - my) * 0.06;
+    draw(cam.c + t * 0.1, t * 0.025, mx, my);
+  }
+  gsap.ticker.add(render);
+
+  window.addEventListener('mousemove', function (e) {
+    tx = (e.clientX / window.innerWidth - 0.5) * W * 0.07;
+    ty = (e.clientY / window.innerHeight - 0.5) * H * 0.07;
+  }, { passive: true });
+
+  var rz;
+  window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(size, 120); });
+
+  root.classList.add('tun--live');
+  size();
+
+  var TOTAL_C = 9.5;
+  var ANG = [-152, -28, 152, 28, -90, 90];
+  var AX = 0.33, AY = 0.26;
+  var MOB = [[-0.2, -0.34], [0.2, -0.24], [-0.2, -0.06], [0.2, 0.06], [-0.2, 0.24], [0.2, 0.34]];
+  function targetX(i) { return (window.innerWidth <= 768 ? MOB[i][0] : Math.cos(ANG[i] * Math.PI / 180) * AX) * window.innerWidth; }
+  function targetY(i) { return (window.innerWidth <= 768 ? MOB[i][1] : Math.sin(ANG[i] * Math.PI / 180) * AY) * window.innerHeight; }
+
+  var tl = gsap.timeline({
+    defaults: { ease: 'none' },
+    scrollTrigger: {
+      trigger: pin,
+      start: 'top top',
+      end: function () { return '+=' + Math.round(window.innerHeight * (mobile ? 4.4 : 5.8)); },
+      pin: true, scrub: 0.6, anticipatePin: 1, invalidateOnRefresh: true,
+      onToggle: function (st) { active = st.isActive || st.progress > 0 && st.progress < 1; },
+      onUpdate: function () { setHud(tl.time()); }
+    }
+  });
+
+  /* always render while the section is near the viewport */
+  ScrollTrigger.create({
+    trigger: root, start: 'top bottom', end: 'bottom top',
+    onToggle: function (st) { active = st.isActive; }
+  });
+
+  gsap.set(intro, { xPercent: -50, yPercent: -50 });
+  gsap.set(outro, { xPercent: -50, yPercent: -50, opacity: 0 });
+  gsap.set(head,  { xPercent: -50, yPercent: -50, opacity: 0, scale: 0.4 });
+
+  /* camera flies down the tunnel for the whole scroll */
+  tl.to(cam, { c: TOTAL_C, duration: 15.6 }, 0);
+
+  /* peach iris opens from the centre (continues the hero panel), then closes at the end */
+  tl.fromTo(iris, { '--iris': -8 }, { '--iris': 105, ease: 'power2.inOut', duration: 1.5 }, 0.35);
+  tl.to(intro, { scale: 1.35, opacity: 0, ease: 'power2.in', duration: 1.3 }, 0.55);
+
+  function flyCard(el, t, hold, rot) {
+    gsap.set(el, { xPercent: -50, yPercent: -50, rotation: rot, opacity: 0, scale: 0.4 });
+    tl.to(el, { opacity: 1, scale: 1, ease: 'power2.out', duration: 0.8 }, t)
+      .to(el, { scale: 1.06, ease: 'none', duration: hold }, t + 0.8)
+      .to(el, { opacity: 0, scale: 2.1, ease: 'power2.in', duration: 0.75 }, t + 0.8 + hold);
+  }
+  flyCard(cards[0], 2.0, 1.6, -1.5);
+  flyCard(cards[1], 4.95, 1.0, 1.4);
+  flyCard(cards[2], 7.3, 1.0, -1.0);
+
+  tl.to(head, { opacity: 1, scale: 1, ease: 'power2.out', duration: 0.8 }, 9.7)
+    .to(head, { scale: 1.05, duration: 1.4 }, 10.5)
+    .to(head, { opacity: 0, scale: 1.8, ease: 'power2.in', duration: 0.75 }, 11.9);
+
+  tools.forEach(function (el, i) {
+    var ts = 9.9 + i * 0.24;
+    gsap.set(el, { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0.15, opacity: 0 });
+    tl.to(el, {
+      opacity: 1, scale: 1, ease: 'power2.out', duration: 1.0,
+      x: function () { return targetX(i); },
+      y: function () { return targetY(i); }
+    }, ts)
+    .to(el, {
+      opacity: 0, scale: 1.7, ease: 'power2.in', duration: 0.9,
+      x: function () { return targetX(i) * 2.3; },
+      y: function () { return targetY(i) * 2.3; }
+    }, ts + 1.0 + 0.5);
+  });
+
+  tl.to(iris, { '--iris': -8, ease: 'power2.inOut', duration: 1.4 }, 12.6);
+  tl.to(outro, { opacity: 1, ease: 'power2.out', duration: 0.8 }, 13.8);
+  tl.to({}, { duration: 0.01 }, 15.6);
+
+  /* progress dots */
+  var STAGES = [[1.9, 4.95], [4.95, 7.3], [7.3, 9.7], [9.7, 13.0]];
+  function setHud(t) {
+    dots.forEach(function (d, i) { d.classList.toggle('on', t >= STAGES[i][0] && t < STAGES[i][1]); });
+  }
+
+  window.addEventListener('drp:end', function () { ScrollTrigger.refresh(); });
+  window.addEventListener('load', function () { size(); ScrollTrigger.refresh(); });
+
+  active = true; draw(0, 0, 0, 0);
+})();
+</script>
+<script>
+/* CASE STUDY — Bhartiya Khel Sutra (needs gsap + ScrollTrigger). Each chapter has its own motion. */
+(function () {
+  'use strict';
+  var root = document.querySelector('.kx');
+  if (!root) return;
+  var $  = function (s, c) { return (c || root).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || root).querySelectorAll(s)); };
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* the prototype video: play only while the laptop is on screen */
+  var vid = $('.kx-lap video');
+  if (vid) {
+    if (reduce) { vid.setAttribute('controls', ''); }
+    else if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { var p = vid.play(); if (p && p.catch) p.catch(function () {}); } else vid.pause();
         });
+      }, { threshold: 0.25 }).observe(vid);
+    }
+  }
 
-        // ── 2. Letter wipe-up (staggered) ──────────────
-        tl.to(letters, {
-          y: '0%',
-          duration: 0.9,
-          ease: 'power4.out',
-          stagger: 0.08
-        }, '-=0.15');
-
-        // ── 3. "Yes, double r" annotation fades in ─────
-        tl.to(note, {
-          opacity: 1,
-          y: 0,
-          duration: 0.55,
-          ease: 'power3.out'
-        }, '-=0.3');
-
-        // ── 4. Breathe pause ───────────────────────────
-        tl.to({}, { duration: 0.65 });
-
-        // ── 5. Overlay wipes up ────────────────────────
-        tl.to(overlay, {
-          yPercent: -100,
-          duration: 1.0,
-          ease: 'power4.inOut'
-        });
+  /* images load lazily; warm them one by one while the browser is idle so nothing decodes mid-scroll */
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var q = $$('img[loading="lazy"]');
+      (function next() {
+        var im = q.shift(); if (!im) return;
+        im.loading = 'eager';
+        var go = function () { (window.requestIdleCallback || function (f) { setTimeout(f, 200); })(next, { timeout: 1500 }); };
+        if (im.decode) im.decode().then(go, go); else go();
       })();
-    </script>
-    <!-- ═══════════════════════════════════════════ -->
+    }, 2500);
+  });
 
+  if (reduce || !window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+  root.classList.add('kx--live');
+  var mob = function () { return window.innerWidth <= 860; };
+  var D = { ease: 'none' };
+
+  /* A · laptop rises, the one top panel drops */
+  (function () {
+    var pin = $('.kx-a__pin'), head = $('.kx-a__head'), lap = $('.kx-lap'), bar = $('.kx-a__bar');
+    gsap.set(bar, { yPercent: -100 });
+    gsap.set(lap, { yPercent: 115 });
+    var tl = gsap.timeline({ defaults: D, scrollTrigger: { trigger: pin, start: 'top top', end: '+=160%', pin: true, scrub: 0.5, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.to(head, { yPercent: -22, autoAlpha: 0.0, duration: 1 }, 0.35)
+      .to(lap, { yPercent: 0, duration: 1.2, ease: 'power2.out' }, 0.2)
+      .to(bar, { yPercent: 0, duration: 0.8, ease: 'power3.out' }, 1.5)
+      .to({}, { duration: 0.6 });
+  })();
+
+  /* B · challenge text and research doc in one pinned scroll */
+  (function () {
+    if (mob()) return;
+    var sec = $('.kx-b'), pin = $('.kx-b__pin');
+    var lab = $('.kx-b .kx-lab'), t = $('.kx-b .kx-t'), p = $('.kx-b > .kx-b__pin .kx-p'), li = $$('.kx-b__issues li'),
+        doc = $('.kx-b__doc'), stamp = $('.kx-b__stamp');
+    var all = [lab, t, p].concat(li);
+    gsap.set(all, { autoAlpha: 0, y: 28 });
+    gsap.set(doc, { autoAlpha: 0, y: 140, rotate: 4 });
+    gsap.set(stamp, { scale: 0, autoAlpha: 0 });
+    var cfg = { trigger: pin, start: 'top top', end: '+=100%', pin: true, scrub: 0.5, anticipatePin: 1, invalidateOnRefresh: true };
+    var tl = gsap.timeline({ defaults: D, scrollTrigger: cfg });
+    tl.to([lab, t], { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' }, 0)
+      .to(doc, { autoAlpha: 1, y: 0, rotate: 1.4, duration: 0.9, ease: 'power2.out' }, 0.2)
+      .to(p, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.7)
+      .to(li, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.45, ease: 'power2.out' }, 1.2)
+      .to(stamp, { scale: 1, autoAlpha: 1, duration: 0.5, ease: 'back.out(2)' }, 2.1)
+      .to({}, { duration: 0.6 });
+  })();
+
+  /* C · the diagram pans sideways inside its frame (no circle) */
+  (function () {
+    var pin = $('.kx-c__pin'), head = $('.kx-c__head'), img = $('.kx-c__view img'), cap = $('.kx-c .kx-cap');
+    gsap.set([head, cap], { autoAlpha: 0, y: 24 });
+    var pan = function () { return -Math.max(0, img.offsetWidth - img.parentNode.offsetWidth); };
+    var tl = gsap.timeline({ defaults: D, scrollTrigger: { trigger: pin, start: 'top top', end: '+=100%', pin: true, scrub: 0.5, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.to(head, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0)
+      .to(cap, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0.4)
+      .fromTo(img, { x: 0 }, { x: pan, duration: 2, ease: 'power1.inOut' }, 0.8)
+      .to({}, { duration: 0.5 });
+  })();
+
+  /* D · the two screens drift at different speeds past the sticky text */
+  $$('.kx-d [data-par]').forEach(function (el) {
+    gsap.fromTo(el, { y: 0 }, { y: parseFloat(el.getAttribute('data-par')) * (mob() ? 0.3 : 1), ease: 'none',
+      scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
+  });
+
+  /* E · horizontal gallery */
+  (function () {
+    var pin = $('.kx-e__pin'), track = $('.kx-e__track');
+    var dist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
+    gsap.to(track, { x: function () { return -dist(); }, ease: 'none',
+      scrollTrigger: { trigger: pin, start: 'top top', end: function () { return '+=' + dist(); }, pin: true, scrub: 0.5, anticipatePin: 1, invalidateOnRefresh: true } });
+  })();
+
+  /* F · spreads settle at different depths */
+  $$('.kx-f [data-par]').forEach(function (el) {
+    gsap.fromTo(el, { y: 60 }, { y: parseFloat(el.getAttribute('data-par')) * (mob() ? 0.4 : 1), ease: 'none',
+      scrollTrigger: { trigger: '.kx-f', start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
+  });
+
+  /* G · the row in the middle of the screen is the lit one */
+  (function () {
+    var rows = $$('.kx-g__rows li');
+    rows.forEach(function (r) {
+      ScrollTrigger.create({ trigger: r, start: 'top 62%', end: 'bottom 38%',
+        onToggle: function (s) { r.classList.toggle('on', s.isActive); } });
+    });
+  })();
+
+  window.addEventListener('drp:end', function () { ScrollTrigger.refresh(); });
+  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+})();
+</script>
+
+<!-- ============================ BOTTOM BAR (appears at the Khel Sutra mockup) ============================ -->
+<nav class="kbar" id="kbar" aria-label="Project navigation">
+  <span class="kbar__msg" id="kbarMsg"><i>↓</i><span>Scroll down for case study</span></span>
+  <a class="kbar__go" href="echo-case-study.html">Next project · Echo <span aria-hidden="true">→</span></a>
+</nav>
+<script>
+(function(){
+  var bar=document.getElementById('kbar'),msg=document.getElementById('kbarMsg');
+  var a=document.querySelector('.kx-a'),b=document.querySelector('.kx-b'),w=document.getElementById('work');
+  if(!bar||!a||!b||!w)return;
+  var cur=-1;
+  function upd(){
+    var vh=window.innerHeight;
+    var on=a.getBoundingClientRect().top<-vh*.15&&w.getBoundingClientRect().bottom>vh*.55;
+    bar.classList.toggle('on',on);
+    var intro=b.getBoundingClientRect().top>vh*.5?1:0;
+    if(intro!==cur){cur=intro;msg.innerHTML=intro?'<i>\u2193</i><span>Scroll down for case study</span>':'<span>Bhartiya Khel Sutra</span>';}
+  }
+  window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);
+  window.addEventListener('drp:end',function(){setTimeout(upd,200);});
+  upd();
+  /* coming back from the Echo page: land on the Khel Sutra mockup */
+  window.addEventListener('drp:end',function(){
+    var tgt=location.hash==='#work'?w:(location.hash==='#contact'?document.getElementById('contact'):null);
+    if(!tgt)return;
+    setTimeout(function(){
+      if(window.ScrollTrigger)ScrollTrigger.refresh();
+      window.scrollTo(0,tgt.getBoundingClientRect().top+window.pageYOffset);
+    },250);
+  });
+})();
+</script>
+<script>
+/* Resume buttons: the portfolio tab stays put. The PDF is saved to downloads and also opens in a separate tab. */
+(function(){
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[data-resume]');
+    if(!a)return;
+    e.preventDefault();
+    var href=a.getAttribute('href'),name=a.getAttribute('download')||'Resume.pdf';
+    try{
+      var d=document.createElement('a');
+      d.href=href;d.download=name;d.style.display='none';
+      document.body.appendChild(d);d.click();document.body.removeChild(d);
+    }catch(x){}
+    try{window.open(href,'_blank','noopener');}catch(x){}
+  });
+})();
+</script>
 </body>
-
 </html>
