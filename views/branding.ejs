@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <meta name="description"
+        content="Brand Identity & Visual Systems by Drriti Pasrija — Explore brand books, editorial design, typography systems, and packaging.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+        .branding-hero {
+            padding: 140px 6vw 60px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .branding-tag {
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #8b5cf6;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .branding-title {
+            font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 18px;
+            color: #fff;
+        }
+        .branding-desc {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+        .branding-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 40px;
+            max-width: 1240px;
+            margin: 40px auto 100px;
+            padding: 0 6vw;
+        }
+        .branding-card {
+            background: #14161f;
+            border: 1px solid #232736;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        .branding-card:hover {
+            transform: translateY(-8px);
+            border-color: #8b5cf6;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.4), 0 0 30px rgba(139, 92, 246, 0.15);
+        }
+        .branding-card-media {
+            height: 280px;
+            overflow: hidden;
+            background: #0f1016;
+            position: relative;
+        }
+        .branding-card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .branding-card:hover .branding-card-media img {
+            transform: scale(1.05);
+        }
+        .branding-card-content {
+            padding: 28px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .branding-card-cat {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #8b5cf6;
+            margin-bottom: 8px;
+        }
+        .branding-card-h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        .branding-card-p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .branding-card-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+        }
+        .branding-card-link i {
+            transition: transform 0.25s ease;
+        }
+        .branding-card:hover .branding-card-link i {
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <%- include('partials/nav') %>
+
+    <main>
+        <section class="branding-hero">
+            <span class="branding-tag">Brand & Visual Communication</span>
+            <h1 class="branding-title">Visual Systems, Identity & Editorial Design</h1>
+            <p class="branding-desc">
+                Complementing my UI/UX work with foundational visual communication—crafting distinctive brand books, 
+                typography hierarchies, packaging systems, and editorial publications.
+            </p>
+        </section>
+
+        <section class="branding-grid">
+            <!-- Project 1: Oton -->
+            <a href="/oton" class="branding-card">
+                <div class="branding-card-media">
+                    <img src="/images/oton/Clothing Label Mockup.png" alt="Oton brand identity">
+                </div>
+                <div class="branding-card-content">
+                    <span class="branding-card-cat">Identity · Fashion</span>
+                    <h3 class="branding-card-h3">OTON</h3>
+                    <p class="branding-card-p">A modern menswear brand identity emphasizing architectural precision, quiet luxury, and bespoke typography.</p>
+                    <span class="branding-card-link">View Brand Guidelines <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Project 2: Mittrika -->
+            <a href="/mittrika" class="branding-card">
+                <div class="branding-card-media">
+                    <img src="/images/mittrika/MRITTIKA BEHANCE-01.jpg" alt="Mittrika branding">
+                </div>
+                <div class="branding-card-content">
+                    <span class="branding-card-cat">Branding · Material Design</span>
+                    <h3 class="branding-card-h3">MRITTIKA</h3>
+                    <p class="branding-card-p">Earthy, organic brand identity for terracotta and artisanal desk accessories rooted in Indian craft traditions.</p>
+                    <span class="branding-card-link">View Case Study <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Project 3: Riyasat -->
+            <a href="/riyasat" class="branding-card">
+                <div class="branding-card-media">
+                    <img src="/images/riyasat/riyasat brand guidelines 1_Page_01.jpg" alt="Riyasat brand identity">
+                </div>
+                <div class="branding-card-content">
+                    <span class="branding-card-cat">Heritage · Brand Book</span>
+                    <h3 class="branding-card-h3">Riyasat</h3>
+                    <p class="branding-card-p">Comprehensive 46-page brand book, royal insignia anatomy, gold leaf packaging, and luxury guidelines.</p>
+                    <span class="branding-card-link">Explore Brand Book <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Project 4: Bhartiya Khel Sutra Book Design -->
+            <a href="https://heyzine.com/flip-book/c704068ec5.html" target="_blank" rel="noopener noreferrer" class="branding-card">
+                <div class="branding-card-media">
+                    <img src="/images/khel-sutra/building-visuals.jpg" alt="Bhartiya Khel Sutra Book Design">
+                </div>
+                <div class="branding-card-content">
+                    <span class="branding-card-cat">Editorial · Information Design</span>
+                    <h3 class="branding-card-h3">Bhartiya Khel Sutra (Book)</h3>
+                    <p class="branding-card-p">Structured editorial architecture system documenting Indian play traditions across 75 custom illustrations and archival research.</p>
+                    <span class="branding-card-link">Open Flipbook Publication <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                </div>
+            </a>
+
+            <!-- Project 5: Khol Khel Catalogues -->
+            <a href="https://heyzine.com/flip-book/d973095494.html" target="_blank" rel="noopener noreferrer" class="branding-card">
+                <div class="branding-card-media">
+                    <img src="/images/Packaging behance-07.jpg" alt="Khol Khel Catalogues">
+                </div>
+                <div class="branding-card-content">
+                    <span class="branding-card-cat">Catalogue · Print & Layout</span>
+                    <h3 class="branding-card-h3">Khol Khel Product Catalogues</h3>
+                    <p class="branding-card-p">Series of three commercial product catalogues translating handcrafted wooden games and artisan stories into structured retail layouts.</p>
+                    <span class="branding-card-link">Open Catalogue Flipbook <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                </div>
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+</body>
+</html>

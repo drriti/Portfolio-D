@@ -1,0 +1,393 @@
+/* =========================================================================
+   DRRITI — HERO & SCROLL TRANSITION
+   Scoped under .drh
+   ========================================================================= */
+
+.drh {
+  --drh-dark: #10130d;
+  --drh-peach: #F3B477;
+  --drh-cream: #F2E4C8;
+  --drh-ivory: #EFE5D2;
+  --drh-sage: #92977A;
+  --drh-olive: #73795B;
+  --drh-forest: #424C3A;
+  --drh-pumpkin: #D98A3A;
+  --drh-ink: #171717;
+  --drh-display: "Lexend Zetta", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --drh-mono: "Martian Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  position: relative;
+  background: var(--drh-dark);
+  color: var(--drh-ink);
+  font-family: var(--drh-mono);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  width: 100%;
+}
+
+.drh *, .drh *::before, .drh *::after {
+  box-sizing: border-box;
+}
+
+.drh img {
+  display: block;
+  max-width: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Failsafe handling: don't permanently hide on load */
+.js .drh:not(.drh--live):not(.drh--static) {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------- pin & scene -- */
+.drh__pin {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.drh__scene {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 45%, #2d3824 0%, #171e11 70%, #0d1209 100%);
+}
+
+.drh__layers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.drh__layer {
+  position: absolute;
+  left: -4%;
+  top: -4%;
+  width: 108%;
+  height: 108%;
+  object-fit: cover;
+  object-position: 50% 56%;
+  pointer-events: none;
+  will-change: transform;
+  transform-origin: 50% 62%;
+}
+
+/* Fallback procedural canvas scene if external raster layers are omitted */
+.drh__scene-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.drh__grade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 58%, rgba(0,0,0,0) 52%, rgba(28,32,18,.38) 100%),
+    radial-gradient(60% 50% at 72% 18%, rgba(255,210,140,.20), rgba(255,210,140,0) 70%),
+    linear-gradient(to top, rgba(52,60,34,.20), rgba(52,60,34,0) 38%);
+}
+
+.drh__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.35;
+}
+
+/* -------------------------------------------------------------- mosaic --- */
+.drh__mosaic {
+  display: none;
+}
+
+.drh--live .drh__mosaic {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2400px;
+  height: 1500px;
+  margin: -750px 0 0 -1200px;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  pointer-events: none;
+  --shade: 0;
+}
+
+.drh__tile {
+  position: absolute;
+  overflow: hidden;
+  background: #2b3022;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+
+.drh__tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--drh-dark);
+  opacity: var(--shade, 0);
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.drh__tile img,
+.drh__tile-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(var(--z, 1.2)) translate3d(var(--dx, 0), var(--dy, 0), 0);
+  transform-origin: var(--ox, 50%) var(--oy, 50%);
+  animation: drh-drift var(--dur, 16s) ease-in-out infinite alternate;
+}
+
+@keyframes drh-drift {
+  from { transform: scale(var(--z, 1.2)) translate3d(calc(var(--dx, 0px) * -1), calc(var(--dy, 0px) * -1), 0); }
+  to   { transform: scale(var(--z, 1.2)) translate3d(var(--dx, 0px), var(--dy, 0px), 0); }
+}
+
+/* live (pinned) layout */
+.drh--live .drh__pin {
+  height: 100vh;
+  height: 100svh;
+  background: var(--drh-dark);
+}
+
+.drh--live .drh__scene {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  transform-origin: 50% 50%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* ------------------------------------------------------------------ CTA -- */
+.drh__cta {
+  display: none;
+}
+
+.drh--live .drh__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  cursor: pointer;
+  font: 400 11px/1 var(--drh-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--drh-ink);
+  padding: 0.95em 1.6em;
+  border-radius: 999px;
+  border: 1px solid rgba(23, 23, 23, 0.35);
+  background: rgba(242, 228, 200, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.25s, transform 0.25s;
+}
+
+.drh--live .drh__cta:hover {
+  background: rgba(242, 228, 200, 0.96);
+  transform: translate(-50%, -52%);
+}
+
+.drh--live .drh__cta:focus-visible {
+  outline: 2px solid var(--drh-ink);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------- panel --- */
+.drh__panel {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: linear-gradient(90deg, #E2C4A3 0%, #EDB27A 19%, #F0A24F 40%, #EC9A42 50%, #EFAE72 72%, #E6C7A5 100%);
+}
+
+.drh--live .drh__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  min-height: 0;
+  will-change: transform;
+}
+
+.drh__content {
+  position: relative;
+  padding: 0 4vw;
+  will-change: transform;
+}
+
+.drh__meta {
+  display: grid;
+  grid-template-columns: 28% 22% 1fr auto;
+  align-items: start;
+  padding-top: 3.5vh;
+  font: 400 clamp(9px, 0.68vw, 12px)/1.4 var(--drh-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(23, 23, 23, 0.7);
+}
+
+.drh__meta a {
+  color: inherit;
+  text-decoration: none;
+}
+.drh__meta a:hover {
+  text-decoration: underline;
+}
+
+.drh__title {
+  margin: clamp(24px, 4.5vh, 60px) 0 0;
+  font: 200 12vw/1 var(--drh-display);
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--drh-ink);
+  font-kerning: normal;
+}
+
+.drh__line {
+  display: block;
+  overflow: hidden;
+  padding: 0.05em 0 0.04em;
+  margin: -0.05em 0 -0.04em;
+}
+
+.drh__line > span {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.drh__line--1 {
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.drh__line--2 {
+  font-size: 4.8vw;
+  line-height: 1.05;
+  margin-top: 0.12em;
+  letter-spacing: -0.02em;
+}
+
+.drh__lede, .drh__note {
+  margin: 0;
+  width: 42%;
+  margin-left: 50%;
+  font: 300 clamp(10px, 0.72vw, 13px)/1.75 var(--drh-mono);
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: rgba(23, 23, 23, 0.85);
+}
+
+.drh__lede strong {
+  font-weight: 500;
+}
+
+.drh__lede {
+  margin-top: 6vh;
+}
+
+.drh__statement {
+  margin: 9vh 0 0 35%;
+  width: 60%;
+  font: 300 clamp(18px, 2.2vw, 42px)/1.22 var(--drh-display);
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: var(--drh-ink);
+}
+
+.drh__statement .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.06em 0 0.04em;
+  margin: -0.06em 0 -0.04em;
+}
+
+.drh__statement .w > span {
+  display: inline-block;
+  will-change: transform;
+}
+
+.drh__note {
+  margin-top: 6vh;
+  padding-bottom: 12vh;
+  color: rgba(23, 23, 23, 0.6);
+}
+
+/* ----------------------------------------------------------- mobile ------ */
+@media (max-width: 768px) {
+  .drh__content {
+    padding: 0 5vw;
+  }
+  .drh__meta {
+    grid-template-columns: 1fr auto;
+    row-gap: 0.5em;
+    font-size: 9.5px;
+    padding-top: 2.5vh;
+  }
+  .drh__meta span:nth-child(2),
+  .drh__meta span:nth-child(3) {
+    display: none;
+  }
+  .drh__title {
+    font-size: 15vw;
+    margin-top: 4vh;
+  }
+  .drh__line--2 {
+    font-size: 6vw;
+  }
+  .drh__lede, .drh__note {
+    width: 100%;
+    margin-left: 0;
+    font-size: 10.5px;
+    line-height: 1.7;
+  }
+  .drh__lede {
+    margin-top: 4vh;
+  }
+  .drh__statement {
+    margin: 5vh 0 0;
+    width: 100%;
+    font-size: 5vw;
+    line-height: 1.25;
+  }
+  .drh__note {
+    margin-top: 4vh;
+    padding-bottom: 8vh;
+  }
+  .drh--live .drh__cta {
+    font-size: 10px;
+    padding: 0.9em 1.3em;
+  }
+}
+
+/* ------------------------------------------------------ reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .drh__tile img,
+  .drh__tile-art {
+    animation: none;
+  }
+}

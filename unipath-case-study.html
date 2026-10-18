@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>UniPath — Case study · Drriti</title>
+<meta name="description" content="UniPath: a study-abroad app that turns a student's profile into a roadmap, matched universities and a deadline timeline.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Zetta:wght@200;300;400;500&family=Martian+Mono:wght@300;400;500&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html{background:#0E1B33;scroll-behavior:smooth}
+body{margin:0;background:#0E1B33}
+html{background:#0E1B33;scroll-behavior:smooth}
+body{margin:0;background:#0E1B33}
+/* =========================================================================
+   CASE STUDY — BHARTIYA KHEL SUTRA  (scoped under .kx)
+   Type: Space Grotesk (display) + Martian Mono (text, labels), same as the hero.
+   Default (no JS / reduced motion): every chapter stacks normally.
+   .kx--live adds the pinned / scrubbed behaviour, one idea per chapter:
+     A intro  — laptop rises, top panel drops (the only top panel)
+     B brief  — doc + challenge share one pinned scroll
+     C IA     — circle opens onto the diagram (the only circle)
+     D access — sticky text, two browser frames drift past
+     E world  — horizontal gallery
+     F print  — overlapping spreads
+     G change — list with a sticky screen
+     H launch — closing
+   ========================================================================= */
+.kx{
+  --ink:#0E1B33; --cream:#F4EFDF; --paper:#EDE5CE; --moss:#16358F; --mossd:#12285A; --clay:#1D4ED8; --gold:#9DB8FF; --sky:#64748B;
+  --serif:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --text:"Martian Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  position:relative;background:var(--ink);color:var(--cream);font-family:var(--text);-webkit-font-smoothing:antialiased;overflow-x:clip;
+}
+.kx *,.kx *::before,.kx *::after{box-sizing:border-box}
+.kx img,.kx video{display:block;max-width:100%}
+.kx :where(h2,h3,p,dl,dd,ul,figure){margin:0;padding:0}
+.kx ul{list-style:none}
+.kx em{font-style:italic}
+.kx-lab{font:300 12px/1.4 var(--text);letter-spacing:.2em;text-transform:uppercase;opacity:.7;margin-bottom:clamp(12px,1.4vw,22px)}
+.kx-t{font:200 clamp(26px,3.6vw,60px)/.94 var(--serif);letter-spacing:-.015em;margin-bottom:clamp(16px,1.8vw,28px)}
+.kx-p{font:300 clamp(13px,1.01vw,17px)/1.5 var(--text);max-width:34ch}
+.kx-pad{padding:clamp(72px,10vw,150px) 5vw}
+
+/* browser frame (full web-screen screenshots) */
+.kx-win{border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 30px 70px rgba(0,0,0,.34),0 0 0 1px rgba(0,0,0,.12)}
+.kx-win__bar{display:flex;align-items:center;gap:6px;height:28px;padding:0 12px;background:#E9E3D2}
+.kx-win__bar i{width:9px;height:9px;border-radius:50%;background:rgba(14,27,51,.28)}
+.kx-win__bar span{margin-left:10px;font:300 12px/1 var(--text);color:rgba(14,27,51,.62);letter-spacing:.04em}
+.kx-win img{width:100%;height:auto}
+.kx-cap{margin-top:14px;font:300 clamp(12px,0.83vw,14px)/1.4 var(--text);opacity:.85}
+
+/* ---------------- A · intro ---------------- */
+.kx-a{background:radial-gradient(120% 90% at 50% 0%,#1B3A8A 0%,#0E1B33 62%);}
+.kx-a__pin{position:relative;padding:0 5vw 6vh;display:flex;flex-direction:column;align-items:center}
+.kx-a__bar{width:calc(100% + 10vw);margin:0 -5vw;background:var(--cream);color:var(--ink);padding:clamp(14px,2vh,22px) 5vw;display:flex;gap:2vw;justify-content:space-between;align-items:center;flex-wrap:wrap;position:relative;z-index:5}
+.kx-a__name{font:200 clamp(16px,1.56vw,26px)/1 var(--serif)}
+.kx-a__meta{display:flex;gap:clamp(18px,2.6vw,48px);flex-wrap:wrap}
+.kx-a__meta div{min-width:0}
+.kx-a__meta dt{font:300 11px/1 var(--text);letter-spacing:.18em;text-transform:uppercase;opacity:.58;margin-bottom:6px}
+.kx-a__meta dd{font:300 clamp(12px,0.83vw,14px)/1.2 var(--text)}
+.kx-a__head{text-align:center;padding:clamp(48px,9vh,110px) 0 clamp(28px,5vh,60px);position:relative;z-index:2}
+.kx-a__head .kx-t{font-size:clamp(34px,7.4vw,130px);margin:0 0 .2em;line-height:.98}
+.kx-a__head .kx-p{margin:0 auto;max-width:44ch;opacity:.92}
+.kx-lap{--ar:1.755;width:min(86vw,calc(70vh * var(--ar) / .94));position:relative;z-index:3}
+.kx-lap__lid{background:#0B0F0A;border-radius:14px 14px 4px 4px;padding:1.6% 1.6% 1.9%;box-shadow:0 0 0 2px #2A2E29,0 40px 90px rgba(0,0,0,.55);position:relative}
+.kx-lap__lid::before{content:"";position:absolute;left:50%;top:.55%;width:.6%;aspect-ratio:1;border-radius:50%;background:#262B25;transform:translateX(-50%)}
+.kx-lap__screen{aspect-ratio:var(--ar);background:#111;border-radius:3px;overflow:hidden;position:relative}
+.kx-lap__screen video{width:100%;height:100%;object-fit:cover}
+.kx-lap__base{height:clamp(8px,1.5vw,20px);margin:0 -4.5%;background:linear-gradient(#D5D0C2,#A9A598);border-radius:0 0 18px 18px;position:relative;box-shadow:0 24px 40px rgba(0,0,0,.45)}
+.kx-lap__base::before{content:"";position:absolute;left:50%;top:0;width:16%;height:38%;background:rgba(0,0,0,.18);border-radius:0 0 10px 10px;transform:translateX(-50%)}
+.kx-lap__note{margin-top:18px;text-align:center;font:300 clamp(12px,0.79vw,14px)/1.4 var(--text);opacity:.75}
+.kx--live .kx-a__pin{height:100vh;height:100svh;padding-bottom:3vh;justify-content:flex-start;overflow:hidden}
+.kx--live .kx-a__bar{position:absolute;top:0;left:0;margin:0;width:100%}
+.kx--live .kx-a__head{position:absolute;left:0;right:0;top:50%;transform:translateY(-54%);padding:0 5vw}
+.kx--live .kx-lap{position:absolute;left:50%;bottom:3vh;transform:translateX(-50%)}
+.kx--live .kx-lap__note{display:none}
+
+/* ---------------- B · brief + research doc, one scroll ---------------- */
+.kx-b{background:var(--paper);color:var(--ink)}
+.kx-b__in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,90px);align-items:center;max-width:1500px;margin:0 auto}
+.kx-b .kx-lab{color:var(--clay);opacity:1}
+.kx-b__issues{margin-top:clamp(22px,3vw,40px);counter-reset:i}
+.kx-b__issues li{counter-increment:i;display:grid;grid-template-columns:2.2em 1fr;gap:.4em;padding:clamp(12px,1.4vw,20px) 0;border-top:1px solid rgba(14,27,51,.25);font:300 clamp(12px,0.94vw,15px)/1.42 var(--text)}
+.kx-b__issues li::before{content:"0" counter(i);font:200 clamp(13px,1.08vw,18px)/1 var(--serif);color:var(--clay)}
+.kx-b__issues b{font-weight:500}
+.kx-b__doc{position:relative;transform:rotate(1.4deg)}
+.kx-b__doc .kx-win{box-shadow:0 36px 70px rgba(14,27,51,.28),0 0 0 1px rgba(14,27,51,.16)}
+.kx-b__doc .kx-cap{color:var(--ink)}
+.kx-b__stamp{position:absolute;right:-1.4vw;top:-3.2vw;width:clamp(78px,8vw,124px);aspect-ratio:1;border-radius:50%;background:var(--clay);color:var(--cream);display:grid;place-items:center;text-align:center;font:200 clamp(10px,0.9vw,14px)/1.05 var(--serif);transform:rotate(-10deg);box-shadow:0 10px 24px rgba(0,0,0,.22)}
+.kx--live .kx-b{padding:0}
+.kx--live .kx-b__pin{height:100vh;height:100svh;padding:0 5vw;display:flex;align-items:center;overflow:hidden}
+.kx--live .kx-b__in{width:100%}
+
+/* ---------------- C · information architecture (circle) ---------------- */
+.kx-c{background:var(--ink)}
+
+/* ---------------- D · two ways in ---------------- */
+.kx-d{background:var(--cream);color:var(--ink)}
+.kx-d__in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);gap:clamp(28px,5vw,90px);max-width:1500px;margin:0 auto;align-items:start}
+.kx-d__txt{position:sticky;top:18vh}
+.kx-d .kx-lab{color:var(--clay);opacity:1}
+.kx-d__list{margin-top:clamp(20px,2.4vw,34px)}
+.kx-d__list li{padding:.8em 0;border-top:1px solid rgba(14,27,51,.25);font:300 clamp(12px,0.86vw,14px)/1.42 var(--text)}
+.kx-d__shots{display:grid;gap:clamp(40px,8vw,120px)}
+.kx-d__shots figure:nth-child(2){margin-left:clamp(0px,6vw,100px)}
+.kx-d__shots figure:nth-child(1){margin-right:clamp(0px,4vw,60px)}
+.kx-d__shots .kx-cap{color:var(--ink)}
+
+/* ---------------- E · the world (horizontal) ---------------- */
+.kx-e{background:var(--mossd)}
+.kx-e__track{display:flex;gap:clamp(22px,3vw,52px);align-items:center;padding:0 5vw}
+.kx-e__intro{flex:none;width:min(520px,86vw)}
+.kx-e__sw{display:flex;gap:8px;margin-top:clamp(18px,2vw,28px)}
+.kx-e__sw i{width:clamp(30px,2.6vw,42px);aspect-ratio:1;border-radius:50%;border:1px solid rgba(244,239,223,.4)}
+.kx-e__note{margin-top:14px;font:300 clamp(12px,0.79vw,14px)/1.4 var(--text);opacity:.8;max-width:34ch}
+.kx-e__item{flex:none;width:min(66vw,calc(62vh * 1.78));margin:0}
+.kx-e__item .kx-win{box-shadow:0 26px 60px rgba(0,0,0,.45)}
+.kx-e__end{flex:none;width:2vw}
+.kx-e__hint{display:none}
+.kx--live .kx-e__pin{height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden}
+.kx--live .kx-e__track{width:max-content}
+.kx:not(.kx--live) .kx-e{padding:clamp(72px,10vw,150px) 0}
+.kx:not(.kx--live) .kx-e__track{flex-wrap:wrap;justify-content:center}
+.kx:not(.kx--live) .kx-e__item{width:min(92vw,900px)}
+
+/* ---------------- F · print ---------------- */
+.kx-f{background:#E4D9BC;color:var(--ink);overflow:hidden}
+.kx-f__in{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr);gap:clamp(24px,5vw,80px);max-width:1500px;margin:0 auto;align-items:center}
+.kx-f .kx-lab{color:var(--clay);opacity:1}
+.kx-f__art{position:relative;min-height:clamp(420px,52vw,760px)}
+.kx-f__art figure{position:absolute;margin:0;background:#fff;padding:clamp(6px,.8vw,12px);box-shadow:0 26px 50px rgba(14,27,51,.28)}
+.kx-f__art img{width:100%;height:auto}
+.kx-f__a{left:0;top:0;width:58%;transform:rotate(-2.4deg)}
+.kx-f__b{right:0;top:12%;width:50%;transform:rotate(2deg)}
+.kx-f__c{left:14%;bottom:0;width:44%;transform:rotate(-.8deg)}
+.kx-f__art figcaption{font:300 clamp(12px,0.72vw,14px)/1.3 var(--text);padding-top:8px;color:rgba(14,27,51,.75)}
+.kx-f__list{margin-top:clamp(18px,2vw,30px)}
+.kx-f__list li{padding:.8em 0;border-top:1px solid rgba(14,27,51,.28);font:300 clamp(12px,0.86vw,14px)/1.42 var(--text)}
+
+/* ---------------- G · iterations ---------------- */
+.kx-g{background:var(--ink)}
+.kx-g__in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,90px);max-width:1500px;margin:0 auto;align-items:start}
+.kx-g__stick{position:sticky;top:8vh}
+.kx-g__stick .kx-t{font-size:clamp(40px,4.3vw,72px)}
+.kx-g__rows li{display:grid;grid-template-columns:clamp(60px,7vw,110px) 1fr;gap:clamp(12px,2vw,28px);padding:clamp(28px,6vh,64px) 0;border-top:1px solid rgba(244,239,223,.25);opacity:.45;transition:opacity .5s}
+.kx-g__rows li.on,.kx:not(.kx--live) .kx-g__rows li{opacity:1}
+.kx-g__rows li:last-child{border-bottom:1px solid rgba(244,239,223,.25)}
+.kx-g__rows span{font:200 clamp(28px,3.6vw,60px)/.9 var(--serif);color:var(--gold)}
+.kx-g__rows h3{font:200 clamp(16px,1.44vw,24px)/1.05 var(--serif);margin-bottom:.35em}
+.kx-g__rows p{font:300 clamp(12px,0.86vw,14px)/1.5 var(--text);opacity:.9;max-width:40ch}
+.kx-g__rows li{min-height:clamp(180px,34vh,320px);align-items:start}
+
+/* ---------------- H · launch ---------------- */
+.kx-h{background:var(--moss);text-align:center}
+.kx-h__in{max-width:1300px;margin:0 auto}
+.kx-h .kx-t{font-size:clamp(60px,12vw,210px);margin-bottom:.1em}
+.kx-h__lead{font:300 clamp(14px,1.15vw,19px)/1.45 var(--text);max-width:40ch;margin:0 auto clamp(36px,5vw,70px)}
+.kx-h__checks{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,36px);text-align:left;border-top:1px solid rgba(244,239,223,.35);padding-top:clamp(22px,3vw,40px)}
+.kx-h__checks h3{font:200 clamp(13px,1.14vw,19px)/1.05 var(--serif);margin-bottom:.5em;color:var(--gold)}
+.kx-h__checks p{font:300 clamp(12px,0.79vw,14px)/1.5 var(--text);opacity:.92}
+.kx-h__go{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:clamp(36px,5vw,64px)}
+.kx-btn{display:inline-flex;gap:.6em;align-items:center;padding:1em 1.8em;border-radius:999px;border:1px solid var(--cream);color:var(--cream);text-decoration:none;font:300 13px/1 var(--text);letter-spacing:.16em;text-transform:uppercase;transition:background .25s,color .25s}
+.kx-btn:hover,.kx-btn:focus-visible{background:var(--cream);color:var(--ink);outline:none}
+
+/* ---------------- small screens ---------------- */
+@media (max-width:860px){
+  .kx-b__in,.kx-d__in,.kx-f__in,.kx-g__in{grid-template-columns:1fr}
+  .kx-d__txt,.kx-g__stick{position:static}
+  .kx-h__checks{grid-template-columns:1fr 1fr}
+  .kx-a__meta{gap:14px 22px}
+  .kx-a__bar{gap:10px}
+  .kx-f__art{min-height:140vw;margin-bottom:8vw}
+  .kx--live .kx-b__pin{height:auto;display:block;overflow:visible;padding:clamp(72px,10vw,150px) 5vw}
+  .kx-e__item{width:84vw}
+  .kx--live .kx-b__in{gap:20px}
+  .kx-b__doc{transform:none}
+  .kx-b__stamp{display:none}
+  .kx-g__rows li{min-height:0}
+}
+@media (max-width:520px){
+  .kx-a__meta div:nth-child(n+4){display:none}
+  .kx-h__checks{grid-template-columns:1fr}
+}
+
+/* ---- Lexend Zetta / Martian Mono treatment (matches the hero and tunnel) ---- */
+.kx em{font-style:normal;color:var(--gold)}
+.kx-b em,.kx-d em,.kx-f em{color:var(--clay)}
+.kx-t,.kx-a__name,.kx-g__rows h3{text-transform:uppercase;letter-spacing:-.04em}
+.kx-t{line-height:1.02}
+.kx-a__head .kx-t{line-height:.98}
+.kx-lab{font-weight:400;letter-spacing:.18em}
+.kx-p{line-height:1.75;max-width:46ch;letter-spacing:.01em}
+.kx-g__rows span,.kx-b__issues li::before{letter-spacing:-.04em}
+.kx-cap{font-style:normal;letter-spacing:.02em}
+.kx-e__note,.kx-lap__note,.kx-f__art figcaption{font-style:normal}
+.kx-b__stamp{letter-spacing:-.02em;font-size:clamp(13px,1.1vw,18px)}
+.kx-win__bar span{letter-spacing:.04em}
+/* C: no circle — head above, diagram frame below, panned on scroll */
+.kx-c{background:var(--ink)}
+.kx-c__head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,70px);align-items:end;max-width:1500px;margin:0 auto 4vh}
+.kx-c__head .kx-t{margin-bottom:0}
+.kx-c__fig{max-width:1500px;margin:0 auto}
+.kx-c__view{background:var(--cream);border-radius:10px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.kx-c__view img{width:100%;height:auto;max-width:none}
+.kx-c .kx-pad{padding:0}
+.kx-c__pin{padding:clamp(72px,10vw,150px) 5vw}
+.kx--live .kx-c__pin{height:100vh;height:100svh;padding:7vh 5vw 4vh;display:flex;flex-direction:column;overflow:hidden}
+.kx--live .kx-c__fig{flex:1;min-height:0;display:flex;flex-direction:column;width:100%}
+.kx--live .kx-c__view{flex:1;min-height:0}
+.kx--live .kx-c__view img{height:100%;width:auto}
+.kx--live .kx-c__head{width:100%}
+@media (max-width:860px){.kx-c__head{grid-template-columns:1fr}}
+
+/* ---- header face: Space Grotesk (tight, even spacing) ---- */
+.kx-t,.kx-a__name,.kx-g__rows h3,.kx-g__rows span,.kx-b__issues li::before,.kx-b__stamp{font-weight:500}
+.kx-t,.kx-a__name,.kx-g__rows h3{letter-spacing:-.02em;text-transform:uppercase}
+.kx-t{font-size:clamp(36px,5vw,84px);line-height:.98}
+.kx-a__head .kx-t{font-size:clamp(46px,9vw,160px);line-height:.92}
+.kx-a__name{font-size:clamp(20px,1.9vw,32px)}
+.kx-g__stick .kx-t{font-size:clamp(34px,3.9vw,64px)}
+.kx-c__head .kx-t{font-size:clamp(32px,4.2vw,70px)}
+.kx-g__rows h3{font-size:clamp(20px,1.8vw,30px)}
+.kx-g__rows span{font-size:clamp(36px,4.6vw,76px);letter-spacing:-.03em}
+.kx-b__issues li::before{font-size:clamp(18px,1.4vw,24px);letter-spacing:0}
+.kx-b__stamp{font-size:clamp(15px,1.3vw,22px);letter-spacing:-.01em}
+
+/* tunnel headings: Space Grotesk (the hero About section keeps Lexend Zetta) */
+.tun__h{font-weight:500;font-size:clamp(34px,7vw,116px);letter-spacing:-.03em}
+.tun__title{font-weight:500;font-size:clamp(30px,3.9vw,60px);letter-spacing:-.025em}
+.tun__toolshead .tun__t{font-weight:500;font-size:clamp(20px,2.8vw,42px);letter-spacing:-.02em}
+.tun__tool b{font-weight:500;font-size:clamp(17px,1.8vw,26px);letter-spacing:-.01em}
+.tun__outro p{font-weight:500;font-size:clamp(30px,5.6vw,92px);letter-spacing:-.03em}
+
+/* intro heading returns to Lexend Zetta */
+.tun__h{font-family:"Lexend Zetta",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-weight:200;font-size:clamp(30px,6.4vw,104px);letter-spacing:-.045em;text-transform:uppercase}
+/* tools with logos */
+.tun__tool{flex-direction:row!important;align-items:center;gap:14px!important;padding:12px 26px 12px 14px!important;text-align:left}
+.tun__tt{display:flex;flex-direction:column;gap:5px}
+.tun__logo{flex:none;width:38px;height:38px;border-radius:9px;display:grid;place-items:center;background:var(--bg,#1e1e1e);color:var(--fg,#fff);font:700 15px/1 "Martian Mono",monospace;font-style:normal;letter-spacing:-.02em;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18)}
+.tun__logo--fig{background:#1E1E1E}
+/* resume buttons */
+.drh__resume,.tun__resume{display:inline-flex;gap:.7em;align-items:center;padding:.95em 1.6em;border-radius:999px;border:1px solid currentColor;color:inherit;text-decoration:none;font:400 11px/1 "Martian Mono",monospace;letter-spacing:.14em;text-transform:uppercase;transition:background .25s,color .25s;pointer-events:auto}
+.drh__resume:hover,.drh__resume:focus-visible{background:var(--drh-ink);color:var(--drh-peach);outline:none}
+.tun__resume{margin-left:10px;background:var(--tun-ink);color:var(--tun-cream)}
+.tun__resume:hover,.tun__resume:focus-visible{background:transparent;color:var(--tun-ink);outline:none}
+.drh__note{opacity:1}
+/* performance: cheap tiles, no blur shadows, drift only while the hero is untouched */
+.drh__tile{box-shadow:0 0 0 1px rgba(0,0,0,.28)!important}
+.drh__tile::after{display:none}
+.drh--still .drh__tile img{animation-play-state:paused}
+@media (max-width:768px){.drh__tile img{animation:none}}
+@media (max-width:640px){.tun__tool small{display:none}.tun__tool b{font-size:14px!important;white-space:nowrap}.tun__logo{width:32px;height:32px;font-size:13px}.tun__tool{padding:9px 16px 9px 10px!important;gap:10px!important}}
+
+/* =========================================================================
+   ECHO — extra pieces, built from the same parts as the Khel Sutra chapter
+   ========================================================================= */
+.ex-light{color:var(--ink)}
+.ex-light .kx-lab{color:var(--clay);opacity:1}
+.ex-light em{color:var(--clay)}
+.ex-ink{background:var(--ink)} .ex-paper{background:var(--paper)} .ex-cream{background:var(--cream)}
+.ex-moss{background:var(--mossd)} .ex-sand{background:#E4D9BC}
+.ex-in{max-width:1500px;margin:0 auto}
+.ex-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,90px);align-items:center;max-width:1500px;margin:0 auto}
+.ex-two--r{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.ex-hero{width:min(60vw,560px)}
+.ex-hero img{width:100%;height:auto}
+.ex-cut img{filter:drop-shadow(0 30px 60px rgba(59,110,240,.32))}
+.ex-light .ex-cut img{filter:drop-shadow(0 30px 36px rgba(14,27,51,.34))}
+.ex-shot{border-radius:14px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.34)}
+.ex-light .ex-shot{box-shadow:0 30px 60px rgba(14,27,51,.26)}
+.ex-shot img{width:100%;height:auto}
+.ex-stats{display:flex;gap:clamp(20px,3.4vw,56px);margin-top:clamp(24px,3vw,44px);flex-wrap:wrap}
+.ex-stats div{border-top:1px solid rgba(14,27,51,.3);padding-top:12px;min-width:7em}
+.ex-stats b{display:block;font:500 clamp(28px,3.4vw,56px)/1 var(--serif);color:var(--clay);letter-spacing:-.02em;text-transform:uppercase}
+.ex-stats span{display:block;margin-top:8px;font:300 12px/1.4 var(--text);letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.ex-head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,70px);align-items:end;max-width:1500px;margin:0 auto clamp(28px,4vw,56px)}
+.ex-head .kx-t{margin-bottom:0;font-size:clamp(32px,4.2vw,70px)}
+.ex-3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,36px);border-top:1px solid rgba(244,239,223,.3);padding-top:clamp(22px,3vw,40px);margin-top:clamp(40px,5vw,72px)}
+.ex-3 h3{font:500 clamp(18px,1.6vw,26px)/1.05 var(--serif);text-transform:uppercase;letter-spacing:-.02em;color:var(--gold);margin-bottom:.5em}
+.ex-3 p{font:300 clamp(12px,0.86vw,14px)/1.55 var(--text);opacity:.92;max-width:34ch}
+.ex-note{margin-top:clamp(14px,1.4vw,22px);font:300 clamp(12px,0.79vw,14px)/1.5 var(--text);opacity:.85;max-width:60ch}
+.ex-sw{display:flex;flex-wrap:wrap;gap:clamp(14px,1.6vw,24px);margin:clamp(20px,2.4vw,34px) 0}
+.ex-sw div{display:grid;gap:8px;justify-items:center;font:300 11px/1 var(--text);letter-spacing:.1em}
+.ex-sw i{width:clamp(44px,4.2vw,68px);aspect-ratio:1;border-radius:50%;border:1px solid rgba(244,239,223,.4)}
+.ex-type{border-top:1px solid rgba(244,239,223,.25)}
+.ex-type div{display:flex;justify-content:space-between;gap:16px;padding:.9em 0;border-bottom:1px solid rgba(244,239,223,.25);font:300 clamp(12px,0.9vw,15px)/1.2 var(--text);letter-spacing:.14em;text-transform:uppercase}
+.ex-type b{font-weight:300;opacity:.65}
+.ex-big{font:500 clamp(26px,3.8vw,64px)/1.08 var(--serif);text-transform:uppercase;letter-spacing:-.02em;max-width:22ch}
+.ex-emp{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.8vw,26px);max-width:1500px;margin:0 auto}
+.ex-emp>div{border:1px solid rgba(14,27,51,.28);border-radius:14px;padding:clamp(18px,2.2vw,32px)}
+.ex-emp h3{font:500 clamp(18px,1.6vw,26px)/1 var(--serif);text-transform:uppercase;letter-spacing:-.02em;color:var(--clay);margin-bottom:.7em}
+.ex-emp li{padding:.55em 0;border-top:1px solid rgba(14,27,51,.18);font:300 clamp(12px,0.9vw,14.5px)/1.45 var(--text)}
+.ex-table{max-width:1500px;margin:0 auto;background:var(--cream);color:var(--ink);border-radius:14px;overflow-x:auto;box-shadow:0 30px 70px rgba(0,0,0,.4);-webkit-overflow-scrolling:touch}
+.ex-table table{border-collapse:collapse;width:100%;min-width:980px;font:300 12.5px/1.45 var(--text)}
+.ex-table th,.ex-table td{padding:14px 16px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(14,27,51,.16)}
+.ex-table thead th{font:400 11px/1.2 var(--text);letter-spacing:.14em;text-transform:uppercase;background:#E9E3D2;white-space:nowrap}
+.ex-table tbody th{font-weight:500;width:13%;color:var(--moss)}
+.ex-table .e{background:rgba(29,78,216,.1)}
+.ex-table thead .e{background:var(--clay);color:var(--cream)}
+.ex-table b{font-weight:500}
+.ex-table .n{opacity:.55}
+.ex-decs{counter-reset:d}
+.ex-decs li{counter-increment:d;display:grid;grid-template-columns:2.4em 1fr;gap:.4em;padding:clamp(12px,1.4vw,20px) 0;border-top:1px solid rgba(14,27,51,.25);font:300 clamp(12px,0.94vw,15px)/1.45 var(--text)}
+.ex-decs li::before{content:"0" counter(d);font:500 clamp(14px,1.2vw,20px)/1 var(--serif);color:var(--clay)}
+.ex-chain{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.ex-chain span{padding:.85em 1.3em;border-radius:999px;border:1px solid var(--ink);font:300 12px/1 var(--text);letter-spacing:.12em;text-transform:uppercase}
+.ex-chain span.last{background:var(--clay);border-color:var(--clay);color:var(--cream)}
+.ex-chain i{font-style:normal;opacity:.5}
+.ex-rej{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,32px);max-width:1500px;margin:0 auto}
+.ex-rej article{background:var(--cream);border-radius:14px;overflow:hidden;box-shadow:0 22px 50px rgba(14,27,51,.22);display:flex;flex-direction:column}
+.ex-rej .im{background:#fff;aspect-ratio:4/3;display:grid;place-items:center;padding:10px}
+.ex-rej .im img{max-height:100%;width:100%;height:100%;object-fit:contain}
+.ex-rej .tx{padding:clamp(16px,1.8vw,26px);display:grid;gap:12px;font:300 clamp(12px,0.88vw,14px)/1.5 var(--text)}
+.ex-rej b{display:inline-block;margin-right:.8em;font:400 11px/1 var(--text);letter-spacing:.16em;color:var(--clay)}
+.ex-rej .s b{color:var(--moss)}
+.ex-rej p{margin:0}
+.ex-flow{max-width:1500px;margin:0 auto;overflow-x:auto}
+.ex-flow .kx-win img{min-width:900px}
+.ex-four{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,30px);margin:0}
+.ex-four img{width:100%;height:auto;aspect-ratio:710/1540;object-fit:cover;filter:drop-shadow(0 24px 40px rgba(59,110,240,.28))}
+@media (max-width:860px){.ex-four{grid-template-columns:1fr 1fr}}
+.ex-prize{border-radius:18px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.ex-prize img{width:100%;height:auto}
+.ex-refl{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,90px);max-width:1500px;margin:0 auto}
+.ex-refl p{font:300 clamp(14px,1.15vw,19px)/1.6 var(--text);max-width:40ch}
+.ex-phonewrap{display:grid;justify-items:center}
+.ex-phone{position:relative;width:min(300px,72vw);background:#0B0B12;border-radius:46px;padding:10px;box-shadow:0 0 0 2px #2B2B3A,0 40px 80px rgba(14,27,51,.4)}
+.ex-phone__isl{position:absolute;z-index:2;left:50%;top:19px;width:28%;height:22px;border-radius:20px;background:#000;transform:translateX(-50%)}
+.ex-phone__screen{aspect-ratio:9/17;border-radius:37px;overflow:hidden;background:#111;position:relative}
+.ex-phone__yt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#F4EFDF;text-decoration:none;text-align:center;background:radial-gradient(120% 90% at 50% 20%,#16358F 0%,#0E1B33 70%);font:300 12px/1.3 var(--text);letter-spacing:.12em;text-transform:uppercase}
+.ex-phone__yt b{font-weight:400}.ex-phone__yt small{opacity:.7;font-size:10px}
+.ex-phone__play{width:64px;height:64px;border-radius:50%;background:#3B6EF0;position:relative;box-shadow:0 10px 30px rgba(59,110,240,.5)}
+.ex-phone__play::after{content:"";position:absolute;left:26px;top:20px;border-left:19px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent}
+.ex-phone__screen video,.ex-phone__screen iframe{width:100%;height:100%;object-fit:cover;border:0;display:block}
+.ex-ph{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,28px);margin-top:clamp(18px,2vw,30px)}
+.ex-ph img{width:100%;height:auto;border-radius:14px;box-shadow:0 24px 50px rgba(0,0,0,.35)}
+.kx-btn--dark{border-color:var(--ink);color:var(--ink)}
+.kx-btn--dark:hover{background:var(--ink);color:var(--cream)}
+.kx-btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+
+/* reveal on scroll (only when JS runs) */
+.ex-js .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.ex-js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.ex-js .rv{opacity:1;transform:none;transition:none}}
+
+@media (max-width:860px){
+  .ex-two,.ex-two--r,.ex-head,.ex-refl{grid-template-columns:1fr}
+  .ex-3{grid-template-columns:1fr}
+  .ex-emp{grid-template-columns:1fr}
+  .ex-rej{grid-template-columns:1fr}
+}
+
+
+/* story pieces */
+.ex-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,28px);max-width:1500px;margin:0 auto}
+.ex-trio article{border:1px solid rgba(14,27,51,.25);border-radius:14px;padding:clamp(20px,2.4vw,36px);background:rgba(255,255,255,.35)}
+.ex-trio span{display:block;font:500 clamp(18px,1.7vw,28px)/1 var(--serif);text-transform:uppercase;letter-spacing:-.02em;color:var(--clay);margin-bottom:.8em}
+.ex-trio p{font:300 clamp(13px,1vw,16px)/1.6 var(--text);max-width:36ch;margin:0}
+.ex-chips{display:flex;flex-wrap:wrap;gap:10px;max-width:1500px;margin:0 auto clamp(20px,2.4vw,32px);padding:0;list-style:none}
+.ex-chips li{padding:.8em 1.3em;border-radius:999px;background:var(--clay);color:var(--cream);font:300 12px/1 var(--text);letter-spacing:.12em;text-transform:uppercase}
+.ex-steps{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(12px,1.6vw,24px);max-width:1500px}
+.ex-steps li{border-top:1px solid rgba(244,239,223,.35);padding-top:16px}
+.ex-steps b{display:block;font:500 clamp(28px,3vw,48px)/1 var(--serif);color:var(--gold);letter-spacing:-.03em;margin-bottom:.4em}
+.ex-steps h3{font:500 clamp(15px,1.3vw,21px)/1.1 var(--serif);text-transform:uppercase;letter-spacing:-.02em;margin:0 0 .5em}
+.ex-steps p{font:300 clamp(12px,0.84vw,14px)/1.55 var(--text);opacity:.9;margin:0}
+.ex-strip{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:0;max-width:1500px;border-top:2px solid var(--ink)}
+.ex-strip li{position:relative;padding:22px 14px 0 0}
+.ex-strip li::before{content:"";position:absolute;left:0;top:-7px;width:12px;height:12px;border-radius:50%;background:var(--clay)}
+.ex-strip b{display:block;font:500 12px/1 var(--text);letter-spacing:.16em;color:var(--clay);margin-bottom:.8em}
+.ex-strip span{display:block;font:500 clamp(14px,1.2vw,19px)/1.1 var(--serif);text-transform:uppercase;letter-spacing:-.02em;margin-bottom:.4em}
+.ex-strip em{font:300 12.5px/1.4 var(--text);font-style:normal;opacity:.8}
+@media (max-width:860px){.ex-trio,.ex-steps,.ex-strip{grid-template-columns:1fr}.ex-strip li{padding-bottom:14px}}
+
+/* bottom bar (same part as on the Khel Sutra page) */
+.kbar{position:fixed;left:50%;bottom:clamp(12px,2.4vh,26px);z-index:60;transform:translate(-50%,24px);width:min(calc(100vw - 24px),640px);display:flex;align-items:center;justify-content:space-between;gap:14px;padding:8px 8px 8px 22px;border-radius:999px;background:rgba(244,239,223,.95);color:#0E1B33;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 14px 40px rgba(0,0,0,.4),0 0 0 1px rgba(14,27,51,.14);font:300 11px/1.2 "Martian Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .45s,transform .45s,visibility 0s .45s}
+.kbar.on{opacity:1;visibility:visible;transform:translate(-50%,0);pointer-events:auto;transition-delay:0s}
+.kbar__msg{display:flex;align-items:center;gap:.8em;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:inherit;text-decoration:none}
+.kbar__msg i{font-style:normal;display:inline-block;animation:kbarBob 1.6s ease-in-out infinite}
+.kbar__go{flex:none;display:inline-flex;gap:.6em;align-items:center;padding:1em 1.4em;border-radius:999px;background:#1D4ED8;color:#F4EFDF;text-decoration:none;white-space:nowrap;transition:background .25s}
+a.kbar__go:hover,a.kbar__go:focus-visible{background:#3B6EF0;outline:none}
+.kbar__go[aria-disabled="true"]{opacity:.55;cursor:default}
+@keyframes kbarBob{0%,100%{transform:translateY(-1px)}50%{transform:translateY(3px)}}
+@media (max-width:560px){.kbar{font-size:9.5px;letter-spacing:.08em;padding-left:16px}.kbar__go{padding:.95em 1.1em}}
+@media (prefers-reduced-motion:reduce){.kbar__msg i{animation:none}.kbar{transition:none}}
+/* ===== UNIPATH extras ===== */
+.up-ph{border-radius:30px;overflow:hidden;background:#fff;box-shadow:0 0 0 6px #0B1220,0 0 0 7px rgba(255,255,255,.12),0 34px 70px rgba(0,0,0,.38)}
+.ex-light .up-ph{box-shadow:0 0 0 6px #0B1220,0 30px 60px rgba(14,27,51,.3)}
+.up-ph img{width:100%;height:auto;display:block}
+.up-fan{display:flex;gap:clamp(14px,2.4vw,36px);justify-content:center;align-items:flex-end;width:min(94vw,1000px)}
+.up-fan .up-ph{flex:1;max-width:300px}
+.up-fan .up-ph:nth-child(2){transform:translateY(-6%)}
+.up-pair{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.4vw,36px);justify-self:center;width:min(100%,640px)}
+.up-pair--1{grid-template-columns:1fr;width:min(100%,320px)}
+.up-pair--3{grid-template-columns:repeat(3,1fr);width:min(100%,900px)}
+.up-pair figure{margin:0}
+.up-pair figcaption{margin-top:14px;font:300 12px/1.4 var(--text);letter-spacing:.04em;opacity:.85}
+.up-dots{display:grid;grid-template-columns:repeat(10,1fr);gap:clamp(4px,.5vw,8px);max-width:260px;margin-bottom:22px}
+.up-dots i{aspect-ratio:1;border-radius:50%;background:rgba(244,239,223,.18)}
+.up-dots i.f{background:var(--gold)}
+.ex-light .up-dots i{background:rgba(14,27,51,.14)}.ex-light .up-dots i.f{background:var(--clay)}
+.up-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,48px);max-width:1500px;margin:0 auto}
+.up-stats b{display:block;font:500 clamp(40px,5vw,84px)/1 var(--serif);letter-spacing:-.03em;color:var(--gold)}
+.up-stats p{font:300 clamp(12px,.9vw,14.5px)/1.55 var(--text);opacity:.92;max-width:34ch;margin-top:10px}
+.up-two5{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,28px);max-width:1500px;margin:0 auto clamp(28px,3vw,48px)}
+.up-big{border:1px solid rgba(244,239,223,.3);border-radius:14px;padding:clamp(22px,2.6vw,40px)}
+.up-big b{display:block;font:500 clamp(44px,5.6vw,96px)/1 var(--serif);letter-spacing:-.03em;color:var(--gold);margin-bottom:.15em}
+.up-big p{font:300 clamp(13px,1vw,16px)/1.55 var(--text);max-width:36ch}
+.up-photos{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,28px);max-width:1500px;margin:0 auto}
+.up-photos img{width:100%;height:auto;border-radius:14px;box-shadow:0 24px 50px rgba(0,0,0,.35)}
+.up-ps{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,28px);max-width:1500px;margin:0 auto}
+.up-ps article{border:1px solid rgba(14,27,51,.25);border-radius:14px;padding:clamp(20px,2.4vw,36px);background:rgba(255,255,255,.35)}
+.up-ps article.s{background:var(--clay);color:var(--cream);border-color:var(--clay)}
+.up-ps span{display:block;font:500 clamp(18px,1.7vw,28px)/1 var(--serif);text-transform:uppercase;letter-spacing:-.02em;color:var(--clay);margin-bottom:.8em}
+.up-ps .s span{color:var(--cream)}
+.up-ps p{font:300 clamp(13px,1vw,16px)/1.6 var(--text);max-width:40ch;margin:0}
+.up-4{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,24px);max-width:1500px}
+.up-4 li{border-top:1px solid rgba(244,239,223,.35);padding-top:16px}
+.up-4 b{display:block;font:500 clamp(28px,3vw,48px)/1 var(--serif);color:var(--gold);letter-spacing:-.03em;margin-bottom:.4em}
+.up-4 h3{font:500 clamp(15px,1.3vw,21px)/1.1 var(--serif);text-transform:uppercase;letter-spacing:-.02em;margin:0 0 .5em}
+.up-4 p{font:300 clamp(12px,.84vw,14px)/1.55 var(--text);opacity:.9;margin:0}
+.up-flow{max-width:1500px;margin:0 auto}
+.up-flowrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.up-flowrow span{padding:.85em 1.3em;border-radius:999px;border:1px solid var(--cream);font:300 12px/1 var(--text);letter-spacing:.12em;text-transform:uppercase}
+.up-flowrow span.hi{background:var(--clay);border-color:var(--clay)}
+.up-flowrow i{font-style:normal;opacity:.5}
+.up-flowlab{font:300 11px/1 var(--text);letter-spacing:.18em;text-transform:uppercase;opacity:.65;margin-top:26px}
+.up-crit{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,28px);max-width:1500px;margin:0 auto}
+.up-crit>div{border:1px solid rgba(244,239,223,.28);border-radius:14px;padding:clamp(18px,2.2vw,32px)}
+.up-crit h3{font:500 clamp(16px,1.4vw,22px)/1.05 var(--serif);text-transform:uppercase;letter-spacing:-.02em;color:var(--gold);margin-bottom:.6em}
+.up-crit p{font:300 clamp(12px,.9vw,14.5px)/1.55 var(--text);margin:0;opacity:.92}
+.up-crit p+p{margin-top:.7em}
+.up-crit .n{opacity:.6}
+.up-ba{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.4vw,36px);max-width:1500px;margin:0 auto}
+.up-ba figure{margin:0}
+.up-ba .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.up-ba .pair div{position:relative}
+.up-ba img{width:100%;aspect-ratio:393/852;object-fit:cover;object-position:top;border-radius:16px;display:block;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.up-ba .pair em{position:absolute;left:8px;top:8px;font:400 9px/1 var(--text);letter-spacing:.14em;text-transform:uppercase;background:rgba(14,27,51,.85);color:var(--cream);padding:.5em .7em;border-radius:4px}
+.up-ba .pair div:last-child em{background:var(--clay)}
+.up-ba figcaption{margin-top:12px;font:300 12px/1.4 var(--text);letter-spacing:.04em}
+.up-ba-more{margin-top:clamp(24px,3vw,40px)}
+.up-ba--big{grid-template-columns:repeat(2,1fr);max-width:1100px}
+.ex-ink .ex-decs li,.ex-moss .ex-decs li{border-top-color:rgba(244,239,223,.25)}
+.ex-ink .ex-decs li::before,.ex-moss .ex-decs li::before{color:var(--gold)}
+@media (max-width:860px){.up-stats,.up-4,.up-crit,.up-ps,.up-two5,.up-photos{grid-template-columns:1fr}.up-ba{grid-template-columns:1fr 1fr}.up-pair--3{grid-template-columns:1fr 1fr}.up-fan .up-ph:nth-child(2){transform:none}}
+@media (max-width:520px){.up-ba{grid-template-columns:1fr}.up-fan .up-ph:nth-child(3){display:none}}
+.up-light-sw{display:flex;flex-wrap:wrap;gap:clamp(14px,1.6vw,24px);margin:clamp(20px,2.4vw,34px) 0}
+
+</style>
+</head>
+<body>
+<div class="kx" id="unipath">
+
+  <section class="kx-a" aria-label="UniPath: introduction"><div class="kx-a__pin">
+    <header class="kx-a__bar"><p class="kx-a__name">Uni<em>Path</em></p>
+      <dl class="kx-a__meta"><div><dt>Role</dt><dd>UI/UX designer</dd></div><div><dt>Nature</dt><dd>Mobile app, EdTech</dd></div><div><dt>Focus</dt><dd>Research, UI design</dd></div><div><dt>Tools</dt><dd>Figma</dd></div><div><dt>Year</dt><dd>2025</dd></div></dl></header>
+    <div class="kx-a__head"><p class="kx-lab">Case study · Mobile app</p><h1 class="kx-t">Uni<em>Path</em></h1>
+      <p class="kx-p">A study-abroad companion that turns a student's profile into a roadmap: matched universities, a timeline with deadlines, a checklist and a mentor, in one app.</p></div>
+    <div class="up-fan rv"><div class="up-ph"><img src="unipath-assets/after-roadmap.webp" alt="UniPath roadmap screen" decoding="async" loading="lazy"></div><div class="up-ph"><img src="unipath-assets/after-matches.webp" alt="UniPath university matches screen" decoding="async" loading="lazy"></div><div class="up-ph"><img src="unipath-assets/after-timeline.webp" alt="UniPath timeline screen" decoding="async" loading="lazy"></div></div>
+  </div></section>
+
+  <section class="ex-cream ex-light kx-pad" aria-label="The idea in 30 seconds" id="idea30">
+    <div class="ex-head rv"><div><p class="kx-lab">01 — The idea in 30 seconds</p><h2 class="kx-t">Study abroad should feel exciting, <em>not overwhelming</em></h2></div>
+      <p class="kx-p">UniPath is a mobile platform for students who want to study abroad. It helps them explore universities, check eligibility, track applications and keep documents and deadlines organised.</p></div>
+    <div class="ex-trio rv">
+      <article><span>The problem</span><p>Students have no single trusted place for accurate study-abroad information. Confusion leads to wrong decisions, delays and missed opportunities.</p></article>
+      <article><span>The insight</span><p>The student's own profile already decides most of the path: eligibility, budget, destination. The app should read it, not ask them to decode it.</p></article>
+      <article><span>The idea</span><p>Build a custom roadmap from the profile. Clear steps and matched universities mean smart decisions, with no missed deadlines.</p></article>
+    </div>
+  </section>
+
+  <section class="ex-ink kx-pad" aria-label="Why it matters" id="why">
+    <div class="ex-head rv"><div><p class="kx-lab">02 — Why it matters</p><h2 class="kx-t">The hard part is not <em>wanting to go</em></h2></div>
+      <p class="kx-p">The numbers from my research board point the same way: choosing the right university is difficult, and the process punishes missed steps.</p></div>
+    <div class="up-two5 rv">
+      <div class="up-big"><b>80%</b><p>of students say finding the right universities that match their profile is difficult.</p></div>
+      <div class="up-big"><b>1 in 3</b><p>international students struggle with missing deadlines for colleges and scholarships.</p></div>
+    </div>
+    <div class="up-stats rv">
+      <div><div class="up-dots" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i></div><b>95%</b><p>of study-abroad aspirants feel overwhelmed by complex eligibility rules, document requirements and changing admission criteria.</p></div>
+      <div><div class="up-dots" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><b>67%</b><p>of students struggle with admission steps like shortlisting, SOPs, LORs and visa procedures because guidance is unclear.</p></div>
+      <div><div class="up-dots" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><b>39%</b><p>of applicants face avoidable delays or rejections because they miss deadlines, submit incorrect documents or lack proper tracking.</p></div>
+    </div>
+    <p class="ex-note rv" style="max-width:1500px;margin:clamp(28px,3vw,44px) auto 0">Figures as published on my UniPath Behance board.</p>
+    <div class="up-photos rv" style="margin-top:clamp(28px,3vw,44px)"><img src="unipath-assets/photo-overwhelmed.webp" alt="A student overwhelmed by study material" loading="lazy" decoding="async"><img src="unipath-assets/photo-deadline.webp" alt="A student worried over an application letter" loading="lazy" decoding="async"></div>
+  </section>
+
+  <section class="ex-paper ex-light kx-pad" aria-label="The user" id="user">
+    <div class="ex-head rv"><div><p class="kx-lab">03 — The user</p><h2 class="kx-t">A student with a <em>target, a budget and a deadline</em></h2></div>
+      <p class="kx-p">The prototype is built around one profile: a 19-year-old in India aiming for a Fall 2026 start in the USA or Canada. What she needs from the app is concrete.</p></div>
+    <div class="ex-emp rv">
+      <div><h3>Needs to know</h3><ul><li>Which universities fit my profile</li><li>What each one costs and how selective it is</li><li>Whether scholarships exist</li><li>What I must submit, and by when</li></ul></div>
+      <div><h3>Struggles with</h3><ul><li>Eligibility rules that keep changing</li><li>Document requirements spread over many sites</li><li>Admission steps: shortlist, SOPs, LORs, visa</li><li>Keeping track of deadlines across universities</li></ul></div>
+      <div><h3>Does today</h3><ul><li>Searches university sites one by one</li><li>Keeps notes and lists in separate places</li><li>Asks consultants for answers she cannot verify</li><li>Works out the order of steps alone</li></ul></div>
+      <div><h3>Wants</h3><ul><li>One trusted place for information</li><li>A plan that already knows her profile</li><li>Reminders before deadlines, not after</li><li>Someone to ask when she is stuck</li></ul></div>
+    </div>
+  </section>
+
+  <section class="ex-sand ex-light kx-pad" aria-label="Problem and solution" id="solution">
+    <div class="ex-head rv"><div><p class="kx-lab">04 — Problem and solution</p><h2 class="kx-t">One problem, <em>two answers</em></h2></div>
+      <p class="kx-p">Every feature in the app maps back to one of these two answers.</p></div>
+    <div class="up-ps rv">
+      <article style="grid-column:1/-1"><span>Problem</span><p>Students lack a trusted, single platform for accurate study-abroad information. This confusion leads to wrong decisions, delays and missed opportunities.</p></article>
+      <article class="s"><span>Solution 1 · Custom roadmap</span><p>UniPath builds a roadmap from each student's profile. Clear steps plus matching universities mean smart decisions and zero confusion.</p></article>
+      <article class="s"><span>Solution 2 · Trusted guidance</span><p>Students get consultant-backed access and application tracking in one place. No missed deadlines, no misinformation, a smoother journey abroad.</p></article>
+    </div>
+  </section>
+
+  <section class="ex-ink kx-pad" aria-label="Design process" id="process">
+    <div class="ex-head rv"><div><p class="kx-lab">05 — The process</p><h2 class="kx-t">From research to final screens, <em>four steps</em></h2></div>
+      <p class="kx-p">Each step stayed focused on what the student needs to decide next.</p></div>
+    <ol class="up-4 rv">
+      <li><b>01</b><h3>Discover</h3><p>Understand where students get stuck: matching universities, eligibility, documents and deadlines.</p></li>
+      <li><b>02</b><h3>Define</h3><p>Frame one problem and two answers. Decide the core: roadmap, matches, timeline, mentor, profile.</p></li>
+      <li><b>03</b><h3>Develop</h3><p>Map the flow from onboarding to the five tabs, then design the screens in Figma.</p></li>
+      <li><b>04</b><h3>Deliver</h3><p>Hi-fi screens, then a redesign pass to make the interface calmer and more professional.</p></li>
+    </ol>
+  </section>
+
+  <section class="ex-cream ex-light kx-pad" aria-label="Structure and flow" id="flow">
+    <div class="ex-head rv"><div><p class="kx-lab">06 — Structure and flow</p><h2 class="kx-t">Four steps in, <em>five tabs out</em></h2></div>
+      <p class="kx-p">A short onboarding collects what the app needs. After that, the whole product lives in a five-tab bar, so nothing is more than one tap away.</p></div>
+    <div class="up-flow rv" style="color:var(--ink)">
+      <p class="up-flowlab" style="margin-top:0">Onboarding</p>
+      <div class="up-flowrow" style="--b:var(--ink)"><span style="border-color:var(--ink)">Welcome</span><i>→</i><span style="border-color:var(--ink)">About you</span><i>→</i><span style="border-color:var(--ink)">Academic background</span><i>→</i><span style="border-color:var(--ink)">Create roadmap</span></div>
+      <p class="up-flowlab">Main app</p>
+      <div class="up-flowrow"><span class="hi">Roadmap</span><span style="border-color:var(--ink)">Matches</span><span style="border-color:var(--ink)">Timeline</span><span style="border-color:var(--ink)">AI Mentor</span><span style="border-color:var(--ink)">Profile</span></div>
+    </div>
+    <div class="ex-3 rv" style="border-top-color:rgba(14,27,51,.3)">
+      <div><h3 style="color:var(--clay)">Know</h3><p>Onboarding and profile hold what the student has told us once.</p></div>
+      <div><h3 style="color:var(--clay)">Decide</h3><p>Roadmap and Matches turn the profile into choices, ranked and explained.</p></div>
+      <div><h3 style="color:var(--clay)">Do</h3><p>Timeline and Mentor turn choices into dated tasks, with help close by.</p></div>
+    </div>
+  </section>
+<section class="ex-paper ex-light kx-pad" aria-label="07 — Onboarding" id="onboarding"><div class="ex-two" style="grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr)"><div class="rv"><p class="kx-lab">07 — Onboarding</p><h2 class="kx-t">Four steps, <em>two minutes</em></h2><p class="kx-p">The welcome screen says what the student gets. Two short forms collect the minimum: who they are and where they study now. A progress bar shows how much is left.</p><ol class="ex-decs" style="margin-top:clamp(18px,2vw,28px)"><li><span>Say the payoff first: matches, timeline, checklist, guidance.</span></li><li><span>Four steps with a visible progress bar and a percentage.</span></li><li><span>Only ask what changes the plan: name, age, country, email, then education, GPA, field, English test.</span></li><li><span>Reassure when it matters: a student who has not taken a test still gets a roadmap.</span></li></ol></div><div class="rv up-pair up-pair--3"><figure><div class="up-ph"><img src="unipath-assets/after-welcome.webp" alt="Welcome screen" decoding="async" loading="lazy"></div></figure><figure><div class="up-ph"><img src="unipath-assets/after-about-you.webp" alt="About you form" decoding="async" loading="lazy"></div></figure><figure><div class="up-ph"><img src="unipath-assets/after-academic.webp" alt="Academic background form" decoding="async" loading="lazy"></div></figure></div></div></section><section class="ex-ink kx-pad" aria-label="08 — Roadmap" id="roadmap"><div class="ex-two ex-two--r"><div class="rv up-pair up-pair--1"><figure><div class="up-ph"><img src="unipath-assets/after-roadmap.webp" alt="Roadmap screen" decoding="async" loading="lazy"></div></figure></div><div class="rv"><p class="kx-lab">08 — Roadmap</p><h2 class="kx-t">Your plan, <em>in order</em></h2><p class="kx-p">The home tab answers one question: where am I, and what is next? Overall progress and the deadline sit on top, with the phases below.</p><ol class="ex-decs" style="margin-top:clamp(18px,2vw,28px)"><li><span>Overall progress and target intake first: 35% toward Fall 2026.</span></li><li><span>Three numbers that matter: matched universities, tasks pending, days to deadline.</span></li><li><span>Phases as cards: Research and planning, Test preparation, Application process.</span></li><li><span>Each phase shows its own progress, so effort is visible.</span></li></ol></div></div></section><section class="ex-cream ex-light kx-pad" aria-label="09 — University matches" id="matches"><div class="ex-two"><div class="rv"><p class="kx-lab">09 — University matches</p><h2 class="kx-t">Matches that <em>explain themselves</em></h2><p class="kx-p">Matches are filtered by eligibility, budget and destination. Each card says how well it fits and why, so a student can compare without opening ten tabs.</p><ol class="ex-decs" style="margin-top:clamp(18px,2vw,28px)"><li><span>A match score per university, with a reason one tap away.</span></li><li><span>Reach, target and safety tags so the shortlist is balanced.</span></li><li><span>Tuition, acceptance rate and scholarships in one row, comparable at a glance.</span></li><li><span>Filter tabs by category, a save button on every card.</span></li></ol></div><div class="rv up-pair up-pair--1"><figure><div class="up-ph"><img src="unipath-assets/after-matches.webp" alt="University matches screen" decoding="async" loading="lazy"></div></figure></div></div></section><section class="ex-sand ex-light kx-pad" aria-label="10 — Timeline and checklist" id="timeline"><div class="ex-two ex-two--r"><div class="rv up-pair up-pair--1"><figure><div class="up-ph"><img src="unipath-assets/after-timeline.webp" alt="Timeline screen" decoding="async" loading="lazy"></div></figure></div><div class="rv"><p class="kx-lab">10 — Timeline and checklist</p><h2 class="kx-t">Steps and dates, <em>generated for you</em></h2><p class="kx-p">The app generates the steps for each university from the student's profile. Students can add their own tasks, notes and documents for anything unusual.</p><ol class="ex-decs" style="margin-top:clamp(18px,2vw,28px)"><li><span>Phases grouped by how early they start, with a clear status.</span></li><li><span>Completed tasks stay visible and quiet, open tasks stay readable.</span></li><li><span>A timeline view for order, a calendar view for dates.</span></li><li><span>Custom tasks for requirements the app cannot know.</span></li></ol></div></div></section><section class="ex-ink kx-pad" aria-label="11 — AI Mentor and profile" id="mentor"><div class="ex-two"><div class="rv"><p class="kx-lab">11 — AI Mentor and profile</p><h2 class="kx-t">Help when stuck, <em>context always on</em></h2><p class="kx-p">The mentor already knows the profile, so questions like "what documents do I need?" get an answer for this student. The profile tab keeps the data honest and shows how complete it is.</p><ol class="ex-decs" style="margin-top:clamp(18px,2vw,28px)"><li><span>Quick questions up top for the most common blockers.</span></li><li><span>Answers are short and listed, not essays.</span></li><li><span>Profile completion nudges better data, which means better matches.</span></li><li><span>Personal and academic details editable in one place.</span></li></ol></div><div class="rv up-pair "><figure><div class="up-ph"><img src="unipath-assets/after-ai-mentor.webp" alt="AI Mentor screen" decoding="async" loading="lazy"></div></figure><figure><div class="up-ph"><img src="unipath-assets/after-profile.webp" alt="Profile screen" decoding="async" loading="lazy"></div></figure></div></div></section>
+  <section class="ex-moss kx-pad" aria-label="The redesign" id="redesign">
+    <div class="ex-head rv"><div><p class="kx-lab">12 — The redesign</p><h2 class="kx-t">My first hi-fi looked <em>generated</em>. So I rebuilt it.</h2></div>
+      <p class="kx-p">The first version had the right structure and the wrong voice. I kept the flow and redesigned the surface: calmer colour, squarer controls, clearer type.</p></div>
+    <div class="up-crit rv">
+      <div><h3>What was wrong</h3><p>A purple-to-pink gradient on every header, bar and button.</p><p>Capsule buttons, pills and tabs everywhere.</p><p>Emoji as icons, heavy drop shadows, glass cards.</p><p class="n">Form placeholders copied from the first form into the second.</p></div>
+      <div><h3>What I changed</h3><p>One blue, a navy welcome screen and neutral greys. Amber only for Reach, green only for done.</p><p>Rectangular buttons and tags with small radii.</p><p>Line icons, hairline borders, a single typeface.</p><p>Real labels for every field.</p></div>
+    </div>
+    <div class="up-ba up-ba--big rv" style="margin-top:clamp(36px,5vw,72px)">
+      <figure><div class="pair"><div><img src="unipath-assets/before-welcome.webp" alt="Welcome screen before" loading="lazy"><em>Before</em></div><div><img src="unipath-assets/after-welcome.webp" alt="Welcome screen after" loading="lazy"><em>After</em></div></div><figcaption>Welcome</figcaption></figure>
+      <figure><div class="pair"><div><img src="unipath-assets/before-roadmap.webp" alt="Roadmap before" loading="lazy"><em>Before</em></div><div><img src="unipath-assets/after-roadmap.webp" alt="Roadmap after" loading="lazy"><em>After</em></div></div><figcaption>Roadmap</figcaption></figure>
+      <figure><div class="pair"><div><img src="unipath-assets/before-matches.webp" alt="Matches before" loading="lazy"><em>Before</em></div><div><img src="unipath-assets/after-matches.webp" alt="Matches after" loading="lazy"><em>After</em></div></div><figcaption>University matches</figcaption></figure>
+      <figure><div class="pair"><div><img src="unipath-assets/before-timeline.webp" alt="Timeline before" loading="lazy"><em>Before</em></div><div><img src="unipath-assets/after-timeline.webp" alt="Timeline after" loading="lazy"><em>After</em></div></div><figcaption>Timeline</figcaption></figure>
+    </div>
+    <div class="up-ba up-ba-more rv">
+      <figure><div class="pair"><div><img src="unipath-assets/before-form1.webp" alt="Form before" loading="lazy"><em>Before</em></div><div><img src="unipath-assets/after-about-you.webp" alt="Form after" loading="lazy"><em>After</em></div></div><figcaption>Onboarding, step 1</figcaption></figure>
+      <figure><div class="pair"><div><img src="unipath-assets/before-form2.webp" alt="Form 2 before" loading="lazy"><em>Before</em></div><div><img src="unipath-assets/after-academic.webp" alt="Form 2 after" loading="lazy"><em>After</em></div></div><figcaption>Onboarding, step 2</figcaption></figure>
+      <figure><div class="pair"><div><img src="unipath-assets/before-mentor.webp" alt="Mentor before" loading="lazy"><em>Before</em></div><div><img src="unipath-assets/after-ai-mentor.webp" alt="Mentor after" loading="lazy"><em>After</em></div></div><figcaption>AI Mentor</figcaption></figure>
+      <figure><div class="pair"><div><img src="unipath-assets/before-profile.webp" alt="Profile before" loading="lazy"><em>Before</em></div><div><img src="unipath-assets/after-profile.webp" alt="Profile after" loading="lazy"><em>After</em></div></div><figcaption>Profile</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="ex-ink kx-pad" aria-label="Design system" id="system">
+    <div class="ex-two">
+      <div class="rv"><p class="kx-lab">13 — Design system</p><h2 class="kx-t">Blue, grey, and <em>nothing else</em></h2>
+        <p class="kx-p">A small, strict system, so every screen reads as one product.</p>
+        <div class="ex-sw"><div><i style="background:#16358F"></i><span>#16358F</span></div><div><i style="background:#1D4ED8"></i><span>#1D4ED8</span></div><div><i style="background:#0F172A"></i><span>#0F172A</span></div><div><i style="background:#64748B"></i><span>#64748B</span></div><div><i style="background:#E2E8F0"></i><span>#E2E8F0</span></div></div>
+        <div class="ex-type"><div><b>Typeface</b><span style="font-weight:500">Inter</span></div><div><b>Radius</b><span>8px buttons · 10px cards</span></div><div><b>Grid</b><span>8px</span></div><div><b>Status</b><span>Amber reach · Green done</span></div></div>
+      </div>
+      <figure class="rv up-pair" style="width:min(100%,560px)">
+        <div class="up-ph" style="background:#fff;padding:18px;border-radius:18px"><div style="font:600 12px Inter,sans-serif;color:#64748B;margin-bottom:12px">BUTTON</div><div style="background:#1D4ED8;color:#fff;border-radius:8px;height:46px;display:grid;place-items:center;font:600 14px Inter,sans-serif">Continue</div><div style="font:600 12px Inter,sans-serif;color:#64748B;margin:18px 0 10px">TAGS</div><span style="background:#DBEAFE;color:#1E40AF;font:600 11px Inter,sans-serif;padding:4px 8px;border-radius:4px;margin-right:6px">In progress</span><span style="background:#FEF3C7;color:#92400E;font:600 11px Inter,sans-serif;padding:4px 8px;border-radius:4px">Reach</span></div>
+        <div class="up-ph" style="background:#fff;padding:18px;border-radius:18px"><div style="font:600 12px Inter,sans-serif;color:#64748B;margin-bottom:12px">PROGRESS</div><div style="height:6px;background:#E2E8F0;border-radius:3px"><i style="display:block;width:65%;height:100%;background:#1D4ED8;border-radius:3px"></i></div><div style="font:600 12px Inter,sans-serif;color:#64748B;margin:18px 0 10px">INPUT</div><div style="border:1px solid #CBD5E1;border-radius:8px;height:44px;display:flex;align-items:center;padding:0 12px;font:400 14px Inter,sans-serif;color:#94A3B8">name@example.com</div></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="ex-paper ex-light kx-pad" aria-label="Reflection" id="reflection">
+    <div class="ex-in rv" style="margin-bottom:clamp(24px,3vw,48px)"><p class="kx-lab">14 — Reflection</p><h2 class="kx-t">Restraint reads as <em>trust</em></h2></div>
+    <div class="ex-refl rv">
+      <p>For a product that asks students to share grades and plan a move abroad, the interface has to feel dependable. Stripping the gradients and pills made the information louder and the app calmer.</p>
+      <p>Next I would test the match score with real applicants, to see whether the "why this matches you" explanation builds enough trust to act on.</p>
+    </div>
+  </section>
+
+  <section class="kx-h kx-pad" aria-label="Next" id="end">
+    <div class="kx-h__in"><p class="kx-lab">That was UniPath</p><h2 class="kx-t">Up <em>next</em></h2>
+      <p class="kx-h__lead">That wraps up the UX case studies. Next up is my branding work: three brand identities, from a client project to two assignments.</p>
+      <div class="kx-h__go"><a class="kx-btn" href="echo-case-study.html">← Echo</a><a class="kx-btn" href="final-v2.html">Home</a><a class="kx-btn" href="final-v2.html#contact">Work with me</a><a class="kx-btn" href="branding.html">Branding →</a></div></div>
+  </section>
+
+</div>
+<nav class="kbar" id="kbar" aria-label="Project navigation">
+  <a class="kbar__msg" href="echo-case-study.html"><i>←</i><span>Echo</span></a>
+  <a class="kbar__go" href="branding.html">Next · Branding →</a>
+</nav>
+<script>
+(function(){
+  var d=document.documentElement;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rv=[].slice.call(document.querySelectorAll('.rv'));
+  if(!reduce&&'IntersectionObserver' in window){
+    d.classList.add('ex-js');
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    rv.forEach(function(el){io.observe(el);});
+    setTimeout(function(){rv.forEach(function(el){el.classList.add('in');});},9000);
+  }
+  var bar=document.getElementById('kbar'),end=document.getElementById('end');
+  function upd(){var vh=window.innerHeight;bar.classList.toggle('on',window.pageYOffset>vh*.7&&end.getBoundingClientRect().top>vh*.6);}
+  window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
+  var lz=[].slice.call(document.querySelectorAll('img[loading="lazy"]'));
+  window.addEventListener('load',function(){lz.forEach(function(i){i.loading='eager';});});
+})();
+</script>
+</body>
+</html>

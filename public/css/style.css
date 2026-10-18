@@ -1,8 +1,103 @@
 :root {
+  /* Brand palette */
   --beige: #f4efe9;
   --black: #0b0b0b;
   --muted-red: #8b2f2f;
+
+  /* Design System Palette (from cinematic hero & reference) */
+  --drh-dark: #10130d;
+  --drh-peach: #F3B477;
+  --drh-cream: #F2E4C8;
+  --drh-ivory: #EFE5D2;
+  --drh-sage: #92977A;
+  --drh-olive: #73795B;
+  --drh-forest: #424C3A;
+  --drh-pumpkin: #D98A3A;
+  --drh-ink: #171717;
+
+  /* Design System Typography */
+  --font-display: "Lexend Zetta", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-body: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
 }
+
+/* ===========================================
+   INTRO OVERLAY — remove this block to disable
+=========================================== */
+
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0b0b0b;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.intro-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro-counter-line {
+  margin-bottom: 28px;
+}
+
+.intro-counter {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  color: var(--muted-red);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.intro-name-row {
+  display: flex;
+  align-items: flex-end;
+  line-height: 1;
+}
+
+.intro-letter-wrap {
+  overflow: hidden;
+  display: inline-flex;
+  align-items: flex-end;
+}
+
+.intro-letter-wrap span {
+  display: inline-block;
+  transform: translateY(110%);
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(72px, 11vw, 128px);
+  font-weight: 500;
+  color: var(--beige);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  will-change: transform;
+}
+
+.intro-letter-wrap span.intro-rr {
+  color: var(--muted-red);
+}
+
+.intro-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  color: var(--muted-red);
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(10px);
+  will-change: opacity, transform;
+}
+
+/* =========================================== */
 
 /* RESET */
 * {
@@ -72,6 +167,26 @@ a {
   opacity: 0.7;
 }
 
+.resume-btn {
+  font-family: var(--font-mono);
+  font-size: 11px !important;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 8px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 999px;
+  margin-right: 10px;
+  text-decoration: none;
+  color: var(--black) !important;
+}
+
+.resume-btn i {
+  font-size: 11px;
+  margin-left: 6px;
+  opacity: 0.7;
+}
+
 .resume-btn:hover {
   background: var(--black);
   color: #fff !important;
@@ -88,7 +203,10 @@ a {
 }
 
 .nav-links a {
-  font-size: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: #555;
   text-decoration: none;
   position: relative;
@@ -99,11 +217,13 @@ a {
 }
 
 .nav-left {
-  font-size: 11px;
-  letter-spacing: 0.3em;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.944);
-  font-weight: 400;
+  color: rgba(0, 0, 0, 0.94);
+  font-weight: 300;
+  text-decoration: none;
 }
 
 .nav-left:hover {
@@ -255,7 +375,10 @@ html {
 }
 
 h2 {
-  font-size: 36px;
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  font-size: clamp(28px, 3.5vw, 42px);
   margin-bottom: 32px;
 }
 

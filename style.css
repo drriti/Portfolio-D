@@ -4,6 +4,90 @@
   --muted-red: #8b2f2f;
 }
 
+/* ===========================================
+   INTRO OVERLAY — remove this block to disable
+=========================================== */
+
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0b0b0b;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.intro-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Counter line */
+.intro-counter-line {
+  margin-bottom: 28px;
+}
+
+.intro-counter {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  color: var(--muted-red);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Name row — clip containers so letters wipe in from below */
+.intro-name-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  line-height: 1;
+}
+
+.intro-letter-wrap {
+  overflow: hidden;
+  display: inline-flex;
+  align-items: flex-end;
+}
+
+.intro-letter-wrap span {
+  display: inline-block;
+  transform: translateY(110%);
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(72px, 11vw, 128px);
+  font-weight: 500;
+  color: var(--beige);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  will-change: transform;
+}
+
+/* the "rr" stays muted red — your signature */
+.intro-letter-wrap span.intro-rr {
+  color: var(--muted-red);
+}
+
+/* "Yes, double r" annotation */
+.intro-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  color: var(--muted-red);
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(10px);
+  will-change: opacity, transform;
+}
+
+/* =========================================== */
+
 /* RESET */
 * {
   margin: 0;
@@ -127,6 +211,16 @@ html {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+/* Interactive hero canvas */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .scroll-indicator {

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <meta name="description"
+        content="Bhartiya Khel Sutra — An interactive digital archive and spatial web experience reviving 75 traditional Indian games through structured information architecture and visual storytelling. UI/UX Case Study by Drriti Pasrija.">
+
+    <!-- Fonts: Fraunces (Display) + Work Sans (Interface) + Caveat (Handwritten note) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- GSAP for scroll animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Custom Case Study CSS -->
+    <link rel="stylesheet" href="/css/khel-sutra.css" />
+</head>
+
+<body>
+
+    <!-- Reading Progress Indicator -->
+    <div class="ks-progress-bar" id="ksProgressBar"></div>
+
+    <!-- Floating Back Navigation -->
+    <a href="/#work" class="ks-back-nav">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Back to Portfolio</span>
+    </a>
+
+    <!-- ═══════════════════════════════════════════
+         1. HERO SECTION
+    ═══════════════════════════════════════════ -->
+    <header class="ks-hero">
+        <div class="ks-badge-row">
+            <span class="ks-badge ks-badge-industry">
+                <i class="fa-solid fa-briefcase"></i> Client / Industry Project
+            </span>
+            <span class="ks-badge ks-badge-launch">
+                <i class="fa-solid fa-rocket"></i> Launching Soon
+            </span>
+            <span class="ks-badge ks-badge-client">
+                <i class="fa-solid fa-building"></i> Khol Khel Pvt. Ltd. · Delhi
+            </span>
+        </div>
+
+        <h1 class="ks-hero-title">Bhartiya Khel Sutra</h1>
+        <p class="ks-hero-tagline">Play Traditions of India — An Immersive Spatial Archive</p>
+
+        <p class="ks-hero-description">
+            Rather than reducing ancient cultural games into a static catalog, 
+            <strong>Bhartiya Khel Sutra</strong> was designed around spatial exploration. 
+            I architected a digital world that allows users to traverse an illustrated school playground, 
+            explore classrooms and akhara grounds, and uncover the living rules, histories, and mechanics of 
+            <strong>75 traditional Indian games</strong>.
+        </p>
+
+        <!-- Project Snapshot Meta Bar -->
+        <div class="ks-meta-grid">
+            <div class="ks-meta-item">
+                <span>Role</span>
+                <strong>UI/UX Designer</strong>
+            </div>
+            <div class="ks-meta-item">
+                <span>Client</span>
+                <strong>Khol Khel Pvt. Ltd.</strong>
+            </div>
+            <div class="ks-meta-item">
+                <span>Duration</span>
+                <strong>8 Weeks</strong>
+            </div>
+            <div class="ks-meta-item">
+                <span>Deliverables</span>
+                <strong>IA, Design System, Responsive Web UI, Prototype</strong>
+            </div>
+            <div class="ks-meta-item">
+                <span>Tools</span>
+                <strong>Figma, FigJam, Illustrator, 3D Mockups</strong>
+            </div>
+        </div>
+
+        <!-- Hero Showcase Banner -->
+        <div class="ks-hero-showcase">
+            <img src="/images/khel-sutra/playground-home-screen.jpg" 
+                 alt="Bhartiya Khel Sutra — Interactive Playground Homepage with 75 games and 9 zones" />
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════
+         2. THE CHALLENGE & THE BRIEF
+    ═══════════════════════════════════════════ -->
+    <section class="ks-section">
+        <div class="ks-container">
+            <span class="ks-section-label">01 / The Challenge</span>
+            <h2 class="ks-section-h2">From Dusty Archives to an Organic Playground</h2>
+            
+            <p class="ks-body-text">
+                Traditional Indian games—from <em>Pachisi</em> and <em>Gilli Danda</em> to forgotten regional board games 
+                like <em>Terhuchü</em> and <em>We-Dyuta</em>—are fading from public memory. Khol Khel’s core mission 
+                is reviving these cultural traditions through craftsmanship and storytelling.
+            </p>
+
+            <div class="ks-callout-card">
+                <p>
+                    "The client had documented over 75 games across India with complex rules, historical lineages, and cultural contexts. 
+                    A standard e-commerce grid or alphabetized list would strip away the very soul of play. 
+                    The challenge was to design an intuitive mental model where users feel like they are exploring, not researching."
+                </p>
+                <small>— Design Objective</small>
+            </div>
+
+            <div class="ks-split-grid">
+                <div>
+                    <h3 style="font-family: var(--font-display); font-size: 1.5rem; color: var(--ks-moss-deep); margin-bottom: 12px;">The Core Problems</h3>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px;">
+                        <li style="display: flex; gap: 12px; align-items: flex-start;">
+                            <i class="fa-solid fa-circle-xmark" style="color: var(--ks-clay); margin-top: 4px;"></i>
+                            <span><strong>Information Overload:</strong> 75 games with varied density—some have simple 2-line rules, while others carry centuries of archaeological evidence.</span>
+                        </li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start;">
+                            <i class="fa-solid fa-circle-xmark" style="color: var(--ks-clay); margin-top: 4px;"></i>
+                            <span><strong>Contextual Disconnection:</strong> In traditional play, games are tied to places—courtyards, temple floors, school lanes, open fields. Flat lists erase this spatial emotion.</span>
+                        </li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start;">
+                            <i class="fa-solid fa-circle-xmark" style="color: var(--ks-clay); margin-top: 4px;"></i>
+                            <span><strong>Discoverability vs. Utility:</strong> Users who want to casually browse need delightful serendipity, while educators and game enthusiasts need immediate search and filtering.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 style="font-family: var(--font-display); font-size: 1.5rem; color: var(--ks-moss); margin-bottom: 12px;">The Strategic Solution</h3>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px;">
+                        <li style="display: flex; gap: 12px; align-items: flex-start;">
+                            <i class="fa-solid fa-circle-check" style="color: var(--ks-moss); margin-top: 4px;"></i>
+                            <span><strong>Spatial Navigation:</strong> Designed an illustrated interactive "Playground" map as the mental anchor. Users pan and zoom naturally across familiar childhood settings.</span>
+                        </li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start;">
+                            <i class="fa-solid fa-circle-check" style="color: var(--ks-moss); margin-top: 4px;"></i>
+                            <span><strong>Hierarchical Taxonomy:</strong> Grouped 75 games into 9 physical & intellectual zones (Buddhiyoga, Aim & Pocket, Family, Gully, Dodge & Tag, Strike & Field, Sports, Yoga, Buddhibala).</span>
+                        </li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start;">
+                            <i class="fa-solid fa-circle-check" style="color: var(--ks-moss); margin-top: 4px;"></i>
+                            <span><strong>Dual-Mode Access:</strong> Combined free-roam visual exploration with a lightning-fast filter drawer for users searching by player count, genre, or region.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         3. INFORMATION ARCHITECTURE
+    ═══════════════════════════════════════════ -->
+    <section class="ks-section">
+        <div class="ks-container">
+            <span class="ks-section-label">02 / Information Architecture</span>
+            <h2 class="ks-section-h2">Structuring 75 Games Across 9 Living Environments</h2>
+            
+            <p class="ks-body-text">
+                The backbone of this project was converting an unstructured research spreadsheet into an intuitive taxonomy. 
+                Each game belongs to both an <em>intellectual genre</em> and a <em>physical environment</em>.
+            </p>
+
+            <!-- IA Diagram Showcase -->
+            <div class="ks-showcase-card">
+                <img src="/images/khel-sutra/information-architecture.jpg" 
+                     alt="Information Architecture taxonomy mapping 75 games into 9 zones" 
+                     class="ks-showcase-img" />
+                <div class="ks-showcase-caption">
+                    <span><strong>Figure 1:</strong> Complete Information Architecture map dividing the archive into 9 zones and environmental spaces.</span>
+                    <span class="ks-caption-tag">Taxonomy & Systems Thinking</span>
+                </div>
+            </div>
+
+            <!-- 9 Environments Cards Grid -->
+            <div class="ks-ia-grid">
+                <div class="ks-ia-card">
+                    <div class="ks-ia-number">01</div>
+                    <h4 class="ks-ia-title">Buddhiyoga</h4>
+                    <div class="ks-ia-sub">Classroom · 23 Games</div>
+                    <ul class="ks-ia-list">
+                        <li>Race & Dice (Vimanam, We-Dyuta)</li>
+                        <li>Predator & Prey (Adu Puli Aattam, Waag Bokari)</li>
+                        <li>Line & Capture (Nav Kankari, Shara Vyuha)</li>
+                        <li>Snakes & Seeds (Mokshapatam, Pallankuzhi)</li>
+                    </ul>
+                </div>
+
+                <div class="ks-ia-card">
+                    <div class="ks-ia-number">02</div>
+                    <h4 class="ks-ia-title">Aim & Pocket</h4>
+                    <div class="ks-ia-sub">Games Hall · 3 Games</div>
+                    <ul class="ks-ia-list">
+                        <li>Carrom (Precision flick)</li>
+                        <li>Kang Shanaba (Traditional Manipuri game)</li>
+                        <li>Pool & Snooker Heritage</li>
+                    </ul>
+                </div>
+
+                <div class="ks-ia-card">
+                    <div class="ks-ia-number">03</div>
+                    <h4 class="ks-ia-title">Family Games</h4>
+                    <div class="ks-ia-sub">Courtyard · 10 Games</div>
+                    <ul class="ks-ia-list">
+                        <li>Kundala / Pagathiya / Nondi</li>
+                        <li>Clapping & Singing rhythms</li>
+                        <li>Chidiya Udd & Patanguddayan</li>
+                        <li>Antakshari & Raja Mantri Chor Sipahi</li>
+                    </ul>
+                </div>
+
+                <div class="ks-ia-card">
+                    <div class="ks-ia-number">04</div>
+                    <h4 class="ks-ia-title">Gully Games</h4>
+                    <div class="ks-ia-sub">The Lane · 10 Games</div>
+                    <ul class="ks-ia-list">
+                        <li>Pambaram / Lattu (Spinning tops)</li>
+                        <li>Gutte (Pebble tossing)</li>
+                        <li>Goli Gundu / Kanche (Marbles)</li>
+                        <li>Rope Hopping & Pacha Kuthirai</li>
+                    </ul>
+                </div>
+
+                <div class="ks-ia-card">
+                    <div class="ks-ia-number">05</div>
+                    <h4 class="ks-ia-title">Dodge & Tag</h4>
+                    <div class="ks-ia-sub">Open Field · 16 Games</div>
+                    <ul class="ks-ia-list">
+                        <li>Kho-Kho & Kabaddi</li>
+                        <li>Kallukoduthan kale vaa</li>
+                        <li>Rumal Chor & Vishamrut</li>
+                        <li>Langdi & Cheel Jhappata</li>
+                    </ul>
+                </div>
+
+                <div class="ks-ia-card">
+                    <div class="ks-ia-number">06</div>
+                    <h4 class="ks-ia-title">Strike & Field</h4>
+                    <div class="ks-ia-sub">Open Ground · 5 Games</div>
+                    <ul class="ks-ia-list">
+                        <li>Gilli Danda (Ancient ball & bat)</li>
+                        <li>Chakki Badi & Santhai Katti</li>
+                        <li>Khung Kangjei & Mukna Kangjei</li>
+                        <li>Sagol Kangjei (Traditional Polo)</li>
+                    </ul>
+                </div>
+
+                <div class="ks-ia-card">
+                    <div class="ks-ia-number">07</div>
+                    <h4 class="ks-ia-title">Sports & Skill</h4>
+                    <div class="ks-ia-sub">Training Ground · 5 Games</div>
+                    <ul class="ks-ia-list">
+                        <li>Thoda (Himachali archery sport)</li>
+                        <li>Bhalatek (Spear agility)</li>
+                        <li>Koogi Chagga (Strength contest)</li>
+                        <li>Mushtiyuddha & Yubi Lakpi</li>
+                    </ul>
+                </div>
+
+                <div class="ks-ia-card">
+                    <div class="ks-ia-number">08</div>
+                    <h4 class="ks-ia-title">Yoga & Martial</h4>
+                    <div class="ks-ia-sub">Akhara Garden · 4 Games</div>
+                    <ul class="ks-ia-list">
+                        <li>Lathi Khela (Staff combat)</li>
+                        <li>Mardani Khel (Maratha martial art)</li>
+                        <li>Kalaripayattu (Ancient discipline)</li>
+                        <li>Mallakhamb (Acrobatic pole gymnastics)</li>
+                    </ul>
+                </div>
+
+                <div class="ks-ia-card">
+                    <div class="ks-ia-number">09</div>
+                    <h4 class="ks-ia-title">Buddhibala</h4>
+                    <div class="ks-ia-sub">The Pavilion · 3 Games</div>
+                    <ul class="ks-ia-list">
+                        <li>Ganjifa (Circular painted playing cards)</li>
+                        <li>Para Sho (Bhutanese / Tibetan heritage)</li>
+                        <li>Shatranj (Precursor to modern chess)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         4. DESIGN SYSTEM & TOKENS
+    ═══════════════════════════════════════════ -->
+    <section class="ks-section">
+        <div class="ks-container">
+            <span class="ks-section-label">03 / Visual Design & System</span>
+            <h2 class="ks-section-h2">Design Tokens Rooted in Earth, Clay & Ink</h2>
+
+            <p class="ks-body-text">
+                To bridge historical authenticity with high digital readability, I created a custom tokenized design system. 
+                The typography pairs <strong>Fraunces</strong> (an editorial serif with organic warmth) with 
+                <strong>Work Sans</strong> (a clean grotesque sans-serif for responsive UI and accessibility).
+            </p>
+
+            <div class="ks-palette-grid">
+                <div class="ks-swatch" style="background: #1e2b1c; color: #f4efdf;">
+                    <span class="ks-swatch-name">Ink</span>
+                    <span class="ks-swatch-hex">#1E2B1C</span>
+                </div>
+                <div class="ks-swatch" style="background: #f4efdf; color: #1e2b1c;">
+                    <span class="ks-swatch-name">Cream</span>
+                    <span class="ks-swatch-hex">#F4EFDF</span>
+                </div>
+                <div class="ks-swatch" style="background: #33502f; color: #f4efdf;">
+                    <span class="ks-swatch-name">Moss</span>
+                    <span class="ks-swatch-hex">#33502F</span>
+                </div>
+                <div class="ks-swatch" style="background: #223a20; color: #f4efdf;">
+                    <span class="ks-swatch-name">Moss-Deep</span>
+                    <span class="ks-swatch-hex">#223A20</span>
+                </div>
+                <div class="ks-swatch" style="background: #b5502f; color: #ffffff;">
+                    <span class="ks-swatch-name">Clay</span>
+                    <span class="ks-swatch-hex">#B5502F</span>
+                </div>
+                <div class="ks-swatch" style="background: #cf9a3d; color: #1e2b1c;">
+                    <span class="ks-swatch-name">Gold</span>
+                    <span class="ks-swatch-hex">#CF9A3D</span>
+                </div>
+                <div class="ks-swatch" style="background: #6c8f8c; color: #1e2b1c;">
+                    <span class="ks-swatch-name">Sky</span>
+                    <span class="ks-swatch-hex">#6C8F8C</span>
+                </div>
+                <div class="ks-swatch" style="background: #efe7d0; color: #1e2b1c;">
+                    <span class="ks-swatch-name">Warm-01</span>
+                    <span class="ks-swatch-hex">#EFE7D0</span>
+                </div>
+            </div>
+
+            <!-- Illustration & Character Exploration -->
+            <div class="ks-split-grid" style="margin-top: 48px;">
+                <div class="ks-showcase-card" style="margin: 0;">
+                    <img src="/images/khel-sutra/illustration-style-exploration.jpg" 
+                         alt="Illustration style exploration showing traditional characters and children playing" 
+                         class="ks-showcase-img" />
+                    <div class="ks-showcase-caption">
+                        <span><strong>Illustration Style Exploration:</strong> Developing warm, storybook character art depicting genuine community play.</span>
+                    </div>
+                </div>
+
+                <div class="ks-showcase-card" style="margin: 0;">
+                    <img src="/images/khel-sutra/building-visuals.jpg" 
+                         alt="Pencil sketch to color rendering evolution of traditional players" 
+                         class="ks-showcase-img" />
+                    <div class="ks-showcase-caption">
+                        <span><strong>Craft & Execution:</strong> From archival pencil line-work to rendered digital assets integrated into the UI.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         5. WIREFRAMING & INTERACTION MODEL
+    ═══════════════════════════════════════════ -->
+    <section class="ks-section">
+        <div class="ks-container">
+            <span class="ks-section-label">04 / Wireframing & Layout</span>
+            <h2 class="ks-section-h2">Balancing Free Exploration with Direct Discovery</h2>
+            
+            <p class="ks-body-text">
+                During low-fidelity prototyping, I designed two distinct ways for visitors to interact with the experience:
+            </p>
+
+            <div class="ks-split-grid">
+                <div>
+                    <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: var(--ks-moss-deep); margin-bottom: 12px;">
+                        1. The Spatial Free-Roam
+                    </h3>
+                    <p style="color: #4b5d47; line-height: 1.7; margin-bottom: 18px;">
+                        Users can click and drag the canvas horizontally and vertically. Pins on the playground 
+                        reveal active games with micro-hover interactions. Clicking a zone transitions seamlessly 
+                        into specialized environments (e.g., entering the Buddhiyoga Classroom or stepping onto the Sports Ground).
+                    </p>
+                </div>
+                <div>
+                    <h3 style="font-family: var(--font-display); font-size: 1.4rem; color: var(--ks-moss-deep); margin-bottom: 12px;">
+                        2. The Game Index & Search Drawer
+                    </h3>
+                    <p style="color: #4b5d47; line-height: 1.7; margin-bottom: 18px;">
+                        For educators, researchers, or parents searching for a specific title (e.g. "Indoor games for 4 players"), 
+                        a persistent drawer provides faceted filtering by player count, complexity, material requirements, and historical period.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Wireframes Showcase -->
+            <div class="ks-showcase-card">
+                <img src="/images/khel-sutra/wireframes-1.jpg" 
+                     alt="Low-fidelity wireframes showing map overview, filtered catalog, and detail card modal" 
+                     class="ks-showcase-img" />
+                <div class="ks-showcase-caption">
+                    <span><strong>Wireframe Iterations:</strong> Testing navigation patterns, card density, and multi-tier filter overlays.</span>
+                    <span class="ks-caption-tag">Interaction Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         6. FINAL HI-FI INTERACTIVE SCREENS
+    ═══════════════════════════════════════════ -->
+    <section class="ks-section">
+        <div class="ks-container">
+            <span class="ks-section-label">05 / Final Screens & Walkthrough</span>
+            <h2 class="ks-section-h2">The Living Digital Playground</h2>
+
+            <p class="ks-body-text">
+                Here is the completed interface, combining rich narrative illustrations, responsive bottom sheets, 
+                and detailed information modals.
+            </p>
+
+            <!-- Screen 1: Sports Ground -->
+            <div class="ks-showcase-card">
+                <img src="/images/khel-sutra/sports-ground-screen.jpg" 
+                     alt="Bhartiya Khel Sutra — Sports Ground Sub Section UI" 
+                     class="ks-showcase-img" />
+                <div class="ks-showcase-caption">
+                    <span>
+                        <strong>01 · Sports Ground Environment:</strong> 
+                        Sub-section view showcasing active matches (Thoda archery, Mallakhamb agility, Koogi Chagga). 
+                        A clean top bar allows immediate return to the main playground.
+                    </span>
+                    <span class="ks-caption-tag">Sub-Zone Exploration</span>
+                </div>
+            </div>
+
+            <!-- Screen 2: Classroom Race & Dice -->
+            <div class="ks-showcase-card">
+                <img src="/images/khel-sutra/classroom-race-dice.jpg" 
+                     alt="Buddhiyoga Classroom — Race & Dice Games" 
+                     class="ks-showcase-img" />
+                <div class="ks-showcase-caption">
+                    <span>
+                        <strong>02 · Buddhiyoga Classroom (Race & Dice):</strong> 
+                        An illustrated interior classroom environment. Children are seated on mats playing board games 
+                        from ancient scriptures like Dyuta. Users click individual groups to open game mechanics.
+                    </span>
+                    <span class="ks-caption-tag">Environmental UI</span>
+                </div>
+            </div>
+
+            <!-- Screen 3: Classroom Predator & Prey -->
+            <div class="ks-showcase-card">
+                <img src="/images/khel-sutra/classroom-predator-prey.jpg" 
+                     alt="Buddhiyoga Classroom — Predator & Prey Strategy Games" 
+                     class="ks-showcase-img" />
+                <div class="ks-showcase-caption">
+                    <span>
+                        <strong>03 · Predator & Prey Strategic Games:</strong> 
+                        Interactive room switcher with horizontal pill tabs along the bottom, allowing instantaneous 
+                        transitions between game genres without reloading the environment.
+                    </span>
+                    <span class="ks-caption-tag">Smooth Navigation</span>
+                </div>
+            </div>
+
+            <!-- Screen 4: Game Detail Card Modal -->
+            <div class="ks-showcase-card">
+                <img src="/images/khel-sutra/game-info-card.jpg" 
+                     alt="Game Information Card Modal for We-Dyuta game" 
+                     class="ks-showcase-img" />
+                <div class="ks-showcase-caption">
+                    <span>
+                        <strong>04 · The Game Information Card:</strong> 
+                        Modal overlay presenting the game synopsis, equipment needed (board + dice), historical trivia, 
+                        and a direct call to action to play or read the full editorial rulebook.
+                    </span>
+                    <span class="ks-caption-tag">Modal & Information Density</span>
+                </div>
+            </div>
+
+            <!-- Prototype Callout Banner -->
+            <div class="ks-prototype-banner">
+                <h3 class="ks-prototype-h3">Experience the Interactive Web Prototype</h3>
+                <p class="ks-prototype-p">
+                    Explore the full interactive Figma prototype featuring draggable map pan, zone switching, 
+                    and responsive game information sheets.
+                </p>
+                <a href="https://heyzine.com/flip-book/c704068ec5.html" target="_blank" rel="noopener noreferrer" class="ks-btn-gold">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>View Interactive Documentation</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         7. INDUSTRY IMPACT & MENTOR ENDORSEMENT
+    ═══════════════════════════════════════════ -->
+    <section class="ks-section">
+        <div class="ks-container">
+            <span class="ks-section-label">06 / Real Industry Impact</span>
+            <h2 class="ks-section-h2">Client Delivery & Recommendation</h2>
+            
+            <p class="ks-body-text">
+                Designed during my Creative & UI/UX internship at Khol Khel Pvt. Ltd. (Delhi - The Kunj), 
+                this project demonstrated systems-level design execution—moving from abstract historical archives 
+                into a ready-for-engineering digital experience.
+            </p>
+
+            <!-- Testimonial from Industry Mentor -->
+            <div class="ks-testimonial-box">
+                <i class="fa-solid fa-quote-left ks-quote-icon"></i>
+                <p class="ks-testimonial-text">
+                    "Drriti is a remarkably calm, composed, and well-organized individual who consistently executes her responsibilities with high efficiency. 
+                    During her internship with us at Khol Khel, she demonstrated strong leadership skills and a natural ability to manage team-focused tasks. 
+                    She brings a skilled, practical approach to problem-solving and approaches her work with genuine dedication and sincerity. 
+                    She quickly understood company ethos, contributing to the team in her best possible capacity. She would be an exceptional asset and a valuable addition to any team."
+                </p>
+                <div class="ks-testimonial-author">
+                    <div class="ks-author-avatar">VS</div>
+                    <div class="ks-author-info">
+                        <strong>Vidula Sureka</strong>
+                        <span>Industry Mentor & Textile Designer · Khol Khel Pvt. Ltd.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Takeaways & Systems Thinking -->
+            <div class="ks-split-grid" style="margin-top: 40px;">
+                <div class="ks-callout-card" style="margin: 0; background: #ffffff; border-color: var(--ks-moss);">
+                    <h4 style="font-family: var(--font-display); font-size: 1.25rem; color: var(--ks-moss-deep); margin-bottom: 8px;">
+                        Systems Thinking Over Single Screens
+                    </h4>
+                    <p style="font-size: 1rem; color: #43553f; font-weight: normal;">
+                        "My biggest shift during this project was moving from <em>'does this look right?'</em> to 
+                        <em>'does this architecture hold up across 75 distinct games and diverse player types?'</em> 
+                        Designing flexible components that accommodate different information densities without breaking the visual pattern."
+                    </p>
+                </div>
+
+                <div class="ks-callout-card" style="margin: 0; background: #ffffff; border-color: var(--ks-gold);">
+                    <h4 style="font-family: var(--font-display); font-size: 1.25rem; color: var(--ks-moss-deep); margin-bottom: 8px;">
+                        Cultural Nuance Meets Modern Usability
+                    </h4>
+                    <p style="font-size: 1rem; color: #43553f; font-weight: normal;">
+                        Balancing historical reverence with accessibility. Ensuring that Indian folk heritage doesn't feel like an ancient textbook, 
+                        but rather an inviting, modern digital experience that invites play.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         8. BOTTOM NAVIGATION (NEXT / PREV PROJECT)
+    ═══════════════════════════════════════════ -->
+    <nav class="ks-bottom-nav">
+        <a href="/#work" class="ks-bottom-link prev">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>All Projects</span>
+        </a>
+        <a href="/unipath" class="ks-bottom-link">
+            <span>Next Project: UniPath</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </nav>
+
+    <!-- Script for Progress Bar & Animations -->
+    <script>
+        // Reading progress calculation
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('ksProgressBar').style.width = scrolled + '%';
+        });
+
+        // GSAP ScrollTrigger reveal animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.ks-showcase-card, .ks-ia-card, .ks-callout-card, .ks-testimonial-box').forEach(el => {
+            gsap.from(el, {
+                opacity: 0,
+                y: 35,
+                duration: 0.85,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

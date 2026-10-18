@@ -21,6 +21,30 @@
 </head>
 
 <body>
+
+  <!-- ═══════════════════════════════════════════
+       INTRO OVERLAY — remove this entire block to disable
+  ═══════════════════════════════════════════ -->
+  <div id="intro-overlay">
+    <div class="intro-inner">
+      <div class="intro-counter-line">
+        <span class="intro-counter">000</span>
+      </div>
+      <div class="intro-name-row">
+        <div class="intro-letter-wrap"><span>D</span></div>
+        <div class="intro-letter-wrap"><span class="intro-rr">rr</span></div>
+        <div class="intro-letter-wrap"><span>iti</span></div>
+      </div>
+      <div class="intro-note">
+        <svg width="36" height="22" viewBox="0 0 36 22" fill="none">
+          <path d="M2 20 C12 8, 22 6, 34 2" stroke="#8b2f2f" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        <span>Yes, double r</span>
+      </div>
+    </div>
+  </div>
+  <!-- ═══════════════════════════════════════════ -->
+
   <div id="page-content">
     <div id="page-bg"></div>
     <nav class="nav">
@@ -50,13 +74,15 @@
     </header>
     <!--hero-->
     <section class="hero">
+      <!-- Interactive cursor glow canvas -->
+      <canvas id="hero-canvas"></canvas>
       <!-- background blob -->
       <div class="hero-blob"></div>
       <div class="hero-grain"></div>
       <div class="hero-inner">
         <p class="hero-eyebrow">VISUAL COMMUNICATION DESIGNER</p>
         <h1 class="hero-title">
-          Hi, I’m
+          Hi, I'm
           <span class="name-wrap hero-name">
             D<span class="rr">rr</span>iti
             <!-- Handwritten Name Note -->
@@ -189,7 +215,36 @@
           </div>
         </div>
 
-        <!-- Project 3: MRITTIKA -->
+        <!-- Project 3: Mydayss UX -->
+        <div class="work-card" onclick="window.location.href='mydayss-ux.html'">
+          <div class="work-media">
+            <img src="images/mydayss/hero.png" alt="Mydayss Emotional Search Experience">
+          </div>
+          <div class="work-text">
+            <span class="work-category">UI / UX</span>
+            <h3 class="work-title">Mydayss</h3>
+            <p class="work-desc">
+              An emotion-first digital platform that guides users through self-reflection —
+              from feeling to journaling to healing, one gentle prompt at a time.
+            </p>
+            <div class="work-meta">
+              <div class="work-meta-item">
+                <span class="meta-label">Role</span>
+                <span class="meta-value">UX/UI Designer</span>
+              </div>
+              <div class="work-meta-item">
+                <span class="meta-label">Duration</span>
+                <span class="meta-value">2–3 Weeks</span>
+              </div>
+              <div class="work-meta-item">
+                <span class="meta-label">Tools</span>
+                <span class="meta-value">Figma · Illustrator</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: MRITTIKA -->
         <div class="work-card" onclick="window.location.href='mittrika.html'">
           <div class="work-media">
             <img src="images/mittrika/MRITTIKA BEHANCE-17.jpg" alt="MRITTIKA branding">
@@ -216,6 +271,34 @@
             </div>
           </div>
         </div>
+
+          <!-- Project 4: Riyasat -->
+          <div class="work-card reverse" onclick="window.location.href='riyasat.html'">
+            <div class="work-media">
+              <img src="images/riyasat/riyasat brand guidelines 1_Page_01.jpg" alt="Riyasat branding project">
+            </div>
+            <div class="work-text">
+              <span class="work-category">Branding</span>
+              <h3 class="work-title">Riyasat</h3>
+              <p class="work-desc">
+                A rich, heritage-inspired brand identity rooted in tradition and elegance.
+              </p>
+              <div class="work-meta">
+                <div class="work-meta-item">
+                  <span class="meta-label">Role</span>
+                  <span class="meta-value">Brand Designer</span>
+                </div>
+                <div class="work-meta-item">
+                  <span class="meta-label">Duration</span>
+                  <span class="meta-value">3 Weeks</span>
+                </div>
+                <div class="work-meta-item">
+                  <span class="meta-label">Tools</span>
+                  <span class="meta-value">Illustrator · Photoshop</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
       </div>
     </section>
@@ -314,325 +397,74 @@
 
 
 
-    <!-- SCROLL TRANSITION -->
+    <!-- SCRIPTS -->
+    <script src="public/js/hero-interact.js"></script>
+    <script src="public/js/main.js"></script>
+
+    <!-- ═══════════════════════════════════════════
+         INTRO ANIMATION — remove this script block to disable
+    ═══════════════════════════════════════════ -->
     <script>
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.to("body", {
-        backgroundColor: "#0b0b0b",
-        color: "#ffffff",
-        scrollTrigger: {
-          trigger: "#work",
-          start: "top 70%",
-          end: "top 25%",
-          scrub: true
-        }
-      });
-    </script>
-    <script>
-      gsap.registerPlugin(ScrollTrigger);
-      /* Scroll line grows */
-      gsap.to(".scroll-indicator span", {
-        height: "100%",
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: true
-        }
-      });
-      /* Hero exits clearly */
-      gsap.to(".hero-inner", {
-        y: -80,
-        opacity: 0,
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: true
-        }
-      });
-      /* About enters clearly */
-      gsap.fromTo("#about",
-        { y: 80, opacity: 0 },
-        {
-          y: 0,
+      (function () {
+        const overlay = document.getElementById('intro-overlay');
+        if (!overlay) return;
+
+        // Lock scroll during intro
+        document.documentElement.style.overflow = 'hidden';
+
+        const counterEl = overlay.querySelector('.intro-counter');
+        const letters   = overlay.querySelectorAll('.intro-letter-wrap span');
+        const note      = overlay.querySelector('.intro-note');
+
+        const tl = gsap.timeline({
+          defaults: { ease: 'power3.out' },
+          onComplete: () => {
+            document.documentElement.style.overflow = '';
+            overlay.style.pointerEvents = 'none';
+            overlay.style.display = 'none';
+          }
+        });
+
+        // ── 1. Counter: 000 → 100 ──────────────────────
+        const count = { val: 0 };
+        tl.to(count, {
+          val: 100,
+          duration: 1.6,
+          ease: 'power2.inOut',
+          onUpdate() {
+            counterEl.textContent = String(Math.round(count.val)).padStart(3, '0');
+          }
+        });
+
+        // ── 2. Letter wipe-up (staggered) ──────────────
+        tl.to(letters, {
+          y: '0%',
+          duration: 0.9,
+          ease: 'power4.out',
+          stagger: 0.08
+        }, '-=0.15');
+
+        // ── 3. "Yes, double r" annotation fades in ─────
+        tl.to(note, {
           opacity: 1,
-          scrollTrigger: {
-            trigger: "#about",
-            start: "top 85%",
-            end: "top 55%",
-            scrub: true
-          }
-        }
-      );
+          y: 0,
+          duration: 0.55,
+          ease: 'power3.out'
+        }, '-=0.3');
+
+        // ── 4. Breathe pause ───────────────────────────
+        tl.to({}, { duration: 0.65 });
+
+        // ── 5. Overlay wipes up ────────────────────────
+        tl.to(overlay, {
+          yPercent: -100,
+          duration: 1.0,
+          ease: 'power4.inOut'
+        });
+      })();
     </script>
-    <script>
-      gsap.registerPlugin(ScrollTrigger);
-      /* Image animation */
-      gsap.to(".about-image", {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: "#about",
-          start: "top 80%",
-        }
-      });
-      /* Text animation (slightly delayed) */
-      gsap.to(".about-content", {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        delay: 0.15,
-        scrollTrigger: {
-          trigger: "#about",
-          start: "top 80%",
-        }
-      });
-    </script>
-    <script>
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.utils.toArray(".work").forEach((project) => {
-        gsap.from(project, {
-          y: 100,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: project,
-            start: "top 85%",
-            toggleActions: "play none none none"
-          }
-        });
-      });
-    </script>
-    <script>
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.to("#page-bg", {
-        backgroundColor: "#0b0b0b",
-        scrollTrigger: {
-          trigger: "#work",
-          start: "top 70%",
-          end: "top 30%",
-          scrub: true,
-          invalidateOnRefresh: true
-        }
-      });
-      /* Cards animation */
-      gsap.utils.toArray(".work-card").forEach(card => {
-        gsap.fromTo(card,
-          { y: 80, opacity: 0, scale: 0.96 },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 80%",
-            }
-          }
-        );
-      });
-    </script>
-    <script>
-      window.addEventListener("load", () => {
-        ScrollTrigger.refresh();
-      });
-    </script>
-    <script>
-      /* Custom Project Cursor Logic */
-      const projectCursor = document.querySelector(".project-cursor");
+    <!-- ═══════════════════════════════════════════ -->
 
-      document.addEventListener("mousemove", (e) => {
-        gsap.to(projectCursor, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: 0.5,
-          ease: "power2.out"
-        });
-      });
-
-      document.querySelectorAll(".work-card").forEach(card => {
-        card.addEventListener("mouseenter", () => {
-          gsap.to(projectCursor, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.3
-          });
-        });
-        card.addEventListener("mouseleave", () => {
-          gsap.to(projectCursor, {
-            opacity: 0,
-            scale: 0.8,
-            duration: 0.3
-          });
-        });
-
-        /* 3D Tilt Effect */
-        card.addEventListener("mousemove", (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const rotateX = ((y / rect.height) - 0.5) * -8;
-          const rotateY = ((x / rect.width) - 0.5) * 8;
-
-          card.style.transform = `
-            perspective(1200px)
-            rotateX(${rotateX}deg)
-            rotateY(${rotateY}deg)
-            translateY(-8px)
-          `;
-        });
-        card.addEventListener("mouseleave", () => {
-          card.style.transform = "none";
-        });
-      });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-
-        const pins = document.querySelectorAll(".pin-item");
-        const wall = document.querySelector(".wall");
-        const viewer = document.querySelector(".wall-viewer");
-        const content = document.querySelector(".viewer-content");
-
-        // Track the highest z-index so the most recently dragged pin stays on top
-        let topZ = 10;
-
-        pins.forEach(pin => {
-
-          let isDragging = false;
-          let hasDragged = false;   // true once mouse moves enough during a press
-          let startX = 0;
-          let startY = 0;
-          let offsetX = 0;
-          let offsetY = 0;
-
-          /* ── POINTER DOWN ── */
-          const onPointerDown = (e) => {
-            // Use the primary button only (left-click / touch)
-            if (e.button && e.button !== 0) return;
-
-            isDragging = true;
-            hasDragged = false;
-
-            const point = e.touches ? e.touches[0] : e;
-
-            startX = point.clientX;
-            startY = point.clientY;
-
-            const rect = pin.getBoundingClientRect();
-            offsetX = point.clientX - rect.left;
-            offsetY = point.clientY - rect.top;
-
-            // Lift card visually
-            pin.classList.add("dragging");
-            topZ += 1;
-            pin.style.zIndex = topZ;
-
-            e.preventDefault(); // prevent image ghost drag in browsers
-          };
-
-          /* ── POINTER MOVE ── */
-          const onPointerMove = (e) => {
-            if (!isDragging) return;
-
-            const point = e.touches ? e.touches[0] : e;
-
-            const dx = point.clientX - startX;
-            const dy = point.clientY - startY;
-
-            // Only start dragging after 8 px of movement (prevents accidental drags)
-            if (!hasDragged && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
-              hasDragged = true;
-            }
-
-            if (!hasDragged) return;
-
-            const wallRect = wall.getBoundingClientRect();
-
-            // Calculate new position relative to the wall container
-            let newLeft = point.clientX - wallRect.left - offsetX;
-            let newTop = point.clientY - wallRect.top - offsetY;
-
-            // Clamp inside the wall boundaries
-            newLeft = Math.max(-20, Math.min(newLeft, wallRect.width - pin.offsetWidth + 20));
-            newTop = Math.max(-20, Math.min(newTop, wallRect.height - pin.offsetHeight + 20));
-
-            pin.style.left = newLeft + "px";
-            pin.style.top = newTop + "px";
-          };
-
-          /* ── POINTER UP ── */
-          const onPointerUp = () => {
-            if (!isDragging) return;
-            isDragging = false;
-            pin.classList.remove("dragging");
-          };
-
-          /* ── CLICK (only fires if NOT dragged) ── */
-          pin.addEventListener("click", (e) => {
-            // If user dragged, swallow the click entirely
-            if (hasDragged) {
-              e.preventDefault();
-              e.stopPropagation();
-              return;
-            }
-
-            const type = pin.dataset.type;
-            const src = pin.dataset.src;
-
-            content.innerHTML = "";
-
-            if (type === "video") {
-              const video = document.createElement("video");
-              video.src = src;
-              video.controls = true;
-              video.autoplay = true;
-              content.appendChild(video);
-            } else if (type === "flipbook") {
-              const iframe = document.createElement("iframe");
-              iframe.src = src;
-              iframe.setAttribute("allowfullscreen", "");
-              iframe.setAttribute("scrolling", "no");
-              iframe.style.width = "80vw";
-              iframe.style.height = "80vh";
-              iframe.style.border = "none";
-              iframe.style.borderRadius = "12px";
-              content.appendChild(iframe);
-            } else {
-              const img = document.createElement("img");
-              img.src = src;
-              content.appendChild(img);
-            }
-
-            viewer.classList.add("active");
-          });
-
-          /* ── Bind events ── */
-          // Mouse
-          pin.addEventListener("mousedown", onPointerDown);
-          document.addEventListener("mousemove", onPointerMove);
-          document.addEventListener("mouseup", onPointerUp);
-
-          // Touch (mobile)
-          pin.addEventListener("touchstart", onPointerDown, { passive: false });
-          document.addEventListener("touchmove", onPointerMove, { passive: false });
-          document.addEventListener("touchend", onPointerUp);
-        });
-
-        /* ── Close viewer on click ── */
-        viewer.addEventListener("click", () => {
-          viewer.classList.remove("active");
-          content.innerHTML = "";
-        });
-
-      });
-    </script>
 </body>
 
 </html>

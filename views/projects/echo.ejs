@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <meta name="description"
+        content="Echo — 1st Prize Winner out of 150+ teams at NSUT Oblivion Hackathon. An all-in-one music player and practice utility closing the gap between listening and learning. UI/UX Case Study by Drriti Pasrija.">
+
+    <!-- Fonts: Outfit (Heading) + Plus Jakarta Sans (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- GSAP for scroll animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Custom Case Study CSS -->
+    <link rel="stylesheet" href="/css/echo.css" />
+</head>
+
+<body>
+
+    <!-- Reading Progress Indicator -->
+    <div class="echo-progress-bar" id="echoProgressBar"></div>
+
+    <!-- Floating Back Navigation -->
+    <a href="/#work" class="echo-back-nav">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Back to Portfolio</span>
+    </a>
+
+    <!-- ═══════════════════════════════════════════
+         1. HERO SECTION
+    ═══════════════════════════════════════════ -->
+    <header class="echo-hero">
+        <div class="echo-badge-row">
+            <span class="echo-badge echo-badge-winner">
+                <i class="fa-solid fa-trophy"></i> 1st Prize Winner (150+ Teams)
+            </span>
+            <span class="echo-badge echo-badge-hackathon">
+                <i class="fa-solid fa-bolt"></i> NSUT Oblivion Hackathon
+            </span>
+            <span class="echo-badge echo-badge-tag">
+                <i class="fa-solid fa-music"></i> Product Design & UX Research
+            </span>
+        </div>
+
+        <h1 class="echo-hero-title">Echo <span>Music</span></h1>
+        <p class="echo-hero-tagline">Bridging the Gap Between Streaming Music and Learning It</p>
+
+        <p class="echo-hero-description">
+            Music streaming apps are built purely for passive listening, while music learning apps feel like rigid classrooms. 
+            <strong>ECHO</strong> was designed to bridge this divide—transforming any streaming song into an interactive practice session 
+            with live stem isolation, version-synced chords, tempo controls, and synced jam sessions.
+        </p>
+
+        <!-- Project Snapshot Meta Bar -->
+        <div class="echo-meta-grid">
+            <div class="echo-meta-item">
+                <span>Role</span>
+                <strong>UX Research & Product Design</strong>
+            </div>
+            <div class="echo-meta-item">
+                <span>Team</span>
+                <strong>2 Interns (Collaborative)</strong>
+            </div>
+            <div class="echo-meta-item">
+                <span>Recognition</span>
+                <strong>1st Prize · 150+ Teams</strong>
+            </div>
+            <div class="echo-meta-item">
+                <span>Deliverables</span>
+                <strong>User Flows, Competitive Matrix, Lo-Fi to Hi-Fi UI, Prototype</strong>
+            </div>
+            <div class="echo-meta-item">
+                <span>Tools</span>
+                <strong>Figma, FigJam, Protopie</strong>
+            </div>
+        </div>
+
+        <!-- Hero Showcase Banner -->
+        <div class="echo-hero-showcase">
+            <img src="/images/echo/round2-final-screens.jpg" 
+                 alt="Echo Music Player and Practice Experience UI Screens" />
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════
+         2. ROUND 1: THE INITIAL PROBLEM
+    ═══════════════════════════════════════════ -->
+    <section class="echo-section">
+        <div class="echo-container">
+            <span class="echo-section-label">01 / Round 1 Exploration</span>
+            <h2 class="echo-section-h2">The Problem With Modern Streaming Apps</h2>
+            
+            <p class="echo-body-text">
+                During the opening round of the hackathon, we analyzed friction points across existing mainstream players like Spotify, Apple Music, and YouTube Music:
+            </p>
+
+            <div class="echo-split-grid">
+                <div>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 18px;">
+                        <li style="display: flex; gap: 14px; align-items: flex-start;">
+                            <i class="fa-solid fa-ban" style="color: #ef4444; margin-top: 5px;"></i>
+                            <div>
+                                <strong style="color: #f1f5f9; display: block;">Cluttered Home Feeds</strong>
+                                <span style="color: #94a3b8; font-size: 0.95rem;">Algorithms push podcasts, audiobooks, and sponsored playlists, burying the user's personal saved library.</span>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 14px; align-items: flex-start;">
+                            <i class="fa-solid fa-ban" style="color: #ef4444; margin-top: 5px;"></i>
+                            <div>
+                                <strong style="color: #f1f5f9; display: block;">Friction in Active Queueing</strong>
+                                <span style="color: #94a3b8; font-size: 0.95rem;">Simple actions like adding a track to the queue require multiple clicks and interrupt the listening flow.</span>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 14px; align-items: flex-start;">
+                            <i class="fa-solid fa-ban" style="color: #ef4444; margin-top: 5px;"></i>
+                            <div>
+                                <strong style="color: #f1f5f9; display: block;">Disconnected Social Listening</strong>
+                                <span style="color: #94a3b8; font-size: 0.95rem;">Sharing music and listening together is fragmented across separate messaging apps.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="echo-callout-card" style="margin: 0;">
+                        <p>
+                            "We re-architected the primary user flow into three clear mental models: 
+                            <strong>LISTEN</strong> (instant access to personal favorites), 
+                            <strong>DISCOVER</strong> (contextual suggestions without feed overload), and 
+                            <strong>CONNECT</strong> (live synced Jam sessions with friends)."
+                        </p>
+                        <small>— Round 1 UX Strategy</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wireframes Showcase -->
+            <div class="echo-showcase-card">
+                <img src="/images/echo/round1-wireframes.jpg" 
+                     alt="Low fidelity wireframes of Echo music player" 
+                     class="echo-showcase-img" />
+                <div class="echo-showcase-caption">
+                    <span><strong>Round 1 Wireframes:</strong> Mapping home screen, queue drawer, and social jam room.</span>
+                    <span class="echo-caption-tag">Information Architecture</span>
+                </div>
+            </div>
+
+            <!-- Screens Showcase -->
+            <div class="echo-showcase-card">
+                <img src="/images/echo/round1-final-screens.jpg" 
+                     alt="High fidelity screens of Echo player and social music jam" 
+                     class="echo-showcase-img" />
+                <div class="echo-showcase-caption">
+                    <span><strong>Round 1 Delivery:</strong> Home feed, full player, interactive Live Jam circle, and contextual search.</span>
+                    <span class="echo-caption-tag">Visual Craft</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         3. ROUND 2: THE CRITICAL PIVOT
+    ═══════════════════════════════════════════ -->
+    <section class="echo-section">
+        <div class="echo-container">
+            <span class="echo-section-label">02 / Round 2 Pivot & Deep Discovery</span>
+            <h2 class="echo-section-h2">The Musician's Dilemma: Listening vs. Learning</h2>
+            
+            <div class="echo-callout-card">
+                <p style="font-size: 1.3rem; font-weight: 600; color: #ffffff;">
+                    "Learning a song is rarely as simple as pressing play. Musicians constantly switch between 
+                    music players, chord charts, tutorials, lyrics, and practice tools—making it nearly impossible 
+                    to stay in sync with the exact version they're trying to learn."
+                </p>
+                <small>— Core Problem Statement</small>
+            </div>
+
+            <p class="echo-body-text">
+                Under tight hackathon deadlines, we conducted rapid guerilla user interviews with guitarists, singers, 
+                and hobbyist keyboard players. We synthesized their frustrations into an Empathy Map:
+            </p>
+
+            <!-- Empathy Map Summary Grid -->
+            <div class="echo-split-grid" style="margin-top: 30px;">
+                <div style="background: #14161f; padding: 28px; border-radius: 16px; border: 1px solid var(--echo-card-border);">
+                    <h4 style="color: var(--echo-purple-primary); font-size: 1.1rem; margin-bottom: 12px;">What Users Say & Think</h4>
+                    <ul style="list-style: disc; margin-left: 20px; color: #cbd5e1; display: flex; flex-direction: column; gap: 8px;">
+                        <li><em>"Wait, which YouTube video was I learning from again?"</em></li>
+                        <li><em>"Is this chord sheet in the same key as the live album recording?"</em></li>
+                        <li><em>"I lost my place again trying to rewind 5 seconds on my phone."</em></li>
+                        <li><em>"This is taking forever... there must be an easier way."</em></li>
+                    </ul>
+                </div>
+
+                <div style="background: #14161f; padding: 28px; border-radius: 16px; border: 1px solid var(--echo-card-border);">
+                    <h4 style="color: var(--echo-cyan); font-size: 1.1rem; margin-bottom: 12px;">What Users Do & Feel</h4>
+                    <ul style="list-style: disc; margin-left: 20px; color: #cbd5e1; display: flex; flex-direction: column; gap: 8px;">
+                        <li>Switches between 3–4 open browser tabs (YouTube + Ultimate Guitar + Tuner + Metronome).</li>
+                        <li>Constantly pauses, scrub-rewinds, and screenshots chord diagrams mid-video.</li>
+                        <li>Feels overwhelmed, loses practice momentum, and gives up early.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Competitive Analysis Matrix -->
+            <h3 style="font-family: var(--font-heading); font-size: 1.6rem; color: #ffffff; margin: 50px 0 20px;">
+                Competitive Analysis Matrix
+            </h3>
+
+            <div class="echo-table-wrapper">
+                <table class="echo-table">
+                    <thead>
+                        <tr>
+                            <th>Feature Dimension</th>
+                            <th>Yousician</th>
+                            <th>Ultimate Guitar</th>
+                            <th>Moises.ai</th>
+                            <th>ECHO (Our Strategy)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Core Proposition</strong></td>
+                            <td>Gamified practice lessons</td>
+                            <td>Chord & tab community directory</td>
+                            <td>AI audio stem isolation</td>
+                            <td><strong>All-in-one streaming + practice utility</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Audio Catalog</strong></td>
+                            <td>Synthesized MIDI / limited tracks</td>
+                            <td>None (static text/tabs)</td>
+                            <td>Requires manual MP3/WAV uploads</td>
+                            <td><strong>Full streaming master catalog</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Live Stem Muting</strong></td>
+                            <td>❌ (Pre-rendered tracks)</td>
+                            <td>❌</td>
+                            <td>✅ Market leader (AI stems)</td>
+                            <td><strong>✅ Native 1-tap stem isolation</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Version Synced Chords</strong></td>
+                            <td>⚠️ Gamified falling notes</td>
+                            <td>⚠️ Tabs often mismatch live version</td>
+                            <td>⚠️ Basic AI chord detection</td>
+                            <td><strong>✅ Perfectly synced to exact track version</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Integrated Practice Tools</strong></td>
+                            <td>Tempo control in lessons</td>
+                            <td>Static autoscroll & metronome</td>
+                            <td>A-B Looper & pitch shift</td>
+                            <td><strong>✅ Native looper, count-in, transpose & stems</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         4. REJECTED FLOWS (CRITICAL THINKING)
+    ═══════════════════════════════════════════ -->
+    <section class="echo-section">
+        <div class="echo-container">
+            <span class="echo-section-label">03 / Deliberate Decision Making</span>
+            <h2 class="echo-section-h2">Why We Rejected Initial Flows</h2>
+
+            <p class="echo-body-text">
+                Top product teams judge designers by what they chose <em>not</em> to build. 
+                Documenting our rejected flows helped us defend our decisions before the hackathon jury:
+            </p>
+
+            <div class="echo-showcase-card">
+                <img src="/images/echo/rejected-flow.jpg" 
+                     alt="Sketches and architectural diagram of rejected flows" 
+                     class="echo-showcase-img" />
+                <div class="echo-showcase-caption">
+                    <span><strong>Artifact:</strong> Whiteboard sketches and decision tree documenting rejected concepts.</span>
+                    <span class="echo-caption-tag">Design Rationale</span>
+                </div>
+            </div>
+
+            <div class="echo-split-grid">
+                <div style="background: #14161f; padding: 28px; border-radius: 16px; border: 1px solid #334155;">
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px;">
+                        <span style="background: #ef4444; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;">REJECTED</span>
+                        <strong style="color: #ffffff;">Rigid Role Toggle (Vocalist vs. Instrumentalist)</strong>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">
+                        <strong>Initial Idea:</strong> Make users choose either "Instrument Mode" or "Vocalist Mode" upfront.<br>
+                        <strong>Issue Identified:</strong> Most real musicians sing while playing guitar or piano. Blending features was critical rather than siloing them.
+                    </p>
+                </div>
+
+                <div style="background: #14161f; padding: 28px; border-radius: 16px; border: 1px solid #334155;">
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px;">
+                        <span style="background: #ef4444; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;">REJECTED</span>
+                        <strong style="color: #ffffff;">Manual Link Copy-Pasting</strong>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">
+                        <strong>Initial Idea:</strong> Ask users to copy a YouTube/Spotify link and paste it into ECHO.<br>
+                        <strong>Issue Identified:</strong> High cognitive friction.<br>
+                        <strong>Solution:</strong> Implemented direct OS "Share to Echo" sheet to open the player in 1 tap.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         5. FINAL PRODUCT & DEMO SCREENS
+    ═══════════════════════════════════════════ -->
+    <section class="echo-section">
+        <div class="echo-container">
+            <span class="echo-section-label">04 / High Fidelity Product UI</span>
+            <h2 class="echo-section-h2">From Casual Listening to Live Practice Session</h2>
+
+            <p class="echo-body-text">
+                The final interface introduces a clean 2-screen transition: tapping <strong>"Learn this song"</strong> on the full media player 
+                expands the track into the synchronized Practice Suite.
+            </p>
+
+            <div class="echo-showcase-card">
+                <img src="/images/echo/round2-final-screens.jpg" 
+                     alt="Final UI screens showing Learning Suite, chord sync, and practice controls" 
+                     class="echo-showcase-img" />
+                <div class="echo-showcase-caption">
+                    <span><strong>The Practice Suite:</strong> Synchronized lyrics, chords/tabs, role toggles (Guitar, Piano, Ukulele, Bass, Vocal), and tempo/looping controls.</span>
+                    <span class="echo-caption-tag">Final Delivery</span>
+                </div>
+            </div>
+
+            <!-- Award Ceremony Spotlight -->
+            <div class="echo-award-box">
+                <img src="/images/echo/hackathon-first-prize.jpg" 
+                     alt="Drriti Pasrija receiving 1st Prize certificate at Junoon NSUT Hackathon" 
+                     class="echo-award-img" />
+                <div class="echo-award-content">
+                    <h3>🏆 Awarded 1st Prize Out of 150+ Teams</h3>
+                    <p>
+                        Presented at <em>Oppo Presents Oblivion</em> hosted by Junoon, NSUT. 
+                        The jury praised our thorough persona research, the honest pivot from Round 1, 
+                        and our deliberate decision to reject premature feature complexity in favor of real musician workflows.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         6. BOTTOM NAVIGATION
+    ═══════════════════════════════════════════ -->
+    <nav class="echo-bottom-nav">
+        <a href="/khel-sutra" class="echo-bottom-link prev">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Previous: Bhartiya Khel Sutra</span>
+        </a>
+        <a href="/mydayss" class="echo-bottom-link">
+            <span>Next: MyDayss</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </nav>
+
+    <!-- Script for Progress Bar & Animations -->
+    <script>
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('echoProgressBar').style.width = scrolled + '%';
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.echo-showcase-card, .echo-callout-card, .echo-award-box, .echo-table-wrapper').forEach(el => {
+            gsap.from(el, {
+                opacity: 0,
+                y: 35,
+                duration: 0.85,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

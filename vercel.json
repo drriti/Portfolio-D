@@ -28,6 +28,10 @@
             "dest": "/public/js/$1"
         },
         {
+            "src": "/assets/(.*)",
+            "dest": "/public/assets/$1"
+        },
+        {
             "src": "/files/(.*)",
             "dest": "/images/$1"
         },

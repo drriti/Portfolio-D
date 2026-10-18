@@ -16,28 +16,32 @@ gsap.to("body", {
     }
 });
 
-// ── Scroll line grows ──
-gsap.to(".scroll-indicator span", {
-    height: "100%",
-    scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: true
-    }
-});
+// ── Scroll line grows (if legacy indicator exists) ──
+if (document.querySelector(".scroll-indicator span") && document.querySelector(".hero")) {
+    gsap.to(".scroll-indicator span", {
+        height: "100%",
+        scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true
+        }
+    });
+}
 
-// ── Hero exits clearly ──
-gsap.to(".hero-inner", {
-    y: -80,
-    opacity: 0,
-    scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: true
-    }
-});
+// ── Hero exits clearly (if legacy hero exists) ──
+if (document.querySelector(".hero-inner") && document.querySelector(".hero")) {
+    gsap.to(".hero-inner", {
+        y: -80,
+        opacity: 0,
+        scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true
+        }
+    });
+}
 
 // ── About enters clearly ──
 gsap.fromTo("#about",

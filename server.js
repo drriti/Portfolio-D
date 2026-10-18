@@ -32,11 +32,43 @@ app.get('/', (req, res) => {
     });
 });
 
+// Project: Bhartiya Khel Sutra (Flagship Industry UI/UX Project)
+app.get('/khel-sutra', (req, res) => {
+    res.render('projects/khel-sutra', {
+        title: 'Bhartiya Khel Sutra — Spatial UI/UX Archive',
+        page: 'khel-sutra'
+    });
+});
+
+// Project: Echo (Hackathon 1st Prize Product Design)
+app.get('/echo', (req, res) => {
+    res.render('projects/echo', {
+        title: 'Echo — Music & Musician Practice App',
+        page: 'echo'
+    });
+});
+
+// Project: MyDayss (Emotional Search UX)
+app.get('/mydayss', (req, res) => {
+    res.render('projects/mydayss', {
+        title: 'MyDayss — Emotional Search & Journaling',
+        page: 'mydayss'
+    });
+});
+
 // Project: UniPath
 app.get('/unipath', (req, res) => {
     res.render('projects/unipath', {
         title: 'UniPath — Case Study',
         page: 'unipath'
+    });
+});
+
+// Branding & Visual Systems Gallery
+app.get('/branding', (req, res) => {
+    res.render('branding', {
+        title: 'Brand Identity & Visual Systems — Drriti Pasrija',
+        page: 'branding'
     });
 });
 

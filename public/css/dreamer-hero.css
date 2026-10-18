@@ -1,0 +1,523 @@
+/* ==========================================================================
+   DRRITI PASRIJA — "THE DREAMER" SURREAL HERO SECTION & FLUID CURVED NAVBAR
+   Tone: "The dreamer — girl with power and skills willing to do anything for her dreams"
+   ========================================================================== */
+
+:root {
+  --sw-sky-deep: #080a14;
+  --sw-sky-mid: #101633;
+  --sw-sky-ultramarine: #18225e;
+  --sw-sky-glow: #283796;
+
+  --dune-dark: #0d0f17;
+  --dune-light: #f3ede2;
+
+  --text-pure: #ffffff;
+  --text-cream: #f8f6f0;
+  --text-muted: #9fb0d4;
+  --text-subtle: #6879a3;
+
+  --star-gold: #fbbf24;
+  --star-bright: #fffbeb;
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-hand: 'Caveat', cursive;
+
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--sw-sky-deep);
+  color: var(--text-pure);
+  font-family: var(--font-sans);
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: none; /* Hide default cursor — we use custom SWC cursor */
+}
+
+/* ==========================================================================
+   SLEEP WELL CREATIVES — CUSTOM CURSOR SYSTEM
+   White dot (mix-blend-mode: difference) + spring-lagged ring
+   ========================================================================== */
+.swc-cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 12px; height: 12px;
+  background: #ffffff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: width 0.25s ease, height 0.25s ease, background 0.25s ease;
+  will-change: left, top;
+}
+
+.swc-cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 40px; height: 40px;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999998;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+  will-change: left, top;
+}
+
+/* Hover state */
+.swc-cursor-dot.swc-hover {
+  width: 24px; height: 24px;
+}
+
+.swc-cursor-ring.swc-hover {
+  width: 20px; height: 20px;
+  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   ARCHITECTURAL PRELOADER
+   ========================================================================== */
+#dreamer-preloader {
+  position: fixed;
+  inset: 0;
+  background-color: #070910;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: all;
+  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.8s ease;
+}
+
+#dreamer-preloader.loaded {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dreamer-preloader-track {
+  width: min(88vw, 980px);
+  display: flex;
+  flex-direction: column;
+}
+
+.dreamer-preloader-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.dreamer-preloader-counter {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--text-pure);
+  line-height: 1;
+}
+
+.dreamer-preloader-line-box {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.dreamer-preloader-progress {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #60a5fa, #fde047);
+  box-shadow: 0 0 16px rgba(253, 224, 71, 0.8);
+  transition: width 0.1s linear;
+}
+
+.dreamer-preloader-sub {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+/* ==========================================================================
+   FLUID ORGANIC NAVBAR
+   One seamless pill — left action | center meta items | right CTA
+   ========================================================================== */
+.organic-nav-container {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: min(94vw, 1100px);
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.45));
+}
+
+.organic-nav-bar {
+  display: flex;
+  align-items: center;
+  background: rgba(248, 250, 252, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  /* Tight padding — left/right pills touch edges inside */
+  padding: 6px;
+  gap: 0;
+  transition: all 0.4s var(--ease-cinematic);
+}
+
+.organic-nav-bar:hover {
+  background: #ffffff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(253, 224, 71, 0.18);
+}
+
+/* ── Left pill button ── */
+.nav-pill-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  background: #1e293b;
+  border-radius: 999px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.nav-pill-left:hover {
+  background: #0f172a;
+  transform: scale(1.02);
+}
+
+.nav-pill-arrow-left {
+  font-size: 1rem;
+  line-height: 1;
+  display: inline-block;
+  transform: rotate(135deg);
+}
+
+/* ── Center meta block — flex row, divided ── */
+.nav-center-menu {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  gap: 0;
+  padding: 0 8px;
+}
+
+.nav-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 6px 22px;
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+  min-width: 0;
+  transition: background 0.2s ease;
+  border-radius: 8px;
+}
+
+.nav-meta-item:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+/* Thin divider between meta items */
+.nav-meta-divider {
+  width: 1px;
+  height: 30px;
+  background: rgba(15, 23, 42, 0.15);
+  flex-shrink: 0;
+}
+
+.nav-meta-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+  white-space: nowrap;
+}
+
+.nav-meta-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+}
+
+.nav-meta-chevron {
+  font-size: 0.65rem;
+  color: #94a3b8;
+}
+
+/* ── Right pill button ── */
+.nav-pill-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  background: #1e293b;
+  border-radius: 999px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.nav-pill-right:hover {
+  background: #0f172a;
+  transform: scale(1.02);
+}
+
+.nav-pill-arrow-right {
+  font-size: 1rem;
+  line-height: 1;
+  display: inline-block;
+  transform: rotate(-45deg);
+}
+
+/* ==========================================================================
+   HERO STAGE
+   ========================================================================== */
+.dreamer-hero-stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 720px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 35%, var(--sw-sky-glow) 0%, var(--sw-sky-ultramarine) 38%, var(--sw-sky-mid) 70%, var(--sw-sky-deep) 100%);
+  user-select: none;
+}
+
+/* Three.js Canvas */
+#dreamer-3d-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Atmospheric horizon sheen */
+.dreamer-horizon-light {
+  position: absolute;
+  top: 42%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90vw, 1000px);
+  height: 480px;
+  background: radial-gradient(ellipse at center, rgba(62, 85, 195, 0.35) 0%, rgba(30, 42, 110, 0.12) 55%, transparent 80%);
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Z-INDEX LAYERING (back → front):
+   1  — canvas (stars + terrain)
+   2  — "PRODUCT DESIGNER" background text
+   3  — girl silhouette character
+   4  — "Drriti" name + left/right story columns
+   5  — bottom anchor
+   ========================================================================== */
+
+/* "PRODUCT DESIGNER" — BEHIND the character */
+.dreamer-role-bg-text {
+  position: absolute;
+  /* Vertically centred on where the character body is */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  z-index: 2;
+  font-family: var(--font-sans);
+  font-size: clamp(1.2rem, 2.4vw, 2.2rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* Girl silhouette — IN FRONT of "PRODUCT DESIGNER" */
+.dreamer-figure-wrapper {
+  position: absolute;
+  bottom: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dreamer-figure-svg {
+  width: 110px;
+  height: 260px;
+  filter: drop-shadow(0 0 22px rgba(93, 150, 255, 0.35)) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.85));
+  transform-origin: bottom center;
+  transition: transform 0.2s ease-out;
+}
+
+/* "Drriti" name — in FRONT of character */
+.dreamer-hero-core {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  pointer-events: none;
+}
+
+.dreamer-name-title {
+  font-family: var(--font-sans);
+  font-size: clamp(4rem, 9vw, 8rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  line-height: 1.0;
+  text-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 50px rgba(147, 197, 253, 0.2);
+}
+
+/* Left story column — z-index 4 */
+.dreamer-story-left {
+  position: absolute;
+  top: 44%;
+  left: 5vw;
+  transform: translateY(-50%);
+  z-index: 4;
+  max-width: 260px;
+  text-align: left;
+  pointer-events: none;
+}
+
+.dreamer-story-left p,
+.dreamer-story-right p {
+  font-size: clamp(0.8rem, 1.05vw, 0.94rem);
+  color: rgba(226, 232, 240, 0.85);
+  line-height: 1.75;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.dreamer-story-left strong,
+.dreamer-story-right strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Right story column — z-index 4 */
+.dreamer-story-right {
+  position: absolute;
+  top: 48%;
+  right: 5vw;
+  transform: translateY(-50%);
+  z-index: 4;
+  max-width: 260px;
+  text-align: left;
+  pointer-events: none;
+}
+
+/* Bottom anchor */
+.dreamer-bottom-anchor {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  background: rgba(14, 18, 36, 0.7);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.dreamer-bottom-anchor:hover {
+  background: #ffffff;
+  color: #0b0d14;
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(253, 224, 71, 0.3);
+}
+
+.dreamer-bottom-anchor i { color: #fbbf24; }
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 992px) {
+  .nav-meta-divider { display: none; }
+  .nav-meta-item { padding: 6px 12px; }
+  .nav-meta-label { display: none; }
+  .nav-meta-value { font-size: 0.8rem; }
+  .dreamer-story-left,
+  .dreamer-story-right { display: none; }
+}
+
+@media (max-width: 680px) {
+  .organic-nav-container { top: 14px; width: 95vw; }
+  .organic-nav-bar { padding: 5px; }
+  .nav-center-menu { display: none; }
+  .nav-pill-left, .nav-pill-right { padding: 9px 16px; font-size: 0.82rem; }
+  .dreamer-figure-svg { width: 80px; height: 190px; }
+  .dreamer-hero-core { top: 26%; }
+  .dreamer-role-bg-text { font-size: 1rem; letter-spacing: 0.12em; }
+}

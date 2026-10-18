@@ -1,0 +1,700 @@
+/* ==========================================================================
+   DRRITI PASRIJA — SURREAL 3D CINEMATIC HERO DESIGN SYSTEM
+   Inspired by Sleep Well Creatives & Victor Work
+   Atmosphere: Smoked deep indigo twilight (#0c0e17 -> #151828), tactile terrain,
+               floating 3D work portals, silhouette storytelling, precision typography
+   ========================================================================== */
+
+:root {
+  --sw-bg: #0b0d14;
+  --sw-sky-top: #0e1222;
+  --sw-sky-mid: #161c36;
+  --sw-sky-glow: #24294d;
+  --sw-terrain: #12141e;
+  --sw-terrain-light: #f1f3f7;
+  
+  --text-white: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+  --text-gold: #fde047;
+  
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-ui: 'Plus Jakarta Sans', sans-serif;
+  --font-hand: 'Caveat', cursive;
+  
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--sw-bg);
+  color: var(--text-white);
+  font-family: var(--font-ui);
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   ACT 0: THE ARCHITECTURAL PRELOADER (ThevertMenthe inspired)
+   ========================================================================== */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background-color: var(--sw-bg);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: all;
+  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.8s ease;
+}
+
+#preloader.loaded {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.preloader-track {
+  width: min(88vw, 1000px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.preloader-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.preloader-counter {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--text-white);
+  line-height: 1;
+}
+
+.preloader-identity {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.preloader-line-wrapper {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.preloader-progress-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(167, 139, 250, 0.6), #f8fafc);
+  transition: width 0.1s linear;
+  box-shadow: 0 0 16px rgba(167, 139, 250, 0.8);
+}
+
+.preloader-sub-status {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+/* ==========================================================================
+   ACT 1: FLOATING LUXURY PILL NAV (UX FRIENDLY)
+   ========================================================================== */
+.site-nav {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: min(92vw, 980px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 22px;
+  background: rgba(14, 18, 34, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.4s var(--ease-cinematic);
+}
+
+.site-nav:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(140, 160, 255, 0.15);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-white);
+}
+
+.nav-logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.3), rgba(56, 189, 248, 0.3));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+.nav-brand-text {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: color 0.25s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--text-white);
+}
+
+.nav-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4ade80;
+}
+
+.status-dot-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+  animation: pulse-ring 2s infinite ease-out;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.5; }
+  100% { transform: scale(0.95); opacity: 1; }
+}
+
+.nav-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: var(--text-white);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.3s var(--ease-cinematic);
+}
+
+.nav-cta-btn:hover {
+  background: #ffffff;
+  color: #0b0d14;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   ACT 1: THE SURREAL CINEMATIC HERO STAGE
+   (3D Canvas + Deep Atmosphere + Floating Work Portals + Silhouette)
+   ========================================================================== */
+.cinematic-hero-stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 720px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, var(--sw-sky-mid) 0%, var(--sw-sky-top) 50%, var(--sw-bg) 95%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+/* Three.js 3D WebGL Canvas Layer */
+#cinematic-3d-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: all;
+}
+
+/* Sky Ambient Vignette */
+.sky-atmospheric-glow {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(80vw, 900px);
+  height: 450px;
+  background: radial-gradient(ellipse at center, rgba(62, 85, 175, 0.3) 0%, rgba(30, 40, 90, 0.1) 50%, transparent 80%);
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Top Emblem Icon (Like Sleep Well Creatives Moon Emblem) */
+.hero-celestial-emblem {
+  position: absolute;
+  top: 96px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.emblem-svg-frame {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 26, 52, 0.6);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 25px rgba(120, 150, 255, 0.2);
+}
+
+.emblem-svg-frame svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 1.5;
+}
+
+/* Center Hero Narrative & Title */
+.hero-narrative-overlay {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  width: min(92vw, 1100px);
+  pointer-events: none;
+}
+
+.hero-guiding-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin-bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-guiding-eyebrow::before,
+.hero-guiding-eyebrow::after {
+  content: "•";
+  color: #60a5fa;
+  font-size: 0.9rem;
+}
+
+.hero-cinematic-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 5.8vw, 5.4rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1.1;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6), 0 0 40px rgba(147, 197, 253, 0.2);
+  margin-bottom: 16px;
+}
+
+.hero-signature-line {
+  font-family: var(--font-ui);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  color: #cbd5e1;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.hero-signature-line strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.hand-note-tag {
+  font-family: var(--font-hand);
+  color: #f472b6;
+  font-size: 1.25rem;
+  margin-left: 6px;
+  letter-spacing: 0;
+  display: inline-block;
+  transform: rotate(-3deg);
+}
+
+/* Interactive Portal Hover HUD (Shows active project title on 3D hover) */
+.hero-portal-hud {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-cinematic), transform 0.4s var(--ease-cinematic);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: rgba(14, 18, 34, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(147, 197, 253, 0.2);
+}
+
+.hero-portal-hud.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.hud-category {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #60a5fa;
+  font-weight: 700;
+}
+
+.hud-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.hud-action {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+/* Bottom Controls & Story Navigation */
+.hero-bottom-controls {
+  position: absolute;
+  bottom: 24px;
+  width: 100%;
+  padding: 0 4vw;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: all;
+}
+
+.insights-tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.insights-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.insights-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #60a5fa;
+  opacity: 0.7;
+}
+
+.scroll-explore-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  background: rgba(14, 18, 34, 0.7);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.scroll-explore-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.explore-icon-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+}
+
+.hero-sound-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color 0.25s ease;
+}
+
+.hero-sound-toggle:hover {
+  color: var(--text-white);
+}
+
+/* ==========================================================================
+   ACT 2: TRANSITION INTO THE PROJECTS SHOWCASE (Scroll-Triggered)
+   ========================================================================== */
+.featured-work-anchor {
+  position: relative;
+  z-index: 5;
+  background-color: var(--sw-bg);
+  padding: 100px 6vw 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.section-header-cinematic {
+  max-width: 1100px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.section-tag-pill {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #818cf8;
+  margin-bottom: 14px;
+  display: inline-block;
+}
+
+.section-title-large {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+
+.section-desc-subtle {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Quick project navigation cards below hero */
+.work-grid-cinematic {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-portal-card {
+  background: #141724;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.4s var(--ease-cinematic);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-portal-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(147, 197, 253, 0.4);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 35px rgba(96, 165, 250, 0.15);
+}
+
+.portal-card-media {
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+
+.portal-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-cinematic);
+}
+
+.project-portal-card:hover .portal-card-media img {
+  transform: scale(1.06);
+}
+
+.portal-card-content {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.portal-card-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #60a5fa;
+  margin-bottom: 8px;
+}
+
+.portal-card-h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.portal-card-p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.portal-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #93c5fd;
+}
+
+.portal-card-cta i {
+  transition: transform 0.25s ease;
+}
+
+.project-portal-card:hover .portal-card-cta i {
+  transform: translateX(5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .site-nav {
+    top: 16px;
+    padding: 8px 16px;
+  }
+  .nav-links {
+    display: none;
+  }
+  .hero-cinematic-title {
+    letter-spacing: 0.08em;
+  }
+  .hero-celestial-emblem {
+    top: 80px;
+  }
+}
