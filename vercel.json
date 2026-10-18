@@ -1,51 +1,14 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "server.js",
-            "use": "@vercel/node"
-        },
-        {
-            "src": "public/**",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "images/**",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "vidoes/**",
-            "use": "@vercel/static"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/css/(.*)",
-            "dest": "/public/css/$1"
-        },
-        {
-            "src": "/js/(.*)",
-            "dest": "/public/js/$1"
-        },
-        {
-            "src": "/assets/(.*)",
-            "dest": "/public/assets/$1"
-        },
-        {
-            "src": "/files/(.*)",
-            "dest": "/images/$1"
-        },
-        {
-            "src": "/images/(.*)",
-            "dest": "/images/$1"
-        },
-        {
-            "src": "/videos/(.*)",
-            "dest": "/vidoes/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/server.js"
-        }
-    ]
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/echo", "destination": "/echo-case-study.html" },
+    { "source": "/unipath", "destination": "/Unipath.html" },
+    { "source": "/oton", "destination": "/oton.html" },
+    { "source": "/mittrika", "destination": "/mittrika.html" },
+    { "source": "/branding", "destination": "/branding.html" },
+    { "source": "/mydayss", "destination": "/mydayss-ux.html" },
+    { "source": "/3d-model", "destination": "/3d-model-project.html" },
+    { "source": "/motion-graphics", "destination": "/motion-graphics.html" }
+  ]
 }
